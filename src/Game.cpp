@@ -1,32 +1,29 @@
 #include "Game.hpp"
+#include <array>
+#include <cstddef>
 #include <raylib.h>
 
 void Game::run() {
   InitWindow(screenWidth, screenHeight, "PwatMan");
 
-  Image pwatLeft = LoadImage("../assets/pwatleft.png");
-  Image pwatRight = LoadImage("../assets/pwatright.png");
-  Image pwatDown = LoadImage("../assets/pwatdown.png");
-  Image pwatUp = LoadImage("../assets/pwatup.png");
+  std::array<Image, 4> pwatImages = {
+      LoadImage("../assets/pwatleft.png"),
+      LoadImage("../assets/pwatright.png"),
+      LoadImage("../assets/pwatdown.png"),
+      LoadImage("../assets/pwatup.png"),
+  };
 
-  Texture2D textures[numPwats] = {0, 0, 0, 0, 0};
-  textures[0] = LoadTextureFromImage(pwatLeft);
-  textures[1] = LoadTextureFromImage(pwatRight);
-  textures[2] = LoadTextureFromImage(pwatDown);
-  textures[3] = LoadTextureFromImage(pwatUp);
+  std::array<Texture2D, 4> textures;
+  for (size_t i = 0; i < pwatImages.size(); ++i) {
+    textures[i] = LoadTextureFromImage(pwatImages[i]);
+    UnloadImage(pwatImages[i]);
+  }
+
   int currentTexture = 0;
-
-  UnloadImage(pwatLeft);
-  UnloadImage(pwatRight);
-  UnloadImage(pwatDown);
-  UnloadImage(pwatUp);
-
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
-
   SetTargetFPS(60);
 
   while (!WindowShouldClose()) {
-
     if (IsKeyDown(KEY_LEFT)) {
       currentTexture = 0;
       pwatPosition.x -= 2.0f;
@@ -53,8 +50,8 @@ void Game::run() {
     EndDrawing();
   }
 
-  for (int i = 0; i < numPwats; i++)
-    UnloadTexture(textures[i]);
+  for (auto &tex : textures)
+    UnloadTexture(tex);
 
   CloseWindow();
 }
