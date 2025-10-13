@@ -3,7 +3,6 @@
 #include <raylib.h>
 
 void Game::run() {
-
   Player pwat({
       "../assets/pwatleft.png",
       "../assets/pwatright.png",
@@ -16,22 +15,9 @@ void Game::run() {
   SetTargetFPS(60);
 
   while (!WindowShouldClose()) {
-    if (IsKeyDown(KEY_LEFT)) {
-      currentTexture = 0;
-      pwatPosition.x -= 2.0f;
-    }
-    if (IsKeyDown(KEY_RIGHT)) {
-      currentTexture = 1;
-      pwatPosition.x += 2.0f;
-    }
-    if (IsKeyDown(KEY_DOWN)) {
-      currentTexture = 2;
-      pwatPosition.y += 2.0f;
-    }
-    if (IsKeyDown(KEY_UP)) {
-      currentTexture = 3;
-      pwatPosition.y -= 2.0f;
-    }
+    auto state = pwat.playerMovements(currentTexture, pwatPosition);
+    currentTexture = state.texture;
+    pwatPosition = state.position;
 
     BeginDrawing();
     ClearBackground(RAYWHITE);

@@ -3,6 +3,11 @@
 #include <raylib.h>
 #include <string>
 
+struct PlayerState {
+  int texture;
+  Vector2 position;
+};
+
 class Player {
 public:
   const static std::size_t numPwats = 4;
@@ -19,6 +24,8 @@ public:
     for (auto &tex : textures)
       UnloadTexture(tex);
   }
+
+  PlayerState playerMovements(int current, Vector2 playerPosition);
 
   void draw(Vector2 position, int direction) {
     DrawTexture(textures[direction], position.x, position.y, WHITE);
