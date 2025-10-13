@@ -1,23 +1,15 @@
 #include "Game.hpp"
-#include <array>
-#include <cstddef>
+#include "Player.hpp"
 #include <raylib.h>
 
 void Game::run() {
-  InitWindow(screenWidth, screenHeight, "PwatMan");
 
-  std::array<Image, 4> pwatImages = {
-      LoadImage("../assets/pwatleft.png"),
-      LoadImage("../assets/pwatright.png"),
-      LoadImage("../assets/pwatdown.png"),
-      LoadImage("../assets/pwatup.png"),
-  };
-
-  std::array<Texture2D, 4> textures;
-  for (size_t i = 0; i < pwatImages.size(); ++i) {
-    textures[i] = LoadTextureFromImage(pwatImages[i]);
-    UnloadImage(pwatImages[i]);
-  }
+  Player pwat({
+      "../assets/pwatleft.png",
+      "../assets/pwatright.png",
+      "../assets/pwatdown.png",
+      "../assets/pwatup.png",
+  });
 
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
@@ -44,14 +36,7 @@ void Game::run() {
     BeginDrawing();
     ClearBackground(RAYWHITE);
     DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);
-    DrawTexture(textures[currentTexture], pwatPosition.x, pwatPosition.y,
-                WHITE);
-
+    pwat.draw(pwatPosition, currentTexture);
     EndDrawing();
   }
-
-  for (auto &tex : textures)
-    UnloadTexture(tex);
-
-  CloseWindow();
 }

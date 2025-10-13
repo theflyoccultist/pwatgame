@@ -14,3 +14,5 @@ find_package(raylib REQUIRED)
 target_link_libraries(pwatman PRIVATE raylib)
 
 target_compile_options(pwatman PRIVATE -Wall -Wextra -Wpedantic)
+# target_compile_options(pwatman PRIVATE -fsanitize=address -fno-omit-frame-pointer -g)
+# target_link_options(pwatman PRIVATE -fsanitize=address)
