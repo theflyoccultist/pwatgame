@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "../sound/AudioSystem.hpp"
 #include "Player.hpp"
 #include <raylib.h>
 
@@ -11,7 +10,6 @@ void Game::run() {
       "../assets/pwatup.png",
   });
 
-  AudioSystem audio;
   float footstepTimer = 0.0f;
   const float footstepDelay = 0.38f;
 
@@ -20,17 +18,7 @@ void Game::run() {
   SetTargetFPS(60);
 
   while (!WindowShouldClose()) {
-    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_UP) ||
-        IsKeyDown(KEY_DOWN)) {
-
-      footstepTimer -= GetFrameTime();
-      if (footstepTimer <= 0.0f) {
-        audio.playRandSteps();
-        footstepTimer = footstepDelay;
-      }
-    } else {
-      footstepTimer = 0.0f;
-    }
+    footstepTimer = pwat.playerFootsteps(footstepTimer, footstepDelay);
 
     auto state = pwat.playerMovements(currentTexture, pwatPosition);
     currentTexture = state.texture;

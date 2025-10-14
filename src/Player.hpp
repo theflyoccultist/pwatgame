@@ -28,6 +28,7 @@ public:
   }
 
   PlayerState playerMovements(int current, Vector2 playerPosition);
+  float playerFootsteps(float footstepTimer, const float &footstepDelay);
 
   void draw(Vector2 position, int direction) {
     DrawTexture(textures[direction], position.x, position.y, WHITE);

@@ -1,8 +1,10 @@
 #include "Player.hpp"
+#include "../sound/AudioSystem.hpp"
 #include "Game.hpp"
 #include <raylib.h>
 
 Game g;
+AudioSystem audio;
 
 PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
   if (IsKeyDown(KEY_LEFT)) {
@@ -34,4 +36,19 @@ PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
       playerPosition.y = 0;
   }
   return {current, playerPosition};
+}
+
+float Player::playerFootsteps(float footstepTimer, const float &footstepDelay) {
+  if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_UP) ||
+      IsKeyDown(KEY_DOWN)) {
+
+    footstepTimer -= GetFrameTime();
+    if (footstepTimer <= 0.0f) {
+      audio.playRandSteps();
+      footstepTimer = footstepDelay;
+    }
+  } else {
+    footstepTimer = 0.0f;
+  }
+  return footstepTimer;
 }
