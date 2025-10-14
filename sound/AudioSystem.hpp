@@ -1,3 +1,5 @@
+#pragma once
+
 #include "SoundEffect.hpp"
 #include <array>
 
