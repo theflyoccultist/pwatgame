@@ -7,13 +7,9 @@ class RaylibApp {
 public:
   RaylibApp(int width, int height, const std::string &title) {
     InitWindow(width, height, title.c_str());
-    InitAudioDevice();
   }
 
-  ~RaylibApp() {
-    CloseWindow();
-    CloseAudioDevice();
-  }
+  ~RaylibApp() { CloseWindow(); }
 
   RaylibApp(const RaylibApp &) = delete;
   RaylibApp operator=(const RaylibApp &) = delete;

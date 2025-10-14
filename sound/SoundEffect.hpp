@@ -13,8 +13,6 @@ public:
     }
   }
 
-  ~SoundEffect() { UnloadSound(sfx); }
-
   void play() { PlaySound(sfx); }
   void stop() { StopSound(sfx); }
 

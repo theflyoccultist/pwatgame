@@ -1,5 +1,9 @@
 #include "AudioSystem.hpp"
 
 void AudioSystem::playRandSteps() {
-  pwatSteps[rand() % pwatSteps.size()].play();
+  if (!pwatSteps)
+    return;
+
+  int index = GetRandomValue(0, static_cast<int>(pwatSteps->size()) - 1);
+  (*pwatSteps)[index].play();
 }
