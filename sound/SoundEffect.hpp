@@ -2,16 +2,16 @@
 #include <stdexcept>
 #include <string>
 
-class SoundEffects {
+class SoundEffect {
 public:
-  explicit SoundEffects(const std::string &path) {
+  explicit SoundEffect(const std::string &path) {
     sfx = LoadSound(path.c_str());
     if (!IsSoundValid(sfx)) {
       throw std::runtime_error("Failed to load sfx: " + path);
     }
   }
 
-  ~SoundEffects() { UnloadSound(sfx); }
+  ~SoundEffect() { UnloadSound(sfx); }
 
   void play() { PlaySound(sfx); }
   void stop() { StopSound(sfx); }

@@ -7,7 +7,7 @@ set(CMAKE_CXX_COMPILER_VERSION 12)
 
 include_directories(include)
 
-file(GLOB_RECURSE SOURCES src/*.cpp)
+file(GLOB_RECURSE SOURCES src/*.cpp sound/*.cpp)
 add_executable(pwatman ${SOURCES})
 
 find_package(raylib REQUIRED)
