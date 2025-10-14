@@ -18,7 +18,6 @@ void Game::run() {
     auto state = pwat.playerMovements(currentTexture, pwatPosition);
     currentTexture = state.texture;
     pwatPosition = state.position;
-
     BeginDrawing();
     ClearBackground(RAYWHITE);
     DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);

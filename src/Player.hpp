@@ -10,11 +10,13 @@ struct PlayerState {
 
 class Player {
 public:
-  const static std::size_t numPwats = 4;
+  static constexpr std::size_t numPwats = 4;
+  static constexpr int pwatSize = 70;
 
   Player(std::array<std::string, numPwats> paths) {
     for (size_t i = 0; i < paths.size(); ++i) {
       Image img = LoadImage(paths[i].c_str());
+      ImageResize(&img, pwatSize, pwatSize);
       textures[i] = LoadTextureFromImage(img);
       UnloadImage(img);
     }
