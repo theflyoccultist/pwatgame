@@ -23,8 +23,13 @@ public:
 
   void playRandSteps();
 
+  void updateMusic();
+  void playTitleTrack();
+  // GameScore &playLevelTrack();
+
 private:
   SoundEffect &getStepSound(std::size_t i);
+  GameScore &gameMusic(std::size_t i);
 
   void loadSounds() {
     pwatSteps = std::make_unique<std::array<SoundEffect, 5>>(

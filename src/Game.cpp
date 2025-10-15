@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "../sound/AudioSystem.hpp"
 #include "Player.hpp"
 #include <raylib.h>
 
@@ -10,15 +11,18 @@ void Game::run() {
       "../assets/pwatup.png",
   });
 
-  float footstepTimer = 0.0f;
-  const float footstepDelay = 0.38f;
+  AudioSystem audio;
 
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
   SetTargetFPS(60);
 
+  audio.playTitleTrack();
+
   while (!WindowShouldClose()) {
-    footstepTimer = pwat.playerFootsteps(footstepTimer, footstepDelay);
+    audio.updateMusic();
+
+    pwat.playerFootsteps();
     auto state = pwat.playerMovements(currentTexture, pwatPosition);
     currentTexture = state.texture;
     pwatPosition = state.position;

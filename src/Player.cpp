@@ -37,7 +37,7 @@ PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
   return {current, playerPosition};
 }
 
-float Player::playerFootsteps(float footstepTimer, const float &footstepDelay) {
+float Player::playerFootsteps() {
   if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_UP) ||
       IsKeyDown(KEY_DOWN)) {
 

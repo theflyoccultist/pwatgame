@@ -28,7 +28,7 @@ public:
   }
 
   PlayerState playerMovements(int current, Vector2 playerPosition);
-  float playerFootsteps(float footstepTimer, const float &footstepDelay);
+  float playerFootsteps();
 
   void draw(Vector2 position, int direction) {
     DrawTexture(textures[direction], position.x, position.y, WHITE);
@@ -36,4 +36,7 @@ public:
 
 private:
   std::array<Texture2D, numPwats> textures;
+
+  float footstepTimer = 0.0f;
+  static constexpr float footstepDelay = 0.84f;
 };
