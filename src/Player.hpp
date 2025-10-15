@@ -28,7 +28,7 @@ public:
   }
 
   PlayerState playerMovements(int current, Vector2 playerPosition);
-  float playerFootsteps();
+  void playerFootsteps();
 
   void draw(Vector2 position, int direction) {
     DrawTexture(textures[direction], position.x, position.y, WHITE);

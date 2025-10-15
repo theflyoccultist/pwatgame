@@ -11,16 +11,14 @@ void Game::run() {
       "../assets/pwatup.png",
   });
 
-  AudioSystem audio;
-
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
   SetTargetFPS(60);
 
-  audio.playTitleTrack();
+  AudioSystem::instance().playTitleTrack();
 
   while (!WindowShouldClose()) {
-    audio.updateMusic();
+    AudioSystem::instance().updateMusic();
 
     pwat.playerFootsteps();
     auto state = pwat.playerMovements(currentTexture, pwatPosition);

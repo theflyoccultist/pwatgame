@@ -3,6 +3,6 @@
 class Game {
 public:
   void run();
-  const int screenWidth = 800;
-  const int screenHeight = 800;
+  static constexpr int screenWidth = 800;
+  static constexpr int screenHeight = 800;
 };

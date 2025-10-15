@@ -1,24 +1,31 @@
 #include "AudioSystem.hpp"
 
-SoundEffect &AudioSystem::getStepSound(std::size_t i) {
-  return (*pwatSteps)[i];
+AudioSystem::AudioSystem() {
+  InitAudioDevice();
+  pwatSteps = std::make_unique<std::array<SoundEffect, 5>>(
+      std::array<SoundEffect, 5>{SoundEffect("../assets/sfx/pwatwalk1.wav"),
+                                 SoundEffect("../assets/sfx/pwatwalk2.wav"),
+                                 SoundEffect("../assets/sfx/pwatwalk3.wav"),
+                                 SoundEffect("../assets/sfx/pwatwalk4.wav"),
+                                 SoundEffect("../assets/sfx/pwatwalk5.wav")});
+
+  gameScores = std::make_unique<std::array<GameScore, 2>>(
+      std::array<GameScore, 2>{GameScore("../assets/music/right_to_rave.ogg"),
+                               GameScore("../assets/music/pseudogender.ogg")});
 }
+
+AudioSystem::~AudioSystem() { CloseAudioDevice(); }
 
 void AudioSystem::playRandSteps() {
-  if (!pwatSteps)
-    return;
-
   int index = GetRandomValue(0, static_cast<int>(pwatSteps->size()) - 1);
-  getStepSound(index).play();
+  (*pwatSteps)[index].play();
 }
 
-GameScore &AudioSystem::gameMusic(std::size_t i) { return (*gameScores)[i]; }
+void AudioSystem::playTitleTrack() { (*gameScores)[0].play(); }
+void AudioSystem::playLevelTrack() { (*gameScores)[1].play(); }
 
 void AudioSystem::updateMusic() {
   for (auto &m : *gameScores) {
     m.update();
   }
 }
-
-void AudioSystem::playTitleTrack() { gameMusic(0).play(); }
-// GameScore &AudioSystem::playLevelTrack() { return (*gameScores)[1]; }
