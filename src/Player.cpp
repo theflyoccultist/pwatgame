@@ -1,7 +1,6 @@
 #include "Player.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "Game.hpp"
-#include <raylib.h>
 
 Game g;
 AudioSystem audio;

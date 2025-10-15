@@ -19,7 +19,6 @@ void Game::run() {
 
   while (!WindowShouldClose()) {
     footstepTimer = pwat.playerFootsteps(footstepTimer, footstepDelay);
-
     auto state = pwat.playerMovements(currentTexture, pwatPosition);
     currentTexture = state.texture;
     pwatPosition = state.position;
