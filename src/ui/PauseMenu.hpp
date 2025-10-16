@@ -1,6 +1,6 @@
 #pragma once
 
-class ConfirmQuit {
+class PauseMenu {
 public:
   void show();
 };
