@@ -14,6 +14,8 @@ public:
   }
 
   void play() { PlayMusicStream(music); }
+  void pause() { PauseMusicStream(music); }
+  void resume() { ResumeMusicStream(music); }
   void update() { UpdateMusicStream(music); }
   void stop() { StopMusicStream(music); }
 

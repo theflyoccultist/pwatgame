@@ -7,6 +7,7 @@ class RaylibApp {
 public:
   RaylibApp(int width, int height, const std::string &title) {
     InitWindow(width, height, title.c_str());
+    SetTargetFPS(60);
   }
 
   ~RaylibApp() { CloseWindow(); }

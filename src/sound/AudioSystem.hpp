@@ -15,8 +15,12 @@ public:
   AudioSystem &operator=(const AudioSystem &) = delete;
 
   void playRandSteps();
+
   void playTitleTrack();
   void playLevelTrack();
+
+  void pauseMusic();
+  void resumeMusic();
   void updateMusic();
 
 private:
@@ -25,4 +29,5 @@ private:
 
   std::unique_ptr<std::array<SoundEffect, 5>> pwatSteps;
   std::unique_ptr<std::array<GameScore, 2>> gameScores;
+  int currentTrack = -1;
 };

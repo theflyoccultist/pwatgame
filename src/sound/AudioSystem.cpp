@@ -21,8 +21,25 @@ void AudioSystem::playRandSteps() {
   (*pwatSteps)[index].play();
 }
 
-void AudioSystem::playTitleTrack() { (*gameScores)[0].play(); }
-void AudioSystem::playLevelTrack() { (*gameScores)[1].play(); }
+void AudioSystem::playTitleTrack() {
+  currentTrack = 0;
+  (*gameScores)[0].play();
+}
+
+void AudioSystem::playLevelTrack() {
+  currentTrack = 1;
+  (*gameScores)[1].play();
+}
+
+void AudioSystem::pauseMusic() {
+  if (currentTrack >= 0)
+    (*gameScores)[currentTrack].pause();
+}
+
+void AudioSystem::resumeMusic() {
+  if (currentTrack >= 0)
+    (*gameScores)[currentTrack].resume();
+}
 
 void AudioSystem::updateMusic() {
   for (auto &m : *gameScores) {

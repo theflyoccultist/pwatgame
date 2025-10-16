@@ -1,14 +1,16 @@
 #include "Game.hpp"
 #include "Player.hpp"
 #include "sound/AudioSystem.hpp"
+#include "ui/ConfirmQuit.hpp"
 #include <raylib.h>
 
 void Game::run() {
   Player pwat;
 
+  ConfirmQuit ui;
+
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
-  SetTargetFPS(60);
 
   AudioSystem::instance().playTitleTrack();
 
@@ -24,6 +26,7 @@ void Game::run() {
     ClearBackground(RAYWHITE);
     DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);
     pwat.draw(pwatPosition, currentTexture);
+    ui.show();
     EndDrawing();
   }
 }
