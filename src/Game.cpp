@@ -4,12 +4,7 @@
 #include <raylib.h>
 
 void Game::run() {
-  Player pwat({
-      "../assets/pwatleft.png",
-      "../assets/pwatright.png",
-      "../assets/pwatdown.png",
-      "../assets/pwatup.png",
-  });
+  Player pwat;
 
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};

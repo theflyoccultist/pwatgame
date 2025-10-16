@@ -1,6 +1,20 @@
 #include "Player.hpp"
 #include "../sound/AudioSystem.hpp"
+#include "../texture/AssetSystem.hpp"
 #include "Game.hpp"
+
+Player::Player() {
+  const std::array<std::string, numPwats> pwatPaths = {
+      "../assets/pwatleft.png",
+      "../assets/pwatright.png",
+      "../assets/pwatdown.png",
+      "../assets/pwatup.png",
+  };
+
+  for (size_t i = 0; i < numPwats; ++i) {
+    pwatAssets[i] = &AssetSystem::instance().loadTexture(pwatPaths[i], 70, 70);
+  }
+}
 
 PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
   if (IsKeyDown(KEY_LEFT)) {
@@ -46,4 +60,9 @@ void Player::playerFootsteps() {
   } else {
     footstepTimer = 0.0f;
   }
+}
+
+void Player::draw(Vector2 position, int direction) {
+  AssetSystem::instance().drawTexture(pwatAssets[direction], position.x,
+                                      position.y);
 }
