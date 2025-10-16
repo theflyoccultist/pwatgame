@@ -1,6 +1,6 @@
 #include "Game.hpp"
-#include "../sound/AudioSystem.hpp"
 #include "Player.hpp"
+#include "sound/AudioSystem.hpp"
 #include <raylib.h>
 
 void Game::run() {

@@ -1,7 +1,7 @@
 #include "Player.hpp"
-#include "../sound/AudioSystem.hpp"
-#include "../texture/AssetSystem.hpp"
 #include "Game.hpp"
+#include "sound/AudioSystem.hpp"
+#include "texture/AssetSystem.hpp"
 
 Player::Player() {
   const std::array<std::string, numPwats> pwatPaths = {
@@ -12,7 +12,8 @@ Player::Player() {
   };
 
   for (size_t i = 0; i < numPwats; ++i) {
-    pwatAssets[i] = &AssetSystem::instance().loadTexture(pwatPaths[i], 70, 70);
+    pwatAssets[i] =
+        &AssetSystem::instance().loadTexture(pwatPaths[i], pwatSize, pwatSize);
   }
 }
 
