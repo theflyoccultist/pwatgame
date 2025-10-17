@@ -9,11 +9,7 @@ void Game::run() {
   Player pwat;
   static ItemManager itemManager;
 
-  itemManager.addItem({100, 300}, 0);
-  itemManager.addItem({400, 600}, 1);
-  itemManager.addItem({300, 200}, 2);
-  itemManager.addItem({150, 80}, 3);
-  itemManager.addItem({90, 150}, 4);
+  itemManager.addFoodItems();
 
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};

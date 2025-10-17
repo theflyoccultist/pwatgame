@@ -3,13 +3,14 @@
 #include <array>
 
 Items::Items() {
-  const std::array<std::string, 5> paths = {
+  const std::array<std::string, foodKinds> foods = {
       "../assets/items/buldak.png", "../assets/items/pho.png",
       "../assets/items/shinramyun.png", "../assets/items/tomyum.png",
       "../assets/items/yopokki.png"};
 
-  for (size_t i = 0; i < 5; ++i) {
-    itemAssets[i] = &AssetSystem::instance().loadTexture(paths[i], 70, 70);
+  for (size_t i = 0; i < foodKinds; ++i) {
+    itemAssets[i] =
+        &AssetSystem::instance().loadTexture(foods[i], foodSize, foodSize);
   }
 }
 

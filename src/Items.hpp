@@ -8,4 +8,6 @@ public:
 
 private:
   std::array<Texture2D *, 5> itemAssets;
+  constexpr static int foodSize = 50;
+  constexpr static std::size_t foodKinds = 5;
 };
