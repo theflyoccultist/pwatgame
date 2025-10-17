@@ -27,15 +27,15 @@ void Game::run() {
     DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);
     pwat.draw(pwatPosition, currentTexture);
 
-    if (!paused) {
+    if (paused) {
+      ui.pauseMenu();
+      AudioSystem::instance().pauseMusic();
+    } else {
       AudioSystem::instance().resumeMusic();
       auto state = pwat.playerMovements(currentTexture, pwatPosition);
       currentTexture = state.texture;
       pwatPosition = state.position;
       pwat.playerFootsteps();
-    } else {
-      ui.pauseMenu();
-      AudioSystem::instance().pauseMusic();
     }
 
     EndDrawing();
