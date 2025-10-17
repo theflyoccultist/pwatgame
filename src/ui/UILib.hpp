@@ -2,8 +2,8 @@
 
 class UILib {
 public:
-  void mainMenu();
-
   enum class PauseMenuOpts { Resume, Restart, Options, BackToMenu, Count };
-  PauseMenuOpts pauseMenu();
+  static PauseMenuOpts pauseMenu();
+  void optionsMenu();
+  static void mainMenu();
 };

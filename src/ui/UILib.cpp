@@ -3,11 +3,6 @@
 #include <array>
 #include <raylib.h>
 
-void UILib::mainMenu() {
-  DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);
-  DrawText("PLAY", 275, 400, 60, BLACK);
-}
-
 UILib::PauseMenuOpts UILib::pauseMenu() {
   DrawRectangle(100, 100, 600, 600, YELLOW);
   DrawText("Game Paused", 150, 140, 20, BLACK);
@@ -36,4 +31,14 @@ UILib::PauseMenuOpts UILib::pauseMenu() {
   }
 
   return static_cast<PauseMenuOpts>(selectedIndex);
+}
+
+void UILib::optionsMenu() {
+  DrawText("OPTIONS", 275, 20, 20, DARKPURPLE);
+  DrawText("Hello", 275, 400, 60, BLACK);
+}
+
+void UILib::mainMenu() {
+  DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);
+  DrawText("PLAY", 275, 400, 60, BLACK);
 }

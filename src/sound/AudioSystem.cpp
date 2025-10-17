@@ -47,6 +47,6 @@ void AudioSystem::updateMusic() {
 }
 
 void AudioSystem::stopMusic() {
-  if (currentTrack >= 0)
+  if (currentTrack != -1)
     (*gameScores)[currentTrack].stop();
 }

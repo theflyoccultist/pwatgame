@@ -5,67 +5,74 @@
 #include <iostream>
 #include <raylib.h>
 
-void restartLevel() {
-  AudioSystem::instance().stopMusic();
-  AudioSystem::instance().playLevelTrack();
-}
-
-void changeMusic() {
-  AudioSystem::instance().stopMusic();
-  AudioSystem::instance().playTitleTrack();
-}
-
-enum class GameState { Playing, Paused, Options, MainMenu };
-GameState gameState = GameState::Playing;
-
 void Game::run() {
   Player pwat;
-  UILib ui;
 
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
 
-  AudioSystem::instance().playLevelTrack();
+  AudioSystem::instance().playTitleTrack();
 
-  bool paused = false;
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    pwat.draw(pwatPosition, currentTexture);
     AudioSystem::instance().updateMusic();
 
-    if (IsKeyPressed(KEY_P)) {
-      paused = !paused;
+    switch (Game::currentState) {
+    case GameState::MainMenu:
+      UILib::mainMenu();
+      if (IsKeyPressed(KEY_ENTER)) {
+        Game::currentState = GameState::Playing;
+        AudioSystem::instance().stopMusic();
+        AudioSystem::instance().playLevelTrack();
+      }
+      break;
+
+    case GameState::Playing: {
+      pwat.draw(pwatPosition, currentTexture);
+      auto state = pwat.playerMovements(currentTexture, pwatPosition);
+      currentTexture = state.texture;
+      pwatPosition = state.position;
+      pwat.playerFootsteps();
+
+      if (IsKeyPressed(KEY_P))
+        Game::currentState = GameState::Paused;
+
+      break;
     }
 
-    if (paused) {
-      UILib::PauseMenuOpts pauseChoice = ui.pauseMenu();
+    case GameState::Paused: {
+      auto pauseChoice = UILib::pauseMenu();
       AudioSystem::instance().pauseMusic();
 
       if (IsKeyPressed(KEY_ENTER)) {
         switch (pauseChoice) {
         case UILib::PauseMenuOpts::Resume:
-          std::cout << "Resume\n";
+          Game::currentState = GameState::Playing;
+          AudioSystem::instance().resumeMusic();
           break;
         case UILib::PauseMenuOpts::Restart:
-          restartLevel();
+          Game::currentState = GameState::Playing;
+          AudioSystem::instance().stopMusic();
+          AudioSystem::instance().playLevelTrack();
           break;
         case UILib::PauseMenuOpts::Options:
-          std::cout << "Options\n";
+          Game::currentState = GameState::Options;
           break;
         case UILib::PauseMenuOpts::BackToMenu:
-          changeMusic();
+          Game::currentState = GameState::MainMenu;
+          AudioSystem::instance().stopMusic();
+          AudioSystem::instance().playTitleTrack();
           break;
         default:
           break;
         }
       }
-    } else {
-      auto state = pwat.playerMovements(currentTexture, pwatPosition);
-      currentTexture = state.texture;
-      pwatPosition = state.position;
-      pwat.playerFootsteps();
-      AudioSystem::instance().resumeMusic();
+      break;
+    }
+
+    case GameState::Options:
+      std::cout << "Options\n";
     }
 
     EndDrawing();
