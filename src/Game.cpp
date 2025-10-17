@@ -1,5 +1,5 @@
 #include "Game.hpp"
-#include "Items.hpp"
+#include "ItemsManager.hpp"
 #include "Player.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UILib.hpp"
@@ -7,7 +7,13 @@
 
 void Game::run() {
   Player pwat;
-  Items items;
+  static ItemManager itemManager;
+
+  itemManager.addItem({100, 300}, 0);
+  itemManager.addItem({400, 600}, 1);
+  itemManager.addItem({300, 200}, 2);
+  itemManager.addItem({150, 80}, 3);
+  itemManager.addItem({90, 150}, 4);
 
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
@@ -30,11 +36,7 @@ void Game::run() {
       break;
 
     case GameState::Playing: {
-      items.draw({100, 300}, 0);
-      items.draw({400, 600}, 1);
-      items.draw({300, 200}, 2);
-      items.draw({150, 80}, 3);
-      items.draw({90, 150}, 4);
+      itemManager.drawAll();
       pwat.draw(pwatPosition, currentTexture);
       auto state = pwat.playerMovements(currentTexture, pwatPosition);
       currentTexture = state.texture;
