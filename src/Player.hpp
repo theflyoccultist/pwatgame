@@ -11,6 +11,7 @@ class Player {
 public:
   static constexpr std::size_t numPwats = 4;
   static constexpr int pwatSize = 70;
+  static constexpr float playerSpeed = 3.0f;
 
   Player();
 

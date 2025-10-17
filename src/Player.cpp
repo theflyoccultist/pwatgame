@@ -2,13 +2,14 @@
 #include "Game.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
+#include <algorithm>
 
 Player::Player() {
   const std::array<std::string, numPwats> pwatPaths = {
       "../assets/pwatleft.png",
       "../assets/pwatright.png",
-      "../assets/pwatdown.png",
       "../assets/pwatup.png",
+      "../assets/pwatdown.png",
   };
 
   for (size_t i = 0; i < numPwats; ++i) {
@@ -20,32 +21,34 @@ Player::Player() {
 PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
   if (IsKeyDown(KEY_LEFT)) {
     current = 0;
-    playerPosition.x -= 2.0f;
+    playerPosition.x -= playerSpeed;
 
     if (playerPosition.x <= 0)
       playerPosition.x = 0;
   }
   if (IsKeyDown(KEY_RIGHT)) {
     current = 1;
-    playerPosition.x += 2.0f;
-
-    if (playerPosition.x >= Game::screenWidth - pwatSize)
-      playerPosition.x = Game::screenWidth - pwatSize;
+    playerPosition.x += playerSpeed;
   }
-  if (IsKeyDown(KEY_DOWN)) {
-    current = 2;
-    playerPosition.y += 2.0f;
 
-    if (playerPosition.y >= Game::screenHeight - pwatSize)
-      playerPosition.y = Game::screenHeight - pwatSize;
-  }
   if (IsKeyDown(KEY_UP)) {
-    current = 3;
-    playerPosition.y -= 2.0f;
+    current = 2;
+    playerPosition.y -= playerSpeed;
 
     if (playerPosition.y <= 0)
       playerPosition.y = 0;
   }
+
+  if (IsKeyDown(KEY_DOWN)) {
+    current = 3;
+    playerPosition.y += playerSpeed;
+  }
+
+  playerPosition.x =
+      std::clamp(playerPosition.x, 0.0f, (float)(Game::screenWidth - pwatSize));
+  playerPosition.y = std::clamp(playerPosition.y, 0.0f,
+                                (float)(Game::screenHeight - pwatSize));
+
   return {current, playerPosition};
 }
 
