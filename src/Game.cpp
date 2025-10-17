@@ -8,8 +8,7 @@
 void Game::run() {
   Player pwat;
   static ItemManager itemManager;
-
-  itemManager.addFoodItems();
+  itemManager.populateItems();
 
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
@@ -32,7 +31,8 @@ void Game::run() {
       break;
 
     case GameState::Playing: {
-      itemManager.drawAll();
+      itemManager.drawItems(ItemCategory::Food);
+      itemManager.drawItems(ItemCategory::PowerUp);
       pwat.draw(pwatPosition, currentTexture);
       auto state = pwat.playerMovements(currentTexture, pwatPosition);
       currentTexture = state.texture;
