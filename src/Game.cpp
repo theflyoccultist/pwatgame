@@ -1,6 +1,6 @@
 #include "Game.hpp"
-#include "ItemsManager.hpp"
 #include "Player.hpp"
+#include "items/ItemsManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UILib.hpp"
 #include <raylib.h>
