@@ -15,14 +15,13 @@ public:
 
   Player();
 
+  void draw(Vector2 position, int direction);
+
   PlayerState playerMovements(int current, Vector2 playerPosition);
   void playerFootsteps();
 
-  void draw(Vector2 position, int direction);
-
 private:
   std::array<Texture2D *, numPwats> pwatAssets;
-
   float footstepTimer = 0.0f;
   static constexpr float footstepDelay = 0.84f;
 };

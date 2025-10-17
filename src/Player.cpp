@@ -21,6 +21,11 @@ Player::Player() {
   }
 }
 
+void Player::draw(Vector2 position, int direction) {
+  AssetSystem::instance().drawTexture(pwatAssets[direction], position.x,
+                                      position.y);
+}
+
 PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
   bool left = IsKeyDown(KEY_LEFT);
   bool right = IsKeyDown(KEY_RIGHT);
@@ -83,9 +88,4 @@ void Player::playerFootsteps() {
   } else {
     footstepTimer = 0.0f;
   }
-}
-
-void Player::draw(Vector2 position, int direction) {
-  AssetSystem::instance().drawTexture(pwatAssets[direction], position.x,
-                                      position.y);
 }

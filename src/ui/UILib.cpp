@@ -16,8 +16,6 @@ UILib::PauseMenuOpts UILib::pauseMenu() {
 
   selectedIndex = std::clamp(selectedIndex, 0, (int)PauseMenuOpts::Count - 1);
 
-  const int baseY = 210;
-  const int spacing = 40;
   int posPauseMenu = baseY + selectedIndex * spacing;
   DrawRectangle(140, posPauseMenu, 490, 40, GREEN);
 
