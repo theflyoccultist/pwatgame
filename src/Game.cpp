@@ -4,9 +4,10 @@
 #include "ui/UILib.hpp"
 #include <raylib.h>
 
+bool paused = false;
+
 void Game::run() {
   Player pwat;
-
   UILib ui;
 
   int currentTexture = 0;
@@ -16,16 +17,27 @@ void Game::run() {
 
   while (!WindowShouldClose()) {
     AudioSystem::instance().updateMusic();
-    pwat.playerFootsteps();
-    auto state = pwat.playerMovements(currentTexture, pwatPosition);
-    currentTexture = state.texture;
-    pwatPosition = state.position;
+
+    if (IsKeyPressed(KEY_P)) {
+      paused = !paused;
+    }
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
     DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);
-    ui.pauseMenu();
     pwat.draw(pwatPosition, currentTexture);
+
+    if (!paused) {
+      AudioSystem::instance().resumeMusic();
+      auto state = pwat.playerMovements(currentTexture, pwatPosition);
+      currentTexture = state.texture;
+      pwatPosition = state.position;
+      pwat.playerFootsteps();
+    } else {
+      ui.pauseMenu();
+      AudioSystem::instance().pauseMusic();
+    }
+
     EndDrawing();
   }
 }
