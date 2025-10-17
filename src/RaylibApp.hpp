@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Game.hpp"
 #include <raylib.h>
 #include <string>
 
@@ -8,6 +9,8 @@ public:
   RaylibApp(int width, int height, const std::string &title) {
     InitWindow(width, height, title.c_str());
     SetTargetFPS(60);
+    Game game;
+    game.run();
   }
 
   ~RaylibApp() { CloseWindow(); }
