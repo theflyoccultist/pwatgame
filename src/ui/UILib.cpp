@@ -1,22 +1,39 @@
 #include "UILib.hpp"
 #include <algorithm>
+#include <array>
 #include <raylib.h>
 
-void UILib::pauseMenu() {
+void UILib::mainMenu() {
+  DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);
+  DrawText("PLAY", 275, 400, 60, BLACK);
+}
+
+UILib::PauseMenuOpts UILib::pauseMenu() {
   DrawRectangle(100, 100, 600, 600, YELLOW);
   DrawText("Game Paused", 150, 140, 20, BLACK);
 
-  static int posPauseMenu = 210;
+  static int selectedIndex = 0;
+
   if (IsKeyPressed(KEY_DOWN))
-    posPauseMenu += 40;
+    selectedIndex++;
   if (IsKeyPressed(KEY_UP))
-    posPauseMenu -= 40;
+    selectedIndex--;
 
-  posPauseMenu = std::clamp(posPauseMenu, 210, 330);
+  selectedIndex = std::clamp(selectedIndex, 0, (int)PauseMenuOpts::Count - 1);
 
+  const int baseY = 210;
+  const int spacing = 40;
+  int posPauseMenu = baseY + selectedIndex * spacing;
   DrawRectangle(140, posPauseMenu, 490, 40, GREEN);
-  DrawText("Resume", 150, 220, 20, BLACK);
-  DrawText("Restart Level", 150, 260, 20, BLACK);
-  DrawText("Options", 150, 300, 20, BLACK);
-  DrawText("Back to Menu", 150, 340, 20, BLACK);
+
+  std::array<const char *, 4> menuItems = {"Resume Game", "Restart Level",
+                                           "Options", "Back to Menu"};
+
+  int menuPosition = baseY + 10;
+  for (auto text : menuItems) {
+    DrawText(text, 150, menuPosition, 20, BLACK);
+    menuPosition += spacing;
+  }
+
+  return static_cast<PauseMenuOpts>(selectedIndex);
 }
