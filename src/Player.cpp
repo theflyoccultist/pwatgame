@@ -6,11 +6,14 @@
 
 Player::Player() {
   const std::array<std::string, numPwats> pwatPaths = {
-      "../assets/pwatleft.png",
-      "../assets/pwatright.png",
-      "../assets/pwatup.png",
-      "../assets/pwatdown.png",
-  };
+      "../assets/player/pwatleft.png",
+      "../assets/player/pwatright.png",
+      "../assets/player/pwatup.png",
+      "../assets/player/pwatdown.png",
+      "../assets/player/pwatleft_up.png",
+      "../assets/player/pwatleft_down.png",
+      "../assets/player/pwatright_up.png",
+      "../assets/player/pwatright_down.png"};
 
   for (size_t i = 0; i < numPwats; ++i) {
     pwatAssets[i] =
@@ -19,35 +22,51 @@ Player::Player() {
 }
 
 PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
-  if (IsKeyDown(KEY_LEFT)) {
-    current = 0;
+  bool left = IsKeyDown(KEY_LEFT);
+  bool right = IsKeyDown(KEY_RIGHT);
+  bool up = IsKeyDown(KEY_UP);
+  bool down = IsKeyDown(KEY_DOWN);
+
+  if (left)
     playerPosition.x -= playerSpeed;
 
-    if (playerPosition.x <= 0)
-      playerPosition.x = 0;
-  }
-  if (IsKeyDown(KEY_RIGHT)) {
-    current = 1;
+  if (right)
     playerPosition.x += playerSpeed;
-  }
 
-  if (IsKeyDown(KEY_UP)) {
-    current = 2;
+  if (up)
     playerPosition.y -= playerSpeed;
 
-    if (playerPosition.y <= 0)
-      playerPosition.y = 0;
-  }
-
-  if (IsKeyDown(KEY_DOWN)) {
-    current = 3;
+  if (down)
     playerPosition.y += playerSpeed;
-  }
 
   playerPosition.x =
       std::clamp(playerPosition.x, 0.0f, (float)(Game::screenWidth - pwatSize));
   playerPosition.y = std::clamp(playerPosition.y, 0.0f,
                                 (float)(Game::screenHeight - pwatSize));
+
+  if (left && up)
+    current = 4;
+
+  else if (left && down)
+    current = 5;
+
+  else if (right && up)
+    current = 6;
+
+  else if (right && down)
+    current = 7;
+
+  else if (left)
+    current = 0;
+
+  else if (right)
+    current = 1;
+
+  else if (up)
+    current = 2;
+
+  else if (down)
+    current = 3;
 
   return {current, playerPosition};
 }
