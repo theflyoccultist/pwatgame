@@ -42,7 +42,11 @@ void AudioSystem::resumeMusic() {
 }
 
 void AudioSystem::updateMusic() {
-  for (auto &m : *gameScores) {
-    m.update();
-  }
+  if (currentTrack >= 0)
+    (*gameScores)[currentTrack].update();
+}
+
+void AudioSystem::stopMusic() {
+  if (currentTrack >= 0)
+    (*gameScores)[currentTrack].stop();
 }

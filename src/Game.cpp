@@ -22,6 +22,10 @@ void Game::run() {
       paused = !paused;
     }
 
+    if (IsKeyPressed(KEY_SPACE)) {
+      AudioSystem::instance().stopMusic();
+    }
+
     BeginDrawing();
     ClearBackground(RAYWHITE);
     DrawText("PwatPwat - The Game", 275, 20, 20, DARKPURPLE);

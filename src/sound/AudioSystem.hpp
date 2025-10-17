@@ -22,6 +22,7 @@ public:
   void pauseMusic();
   void resumeMusic();
   void updateMusic();
+  void stopMusic();
 
 private:
   AudioSystem();
