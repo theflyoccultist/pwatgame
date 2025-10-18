@@ -3,9 +3,11 @@
 class UILib {
 public:
   enum class PauseMenuOpts { Resume, Restart, Options, BackToMenu, Count };
-
   static PauseMenuOpts pauseMenu();
-  static void optionsMenu();
+
+  enum class OptionMenuOpts { MusicVol, SfxVol, Count };
+  static OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
+
   static void mainMenu();
 
 private:

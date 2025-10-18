@@ -19,6 +19,8 @@ public:
   void update() { UpdateMusicStream(music); }
   void stop() { StopMusicStream(music); }
 
+  void changeScoreVolume(float vol) { SetMusicVolume(music, vol); }
+
 private:
   Music music;
 };
