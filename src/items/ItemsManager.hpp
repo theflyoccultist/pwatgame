@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Items.hpp"
+#include "../Items.hpp"
 #include <unordered_map>
 #include <vector>
 
@@ -26,9 +26,11 @@ public:
     addItem(ItemCategory::Food, 3, {150, 80});
     addItem(ItemCategory::Food, 4, {90, 150});
 
-    addItem(ItemCategory::PowerUp, 0, {400, 100});
-    addItem(ItemCategory::PowerUp, 1, {100, 700});
-    addItem(ItemCategory::PowerUp, 2, {700, 700});
+    addItem(ItemCategory::Drink, 0, {400, 100});
+    addItem(ItemCategory::Drink, 1, {100, 700});
+    addItem(ItemCategory::Drink, 2, {700, 700});
+    addItem(ItemCategory::Drink, 3, {150, 550});
+    addItem(ItemCategory::Drink, 4, {340, 600});
   }
 
   void drawItems(ItemCategory cat) {

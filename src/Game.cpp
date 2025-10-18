@@ -32,7 +32,7 @@ void Game::run() {
 
     case GameState::Playing: {
       itemManager.drawItems(ItemCategory::Food);
-      itemManager.drawItems(ItemCategory::PowerUp);
+      itemManager.drawItems(ItemCategory::Drink);
       pwat.draw(pwatPosition, currentTexture);
       auto state = pwat.playerMovements(currentTexture, pwatPosition);
       currentTexture = state.texture;
