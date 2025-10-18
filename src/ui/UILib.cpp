@@ -1,4 +1,5 @@
 #include "UILib.hpp"
+#include "../texture/AssetSystem.hpp"
 #include <algorithm>
 #include <array>
 #include <format>
@@ -7,9 +8,22 @@
 
 namespace UILib {
 
+std::array<Texture2D *, numAssets> uiAssets;
+
+void loadUIAssets() {
+  const std::array<std::string, numAssets> uiPaths = {
+      "../assets/ui/pwat_menu.png",
+  };
+
+  for (size_t i = 0; i < numAssets; ++i) {
+    uiAssets[i] = &AssetSystem::instance().loadTexture(uiPaths[i], 300, 300);
+  }
+}
+
 void mainMenu() {
   DrawText("PwatPwat - The Game", 275, 20, 20, BLACK);
-  DrawText("PLAY", 275, 400, 60, BLACK);
+  DrawText("Press Enter To Play", 165, 300, 40, BLACK);
+  AssetSystem::instance().drawTexture(uiAssets[0], 225, 400);
 }
 
 PauseMenuOpts pauseMenu() {

@@ -15,6 +15,7 @@ public:
   AudioSystem &operator=(const AudioSystem &) = delete;
 
   void playRandSteps();
+  void changeSfxVolume(int vol);
 
   void playTitleTrack();
   void playLevelTrack();

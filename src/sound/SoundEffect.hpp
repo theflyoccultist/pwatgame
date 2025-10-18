@@ -15,6 +15,7 @@ public:
 
   void play() { PlaySound(sfx); }
   void stop() { StopSound(sfx); }
+  void changeSoundVolume(float vol) { SetSoundVolume(sfx, vol); }
 
 private:
   Sound sfx;

@@ -6,8 +6,11 @@
 
 namespace UIManager {
 
+void loadUI() { UILib::loadUIAssets(); }
+
 void updateMainMenu() {
   UILib::mainMenu();
+
   if (IsKeyPressed(KEY_ENTER)) {
     Game::currentState = Game::GameState::Playing;
     AudioSystem::instance().stopMusic();
@@ -49,7 +52,7 @@ void updateOptionsMenu() {
   static int sfxVol = 100;
   auto optionsChoice = UILib::optionsMenu(musicVol, sfxVol);
 
-  if (IsKeyPressed(KEY_P))
+  if (IsKeyPressed(KEY_ENTER))
     Game::currentState = Game::GameState::Paused;
 
   if (IsKeyPressed(KEY_LEFT)) {
@@ -58,7 +61,7 @@ void updateOptionsMenu() {
       AudioSystem::instance().changeMusicVolume(musicVol -= 5);
       break;
     case UILib::OptionMenuOpts::SfxVol:
-      sfxVol -= 5;
+      AudioSystem::instance().changeSfxVolume(sfxVol -= 5);
       break;
     default:
       break;
@@ -71,7 +74,7 @@ void updateOptionsMenu() {
       AudioSystem::instance().changeMusicVolume(musicVol += 5);
       break;
     case UILib::OptionMenuOpts::SfxVol:
-      sfxVol += 5;
+      AudioSystem::instance().changeSfxVolume(sfxVol += 5);
       break;
     default:
       break;

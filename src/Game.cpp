@@ -10,6 +10,8 @@ void Game::run() {
   static ItemManager itemManager;
   itemManager.populateItems();
 
+  UIManager::loadUI();
+
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
 

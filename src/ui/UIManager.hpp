@@ -2,6 +2,7 @@
 
 namespace UIManager {
 
+void loadUI();
 void updateMainMenu();
 void updatePauseMenu();
 void updateOptionsMenu();

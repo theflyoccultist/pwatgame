@@ -21,6 +21,12 @@ void AudioSystem::playRandSteps() {
   (*pwatSteps)[index].play();
 }
 
+void AudioSystem::changeSfxVolume(int vol) {
+  float volume = static_cast<float>(vol) / 100;
+  for (auto &s : *pwatSteps)
+    s.changeSoundVolume(volume);
+};
+
 void AudioSystem::playTitleTrack() {
   currentTrack = 0;
   (*gameScores)[0].play();
@@ -52,6 +58,6 @@ void AudioSystem::stopMusic() {
 }
 
 void AudioSystem::changeMusicVolume(int vol) {
-  vol /= 100.0;
-  (*gameScores)[currentTrack].changeScoreVolume(vol);
+  float volume = static_cast<float>(vol) / 100;
+  (*gameScores)[currentTrack].changeScoreVolume(volume);
 }
