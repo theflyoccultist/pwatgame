@@ -4,7 +4,9 @@
 #include "UILib.hpp"
 #include <algorithm>
 
-void UIManager::updateMainMenu() {
+namespace UIManager {
+
+void updateMainMenu() {
   UILib::mainMenu();
   if (IsKeyPressed(KEY_ENTER)) {
     Game::currentState = Game::GameState::Playing;
@@ -13,7 +15,7 @@ void UIManager::updateMainMenu() {
   }
 }
 
-void UIManager::updatePauseMenu() {
+void updatePauseMenu() {
   auto pauseChoice = UILib::pauseMenu();
   AudioSystem::instance().pauseMusic();
 
@@ -42,7 +44,7 @@ void UIManager::updatePauseMenu() {
   }
 }
 
-void UIManager::updateOptionsMenu() {
+void updateOptionsMenu() {
   static int musicVol = 100;
   static int sfxVol = 100;
   auto optionsChoice = UILib::optionsMenu(musicVol, sfxVol);
@@ -79,3 +81,5 @@ void UIManager::updateOptionsMenu() {
   musicVol = std::clamp(musicVol, 0, 100);
   sfxVol = std::clamp(sfxVol, 0, 100);
 }
+
+} // namespace UIManager

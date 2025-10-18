@@ -10,8 +10,6 @@ void Game::run() {
   static ItemManager itemManager;
   itemManager.populateItems();
 
-  static UIManager uiManager;
-
   int currentTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
 
@@ -24,7 +22,7 @@ void Game::run() {
 
     switch (Game::currentState) {
     case GameState::MainMenu:
-      uiManager.updateMainMenu();
+      UIManager::updateMainMenu();
       break;
 
     case GameState::Playing: {
@@ -43,11 +41,11 @@ void Game::run() {
     }
 
     case GameState::Paused:
-      uiManager.updatePauseMenu();
+      UIManager::updatePauseMenu();
       break;
 
     case GameState::Options:
-      uiManager.updateOptionsMenu();
+      UIManager::updateOptionsMenu();
       break;
     }
 

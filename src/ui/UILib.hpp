@@ -1,16 +1,15 @@
 #pragma once
 
-class UILib {
-public:
-  enum class PauseMenuOpts { Resume, Restart, Options, BackToMenu, Count };
-  static PauseMenuOpts pauseMenu();
+namespace UILib {
 
-  enum class OptionMenuOpts { MusicVol, SfxVol, Count };
-  static OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
+enum class PauseMenuOpts { Resume, Restart, Options, BackToMenu, Count };
+enum class OptionMenuOpts { MusicVol, SfxVol, Count };
 
-  static void mainMenu();
+constexpr int baseY = 210;
+constexpr int spacing = 40;
 
-private:
-  static constexpr int baseY = 210;
-  static constexpr int spacing = 40;
-};
+void mainMenu();
+PauseMenuOpts pauseMenu();
+OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
+
+}; // namespace UILib

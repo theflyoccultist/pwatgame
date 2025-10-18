@@ -5,7 +5,14 @@
 #include <raylib.h>
 #include <string>
 
-UILib::PauseMenuOpts UILib::pauseMenu() {
+namespace UILib {
+
+void mainMenu() {
+  DrawText("PwatPwat - The Game", 275, 20, 20, BLACK);
+  DrawText("PLAY", 275, 400, 60, BLACK);
+}
+
+PauseMenuOpts pauseMenu() {
   DrawRectangle(100, 100, 600, 600, YELLOW);
   DrawText("Game Paused", 150, 140, 20, BLACK);
 
@@ -34,7 +41,7 @@ UILib::PauseMenuOpts UILib::pauseMenu() {
   return static_cast<PauseMenuOpts>(pauseSelectedIndex);
 }
 
-UILib::OptionMenuOpts UILib::optionsMenu(int musicVol, int sfxVol) {
+OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
   DrawRectangle(100, 100, 600, 600, ORANGE);
   DrawText("OPTIONS", 150, 140, 20, BLACK);
 
@@ -64,7 +71,4 @@ UILib::OptionMenuOpts UILib::optionsMenu(int musicVol, int sfxVol) {
   return static_cast<OptionMenuOpts>(optionsSelectedIndex);
 }
 
-void UILib::mainMenu() {
-  DrawText("PwatPwat - The Game", 275, 20, 20, BLACK);
-  DrawText("PLAY", 275, 400, 60, BLACK);
-}
+} // namespace UILib
