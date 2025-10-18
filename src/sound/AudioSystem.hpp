@@ -25,7 +25,6 @@ public:
   void stopMusic();
 
   void changeMusicVolume(int vol);
-  void increaseMusicVolume(int vol);
 
 private:
   AudioSystem();

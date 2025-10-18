@@ -1,5 +1,4 @@
 #include "AudioSystem.hpp"
-#include <algorithm>
 
 AudioSystem::AudioSystem() {
   InitAudioDevice();
@@ -53,7 +52,6 @@ void AudioSystem::stopMusic() {
 }
 
 void AudioSystem::changeMusicVolume(int vol) {
-  vol = std::clamp(vol, 0, 100);
   vol /= 100.0;
   (*gameScores)[currentTrack].changeScoreVolume(vol);
 }
