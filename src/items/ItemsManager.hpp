@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Items.hpp"
+#include <raylib.h>
 #include <unordered_map>
 #include <vector>
 
@@ -8,6 +9,8 @@ struct Item {
   ItemCategory category;
   int type;
   Vector2 position;
+  Vector2 size = {55, 55};
+  bool active = true;
 
   Item(ItemCategory c, int t, Vector2 pos)
       : category(c), type(t), position(pos) {}
@@ -45,14 +48,50 @@ public:
       }
     }
   }
-
   void drawItems(ItemCategory cat) {
     auto it = itemsByCategory.find(cat);
     if (it == itemsByCategory.end())
       return;
 
-    for (auto &item : it->second)
+    for (auto &item : it->second) {
       itemsObj.draw(item.category, item.position, item.type);
+
+      // Draw hitbox
+      if (item.active)
+        DrawRectangle(item.position.x, item.position.y, item.size.x,
+                      item.size.y, GREEN);
+      else
+        DrawRectangle(item.position.x, item.position.y, item.size.x,
+                      item.size.y, Fade(GREEN, 0.3f));
+    }
+  }
+
+  bool checkPickup(Vector2 playerPos, const Item &item,
+                   float playerSize = 70.0f) {
+
+    Rectangle playerRect = {playerPos.x, playerPos.y, playerSize, playerSize};
+    Rectangle itemRect = {item.position.x, item.position.y, item.size.x,
+                          item.size.y};
+
+    return CheckCollisionRecs(playerRect, itemRect);
+  }
+
+  void updateItems(Vector2 playerPos) {
+    for (auto &[category, items] : itemsByCategory) {
+      for (auto &item : items) {
+        if (item.active && checkPickup(playerPos, item)) {
+          item.active = false;
+          // switch (item.category) {
+          // case ItemCategory::Food:
+          //   PlayerProjectiles::addAmmo(20);
+          //   break;
+          // case ItemCategory::Drink:
+          //   PlayerProjectiles::changeProjectileType(ProjectileType::Fire);
+          //   break;
+          // }
+        }
+      }
+    }
   }
 
 private:

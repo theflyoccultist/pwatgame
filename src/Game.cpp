@@ -39,6 +39,7 @@ void Game::run() {
     case GameState::Playing: {
       itemManager.drawItems(ItemCategory::Food);
       itemManager.drawItems(ItemCategory::Drink);
+      itemManager.updateItems(pwatState.position);
 
       auto state = pwat.playerMovements(pwatState);
       pwatState = state;
