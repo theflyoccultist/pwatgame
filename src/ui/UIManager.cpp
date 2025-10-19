@@ -19,6 +19,8 @@ void updateMainMenu() {
   }
 }
 
+void updatePlayerHUD() { UILib::playerHUD(); }
+
 void updatePauseMenu() {
   auto pauseChoice = UILib::pauseMenu();
   AudioSystem::instance().pauseMusic();

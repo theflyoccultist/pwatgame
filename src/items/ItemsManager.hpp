@@ -93,6 +93,9 @@ public:
         }
       }
     }
+
+    for (auto &[category, items] : itemsByCategory)
+      std::erase_if(items, [](const Item &item) { return !item.active; });
   }
 
 private:

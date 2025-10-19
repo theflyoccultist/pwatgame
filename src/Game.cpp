@@ -41,6 +41,8 @@ void Game::run() {
       itemManager.drawItems(ItemCategory::Drink);
       itemManager.updateItems(pwatState.position);
 
+      UIManager::updatePlayerHUD();
+
       auto state = pwat.playerMovements(pwatState);
       pwatState = state;
       pwat.draw(pwatState.position, pwatState.texture);

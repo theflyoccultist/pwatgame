@@ -1,4 +1,5 @@
 #include "UILib.hpp"
+#include "../projectiles/PlayerProjectiles.hpp"
 #include "../texture/AssetSystem.hpp"
 #include <algorithm>
 #include <array>
@@ -25,6 +26,11 @@ void mainMenu() {
   DrawText("Press Enter To Play", 165, 300, 40, BLACK);
   AssetSystem::instance().drawTexture(uiAssets[0], 225, 400);
 }
+
+void playerHUD() {
+  DrawText(TextFormat("Ammo: %d", PlayerProjectiles::Projectile::playerAmmo),
+           20, 20, 20, BLACK);
+};
 
 PauseMenuOpts pauseMenu() {
   DrawRectangle(100, 100, 600, 600, YELLOW);

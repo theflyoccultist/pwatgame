@@ -13,6 +13,7 @@ constexpr int baseY = 210;
 constexpr int spacing = 40;
 
 void mainMenu();
+void playerHUD();
 PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
 

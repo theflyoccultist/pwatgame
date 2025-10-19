@@ -8,6 +8,7 @@ struct Projectile {
   Vector2 position;
   Vector2 velocity;
   float lifetime = 2.0f;
+  static inline int playerAmmo = 100;
 };
 
 void init();

@@ -7,7 +7,6 @@ namespace PlayerProjectiles {
 namespace {
 
 std::vector<Projectile> projectiles;
-int ammoCount = 100;
 float shootCooldown = 0.3f;
 float shootTimer = 0.0f;
 
@@ -15,12 +14,12 @@ float shootTimer = 0.0f;
 
 void init() {
   projectiles.clear();
-  ammoCount = 100;
   shootTimer = 0.0f;
+  Projectile::playerAmmo = 100;
 }
 
 void shoot(Vector2 startPosition, Vector2 dir) {
-  if (ammoCount <= 0 || shootTimer > 0.0f)
+  if (Projectile::playerAmmo <= 0 || shootTimer > 0.0f)
     return;
 
   Projectile p;
@@ -29,11 +28,11 @@ void shoot(Vector2 startPosition, Vector2 dir) {
   p.lifetime = 2.0f;
   projectiles.push_back(p);
 
-  ammoCount--;
+  Projectile::playerAmmo--;
   shootTimer = shootCooldown;
 }
 
-void addAmmo(int ammo) { ammoCount += ammo; }
+void addAmmo(int ammo) { Projectile::playerAmmo += ammo; }
 
 void update(Vector2 playerPosition, Vector2 playerDirection, float dt) {
   shootTimer = std::max(0.0f, shootTimer - dt);
@@ -58,8 +57,6 @@ void draw() {
     DrawCircleV(p.position, 10, BLUE);
     DrawCircleV(p.position, 4, RED);
   }
-
-  DrawText(TextFormat("Ammo: %d", ammoCount), 20, 20, 20, BLACK);
 }
 
 } // namespace PlayerProjectiles
