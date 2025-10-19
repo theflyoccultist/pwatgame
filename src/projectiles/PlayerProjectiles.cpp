@@ -33,6 +33,8 @@ void shoot(Vector2 startPosition, Vector2 dir) {
   shootTimer = shootCooldown;
 }
 
+void addAmmo(int ammo) { ammoCount += ammo; }
+
 void update(Vector2 playerPosition, Vector2 playerDirection, float dt) {
   shootTimer = std::max(0.0f, shootTimer - dt);
 

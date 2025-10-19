@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../projectiles/PlayerProjectiles.hpp"
 #include "Items.hpp"
 #include <raylib.h>
 #include <unordered_map>
@@ -57,12 +58,12 @@ public:
       itemsObj.draw(item.category, item.position, item.type);
 
       // Draw hitbox
-      if (item.active)
-        DrawRectangle(item.position.x, item.position.y, item.size.x,
-                      item.size.y, GREEN);
-      else
-        DrawRectangle(item.position.x, item.position.y, item.size.x,
-                      item.size.y, Fade(GREEN, 0.3f));
+      // if (item.active)
+      //   DrawRectangle(item.position.x, item.position.y, item.size.x,
+      //                 item.size.y, GREEN);
+      // else
+      //   DrawRectangle(item.position.x, item.position.y, item.size.x,
+      //                 item.size.y, Fade(GREEN, 0.3f));
     }
   }
 
@@ -81,14 +82,14 @@ public:
       for (auto &item : items) {
         if (item.active && checkPickup(playerPos, item)) {
           item.active = false;
-          // switch (item.category) {
-          // case ItemCategory::Food:
-          //   PlayerProjectiles::addAmmo(20);
-          //   break;
-          // case ItemCategory::Drink:
-          //   PlayerProjectiles::changeProjectileType(ProjectileType::Fire);
-          //   break;
-          // }
+          switch (item.category) {
+          case ItemCategory::Food:
+            PlayerProjectiles::addAmmo(20);
+            break;
+          case ItemCategory::Drink:
+            // PlayerProjectiles::changeProjectileType(ProjectileType::Fire);
+            break;
+          }
         }
       }
     }
