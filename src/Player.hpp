@@ -24,5 +24,5 @@ private:
   float footstepTimer = 0.0f;
   static constexpr float footstepDelay = 0.84f;
 
-  static constexpr float playerSpeed = 3.0f;
+  static constexpr float playerSpeed = 300.0f;
 };

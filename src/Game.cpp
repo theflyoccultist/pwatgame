@@ -3,7 +3,6 @@
 #include "items/ItemsManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
-#include <raylib.h>
 
 void Game::run() {
   Player pwat;
@@ -18,6 +17,8 @@ void Game::run() {
   AudioSystem::instance().playTitleTrack();
 
   while (!WindowShouldClose()) {
+    Game::deltaTime = GetFrameTime();
+
     BeginDrawing();
     ClearBackground(RAYWHITE);
     AudioSystem::instance().updateMusic();

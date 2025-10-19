@@ -33,16 +33,16 @@ PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
   bool down = IsKeyDown(KEY_DOWN);
 
   if (left)
-    playerPosition.x -= playerSpeed;
+    playerPosition.x -= playerSpeed * Game::deltaTime;
 
   if (right)
-    playerPosition.x += playerSpeed;
+    playerPosition.x += playerSpeed * Game::deltaTime;
 
   if (up)
-    playerPosition.y -= playerSpeed;
+    playerPosition.y -= playerSpeed * Game::deltaTime;
 
   if (down)
-    playerPosition.y += playerSpeed;
+    playerPosition.y += playerSpeed * Game::deltaTime;
 
   playerPosition.x =
       std::clamp(playerPosition.x, 0.0f, (float)(Game::screenWidth - pwatSize));
@@ -80,7 +80,7 @@ void Player::playerFootsteps() {
   if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_UP) ||
       IsKeyDown(KEY_DOWN)) {
 
-    footstepTimer -= GetFrameTime();
+    footstepTimer -= Game::deltaTime;
     if (footstepTimer <= 0.0f) {
       AudioSystem::instance().playRandSteps();
       footstepTimer = footstepDelay;
