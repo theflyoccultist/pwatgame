@@ -29,8 +29,8 @@ void mainMenu() {
 }
 
 void playerHUD() {
-  DrawText(TextFormat("Ammo: %d", PlayerProjectiles::Projectile::playerAmmo),
-           20, 20, 20, BLACK);
+  DrawText(TextFormat("Ammo: %d", PlayerProjectiles::playerAmmo), 20, 20, 20,
+           BLACK);
   DrawText(TextFormat("Health: %d", PlayerState::health), 20, 50, 20, BLACK);
 };
 

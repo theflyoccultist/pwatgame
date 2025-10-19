@@ -15,11 +15,11 @@ float shootTimer = 0.0f;
 void init() {
   projectiles.clear();
   shootTimer = 0.0f;
-  Projectile::playerAmmo = 100;
+  PlayerProjectiles::playerAmmo = 100;
 }
 
 void shoot(Vector2 startPosition, Vector2 dir) {
-  if (Projectile::playerAmmo <= 0 || shootTimer > 0.0f)
+  if (PlayerProjectiles::playerAmmo <= 0 || shootTimer > 0.0f)
     return;
 
   Projectile p;
@@ -28,11 +28,11 @@ void shoot(Vector2 startPosition, Vector2 dir) {
   p.lifetime = 2.0f;
   projectiles.push_back(p);
 
-  Projectile::playerAmmo--;
+  PlayerProjectiles::playerAmmo--;
   shootTimer = shootCooldown;
 }
 
-void addAmmo(int ammo) { Projectile::playerAmmo += ammo; }
+void addAmmo(int ammo) { PlayerProjectiles::playerAmmo += ammo; }
 
 void update(Vector2 playerPosition, Vector2 playerDirection, float dt) {
   shootTimer = std::max(0.0f, shootTimer - dt);
