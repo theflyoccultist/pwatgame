@@ -40,7 +40,7 @@ void Game::run() {
       pwatPosition = state.position;
 
       PlayerProjectiles::update(pwatPosition, deltaTime);
-      PlayerProjectiles::draw(pwatPosition);
+      PlayerProjectiles::draw();
 
       pwat.playerFootsteps();
 

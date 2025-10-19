@@ -20,25 +20,28 @@ void init() {
   shootTimer = 0.0f;
 }
 
-void shoot() {
+void shoot(Vector2 startPosition) {
   if (ammoCount <= 0 || shootTimer > 0.0f)
     return;
 
   Projectile p;
+  p.position = startPosition;
   p.velocity = {400, 0};
+  p.lifetime = 2.0f;
   projectiles.push_back(p);
+
   ammoCount--;
   shootTimer = shootCooldown;
 }
 
-void update(Vector2 position, float dt) {
+void update(Vector2 playerPosition, float dt) {
   shootTimer = std::max(0.0f, shootTimer - dt);
 
   if (IsKeyPressed(KEY_SPACE))
-    shoot();
+    shoot(playerPosition);
 
   for (auto &p : projectiles) {
-    position.x += p.velocity.x * dt;
+    p.position.x += p.velocity.x * dt;
     p.lifetime -= dt;
   }
 
@@ -48,9 +51,11 @@ void update(Vector2 position, float dt) {
       projectiles.end());
 }
 
-void draw(Vector2 position) {
-  DrawCircleV(position, 10, BLUE);
-  DrawCircleV(position, 4, RED);
+void draw() {
+  for (auto &p : projectiles) {
+    DrawCircleV(p.position, 10, BLUE);
+    DrawCircleV(p.position, 4, RED);
+  }
 
   DrawText(TextFormat("Ammo: %d", ammoCount), 20, 20, 20, BLACK);
 }
