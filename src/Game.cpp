@@ -42,8 +42,10 @@ void Game::run() {
       pwatState = state;
       pwat.draw(pwatState.position, pwatState.texture);
 
-      PlayerProjectiles::update(pwatState.position, pwatState.direction,
-                                deltaTime);
+      const float playerCenter = static_cast<float>(pwat.pwatSize / 2.0);
+      PlayerProjectiles::update({pwatState.position.x + playerCenter,
+                                 pwatState.position.y + playerCenter},
+                                pwatState.direction, deltaTime);
       PlayerProjectiles::draw();
 
       pwat.playerFootsteps();
