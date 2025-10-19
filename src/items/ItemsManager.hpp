@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Player.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
 #include "Items.hpp"
 #include <raylib.h>
@@ -92,7 +93,7 @@ public:
             PlayerProjectiles::addAmmo(20);
             break;
           case ItemCategory::Drink:
-            // PlayerProjectiles::changeProjectileType(ProjectileType::Fire);
+            Player::changePlayerHealth(20);
             break;
           }
         }

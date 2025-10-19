@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "Player.hpp"
 #include "items/ItemsManager.hpp"
 #include "projectiles/PlayerProjectiles.hpp"
 #include "sound/AudioSystem.hpp"
@@ -67,6 +66,7 @@ void Game::run() {
       AudioSystem::instance().stopMusic();
       AudioSystem::instance().playLevelTrack();
       PlayerProjectiles::init();
+      pwat.resetPlayerHealth();
 
       ItemManager::instance().populateItems();
       Game::currentState = GameState::Playing;

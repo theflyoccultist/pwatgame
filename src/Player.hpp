@@ -6,17 +6,20 @@ struct PlayerState {
   int texture;
   Vector2 position;
   Vector2 direction;
+  static inline int health = 50;
 };
 
 class Player {
 public:
   Player();
   static constexpr int pwatSize = 70;
-
   void draw(Vector2 position, int direction);
 
   PlayerState playerMovements(PlayerState state);
   void playerFootsteps();
+
+  static void changePlayerHealth(int value) { PlayerState::health += value; }
+  static void resetPlayerHealth() { PlayerState::health = 50; }
 
 private:
   static constexpr std::size_t numPwats = 8;

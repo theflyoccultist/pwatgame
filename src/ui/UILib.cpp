@@ -1,4 +1,5 @@
 #include "UILib.hpp"
+#include "../Player.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
 #include "../texture/AssetSystem.hpp"
 #include <algorithm>
@@ -30,6 +31,7 @@ void mainMenu() {
 void playerHUD() {
   DrawText(TextFormat("Ammo: %d", PlayerProjectiles::Projectile::playerAmmo),
            20, 20, 20, BLACK);
+  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 50, 20, BLACK);
 };
 
 PauseMenuOpts pauseMenu() {
