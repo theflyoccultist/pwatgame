@@ -8,9 +8,6 @@
 void Game::run() {
   Player pwat;
 
-  static ItemManager itemManager;
-  itemManager.populateItems();
-
   UIManager::loadUI();
 
   PlayerProjectiles::init();
@@ -23,6 +20,8 @@ void Game::run() {
   PlayerState pwatState = {pwatTexture, pwatPosition, pwatDirection};
 
   AudioSystem::instance().playTitleTrack();
+
+  ItemManager::instance().populateItems();
 
   while (!WindowShouldClose()) {
     Game::deltaTime = GetFrameTime();
@@ -37,9 +36,9 @@ void Game::run() {
       break;
 
     case GameState::Playing: {
-      itemManager.drawItems(ItemCategory::Food);
-      itemManager.drawItems(ItemCategory::Drink);
-      itemManager.updateItems(pwatState.position);
+      ItemManager::instance().drawItems(ItemCategory::Food);
+      ItemManager::instance().drawItems(ItemCategory::Drink);
+      ItemManager::instance().updateItems(pwatState.position);
 
       UIManager::updatePlayerHUD();
 
@@ -62,6 +61,15 @@ void Game::run() {
 
     case GameState::Paused:
       UIManager::updatePauseMenu();
+      break;
+
+    case GameState::Restarting:
+      AudioSystem::instance().stopMusic();
+      AudioSystem::instance().playLevelTrack();
+      PlayerProjectiles::init();
+
+      ItemManager::instance().populateItems();
+      Game::currentState = GameState::Playing;
       break;
 
     case GameState::Options:

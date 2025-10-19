@@ -1,6 +1,5 @@
 #include "UIManager.hpp"
 #include "../Game.hpp"
-#include "../projectiles/PlayerProjectiles.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "UILib.hpp"
 #include <algorithm>
@@ -32,10 +31,7 @@ void updatePauseMenu() {
       AudioSystem::instance().resumeMusic();
       break;
     case UILib::PauseMenuOpts::Restart:
-      Game::currentState = Game::GameState::Playing;
-      AudioSystem::instance().stopMusic();
-      AudioSystem::instance().playLevelTrack();
-      PlayerProjectiles::init();
+      Game::currentState = Game::GameState::Restarting;
       break;
     case UILib::PauseMenuOpts::Options:
       Game::currentState = Game::GameState::Options;
