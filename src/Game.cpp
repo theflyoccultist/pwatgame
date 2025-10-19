@@ -18,6 +18,7 @@ void Game::run() {
   int pwatTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
   Vector2 pwatDirection = {0.0f, 0.0f};
+  const float playerCenter = static_cast<float>(pwat.pwatSize / 2.0);
   PlayerState pwatState = {pwatTexture, pwatPosition, pwatDirection};
 
   AudioSystem::instance().playTitleTrack();
@@ -42,7 +43,6 @@ void Game::run() {
       pwatState = state;
       pwat.draw(pwatState.position, pwatState.texture);
 
-      const float playerCenter = static_cast<float>(pwat.pwatSize / 2.0);
       PlayerProjectiles::update({pwatState.position.x + playerCenter,
                                  pwatState.position.y + playerCenter},
                                 pwatState.direction, deltaTime);
