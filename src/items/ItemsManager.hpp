@@ -55,32 +55,14 @@ public:
       }
     }
   }
+
   void drawItems(ItemCategory cat) {
     auto it = itemsByCategory.find(cat);
     if (it == itemsByCategory.end())
       return;
 
-    for (auto &item : it->second) {
+    for (auto &item : it->second)
       itemsObj.draw(item.category, item.position, item.type);
-
-      // Draw hitbox
-      // if (item.active)
-      //   DrawRectangle(item.position.x, item.position.y, item.size.x,
-      //                 item.size.y, GREEN);
-      // else
-      //   DrawRectangle(item.position.x, item.position.y, item.size.x,
-      //                 item.size.y, Fade(GREEN, 0.3f));
-    }
-  }
-
-  bool checkPickup(Vector2 playerPos, const Item &item,
-                   float playerSize = 70.0f) {
-
-    Rectangle playerRect = {playerPos.x, playerPos.y, playerSize, playerSize};
-    Rectangle itemRect = {item.position.x, item.position.y, item.size.x,
-                          item.size.y};
-
-    return CheckCollisionRecs(playerRect, itemRect);
   }
 
   void updateItems(Vector2 playerPos) {
@@ -107,4 +89,14 @@ public:
 private:
   std::unordered_map<ItemCategory, std::vector<Item>> itemsByCategory;
   Items itemsObj;
+
+  bool checkPickup(Vector2 playerPos, const Item &item,
+                   float playerSize = 70.0f) {
+
+    Rectangle playerRect = {playerPos.x, playerPos.y, playerSize, playerSize};
+    Rectangle itemRect = {item.position.x, item.position.y, item.size.x,
+                          item.size.y};
+
+    return CheckCollisionRecs(playerRect, itemRect);
+  }
 };
