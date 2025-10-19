@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
+
 #include <algorithm>
 
 Player::Player() {

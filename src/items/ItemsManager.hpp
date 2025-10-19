@@ -20,17 +20,30 @@ public:
   }
 
   void populateItems() {
-    addItem(ItemCategory::Food, 0, {100, 300});
-    addItem(ItemCategory::Food, 1, {400, 600});
-    addItem(ItemCategory::Food, 2, {300, 200});
-    addItem(ItemCategory::Food, 3, {150, 80});
-    addItem(ItemCategory::Food, 4, {90, 150});
+    std::unordered_map<ItemCategory, std::vector<Vector2>> itemPositions = {
+        {ItemCategory::Food,
+         {
+             {100, 300},
+             {400, 600},
+             {300, 200},
+             {150, 80},
+             {90, 150},
+         }},
 
-    addItem(ItemCategory::Drink, 0, {400, 100});
-    addItem(ItemCategory::Drink, 1, {100, 700});
-    addItem(ItemCategory::Drink, 2, {700, 700});
-    addItem(ItemCategory::Drink, 3, {150, 550});
-    addItem(ItemCategory::Drink, 4, {340, 600});
+        {ItemCategory::Drink,
+         {
+             {400, 100},
+             {350, 150},
+             {700, 700},
+             {150, 550},
+             {340, 600},
+         }}};
+
+    for (auto &[category, positions] : itemPositions) {
+      for (size_t i = 0; i < positions.size(); ++i) {
+        addItem(category, static_cast<int>(i), positions[i]);
+      }
+    }
   }
 
   void drawItems(ItemCategory cat) {
