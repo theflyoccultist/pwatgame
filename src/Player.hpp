@@ -5,6 +5,7 @@
 struct PlayerState {
   int texture;
   Vector2 position;
+  Vector2 direction;
 };
 
 class Player {
@@ -13,7 +14,7 @@ public:
 
   void draw(Vector2 position, int direction);
 
-  PlayerState playerMovements(int current, Vector2 playerPosition);
+  PlayerState playerMovements(PlayerState state);
   void playerFootsteps();
 
 private:

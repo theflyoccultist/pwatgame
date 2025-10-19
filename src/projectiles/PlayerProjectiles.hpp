@@ -11,6 +11,6 @@ struct Projectile {
 };
 
 void init();
-void update(Vector2 playerPosition, float dt);
+void update(Vector2 playerPosition, Vector2 playerDirection, float dt);
 void draw();
 } // namespace PlayerProjectiles

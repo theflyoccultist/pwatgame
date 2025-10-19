@@ -1,5 +1,4 @@
 #include "PlayerProjectiles.hpp"
-#include "../Player.hpp"
 #include <algorithm>
 #include <vector>
 
@@ -20,13 +19,13 @@ void init() {
   shootTimer = 0.0f;
 }
 
-void shoot(Vector2 startPosition) {
+void shoot(Vector2 startPosition, Vector2 dir) {
   if (ammoCount <= 0 || shootTimer > 0.0f)
     return;
 
   Projectile p;
   p.position = startPosition;
-  p.velocity = {400, 0};
+  p.velocity = {dir.x * 400.0f, dir.y * 400.0f};
   p.lifetime = 2.0f;
   projectiles.push_back(p);
 
@@ -34,14 +33,15 @@ void shoot(Vector2 startPosition) {
   shootTimer = shootCooldown;
 }
 
-void update(Vector2 playerPosition, float dt) {
+void update(Vector2 playerPosition, Vector2 playerDirection, float dt) {
   shootTimer = std::max(0.0f, shootTimer - dt);
 
   if (IsKeyPressed(KEY_SPACE))
-    shoot(playerPosition);
+    shoot(playerPosition, playerDirection);
 
   for (auto &p : projectiles) {
     p.position.x += p.velocity.x * dt;
+    p.position.y += p.velocity.y * dt;
     p.lifetime -= dt;
   }
 

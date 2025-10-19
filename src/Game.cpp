@@ -7,6 +7,7 @@
 
 void Game::run() {
   Player pwat;
+
   static ItemManager itemManager;
   itemManager.populateItems();
 
@@ -14,8 +15,10 @@ void Game::run() {
 
   PlayerProjectiles::init();
 
-  int currentTexture = 0;
+  int pwatTexture = 0;
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
+  Vector2 pwatDirection = {0.0f, 0.0f};
+  PlayerState pwatState = {pwatTexture, pwatPosition, pwatDirection};
 
   AudioSystem::instance().playTitleTrack();
 
@@ -34,12 +37,13 @@ void Game::run() {
     case GameState::Playing: {
       itemManager.drawItems(ItemCategory::Food);
       itemManager.drawItems(ItemCategory::Drink);
-      pwat.draw(pwatPosition, currentTexture);
-      auto state = pwat.playerMovements(currentTexture, pwatPosition);
-      currentTexture = state.texture;
-      pwatPosition = state.position;
 
-      PlayerProjectiles::update(pwatPosition, deltaTime);
+      auto state = pwat.playerMovements(pwatState);
+      pwatState = state;
+      pwat.draw(pwatState.position, pwatState.texture);
+
+      PlayerProjectiles::update(pwatState.position, pwatState.direction,
+                                deltaTime);
       PlayerProjectiles::draw();
 
       pwat.playerFootsteps();

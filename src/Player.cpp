@@ -26,54 +26,62 @@ void Player::draw(Vector2 position, int direction) {
                                       position.y);
 }
 
-PlayerState Player::playerMovements(int current, Vector2 playerPosition) {
-  bool left = IsKeyDown(KEY_LEFT);
-  bool right = IsKeyDown(KEY_RIGHT);
-  bool up = IsKeyDown(KEY_UP);
-  bool down = IsKeyDown(KEY_DOWN);
+PlayerState Player::playerMovements(PlayerState state) {
+  Vector2 moveDir = {0.0f, 0.0f};
 
-  if (left)
-    playerPosition.x -= playerSpeed * Game::deltaTime;
+  bool facingLeft = IsKeyDown(KEY_LEFT);
+  bool facingRight = IsKeyDown(KEY_RIGHT);
+  bool facingUp = IsKeyDown(KEY_UP);
+  bool facingDown = IsKeyDown(KEY_DOWN);
 
-  if (right)
-    playerPosition.x += playerSpeed * Game::deltaTime;
+  if (facingLeft)
+    moveDir.x = -1.0f;
 
-  if (up)
-    playerPosition.y -= playerSpeed * Game::deltaTime;
+  if (facingRight)
+    moveDir.x += 1.0f;
 
-  if (down)
-    playerPosition.y += playerSpeed * Game::deltaTime;
+  if (facingUp)
+    moveDir.y -= 1.0f;
 
-  playerPosition.x =
-      std::clamp(playerPosition.x, 0.0f, (float)(Game::screenWidth - pwatSize));
-  playerPosition.y = std::clamp(playerPosition.y, 0.0f,
+  if (facingDown)
+    moveDir.y += 1.0f;
+
+  state.position.x += moveDir.x * playerSpeed * Game::deltaTime;
+  state.position.y += moveDir.y * playerSpeed * Game::deltaTime;
+
+  state.position.x =
+      std::clamp(state.position.x, 0.0f, (float)(Game::screenWidth - pwatSize));
+  state.position.y = std::clamp(state.position.y, 0.0f,
                                 (float)(Game::screenHeight - pwatSize));
 
-  if (left && up)
-    current = 4;
+  if (moveDir.x != 0 || moveDir.y != 0)
+    state.direction = moveDir;
 
-  else if (left && down)
-    current = 5;
+  if (facingLeft && facingUp)
+    state.texture = 4;
 
-  else if (right && up)
-    current = 6;
+  else if (facingLeft && facingDown)
+    state.texture = 5;
 
-  else if (right && down)
-    current = 7;
+  else if (facingRight && facingUp)
+    state.texture = 6;
 
-  else if (left)
-    current = 0;
+  else if (facingRight && facingDown)
+    state.texture = 7;
 
-  else if (right)
-    current = 1;
+  else if (facingLeft)
+    state.texture = 0;
 
-  else if (up)
-    current = 2;
+  else if (facingRight)
+    state.texture = 1;
 
-  else if (down)
-    current = 3;
+  else if (facingUp)
+    state.texture = 2;
 
-  return {current, playerPosition};
+  else if (facingDown)
+    state.texture = 3;
+
+  return state;
 }
 
 void Player::playerFootsteps() {
