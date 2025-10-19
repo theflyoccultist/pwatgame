@@ -2,8 +2,6 @@
 
 #include <raylib.h>
 
-#pragma once
-
 class Game {
 public:
   void run();
