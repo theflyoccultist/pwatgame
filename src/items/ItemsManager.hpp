@@ -67,7 +67,7 @@ public:
     for (auto &item : it->second)
       itemsObj.draw(item.category, item.position, item.type);
 
-    feedback.draw();
+    FeedbackSystem::instance().draw();
   }
 
   void updateItems(Vector2 playerPos) {
@@ -79,19 +79,19 @@ public:
           switch (item.category) {
           case ItemCategory::Food:
             PlayerProjectiles::addAmmo(20);
-            feedback.addFeedback("+20 AMMO", playerPos);
+            FeedbackSystem::instance().addFeedback("+20 AMMO", playerPos);
             break;
 
           case ItemCategory::Drink:
             Player::changePlayerHealth(20);
-            feedback.addFeedback("+20 HP", playerPos);
+            FeedbackSystem::instance().addFeedback("+20 HP", playerPos);
             break;
           }
         }
       }
     }
 
-    feedback.update();
+    FeedbackSystem::instance().update();
 
     for (auto &[category, items] : itemsByCategory)
       std::erase_if(items, [](const Item &item) { return !item.active; });
@@ -110,6 +110,4 @@ private:
 
     return CheckCollisionRecs(playerRect, itemRect);
   }
-
-  FeedbackSystem feedback;
 };

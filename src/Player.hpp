@@ -7,6 +7,7 @@ struct PlayerState {
   Vector2 position;
   Vector2 direction;
   static inline int health = 50;
+  static inline float playerSpeed = 300.0f;
 };
 
 class Player {
@@ -27,6 +28,4 @@ private:
 
   float footstepTimer = 0.0f;
   static constexpr float footstepDelay = 0.84f;
-
-  static constexpr float playerSpeed = 300.0f;
 };

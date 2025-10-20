@@ -47,8 +47,8 @@ PlayerState Player::playerMovements(PlayerState state) {
   if (facingDown)
     moveDir.y += 1.0f;
 
-  state.position.x += moveDir.x * playerSpeed * Game::deltaTime;
-  state.position.y += moveDir.y * playerSpeed * Game::deltaTime;
+  state.position.x += moveDir.x * state.playerSpeed * Game::deltaTime;
+  state.position.y += moveDir.y * state.playerSpeed * Game::deltaTime;
 
   state.position.x =
       std::clamp(state.position.x, 0.0f, (float)(Game::screenWidth - pwatSize));

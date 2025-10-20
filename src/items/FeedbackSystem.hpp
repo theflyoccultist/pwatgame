@@ -16,6 +16,11 @@ private:
   std::vector<FloatingText> feedbacks;
 
 public:
+  static FeedbackSystem &instance() {
+    static FeedbackSystem instance;
+    return instance;
+  }
+
   void addFeedback(const std::string &text, Vector2 playerPos) {
     feedbacks.push_back({text, playerPos, 1.0f, 255});
   }
