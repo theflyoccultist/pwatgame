@@ -78,6 +78,8 @@ void Game::run() {
       pwat.resetPlayerHealth();
 
       ItemManager::instance().populateItems();
+      entityManager.spawnEnemies();
+      entityManager.drawEnemies();
 
       Game::currentState = GameState::Playing;
       break;

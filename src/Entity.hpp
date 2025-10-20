@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <random>
 #include <raylib.h>
 #include <vector>
 
@@ -22,10 +23,18 @@ private:
 
 public:
   void spawnEnemies() {
-    enemies.push_back(
-        {(EntityTypes::ENEMY), {400, 200}, {0, 0}, true, 110, 0.0f});
-    enemies.push_back(
-        {(EntityTypes::ENEMY), {680, 300}, {0, 0}, true, 250, 0.0f});
+    enemies.clear();
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> hpDist(10, 300);
+    std::uniform_real_distribution<float> posDist(0.0f, 730.0f);
+
+    for (int i = 0; i < 10; ++i) {
+      Vector2 pos = {posDist(gen), posDist(gen)};
+      enemies.push_back(
+          {EntityTypes::ENEMY, pos, {0, 0}, true, hpDist(gen), 0});
+    }
   }
 
   void updateEnemies(const vector<Vector2> &bulletPositions) {
@@ -50,8 +59,12 @@ public:
   }
 
   void drawEnemies() {
+
     for (auto &enemy : enemies) {
-      DrawRectangleV(enemy.position, {100, 100}, BLUE);
+      Color enemyColor = (enemy.entityHP > 200) ? DARKGRAY : RED;
+      DrawRectangle(enemy.position.x, enemy.position.y, 100, 100, enemyColor);
+      DrawText(TextFormat("%d", enemy.entityHP), enemy.position.x + 20,
+               enemy.position.y - 20, 10, BLACK);
     }
   }
 
@@ -70,6 +83,7 @@ public:
   bool checkBulletInteraction(Vector2 bulletPos, const EntityState &entity,
                               float entitySize = 100.0f,
                               float bulletSize = 5.0f) {
+
     Rectangle bulletRect = {bulletPos.x, bulletPos.y, bulletSize, bulletSize};
     Rectangle entityRect = {entity.position.x, entity.position.y, entitySize,
                             entitySize};
