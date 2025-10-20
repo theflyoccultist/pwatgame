@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Entity.hpp"
 #include "items/ItemsManager.hpp"
 #include "projectiles/PlayerProjectiles.hpp"
 #include "sound/AudioSystem.hpp"
@@ -6,6 +7,8 @@
 
 void Game::run() {
   Player pwat;
+
+  EntityManager entityManager;
 
   UIManager::loadUI();
 
@@ -21,6 +24,8 @@ void Game::run() {
   AudioSystem::instance().playTitleTrack();
 
   ItemManager::instance().populateItems();
+
+  entityManager.spawnEnemies();
 
   while (!WindowShouldClose()) {
     Game::deltaTime = GetFrameTime();
@@ -40,7 +45,9 @@ void Game::run() {
 
       auto state = pwat.playerMovements(pwatState);
       pwatState = state;
+
       pwat.draw(pwatState.position, pwatState.texture);
+      pwat.playerFootsteps();
 
       ItemManager::instance().updateItems(pwatState.position);
       ItemManager::instance().drawItems(ItemCategory::Food);
@@ -51,7 +58,8 @@ void Game::run() {
                                 pwatState.direction, deltaTime);
       PlayerProjectiles::draw();
 
-      pwat.playerFootsteps();
+      entityManager.updateEnemies();
+      entityManager.drawEnemies();
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
