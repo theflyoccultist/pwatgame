@@ -8,12 +8,12 @@ struct PlayerState {
   Vector2 direction;
   static inline int health = 50;
   static inline float playerSpeed = 300.0f;
+  static constexpr int playerSize = 70;
 };
 
 class Player {
 public:
   Player();
-  static constexpr int pwatSize = 70;
   void draw(Vector2 position, int direction);
 
   PlayerState playerMovements(PlayerState state);

@@ -16,7 +16,7 @@ void Game::run() {
   PlayerProjectiles::init();
 
   int pwatTexture = 0;
-  const float pwatCenter = static_cast<float>(pwat.pwatSize / 2.0);
+  const float pwatCenter = static_cast<float>(PlayerState::playerSize / 2.0);
   Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
   Vector2 pwatDirection = {0.0f, 0.0f};
 
@@ -58,7 +58,8 @@ void Game::run() {
                                 pwatState.direction, deltaTime);
       PlayerProjectiles::draw();
 
-      entityManager.updateEnemies(PlayerProjectiles::getProjectilePositions());
+      entityManager.updateEnemies(PlayerProjectiles::getProjectilePositions(),
+                                  pwatState.position);
       entityManager.drawEnemies();
 
       if (IsKeyPressed(KEY_P))

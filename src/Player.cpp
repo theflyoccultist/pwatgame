@@ -17,8 +17,8 @@ Player::Player() {
       "../assets/player/pwatright_down.png"};
 
   for (size_t i = 0; i < numPwats; ++i) {
-    pwatAssets[i] =
-        &AssetSystem::instance().loadTexture(pwatPaths[i], pwatSize, pwatSize);
+    pwatAssets[i] = &AssetSystem::instance().loadTexture(
+        pwatPaths[i], PlayerState::playerSize, PlayerState::playerSize);
   }
 }
 
@@ -51,9 +51,11 @@ PlayerState Player::playerMovements(PlayerState state) {
   state.position.y += moveDir.y * state.playerSpeed * Game::deltaTime;
 
   state.position.x =
-      std::clamp(state.position.x, 0.0f, (float)(Game::screenWidth - pwatSize));
-  state.position.y = std::clamp(state.position.y, 0.0f,
-                                (float)(Game::screenHeight - pwatSize));
+      std::clamp(state.position.x, 0.0f,
+                 (float)(Game::screenWidth - PlayerState::playerSize));
+  state.position.y =
+      std::clamp(state.position.y, 0.0f,
+                 (float)(Game::screenHeight - PlayerState::playerSize));
 
   if (moveDir.x != 0 || moveDir.y != 0)
     state.direction = moveDir;
