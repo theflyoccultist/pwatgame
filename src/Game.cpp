@@ -35,15 +35,16 @@ void Game::run() {
       break;
 
     case GameState::Playing: {
-      ItemManager::instance().updateItems(pwatState.position);
-      ItemManager::instance().drawItems(ItemCategory::Food);
-      ItemManager::instance().drawItems(ItemCategory::Drink);
 
       UIManager::updatePlayerHUD();
 
       auto state = pwat.playerMovements(pwatState);
       pwatState = state;
       pwat.draw(pwatState.position, pwatState.texture);
+
+      ItemManager::instance().updateItems(pwatState.position);
+      ItemManager::instance().drawItems(ItemCategory::Food);
+      ItemManager::instance().drawItems(ItemCategory::Drink);
 
       PlayerProjectiles::update({pwatState.position.x + pwatCenter,
                                  pwatState.position.y + pwatCenter},

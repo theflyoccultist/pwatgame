@@ -66,6 +66,8 @@ public:
 
     for (auto &item : it->second)
       itemsObj.draw(item.category, item.position, item.type);
+
+    feedback.draw();
   }
 
   void updateItems(Vector2 playerPos) {
@@ -73,20 +75,23 @@ public:
       for (auto &item : items) {
         if (item.active && checkPickup(playerPos, item)) {
           item.active = false;
+
           switch (item.category) {
           case ItemCategory::Food:
             PlayerProjectiles::addAmmo(20);
             feedback.addFeedback("+20 AMMO", playerPos);
-            feedback.update();
-            feedback.draw();
             break;
+
           case ItemCategory::Drink:
             Player::changePlayerHealth(20);
+            feedback.addFeedback("+20 HP", playerPos);
             break;
           }
         }
       }
     }
+
+    feedback.update();
 
     for (auto &[category, items] : itemsByCategory)
       std::erase_if(items, [](const Item &item) { return !item.active; });
