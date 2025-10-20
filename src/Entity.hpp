@@ -32,7 +32,6 @@ public:
     std::uniform_real_distribution<float> posDist(0.0f, 730.0f);
     std::uniform_int_distribution<> hpDist(10, 300);
     std::uniform_real_distribution<float> speedDist(1.0f, 30.0f);
-    std::uniform_int_distribution<> sizeDist(15, 100);
 
     for (int i = 0; i < 20; ++i) {
       Vector2 pos = {posDist(gen), posDist(gen)};
@@ -42,7 +41,7 @@ public:
                          true,
                          hpDist(gen),
                          speedDist(gen),
-                         sizeDist(gen)});
+                         60});
     }
   }
 
@@ -96,7 +95,7 @@ public:
   const vector<EntityState> &getEnemies() const { return enemies; }
 
   bool checkBulletInteraction(Vector2 bulletPos, const EntityState &entity,
-                              float entitySize = 100.0f,
+                              float entitySize = 60.0f,
                               float bulletSize = 10.0f) {
 
     Rectangle bulletRect = {bulletPos.x, bulletPos.y, bulletSize, bulletSize};
