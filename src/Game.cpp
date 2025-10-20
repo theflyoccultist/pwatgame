@@ -35,9 +35,9 @@ void Game::run() {
       break;
 
     case GameState::Playing: {
+      ItemManager::instance().updateItems(pwatState.position);
       ItemManager::instance().drawItems(ItemCategory::Food);
       ItemManager::instance().drawItems(ItemCategory::Drink);
-      ItemManager::instance().updateItems(pwatState.position);
 
       UIManager::updatePlayerHUD();
 

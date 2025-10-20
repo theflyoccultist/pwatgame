@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Player.hpp"
+#include "../items/FeedbackSystem.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
 #include "Items.hpp"
 #include <raylib.h>
@@ -75,6 +76,9 @@ public:
           switch (item.category) {
           case ItemCategory::Food:
             PlayerProjectiles::addAmmo(20);
+            feedback.addFeedback("+20 AMMO", playerPos);
+            feedback.update();
+            feedback.draw();
             break;
           case ItemCategory::Drink:
             Player::changePlayerHealth(20);
@@ -101,4 +105,6 @@ private:
 
     return CheckCollisionRecs(playerRect, itemRect);
   }
+
+  FeedbackSystem feedback;
 };
