@@ -1,5 +1,5 @@
 #include "Game.hpp"
-#include "Entity.hpp"
+#include "entities/EntityManager.hpp"
 #include "items/ItemsManager.hpp"
 #include "projectiles/PlayerProjectiles.hpp"
 #include "sound/AudioSystem.hpp"
