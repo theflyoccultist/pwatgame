@@ -12,7 +12,8 @@ public:
     EntityTypes type;
     Vector2 position;
     Vector2 direction;
-    int enityHP;
+    bool active = true;
+    int entityHP;
     float entitySpeed;
   };
 
@@ -21,17 +22,31 @@ private:
 
 public:
   void spawnEnemies() {
-    enemies.push_back({(EntityTypes::ENEMY), {400, 200}, {0, 0}, 30, 120.0f});
-    enemies.push_back({(EntityTypes::ENEMY), {680, 300}, {0, 0}, 500, 90.0f});
+    enemies.push_back(
+        {(EntityTypes::ENEMY), {400, 200}, {0, 0}, true, 110, 0.0f});
+    enemies.push_back(
+        {(EntityTypes::ENEMY), {680, 300}, {0, 0}, true, 250, 0.0f});
   }
 
-  void updateEnemies() {
+  void updateEnemies(const vector<Vector2> &bulletPositions) {
     for (auto &enemy : enemies) {
       enemy.position.x +=
           enemy.direction.x * enemy.entitySpeed * Game::deltaTime;
       enemy.position.y +=
           enemy.direction.y * enemy.entitySpeed * Game::deltaTime;
+
+      for (auto &bulletPos : bulletPositions) {
+        if (enemy.active && checkBulletInteraction(bulletPos, enemy)) {
+          enemy.entityHP--;
+          if (enemy.entityHP <= 0) {
+            enemy.active = false;
+            break;
+          }
+        }
+      }
     }
+
+    std::erase_if(enemies, [](const EntityState &e) { return !e.active; });
   }
 
   void drawEnemies() {
@@ -51,4 +66,14 @@ public:
   }
 
   const vector<EntityState> &getEnemies() const { return enemies; }
+
+  bool checkBulletInteraction(Vector2 bulletPos, const EntityState &entity,
+                              float entitySize = 100.0f,
+                              float bulletSize = 5.0f) {
+    Rectangle bulletRect = {bulletPos.x, bulletPos.y, bulletSize, bulletSize};
+    Rectangle entityRect = {entity.position.x, entity.position.y, entitySize,
+                            entitySize};
+
+    return CheckCollisionRecs(bulletRect, entityRect);
+  }
 };

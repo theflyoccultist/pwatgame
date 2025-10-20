@@ -1,6 +1,5 @@
 #include "PlayerProjectiles.hpp"
 #include <algorithm>
-#include <vector>
 
 namespace PlayerProjectiles {
 
@@ -57,6 +56,16 @@ void draw() {
     DrawCircleV(p.position, 10, BLUE);
     DrawCircleV(p.position, 4, RED);
   }
+}
+
+const std::vector<Vector2> getProjectilePositions() {
+  std::vector<Vector2> positions;
+  positions.reserve(projectiles.size());
+
+  for (auto &p : projectiles)
+    positions.push_back(p.position);
+
+  return positions;
 }
 
 } // namespace PlayerProjectiles

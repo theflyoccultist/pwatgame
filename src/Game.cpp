@@ -4,6 +4,7 @@
 #include "projectiles/PlayerProjectiles.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
+#include <raylib.h>
 
 void Game::run() {
   Player pwat;
@@ -40,7 +41,6 @@ void Game::run() {
       break;
 
     case GameState::Playing: {
-
       UIManager::updatePlayerHUD();
 
       auto state = pwat.playerMovements(pwatState);
@@ -58,7 +58,7 @@ void Game::run() {
                                 pwatState.direction, deltaTime);
       PlayerProjectiles::draw();
 
-      entityManager.updateEnemies();
+      entityManager.updateEnemies(PlayerProjectiles::getProjectilePositions());
       entityManager.drawEnemies();
 
       if (IsKeyPressed(KEY_P))
@@ -78,6 +78,7 @@ void Game::run() {
       pwat.resetPlayerHealth();
 
       ItemManager::instance().populateItems();
+
       Game::currentState = GameState::Playing;
       break;
 
