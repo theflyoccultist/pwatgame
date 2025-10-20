@@ -3,7 +3,7 @@
 #include <raylib.h>
 
 namespace PlayerProjectiles {
-inline int playerAmmo = 100;
+inline int playerAmmo;
 
 struct Projectile {
   Vector2 position;

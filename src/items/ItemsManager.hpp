@@ -30,6 +30,8 @@ public:
   }
 
   void populateItems() {
+    itemsByCategory.clear();
+
     std::unordered_map<ItemCategory, std::vector<Vector2>> itemPositions = {
         {ItemCategory::Food,
          {
