@@ -1,15 +1,22 @@
 #include "../Game.hpp"
+#include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include "EntityManager.hpp"
+#include <array>
 #include <cmath>
+#include <cstddef>
 #include <raylib.h>
+#include <string>
 
 vector<EntityManager::EntityState> enemies;
+std::array<Texture2D *, 3> enemyAssets;
 
 void EntityManager::spawnEnemies() {
   enemies.clear();
 
-  for (int i = 0; i < 80; ++i) {
+  size_t enemiesCount = 80;
+
+  for (size_t i = 0; i < enemiesCount; ++i) {
     Vector2 pos = {Random::rangeFloat(0.0f, 730.0f),
                    Random::rangeFloat(0.0f, 730.0f)};
     enemies.push_back({EntityTypes::ENEMY,
@@ -19,6 +26,15 @@ void EntityManager::spawnEnemies() {
                        Random::rangeInt(10, 300),
                        Random::rangeFloat(20.0f, 40.0f),
                        60});
+  }
+
+  const std::array<std::string, 3> enemyPaths = {
+      "../assets/enemies/enemy_HIGH.png", "../assets/enemies/enemy_MED.png",
+      "../assets/enemies/enemy_LOW.png"};
+
+  for (size_t i = 0; i < enemyPaths.size(); ++i) {
+    enemyAssets[i] =
+        &AssetSystem::instance().loadTexture(enemyPaths[i], 60, 60);
   }
 }
 
@@ -69,16 +85,16 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
 void EntityManager::drawEnemies() {
   for (auto &enemy : enemies) {
 
-    Color enemyColor;
     if (enemy.entityHP > 200)
-      enemyColor = DARKGRAY;
+      AssetSystem::instance().drawTexture(enemyAssets[0], enemy.position.x,
+                                          enemy.position.y);
     else if (enemy.entityHP > 100)
-      enemyColor = RED;
+      AssetSystem::instance().drawTexture(enemyAssets[1], enemy.position.x,
+                                          enemy.position.y);
     else
-      enemyColor = PURPLE;
+      AssetSystem::instance().drawTexture(enemyAssets[2], enemy.position.x,
+                                          enemy.position.y);
 
-    DrawRectangle(enemy.position.x, enemy.position.y, enemy.entitySize,
-                  enemy.entitySize, enemyColor);
     DrawText(TextFormat("%d", enemy.entityHP), enemy.position.x + 20,
              enemy.position.y - 20, 10, BLACK);
   }
