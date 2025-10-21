@@ -1,5 +1,6 @@
 #include "../Game.hpp"
 #include "../Player.hpp"
+#include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include "EntityManager.hpp"
@@ -90,13 +91,14 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
     if (enemy.active && checkPlayerInteraction(playerPos, enemy))
       if (PlayerState::damageCooldown <= 0.0f) {
         PlayerState::health--;
-        PlayerState::damageCooldown = 0.2f;
+        PlayerState::damageCooldown = 0.15f;
       }
 
     for (auto &bulletPos : bulletPositions) {
       if (enemy.active && checkBulletInteraction(bulletPos, enemy)) {
         enemy.currentEntityHP--;
         if (enemy.currentEntityHP <= 0) {
+          AudioSystem::instance().enemyKilled();
           enemy.active = false;
           enemiesCount--;
           break;

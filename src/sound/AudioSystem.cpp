@@ -1,4 +1,5 @@
 #include "AudioSystem.hpp"
+#include "SoundEffect.hpp"
 
 AudioSystem::AudioSystem() {
   InitAudioDevice();
@@ -8,6 +9,11 @@ AudioSystem::AudioSystem() {
                                  SoundEffect("../assets/sfx/pwatwalk3.wav"),
                                  SoundEffect("../assets/sfx/pwatwalk4.wav"),
                                  SoundEffect("../assets/sfx/pwatwalk5.wav")});
+
+  combatSFX =
+      std::make_unique<std::array<SoundEffect, 2>>(std::array<SoundEffect, 2>{
+          SoundEffect("../assets/sfx/8bit_shoot.wav"),
+          SoundEffect("../assets/sfx/8bit_explosion.wav")});
 
   gameScores = std::make_unique<std::array<GameScore, 2>>(
       std::array<GameScore, 2>{GameScore("../assets/music/right_to_rave.ogg"),
@@ -20,6 +26,9 @@ void AudioSystem::playRandSteps() {
   int index = GetRandomValue(0, static_cast<int>(pwatSteps->size()) - 1);
   (*pwatSteps)[index].play();
 }
+
+void AudioSystem::gunshotSounds() { (*combatSFX)[0].play(); }
+void AudioSystem::enemyKilled() { (*combatSFX)[1].play(); }
 
 void AudioSystem::changeSfxVolume(int vol) {
   float volume = static_cast<float>(vol) / 100;

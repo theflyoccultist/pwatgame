@@ -1,4 +1,5 @@
 #include "PlayerProjectiles.hpp"
+#include "../sound/AudioSystem.hpp"
 #include <algorithm>
 
 namespace PlayerProjectiles {
@@ -29,6 +30,7 @@ void shoot(Vector2 startPosition, Vector2 dir) {
 
   PlayerProjectiles::playerAmmo--;
   shootTimer = shootCooldown;
+  AudioSystem::instance().gunshotSounds();
 }
 
 void addAmmo(int ammo) { PlayerProjectiles::playerAmmo += ammo; }

@@ -15,6 +15,8 @@ public:
   AudioSystem &operator=(const AudioSystem &) = delete;
 
   void playRandSteps();
+  void gunshotSounds();
+  void enemyKilled();
   void changeSfxVolume(int vol);
 
   void playTitleTrack();
@@ -32,6 +34,8 @@ private:
   ~AudioSystem();
 
   std::unique_ptr<std::array<SoundEffect, 5>> pwatSteps;
+  std::unique_ptr<std::array<SoundEffect, 2>> combatSFX;
+
   std::unique_ptr<std::array<GameScore, 2>> gameScores;
   int currentTrack = -1;
 };
