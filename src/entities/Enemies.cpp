@@ -10,46 +10,39 @@
 #include <raylib.h>
 #include <string>
 
-vector<EntityManager::EntityState> enemies;
+vector<Entity> enemies;
 std::array<Texture2D *, 3> enemyAssets;
 
-void EntityManager::spawnEnemies() {
+void EntityManager::spawnEnemies(EnemyType type, size_t count) {
   enemies.clear();
-  enemiesCount = 60;
-
-  int currentEnemyHP, totalEnemyHP;
-  size_t e = enemiesCount;
-
-  for (size_t i = 0; i < e; ++i) {
+  for (size_t i = 0; i < count; ++i) {
     Vector2 pos = {Random::rangeFloat(0.0f, 730.0f),
                    Random::rangeFloat(0.0f, 730.0f)};
 
-    currentEnemyHP = totalEnemyHP = Random::rangeInt(120, 300);
+    int currentHP = Random::rangeInt(120, 300);
+    float speed = Random::rangeFloat(30.0f, 70.0f);
 
-    enemies.push_back({EntityTypes::ENEMY,
-                       pos,
-                       {0, 0},
-                       true,
-                       currentEnemyHP,
-                       totalEnemyHP,
-                       Random::rangeFloat(30.0f, 70.0f),
-                       60});
-  }
+    Entity enemy = {EntityType::ENEMY, pos,       {0, 0}, true,
+                    currentHP,         currentHP, speed,  60};
 
-  const std::array<std::string, 3> enemyPaths = {
-      "../assets/enemies/enemy_HIGH.png", "../assets/enemies/enemy_MED.png",
-      "../assets/enemies/enemy_LOW.png"};
+    enemies.push_back(enemy);
 
-  for (size_t i = 0; i < enemyPaths.size(); ++i) {
-    enemyAssets[i] =
-        &AssetSystem::instance().loadTexture(enemyPaths[i], 60, 60);
+    const std::array<std::string, 3> enemyPaths = {
+        "../assets/enemies/enemy_HIGH.png", "../assets/enemies/enemy_MED.png",
+        "../assets/enemies/enemy_LOW.png"};
+
+    if (type == EnemyType::SWARMER) {
+      for (size_t i = 0; i < enemyPaths.size(); ++i) {
+        enemyAssets[i] =
+            &AssetSystem::instance().loadTexture(enemyPaths[i], 60, 60);
+      }
+    }
   }
 }
 
-const vector<EntityManager::EntityState> &getEnemies() { return enemies; }
+const vector<Entity> &getEnemies() { return enemies; }
 
-bool checkBulletInteraction(Vector2 bulletPos,
-                            const EntityManager::EntityState &entity,
+bool checkBulletInteraction(Vector2 bulletPos, const Entity &entity,
                             float entitySize = 60.0f,
                             float bulletSize = 10.0f) {
 
@@ -60,8 +53,7 @@ bool checkBulletInteraction(Vector2 bulletPos,
   return CheckCollisionRecs(bulletRect, entityRect);
 }
 
-bool checkPlayerInteraction(Vector2 playerPos,
-                            const EntityManager::EntityState &entity) {
+bool checkPlayerInteraction(Vector2 playerPos, const Entity &entity) {
 
   Rectangle playerRect = {playerPos.x, playerPos.y, 70, 70};
   Rectangle entityRect = {entity.position.x, entity.position.y, 70, 70};
@@ -108,8 +100,7 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
     }
   }
 
-  std::erase_if(enemies,
-                [](const EntityManager::EntityState &e) { return !e.active; });
+  std::erase_if(enemies, [](const Entity &e) { return !e.active; });
 }
 
 void EntityManager::drawEnemies() {

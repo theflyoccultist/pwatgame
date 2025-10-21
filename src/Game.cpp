@@ -26,7 +26,7 @@ void Game::run() {
 
   ItemManager::instance().populateItems();
 
-  entityManager.spawnEnemies();
+  entityManager.spawnEnemies(EnemyType::SWARMER, 30);
 
   while (!WindowShouldClose()) {
     Game::deltaTime = GetFrameTime();
@@ -80,7 +80,7 @@ void Game::run() {
       pwat.resetPlayerScore();
 
       ItemManager::instance().populateItems();
-      entityManager.spawnEnemies();
+      entityManager.spawnEnemies(EnemyType::SWARMER, 30);
       entityManager.drawEnemies();
 
       Game::currentState = GameState::Playing;
