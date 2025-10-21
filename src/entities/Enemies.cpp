@@ -1,27 +1,23 @@
 #include "../Game.hpp"
+#include "../utils/Random.hpp"
 #include "EntityManager.hpp"
 #include <cmath>
-#include <random>
+#include <raylib.h>
 
 vector<EntityManager::EntityState> enemies;
 
 void EntityManager::spawnEnemies() {
   enemies.clear();
 
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_real_distribution<float> posDist(0.0f, 730.0f);
-  std::uniform_int_distribution<> hpDist(10, 300);
-  std::uniform_real_distribution<float> speedDist(1.0f, 30.0f);
-
-  for (int i = 0; i < 20; ++i) {
-    Vector2 pos = {posDist(gen), posDist(gen)};
+  for (int i = 0; i < 80; ++i) {
+    Vector2 pos = {Random::rangeFloat(0.0f, 730.0f),
+                   Random::rangeFloat(0.0f, 730.0f)};
     enemies.push_back({EntityTypes::ENEMY,
                        pos,
                        {0, 0},
                        true,
-                       hpDist(gen),
-                       speedDist(gen),
+                       Random::rangeInt(10, 300),
+                       Random::rangeFloat(20.0f, 40.0f),
                        60});
   }
 }
@@ -72,7 +68,15 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
 
 void EntityManager::drawEnemies() {
   for (auto &enemy : enemies) {
-    Color enemyColor = (enemy.entityHP > 200) ? DARKGRAY : RED;
+
+    Color enemyColor;
+    if (enemy.entityHP > 200)
+      enemyColor = DARKGRAY;
+    else if (enemy.entityHP > 100)
+      enemyColor = RED;
+    else
+      enemyColor = PURPLE;
+
     DrawRectangle(enemy.position.x, enemy.position.y, enemy.entitySize,
                   enemy.entitySize, enemyColor);
     DrawText(TextFormat("%d", enemy.entityHP), enemy.position.x + 20,

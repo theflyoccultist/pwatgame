@@ -3,6 +3,7 @@
 #include "../Player.hpp"
 #include "../items/FeedbackSystem.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
+#include "../utils/Random.hpp"
 #include "Items.hpp"
 #include <raylib.h>
 #include <unordered_map>
@@ -34,27 +35,13 @@ public:
     itemsByCategory.clear();
 
     std::unordered_map<ItemCategory, std::vector<Vector2>> itemPositions = {
-        {ItemCategory::Food,
-         {
-             {100, 300},
-             {400, 600},
-             {300, 200},
-             {150, 80},
-             {90, 150},
-         }},
-
-        {ItemCategory::Drink,
-         {
-             {400, 100},
-             {350, 150},
-             {700, 700},
-             {150, 550},
-             {340, 600},
-         }}};
+        {ItemCategory::Food, {}}, {ItemCategory::Drink, {}}};
 
     for (auto &[category, positions] : itemPositions) {
-      for (size_t i = 0; i < positions.size(); ++i) {
-        addItem(category, static_cast<int>(i), positions[i]);
+      for (size_t i = 0; i < 4; ++i) {
+        addItem(category, static_cast<int>(i),
+                {Random::rangeFloat(0.0f, 730.0f),
+                 Random::rangeFloat(0.0f, 730.0f)});
       }
     }
   }
