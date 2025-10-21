@@ -7,7 +7,7 @@ namespace PlayerProjectiles {
 namespace {
 
 std::vector<Projectile> projectiles;
-float shootCooldown = 0.3f;
+float shootCooldown = 0.15f;
 float shootTimer = 0.0f;
 
 } // namespace
@@ -24,7 +24,7 @@ void shoot(Vector2 startPosition, Vector2 dir) {
 
   Projectile p;
   p.position = startPosition;
-  p.velocity = {dir.x * 400.0f, dir.y * 400.0f};
+  p.velocity = {dir.x * 700.0f, dir.y * 700.0f};
   p.lifetime = 2.0f;
   projectiles.push_back(p);
 

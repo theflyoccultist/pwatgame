@@ -15,7 +15,7 @@ std::array<Texture2D *, 3> enemyAssets;
 
 void EntityManager::spawnEnemies() {
   enemies.clear();
-  enemiesCount = 80;
+  enemiesCount = 60;
 
   int currentEnemyHP, totalEnemyHP;
   size_t e = enemiesCount;
@@ -32,7 +32,7 @@ void EntityManager::spawnEnemies() {
                        true,
                        currentEnemyHP,
                        totalEnemyHP,
-                       Random::rangeFloat(20.0f, 40.0f),
+                       Random::rangeFloat(30.0f, 70.0f),
                        60});
   }
 
@@ -97,6 +97,7 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
     for (auto &bulletPos : bulletPositions) {
       if (enemy.active && checkBulletInteraction(bulletPos, enemy)) {
         enemy.currentEntityHP--;
+        PlayerState::score++;
         if (enemy.currentEntityHP <= 0) {
           AudioSystem::instance().enemyKilled();
           enemy.active = false;

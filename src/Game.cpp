@@ -77,6 +77,7 @@ void Game::run() {
       AudioSystem::instance().playLevelTrack();
       PlayerProjectiles::init();
       pwat.resetPlayerHealth();
+      pwat.resetPlayerScore();
 
       ItemManager::instance().populateItems();
       entityManager.spawnEnemies();

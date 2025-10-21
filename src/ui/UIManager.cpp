@@ -12,7 +12,7 @@ void updateMainMenu() {
   UILib::mainMenu();
 
   if (IsKeyPressed(KEY_ENTER)) {
-    Game::currentState = Game::GameState::Playing;
+    Game::currentState = Game::GameState::Restarting;
     AudioSystem::instance().stopMusic();
     AudioSystem::instance().playLevelTrack();
   }
