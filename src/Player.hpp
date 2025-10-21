@@ -7,6 +7,7 @@ struct PlayerState {
   Vector2 position;
   Vector2 direction;
   static inline int health = 50;
+  static inline float damageCooldown = 0.0f;
   static inline float playerSpeed = 300.0f;
   static constexpr int playerSize = 70;
 };

@@ -1,5 +1,6 @@
 #include "UILib.hpp"
 #include "../Player.hpp"
+#include "../entities/EntityManager.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
 #include "../texture/AssetSystem.hpp"
 #include <algorithm>
@@ -29,9 +30,11 @@ void mainMenu() {
 }
 
 void playerHUD() {
-  DrawText(TextFormat("Ammo: %d", PlayerProjectiles::playerAmmo), 20, 20, 20,
+  DrawText(TextFormat("Enemies remaining: %d", EntityManager::enemiesCount), 20,
+           20, 20, BLACK);
+  DrawText(TextFormat("Ammo: %d", PlayerProjectiles::playerAmmo), 20, 50, 20,
            BLACK);
-  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 50, 20, BLACK);
+  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);
 };
 
 PauseMenuOpts pauseMenu() {

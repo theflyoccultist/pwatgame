@@ -1,9 +1,11 @@
 #include "Player.hpp"
 #include "Game.hpp"
+#include "entities/EntityManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
 
 #include <algorithm>
+#include <raylib.h>
 
 Player::Player() {
   const std::array<std::string, numPwats> pwatPaths = {

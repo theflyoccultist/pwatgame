@@ -1,4 +1,5 @@
 #include "../Game.hpp"
+#include "../Player.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include "EntityManager.hpp"
@@ -13,17 +14,23 @@ std::array<Texture2D *, 3> enemyAssets;
 
 void EntityManager::spawnEnemies() {
   enemies.clear();
+  enemiesCount = 80;
 
-  size_t enemiesCount = 80;
+  int currentEnemyHP, totalEnemyHP;
+  size_t e = enemiesCount;
 
-  for (size_t i = 0; i < enemiesCount; ++i) {
+  for (size_t i = 0; i < e; ++i) {
     Vector2 pos = {Random::rangeFloat(0.0f, 730.0f),
                    Random::rangeFloat(0.0f, 730.0f)};
+
+    currentEnemyHP = totalEnemyHP = Random::rangeInt(120, 300);
+
     enemies.push_back({EntityTypes::ENEMY,
                        pos,
                        {0, 0},
                        true,
-                       Random::rangeInt(10, 300),
+                       currentEnemyHP,
+                       totalEnemyHP,
                        Random::rangeFloat(20.0f, 40.0f),
                        60});
   }
@@ -52,8 +59,21 @@ bool checkBulletInteraction(Vector2 bulletPos,
   return CheckCollisionRecs(bulletRect, entityRect);
 }
 
+bool checkPlayerInteraction(Vector2 playerPos,
+                            const EntityManager::EntityState &entity) {
+
+  Rectangle playerRect = {playerPos.x, playerPos.y, 70, 70};
+  Rectangle entityRect = {entity.position.x, entity.position.y, 70, 70};
+
+  return CheckCollisionRecs(playerRect, entityRect);
+}
+
 void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
                                   Vector2 playerPos) {
+
+  if (PlayerState::damageCooldown > 0.0f)
+    PlayerState::damageCooldown -= Game::deltaTime;
+
   for (auto &enemy : enemies) {
     Vector2 dir = {playerPos.x - enemy.position.x,
                    playerPos.y - enemy.position.y};
@@ -67,11 +87,18 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
     enemy.position.x += dir.x * enemy.entitySpeed * Game::deltaTime;
     enemy.position.y += dir.y * enemy.entitySpeed * Game::deltaTime;
 
+    if (enemy.active && checkPlayerInteraction(playerPos, enemy))
+      if (PlayerState::damageCooldown <= 0.0f) {
+        PlayerState::health--;
+        PlayerState::damageCooldown = 0.2f;
+      }
+
     for (auto &bulletPos : bulletPositions) {
       if (enemy.active && checkBulletInteraction(bulletPos, enemy)) {
-        enemy.entityHP--;
-        if (enemy.entityHP <= 0) {
+        enemy.currentEntityHP--;
+        if (enemy.currentEntityHP <= 0) {
           enemy.active = false;
+          enemiesCount--;
           break;
         }
       }
@@ -85,17 +112,17 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
 void EntityManager::drawEnemies() {
   for (auto &enemy : enemies) {
 
-    if (enemy.entityHP > 200)
+    if (enemy.currentEntityHP > 200)
       AssetSystem::instance().drawTexture(enemyAssets[0], enemy.position.x,
                                           enemy.position.y);
-    else if (enemy.entityHP > 100)
+    else if (enemy.currentEntityHP > 100)
       AssetSystem::instance().drawTexture(enemyAssets[1], enemy.position.x,
                                           enemy.position.y);
     else
       AssetSystem::instance().drawTexture(enemyAssets[2], enemy.position.x,
                                           enemy.position.y);
 
-    DrawText(TextFormat("%d", enemy.entityHP), enemy.position.x + 20,
-             enemy.position.y - 20, 10, BLACK);
+    DrawText(TextFormat("%d / %d", enemy.currentEntityHP, enemy.totalEntityHP),
+             enemy.position.x + 20, enemy.position.y - 20, 10, BLACK);
   }
 }
