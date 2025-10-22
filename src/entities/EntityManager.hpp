@@ -6,7 +6,7 @@ using std::vector;
 
 enum class EntityType { ENEMY, ALLY };
 
-enum class EnemyType { SWARMER, SNIPER };
+enum class EnemyType { SWARMER, SNIPER, COUNT };
 
 struct Entity {
   EntityType type;
@@ -21,8 +21,9 @@ struct Entity {
 
 class EntityManager {
 public:
-  static inline size_t enemiesCount;
+  static inline size_t enemiesCount = 0;
 
+  void clearEnemies();
   void spawnEnemies(EnemyType type, size_t count);
   void updateEnemies(const vector<Vector2> &bulletPositions, Vector2 playerPos);
   void drawEnemies(EnemyType type);

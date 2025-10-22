@@ -45,7 +45,9 @@ void Game::run() {
       pwat.resetPlayerScore();
 
       ItemManager::instance().populateItems();
+      entityManager.clearEnemies();
       entityManager.spawnEnemies(EnemyType::SWARMER, 50);
+      entityManager.spawnEnemies(EnemyType::SNIPER, 10);
 
       Game::currentState = GameState::Playing;
       break;
@@ -71,6 +73,7 @@ void Game::run() {
       entityManager.updateEnemies(PlayerProjectiles::getProjectilePositions(),
                                   pwatState.position);
       entityManager.drawEnemies(EnemyType::SWARMER);
+      entityManager.drawEnemies(EnemyType::SNIPER);
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
