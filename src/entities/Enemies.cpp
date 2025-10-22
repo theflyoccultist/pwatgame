@@ -1,5 +1,5 @@
-#include "../CollisionDetection.hpp"
 #include "../Game.hpp"
+#include "../collisions/CollisionDetection.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
 #include <array>

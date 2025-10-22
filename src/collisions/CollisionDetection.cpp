@@ -1,5 +1,5 @@
 #include "CollisionDetection.hpp"
-#include "projectiles/PlayerProjectiles.hpp"
+#include "../projectiles/PlayerProjectiles.hpp"
 
 namespace Collisions {
 bool checkPickup(Vector2 playerPos, const Item &item) {

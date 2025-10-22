@@ -1,7 +1,7 @@
 #pragma once
 
-#include "entities/EntityManager.hpp"
-#include "items/ItemsManager.hpp"
+#include "../entities/EntityManager.hpp"
+#include "../items/ItemsManager.hpp"
 #include <raylib.h>
 
 namespace Collisions {

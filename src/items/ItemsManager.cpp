@@ -1,5 +1,5 @@
 #include "ItemsManager.hpp"
-#include "../CollisionDetection.hpp"
+#include "../collisions/CollisionDetection.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
 #include "FeedbackSystem.hpp"
 
