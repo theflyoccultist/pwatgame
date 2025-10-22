@@ -26,7 +26,7 @@ void Game::run() {
 
   ItemManager::instance().populateItems();
 
-  entityManager.spawnEnemies(EnemyType::SWARMER, 30);
+  entityManager.spawnEnemies(EnemyType::SWARMER, 50);
 
   while (!WindowShouldClose()) {
     Game::deltaTime = GetFrameTime();
@@ -60,7 +60,7 @@ void Game::run() {
 
       entityManager.updateEnemies(PlayerProjectiles::getProjectilePositions(),
                                   pwatState.position);
-      entityManager.drawEnemies();
+      entityManager.drawEnemies(EnemyType::SWARMER);
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
@@ -80,8 +80,7 @@ void Game::run() {
       pwat.resetPlayerScore();
 
       ItemManager::instance().populateItems();
-      entityManager.spawnEnemies(EnemyType::SWARMER, 30);
-      entityManager.drawEnemies();
+      entityManager.spawnEnemies(EnemyType::SWARMER, 50);
 
       Game::currentState = GameState::Playing;
       break;

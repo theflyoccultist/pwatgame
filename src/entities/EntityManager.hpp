@@ -16,13 +16,14 @@ struct Entity {
   int totalEntityHP;
   int currentEntityHP;
   float entitySpeed;
-  int entitySize;
+  float entitySize;
 };
 
 class EntityManager {
 public:
-  static inline size_t enemiesCount = 80;
+  static inline size_t enemiesCount;
+
   void spawnEnemies(EnemyType type, size_t count);
   void updateEnemies(const vector<Vector2> &bulletPositions, Vector2 playerPos);
-  void drawEnemies();
+  void drawEnemies(EnemyType type);
 };

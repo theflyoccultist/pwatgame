@@ -15,6 +15,8 @@ std::array<Texture2D *, 3> enemyAssets;
 
 void EntityManager::spawnEnemies(EnemyType type, size_t count) {
   enemies.clear();
+  enemiesCount = count;
+
   for (size_t i = 0; i < count; ++i) {
     Vector2 pos = {Random::rangeFloat(0.0f, 730.0f),
                    Random::rangeFloat(0.0f, 730.0f)};
@@ -23,7 +25,7 @@ void EntityManager::spawnEnemies(EnemyType type, size_t count) {
     float speed = Random::rangeFloat(30.0f, 70.0f);
 
     Entity enemy = {EntityType::ENEMY, pos,       {0, 0}, true,
-                    currentHP,         currentHP, speed,  60};
+                    currentHP,         currentHP, speed,  60.0f};
 
     enemies.push_back(enemy);
 
@@ -55,8 +57,10 @@ bool checkBulletInteraction(Vector2 bulletPos, const Entity &entity,
 
 bool checkPlayerInteraction(Vector2 playerPos, const Entity &entity) {
 
-  Rectangle playerRect = {playerPos.x, playerPos.y, 70, 70};
-  Rectangle entityRect = {entity.position.x, entity.position.y, 70, 70};
+  Rectangle playerRect = {playerPos.x, playerPos.y, PlayerState::playerSize,
+                          PlayerState::playerSize};
+  Rectangle entityRect = {entity.position.x, entity.position.y,
+                          entity.entitySize, entity.entitySize};
 
   return CheckCollisionRecs(playerRect, entityRect);
 }
@@ -80,11 +84,12 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
     enemy.position.x += dir.x * enemy.entitySpeed * Game::deltaTime;
     enemy.position.y += dir.y * enemy.entitySpeed * Game::deltaTime;
 
-    if (enemy.active && checkPlayerInteraction(playerPos, enemy))
+    if (enemy.active && checkPlayerInteraction(playerPos, enemy)) {
       if (PlayerState::damageCooldown <= 0.0f) {
         PlayerState::health--;
-        PlayerState::damageCooldown = 0.15f;
+        PlayerState::damageCooldown = 0.10f;
       }
+    }
 
     for (auto &bulletPos : bulletPositions) {
       if (enemy.active && checkBulletInteraction(bulletPos, enemy)) {
@@ -103,20 +108,23 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
   std::erase_if(enemies, [](const Entity &e) { return !e.active; });
 }
 
-void EntityManager::drawEnemies() {
-  for (auto &enemy : enemies) {
+void EntityManager::drawEnemies(EnemyType type) {
+  if (type == EnemyType::SWARMER) {
+    for (auto &enemy : enemies) {
 
-    if (enemy.currentEntityHP > 200)
-      AssetSystem::instance().drawTexture(enemyAssets[0], enemy.position.x,
-                                          enemy.position.y);
-    else if (enemy.currentEntityHP > 100)
-      AssetSystem::instance().drawTexture(enemyAssets[1], enemy.position.x,
-                                          enemy.position.y);
-    else
-      AssetSystem::instance().drawTexture(enemyAssets[2], enemy.position.x,
-                                          enemy.position.y);
+      if (enemy.currentEntityHP > 200)
+        AssetSystem::instance().drawTexture(enemyAssets[0], enemy.position.x,
+                                            enemy.position.y);
+      else if (enemy.currentEntityHP > 100)
+        AssetSystem::instance().drawTexture(enemyAssets[1], enemy.position.x,
+                                            enemy.position.y);
+      else
+        AssetSystem::instance().drawTexture(enemyAssets[2], enemy.position.x,
+                                            enemy.position.y);
 
-    DrawText(TextFormat("%d / %d", enemy.currentEntityHP, enemy.totalEntityHP),
-             enemy.position.x + 20, enemy.position.y - 20, 10, BLACK);
+      DrawText(
+          TextFormat("%d / %d", enemy.currentEntityHP, enemy.totalEntityHP),
+          enemy.position.x + 20, enemy.position.y - 20, 10, BLACK);
+    }
   }
 }
