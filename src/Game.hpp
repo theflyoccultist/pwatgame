@@ -10,6 +10,6 @@ public:
 
   static inline float deltaTime = 0.0f;
 
-  enum class GameState { MainMenu, Playing, Paused, Restarting, Options };
+  enum class GameState { MainMenu, Restarting, Playing, Paused, Options };
   static inline GameState currentState = GameState::MainMenu;
 };

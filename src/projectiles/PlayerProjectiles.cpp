@@ -16,6 +16,7 @@ void init() {
   projectiles.clear();
   shootTimer = 0.0f;
   PlayerProjectiles::playerAmmo = 100;
+  PlayerProjectiles::size = 10;
 }
 
 void shoot(Vector2 startPosition, Vector2 dir) {
@@ -55,7 +56,7 @@ void update(Vector2 playerPosition, Vector2 playerDirection, float dt) {
 
 void draw() {
   for (auto &p : projectiles) {
-    DrawCircleV(p.position, 10, BLUE);
+    DrawCircleV(p.position, PlayerProjectiles::size, BLUE);
     DrawCircleV(p.position, 4, RED);
   }
 }

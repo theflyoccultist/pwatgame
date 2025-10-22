@@ -5,6 +5,7 @@
 
 namespace PlayerProjectiles {
 inline int playerAmmo;
+inline float size;
 
 struct Projectile {
   Vector2 position;

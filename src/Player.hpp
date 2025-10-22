@@ -6,7 +6,7 @@ struct PlayerState {
   int texture;
   Vector2 position;
   Vector2 direction;
-  static inline int health = 50;
+  static inline int health;
   static inline float damageCooldown = 0.0f;
   static inline float playerSpeed = 500.0f;
   static constexpr int playerSize = 70;
@@ -30,5 +30,5 @@ private:
   std::array<Texture2D *, numPwats> pwatAssets;
 
   float footstepTimer = 0.0f;
-  static constexpr float footstepDelay = 0.84f;
+  static constexpr float footstepDelay = 0.44f;
 };

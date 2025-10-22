@@ -88,10 +88,10 @@ private:
   std::unordered_map<ItemCategory, std::vector<Item>> itemsByCategory;
   Items itemsObj;
 
-  bool checkPickup(Vector2 playerPos, const Item &item,
-                   float playerSize = 70.0f) {
+  bool checkPickup(Vector2 playerPos, const Item &item) {
 
-    Rectangle playerRect = {playerPos.x, playerPos.y, playerSize, playerSize};
+    Rectangle playerRect = {playerPos.x, playerPos.y, PlayerState::playerSize,
+                            PlayerState::playerSize};
     Rectangle itemRect = {item.position.x, item.position.y, item.size.x,
                           item.size.y};
 

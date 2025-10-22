@@ -1,12 +1,12 @@
+#include "../CollisionDetection.hpp"
 #include "../Game.hpp"
-#include "../Player.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
-#include "EntityManager.hpp"
 #include <array>
 #include <cmath>
 #include <cstddef>
+#include <iostream>
 #include <raylib.h>
 #include <string>
 
@@ -17,15 +17,16 @@ void EntityManager::spawnEnemies(EnemyType type, size_t count) {
   enemies.clear();
   enemiesCount = count;
 
-  for (size_t i = 0; i < count; ++i) {
+  for (size_t i = 0; i < enemiesCount; ++i) {
     Vector2 pos = {Random::rangeFloat(0.0f, 730.0f),
                    Random::rangeFloat(0.0f, 730.0f)};
 
     int currentHP = Random::rangeInt(120, 300);
     float speed = Random::rangeFloat(30.0f, 70.0f);
+    float enemySize = 60.0f;
 
     Entity enemy = {EntityType::ENEMY, pos,       {0, 0}, true,
-                    currentHP,         currentHP, speed,  60.0f};
+                    currentHP,         currentHP, speed,  enemySize};
 
     enemies.push_back(enemy);
 
@@ -35,35 +36,14 @@ void EntityManager::spawnEnemies(EnemyType type, size_t count) {
 
     if (type == EnemyType::SWARMER) {
       for (size_t i = 0; i < enemyPaths.size(); ++i) {
-        enemyAssets[i] =
-            &AssetSystem::instance().loadTexture(enemyPaths[i], 60, 60);
+        enemyAssets[i] = &AssetSystem::instance().loadTexture(
+            enemyPaths[i], enemySize, enemySize);
       }
     }
   }
 }
 
 const vector<Entity> &getEnemies() { return enemies; }
-
-bool checkBulletInteraction(Vector2 bulletPos, const Entity &entity,
-                            float entitySize = 60.0f,
-                            float bulletSize = 10.0f) {
-
-  Rectangle bulletRect = {bulletPos.x, bulletPos.y, bulletSize, bulletSize};
-  Rectangle entityRect = {entity.position.x, entity.position.y, entitySize,
-                          entitySize};
-
-  return CheckCollisionRecs(bulletRect, entityRect);
-}
-
-bool checkPlayerInteraction(Vector2 playerPos, const Entity &entity) {
-
-  Rectangle playerRect = {playerPos.x, playerPos.y, PlayerState::playerSize,
-                          PlayerState::playerSize};
-  Rectangle entityRect = {entity.position.x, entity.position.y,
-                          entity.entitySize, entity.entitySize};
-
-  return CheckCollisionRecs(playerRect, entityRect);
-}
 
 void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
                                   Vector2 playerPos) {
@@ -84,15 +64,18 @@ void EntityManager::updateEnemies(const vector<Vector2> &bulletPositions,
     enemy.position.x += dir.x * enemy.entitySpeed * Game::deltaTime;
     enemy.position.y += dir.y * enemy.entitySpeed * Game::deltaTime;
 
-    if (enemy.active && checkPlayerInteraction(playerPos, enemy)) {
+    if (enemy.active && Collisions::checkPlayerInteraction(playerPos, enemy)) {
       if (PlayerState::damageCooldown <= 0.0f) {
         PlayerState::health--;
         PlayerState::damageCooldown = 0.10f;
       }
+      if (PlayerState::health <= 0)
+        std::cout << "Game Over!\n";
     }
 
     for (auto &bulletPos : bulletPositions) {
-      if (enemy.active && checkBulletInteraction(bulletPos, enemy)) {
+      if (enemy.active &&
+          Collisions::checkBulletInteraction(bulletPos, enemy)) {
         enemy.currentEntityHP--;
         PlayerState::score++;
         if (enemy.currentEntityHP <= 0) {

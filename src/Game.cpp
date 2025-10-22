@@ -17,16 +17,13 @@ void Game::run() {
 
   int pwatTexture = 0;
   const float pwatCenter = static_cast<float>(PlayerState::playerSize / 2.0);
-  Vector2 pwatPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
+  Vector2 pwatPosition = {static_cast<float>(screenWidth / 2.0),
+                          static_cast<float>(screenHeight / 2.0)};
   Vector2 pwatDirection = {0.0f, 0.0f};
 
   PlayerState pwatState = {pwatTexture, pwatPosition, pwatDirection};
 
   AudioSystem::instance().playTitleTrack();
-
-  ItemManager::instance().populateItems();
-
-  entityManager.spawnEnemies(EnemyType::SWARMER, 50);
 
   while (!WindowShouldClose()) {
     Game::deltaTime = GetFrameTime();
@@ -40,9 +37,22 @@ void Game::run() {
       UIManager::updateMainMenu();
       break;
 
+    case GameState::Restarting: {
+      AudioSystem::instance().stopMusic();
+      AudioSystem::instance().playLevelTrack();
+      PlayerProjectiles::init();
+      pwat.resetPlayerHealth();
+      pwat.resetPlayerScore();
+
+      ItemManager::instance().populateItems();
+      entityManager.spawnEnemies(EnemyType::SWARMER, 50);
+
+      Game::currentState = GameState::Playing;
+      break;
+    }
+
     case GameState::Playing: {
       UIManager::updatePlayerHUD();
-
       auto state = pwat.playerMovements(pwatState);
       pwatState = state;
 
@@ -70,19 +80,6 @@ void Game::run() {
 
     case GameState::Paused:
       UIManager::updatePauseMenu();
-      break;
-
-    case GameState::Restarting:
-      AudioSystem::instance().stopMusic();
-      AudioSystem::instance().playLevelTrack();
-      PlayerProjectiles::init();
-      pwat.resetPlayerHealth();
-      pwat.resetPlayerScore();
-
-      ItemManager::instance().populateItems();
-      entityManager.spawnEnemies(EnemyType::SWARMER, 50);
-
-      Game::currentState = GameState::Playing;
       break;
 
     case GameState::Options:
