@@ -1,6 +1,8 @@
 #include "ItemsManager.hpp"
+#include "../Player.hpp"
 #include "../collisions/CollisionDetection.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
+#include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
 
 void ItemManager::addItem(ItemCategory cat, int type, Vector2 pos) {

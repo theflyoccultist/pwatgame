@@ -1,5 +1,4 @@
 #include "UILib.hpp"
-#include "../Player.hpp"
 #include "../entities/EnemyManager.hpp"
 #include "../projectiles/PlayerProjectiles.hpp"
 #include "../texture/AssetSystem.hpp"
@@ -29,9 +28,8 @@ void mainMenu() {
   AssetSystem::instance().drawTexture(uiAssets[0], 225, 400);
 }
 
-void playerHUD() {
-  DrawText(TextFormat("Enemies remaining: %d", EnemyManager::enemiesCount), 20,
-           20, 20, BLACK);
+void playerHUD(int count) {
+  DrawText(TextFormat("Enemies remaining: %d", 70), 20, 20, 20, BLACK);
   DrawText(TextFormat("Ammo: %d", PlayerProjectiles::playerAmmo), 20, 50, 20,
            BLACK);
   DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);

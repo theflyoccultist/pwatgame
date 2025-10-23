@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../Player.hpp"
-#include "../utils/Random.hpp"
 #include "Items.hpp"
 #include <raylib.h>
 #include <unordered_map>

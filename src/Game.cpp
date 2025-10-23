@@ -10,6 +10,7 @@ void Game::run() {
   Player pwat;
 
   EnemyManager enemyManager;
+  enemyManager.init();
 
   UIManager::loadUI();
 
@@ -45,8 +46,9 @@ void Game::run() {
       pwat.resetPlayerScore();
 
       ItemManager::instance().populateItems();
-      enemyManager.clearEnemies();
-      enemyManager.spawnEnemies(EnemyType::SWARMER, 50);
+      enemyManager.clearAll();
+      enemyManager.spawnEnemies(EnemyType::SWARMER, 5);
+      enemyManager.spawnEnemies(EnemyType::SNIPER, 5);
 
       Game::currentState = GameState::Playing;
       break;
@@ -69,9 +71,8 @@ void Game::run() {
                                 pwatState.direction, deltaTime);
       PlayerProjectiles::draw();
 
-      enemyManager.updateEnemies(deltaTime,
-                                 PlayerProjectiles::getProjectilePositions(),
-                                 pwatState.position);
+      enemyManager.updateAll(deltaTime, pwatState.position,
+                             PlayerProjectiles::getProjectilePositions());
       enemyManager.drawAll();
 
       if (IsKeyPressed(KEY_P))
