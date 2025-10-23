@@ -1,6 +1,6 @@
 #include "Player.hpp"
 #include "Game.hpp"
-#include "entities/EntityManager.hpp"
+#include "entities/EnemyManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
 

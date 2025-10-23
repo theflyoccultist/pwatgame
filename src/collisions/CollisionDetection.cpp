@@ -12,22 +12,22 @@ bool checkPickup(Vector2 playerPos, const Item &item) {
   return CheckCollisionRecs(playerRect, itemRect);
 }
 
-bool checkBulletInteraction(Vector2 bulletPos, const Entity &entity) {
+bool checkBulletInteraction(Vector2 bulletPos, const Enemy &enemy) {
 
   Rectangle bulletRect = {bulletPos.x, bulletPos.y, PlayerProjectiles::size,
                           PlayerProjectiles::size};
-  Rectangle entityRect = {entity.position.x, entity.position.y,
-                          entity.entitySize, entity.entitySize};
+  Rectangle entityRect = {enemy.position.x, enemy.position.y, enemy.entitySize,
+                          enemy.entitySize};
 
   return CheckCollisionRecs(bulletRect, entityRect);
 }
 
-bool checkPlayerInteraction(Vector2 playerPos, const Entity &entity) {
+bool checkPlayerInteraction(Vector2 playerPos, const Enemy &enemy) {
 
   Rectangle playerRect = {playerPos.x, playerPos.y, PlayerState::playerSize,
                           PlayerState::playerSize};
-  Rectangle entityRect = {entity.position.x, entity.position.y,
-                          entity.entitySize, entity.entitySize};
+  Rectangle entityRect = {enemy.position.x, enemy.position.y, enemy.entitySize,
+                          enemy.entitySize};
 
   return CheckCollisionRecs(playerRect, entityRect);
 }

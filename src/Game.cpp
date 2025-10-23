@@ -1,5 +1,5 @@
 #include "Game.hpp"
-#include "entities/EntityManager.hpp"
+#include "entities/EnemyManager.hpp"
 #include "items/ItemsManager.hpp"
 #include "projectiles/PlayerProjectiles.hpp"
 #include "sound/AudioSystem.hpp"
@@ -9,7 +9,7 @@
 void Game::run() {
   Player pwat;
 
-  EntityManager entityManager;
+  EnemyManager enemyManager;
 
   UIManager::loadUI();
 
@@ -45,9 +45,8 @@ void Game::run() {
       pwat.resetPlayerScore();
 
       ItemManager::instance().populateItems();
-      entityManager.clearEnemies();
-      entityManager.spawnEnemies(EnemyType::SWARMER, 50);
-      entityManager.spawnEnemies(EnemyType::SNIPER, 10);
+      enemyManager.clearEnemies();
+      enemyManager.spawnEnemies(EnemyType::SWARMER, 50);
 
       Game::currentState = GameState::Playing;
       break;
@@ -70,10 +69,10 @@ void Game::run() {
                                 pwatState.direction, deltaTime);
       PlayerProjectiles::draw();
 
-      entityManager.updateEnemies(PlayerProjectiles::getProjectilePositions(),
-                                  pwatState.position);
-      entityManager.drawEnemies(EnemyType::SWARMER);
-      entityManager.drawEnemies(EnemyType::SNIPER);
+      enemyManager.updateEnemies(deltaTime,
+                                 PlayerProjectiles::getProjectilePositions(),
+                                 pwatState.position);
+      enemyManager.drawAll();
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
