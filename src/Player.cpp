@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include "projectiles/Projectile.hpp"
 #include "projectiles/ProjectileManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
@@ -68,7 +67,7 @@ PlayerState Player::playerMovements(PlayerState state, float dt) {
   shootTimer = std::max(0.0f, shootTimer - dt);
 
   if (shooting)
-    shoot(state.position, state.direction);
+    shoot(state.position, moveDir);
 
   state.position.x += moveDir.x * state.playerSpeed * dt;
   state.position.y += moveDir.y * state.playerSpeed * dt;

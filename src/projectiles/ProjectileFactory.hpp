@@ -3,7 +3,6 @@
 #include "StraightProjectile.hpp"
 #include <memory>
 #include <raylib.h>
-#include <stdexcept>
 
 class ProjectileFactory {
 public:
@@ -14,9 +13,7 @@ public:
       AudioSystem::instance().gunshotSounds();
       return std::make_unique<StraightProjectile>(startPos, dir);
     default:
-      throw std::runtime_error("Unknown projectile type");
+      return nullptr;
     }
-
-    return nullptr;
   }
 };
