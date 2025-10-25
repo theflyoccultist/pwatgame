@@ -2,8 +2,8 @@
 #include "Game.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
+#include "utils/clampEntities.hpp"
 
-#include <algorithm>
 #include <raylib.h>
 
 Player::Player() {
@@ -51,12 +51,7 @@ PlayerState Player::playerMovements(PlayerState state) {
   state.position.x += moveDir.x * state.playerSpeed * Game::deltaTime;
   state.position.y += moveDir.y * state.playerSpeed * Game::deltaTime;
 
-  state.position.x =
-      std::clamp(state.position.x, 0.0f,
-                 (float)(Game::screenWidth - PlayerState::playerSize));
-  state.position.y =
-      std::clamp(state.position.y, 0.0f,
-                 (float)(Game::screenHeight - PlayerState::playerSize));
+  ClampEntities::clamp(state.position, PlayerState::playerSize);
 
   if (moveDir.x != 0 || moveDir.y != 0)
     state.direction = moveDir;

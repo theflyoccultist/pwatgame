@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../utils/clampEntities.hpp"
 #include "Enemy.hpp"
 #include <array>
 #include <cmath>
-#include <iostream>
 #include <raylib.h>
 
 class Sniper : public Enemy {
@@ -27,8 +27,10 @@ public:
 
       position.x += dir.x * speed * delta * 8;
       position.y += dir.y * speed * delta * 8;
+
+      ClampEntities::clamp(position, 70);
     } else {
-      std::cout << "patrol\n";
+      // std::cout << "patrol\n";
     }
   }
 };
