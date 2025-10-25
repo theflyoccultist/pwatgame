@@ -1,12 +1,9 @@
 #include "ProjectileManager.hpp"
 #include <algorithm>
 
-void ProjectileManager::init() { projectiles.clear(); }
-
 void ProjectileManager::spawn(ProjectileType type, Vector2 startPos,
                               Vector2 dir) {
-  projectiles.push_back(
-      ProjectileFactory::createProjectile(type, startPos, dir));
+  projectiles.push_back(factory.createProjectile(type, startPos, dir));
 }
 
 void ProjectileManager::update(float dt) {
@@ -20,7 +17,7 @@ void ProjectileManager::update(float dt) {
                     projectiles.end());
 }
 
-void ProjectileManager::draw() const {
+void ProjectileManager::draw() {
   for (auto &p : projectiles)
     p->draw();
 }
@@ -34,3 +31,5 @@ std::vector<Vector2> ProjectileManager::getProjectilePositions() const {
 
   return positions;
 }
+
+void ProjectileManager::clearAll() { projectiles.clear(); }

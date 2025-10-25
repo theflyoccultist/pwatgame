@@ -30,7 +30,7 @@ public:
 
       ClampEntities::clamp(position, 70);
     } else {
-      // std::cout << "patrol\n";
+      // shoot at the player
     }
   }
 };

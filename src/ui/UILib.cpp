@@ -30,7 +30,7 @@ void mainMenu() {
 void playerHUD() {
   DrawText(TextFormat("Enemies remaining: %d", EnemyManager::enemyCount), 20,
            20, 20, BLACK);
-  DrawText(TextFormat("Ammo: %d", 100), 20, 50, 20, BLACK);
+  DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
   DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);
   DrawText(TextFormat("Score: %d", PlayerState::score), 20, 110, 20, BLACK);
 };

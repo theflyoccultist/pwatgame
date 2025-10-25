@@ -6,13 +6,9 @@
 class StraightProjectile : public Projectile {
 public:
   StraightProjectile(Vector2 startPos, Vector2 dir)
-      : Projectile(ProjectileType::STRAIGHT, startPos, dir) {
-    position = startPos;
-    velocity = {dir.x * speed, dir.y * speed};
-    size = 10;
-    speed = 700.0f;
-    lifetime = 2.0f;
-  }
+      : Projectile(ProjectileType::STRAIGHT, startPos, dir, straightSpeed,
+                   {dir.x * straightSpeed, dir.y * straightSpeed}, straightSize,
+                   straightLifetime) {}
 
   void update(float dt) override {
     position.x += velocity.x * speed * dt;
@@ -24,4 +20,9 @@ public:
     DrawCircleV(position, size, BLUE);
     DrawCircleV(position, 4, RED);
   }
+
+private:
+  static constexpr float straightSpeed = 700.0f;
+  static constexpr int straightSize = 10;
+  static constexpr float straightLifetime = 2.0f;
 };

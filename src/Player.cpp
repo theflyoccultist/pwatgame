@@ -1,4 +1,6 @@
 #include "Player.hpp"
+#include "projectiles/Projectile.hpp"
+#include "projectiles/ProjectileManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
 #include "utils/clampEntities.hpp"
@@ -23,20 +25,19 @@ Player::Player() {
   }
 
   shootTimer = 0.0f;
-  playerAmmo = 100;
+  PlayerState::playerAmmo = 100;
 }
 
 void Player::shoot(Vector2 startPosition, Vector2 dir) {
-  if (playerAmmo <= 0 || shootTimer > 0.0f)
+  if (PlayerState::playerAmmo <= 0 || shootTimer > 0.0f)
     return;
 
-  proj.spawn(ProjectileType::STRAIGHT, startPosition, dir);
+  ProjectileManager::instance().spawn(ProjectileType::STRAIGHT, startPosition,
+                                      dir);
 
-  playerAmmo--;
+  PlayerState::playerAmmo--;
   shootTimer = shootCooldown;
 }
-
-void Player::addAmmo(int ammo) { playerAmmo += ammo; }
 
 void Player::draw(Vector2 position, int direction) {
   AssetSystem::instance().drawTexture(pwatAssets[direction], position.x,

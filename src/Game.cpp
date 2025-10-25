@@ -12,9 +12,6 @@ void Game::run() {
   EnemyManager enemyManager;
   enemyManager.init();
 
-  ProjectileManager projManager;
-  projManager.init();
-
   UIManager::loadUI();
 
   int pwatTexture = 0;
@@ -43,11 +40,14 @@ void Game::run() {
       AudioSystem::instance().playLevelTrack();
       pwat.resetPlayerHealth();
       pwat.resetPlayerScore();
+      pwat.resetPlayerAmmo();
 
       ItemManager::instance().populateItems();
       enemyManager.clearAll();
       enemyManager.spawnEnemies(EnemyType::SWARMER, 5);
       enemyManager.spawnEnemies(EnemyType::SNIPER, 5);
+
+      ProjectileManager::instance().clearAll();
 
       Game::currentState = GameState::Playing;
       break;
@@ -55,21 +55,23 @@ void Game::run() {
 
     case GameState::Playing: {
       UIManager::updatePlayerHUD();
+
       auto state = pwat.playerMovements(pwatState, deltaTime);
       pwatState = state;
 
       pwat.draw(pwatState.position, pwatState.texture);
       pwat.playerFootsteps();
 
+      ProjectileManager::instance().update(deltaTime);
+      ProjectileManager::instance().draw();
+
       ItemManager::instance().updateItems(pwatState.position);
       ItemManager::instance().drawItems(ItemCategory::Food);
       ItemManager::instance().drawItems(ItemCategory::Drink);
 
-      projManager.update(deltaTime);
-      projManager.draw();
-
-      enemyManager.updateAll(deltaTime, pwatState.position,
-                             projManager.getProjectilePositions());
+      enemyManager.updateAll(
+          deltaTime, pwatState.position,
+          ProjectileManager::instance().getProjectilePositions());
       enemyManager.drawAll();
 
       if (IsKeyPressed(KEY_P))
