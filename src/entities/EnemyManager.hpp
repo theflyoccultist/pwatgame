@@ -10,9 +10,12 @@
 
 class EnemyManager {
 public:
+  static inline int enemyCount;
+
   void init() { factory.loadAssets(); }
 
   void spawnEnemies(EnemyType type, int count) {
+    enemyCount += count;
     for (int i = 0; i < count; ++i) {
       Vector2 pos = {Random::rangeFloat(0, 730.0f),
                      Random::rangeFloat(0, 730.0f)};
@@ -32,6 +35,9 @@ public:
       e->update(delta, playerPos);
       Enemy::takeBulletIfHit(e, bulletPositions);
       Enemy::giveDMGIfTouched(playerPos, e->position);
+
+      if (!e->isAlive())
+        enemyCount--;
     }
 
     std::erase_if(

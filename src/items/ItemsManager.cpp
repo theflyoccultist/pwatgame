@@ -16,7 +16,7 @@ void ItemManager::populateItems() {
       {ItemCategory::Food, {}}, {ItemCategory::Drink, {}}};
 
   for (auto &[category, positions] : itemPositions) {
-    for (size_t i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < 5; ++i) {
       addItem(
           category, static_cast<int>(i),
           {Random::rangeFloat(0.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
