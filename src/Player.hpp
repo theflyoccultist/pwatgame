@@ -1,3 +1,4 @@
+#include "projectiles/ProjectileManager.hpp"
 #include <array>
 #include <cstddef>
 #include <raylib.h>
@@ -18,12 +19,15 @@ public:
   Player();
   void draw(Vector2 position, int direction);
 
-  PlayerState playerMovements(PlayerState state);
+  PlayerState playerMovements(PlayerState state, float dt);
   void playerFootsteps();
 
   static void changePlayerHealth(int value) { PlayerState::health += value; }
   static void resetPlayerHealth() { PlayerState::health = 50; }
   static void resetPlayerScore() { PlayerState::score = 0; }
+
+  static inline int playerAmmo = 0;
+  static void addAmmo(int ammo);
 
 private:
   static constexpr std::size_t numPwats = 8;
@@ -31,4 +35,9 @@ private:
 
   float footstepTimer = 0.0f;
   static constexpr float footstepDelay = 0.44f;
+  float shootCooldown = 0.15f;
+  float shootTimer = 0.0f;
+
+  ProjectileManager proj;
+  void shoot(Vector2 startPosition, Vector2 dir);
 };

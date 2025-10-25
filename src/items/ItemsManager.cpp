@@ -1,7 +1,6 @@
 #include "ItemsManager.hpp"
 #include "../Player.hpp"
 #include "../collisions/CollisionDetection.hpp"
-#include "../projectiles/PlayerProjectiles.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
 
@@ -42,7 +41,7 @@ void ItemManager::updateItems(Vector2 playerPos) {
 
         switch (item.category) {
         case ItemCategory::Food:
-          PlayerProjectiles::addAmmo(20);
+          // PlayerProjectiles::addAmmo(20);
           FeedbackSystem::instance().addFeedback("+20 AMMO", playerPos);
           break;
 

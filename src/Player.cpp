@@ -1,9 +1,9 @@
 #include "Player.hpp"
-#include "Game.hpp"
 #include "sound/AudioSystem.hpp"
 #include "texture/AssetSystem.hpp"
 #include "utils/clampEntities.hpp"
 
+#include <algorithm>
 #include <raylib.h>
 
 Player::Player() {
@@ -21,20 +21,36 @@ Player::Player() {
     pwatAssets[i] = &AssetSystem::instance().loadTexture(
         pwatPaths[i], PlayerState::playerSize, PlayerState::playerSize);
   }
+
+  shootTimer = 0.0f;
+  playerAmmo = 100;
 }
+
+void Player::shoot(Vector2 startPosition, Vector2 dir) {
+  if (playerAmmo <= 0 || shootTimer > 0.0f)
+    return;
+
+  proj.spawn(ProjectileType::STRAIGHT, startPosition, dir);
+
+  playerAmmo--;
+  shootTimer = shootCooldown;
+}
+
+void Player::addAmmo(int ammo) { playerAmmo += ammo; }
 
 void Player::draw(Vector2 position, int direction) {
   AssetSystem::instance().drawTexture(pwatAssets[direction], position.x,
                                       position.y);
 }
 
-PlayerState Player::playerMovements(PlayerState state) {
+PlayerState Player::playerMovements(PlayerState state, float dt) {
   Vector2 moveDir = {0.0f, 0.0f};
 
   bool facingLeft = IsKeyDown(KEY_LEFT);
   bool facingRight = IsKeyDown(KEY_RIGHT);
   bool facingUp = IsKeyDown(KEY_UP);
   bool facingDown = IsKeyDown(KEY_DOWN);
+  bool shooting = IsKeyDown(KEY_SPACE);
 
   if (facingLeft)
     moveDir.x = -1.0f;
@@ -48,8 +64,13 @@ PlayerState Player::playerMovements(PlayerState state) {
   if (facingDown)
     moveDir.y += 1.0f;
 
-  state.position.x += moveDir.x * state.playerSpeed * Game::deltaTime;
-  state.position.y += moveDir.y * state.playerSpeed * Game::deltaTime;
+  shootTimer = std::max(0.0f, shootTimer - dt);
+
+  if (shooting)
+    shoot(state.position, state.direction);
+
+  state.position.x += moveDir.x * state.playerSpeed * dt;
+  state.position.y += moveDir.y * state.playerSpeed * dt;
 
   ClampEntities::clamp(state.position, PlayerState::playerSize);
 

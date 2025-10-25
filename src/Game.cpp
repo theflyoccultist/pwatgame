@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "entities/EnemyManager.hpp"
 #include "items/ItemsManager.hpp"
-#include "projectiles/PlayerProjectiles.hpp"
+#include "projectiles/ProjectileManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
 #include <raylib.h>
@@ -12,12 +12,12 @@ void Game::run() {
   EnemyManager enemyManager;
   enemyManager.init();
 
+  ProjectileManager projManager;
+  projManager.init();
+
   UIManager::loadUI();
 
-  PlayerProjectiles::init();
-
   int pwatTexture = 0;
-  const float pwatCenter = static_cast<float>(PlayerState::playerSize / 2.0);
   Vector2 pwatPosition = {static_cast<float>(screenWidth / 2.0),
                           static_cast<float>(screenHeight / 2.0)};
   Vector2 pwatDirection = {0.0f, 0.0f};
@@ -27,13 +27,13 @@ void Game::run() {
   AudioSystem::instance().playTitleTrack();
 
   while (!WindowShouldClose()) {
-    Game::deltaTime = GetFrameTime();
+    deltaTime = GetFrameTime();
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
     AudioSystem::instance().updateMusic();
 
-    switch (Game::currentState) {
+    switch (currentState) {
     case GameState::MainMenu:
       UIManager::updateMainMenu();
       break;
@@ -41,7 +41,6 @@ void Game::run() {
     case GameState::Restarting: {
       AudioSystem::instance().stopMusic();
       AudioSystem::instance().playLevelTrack();
-      PlayerProjectiles::init();
       pwat.resetPlayerHealth();
       pwat.resetPlayerScore();
 
@@ -56,7 +55,7 @@ void Game::run() {
 
     case GameState::Playing: {
       UIManager::updatePlayerHUD();
-      auto state = pwat.playerMovements(pwatState);
+      auto state = pwat.playerMovements(pwatState, deltaTime);
       pwatState = state;
 
       pwat.draw(pwatState.position, pwatState.texture);
@@ -66,13 +65,11 @@ void Game::run() {
       ItemManager::instance().drawItems(ItemCategory::Food);
       ItemManager::instance().drawItems(ItemCategory::Drink);
 
-      PlayerProjectiles::update({pwatState.position.x + pwatCenter,
-                                 pwatState.position.y + pwatCenter},
-                                pwatState.direction, deltaTime);
-      PlayerProjectiles::draw();
+      projManager.update(deltaTime);
+      projManager.draw();
 
       enemyManager.updateAll(deltaTime, pwatState.position,
-                             PlayerProjectiles::getProjectilePositions());
+                             projManager.getProjectilePositions());
       enemyManager.drawAll();
 
       if (IsKeyPressed(KEY_P))

@@ -1,5 +1,4 @@
 #include "CollisionDetection.hpp"
-#include "../projectiles/PlayerProjectiles.hpp"
 #include <raylib.h>
 
 namespace Collisions {
@@ -14,8 +13,7 @@ bool checkPickup(Vector2 playerPos, const Item &item) {
 
 bool checkBulletInteraction(Vector2 bulletPos, const Vector2 &enemy) {
 
-  Rectangle bulletRect = {bulletPos.x, bulletPos.y, PlayerProjectiles::size,
-                          PlayerProjectiles::size};
+  Rectangle bulletRect = {bulletPos.x, bulletPos.y, 10, 10};
   Rectangle entityRect = {enemy.x, enemy.y, 70, 70};
 
   return CheckCollisionRecs(bulletRect, entityRect);
