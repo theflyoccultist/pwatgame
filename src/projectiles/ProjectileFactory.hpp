@@ -1,6 +1,6 @@
 #include "../sound/AudioSystem.hpp"
 #include "Projectile.hpp"
-#include "StraightProjectile.hpp"
+#include "Straight.hpp"
 #include <memory>
 #include <raylib.h>
 
@@ -10,8 +10,8 @@ public:
                                                Vector2 startPos, Vector2 dir) {
     switch (type) {
     case ProjectileType::STRAIGHT:
-      AudioSystem::instance().gunshotSounds();
-      return std::make_unique<StraightProjectile>(startPos, dir);
+      AudioSystem::instance().defaultGun();
+      return std::make_unique<Straight>(startPos, dir);
     default:
       return nullptr;
     }

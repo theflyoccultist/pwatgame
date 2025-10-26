@@ -3,9 +3,9 @@
 #include "Projectile.hpp"
 #include <raylib.h>
 
-class StraightProjectile : public Projectile {
+class Straight : public Projectile {
 public:
-  StraightProjectile(Vector2 startPos, Vector2 dir)
+  Straight(Vector2 startPos, Vector2 dir)
       : Projectile(ProjectileType::STRAIGHT, startPos, dir, straightSpeed,
                    {dir.x * straightSpeed, dir.y * straightSpeed}, straightSize,
                    straightLifetime) {}

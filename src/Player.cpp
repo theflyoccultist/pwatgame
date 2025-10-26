@@ -24,7 +24,7 @@ Player::Player() {
   }
 
   shootTimer = 0.0f;
-  PlayerState::playerAmmo = 100;
+  PlayerState::playerAmmo = 500;
 }
 
 void Player::shoot(Vector2 startPosition, Vector2 dir) {

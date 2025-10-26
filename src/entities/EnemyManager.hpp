@@ -34,7 +34,9 @@ public:
     for (std::unique_ptr<Enemy> &e : enemies) {
       e->update(delta, playerPos);
       Enemy::takeBulletIfHit(e, bulletPositions);
-      Enemy::giveDMGIfTouched(playerPos, e->position);
+
+      if (e->type == EnemyType::SWARMER)
+        Enemy::contactDMG(playerPos, e->position);
 
       if (!e->isAlive())
         enemyCount--;

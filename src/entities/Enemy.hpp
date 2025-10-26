@@ -33,7 +33,7 @@ public:
 
   static void takeBulletIfHit(const std::unique_ptr<Enemy> &enemy,
                               const std::vector<Vector2> &bulletPositions);
-  static void giveDMGIfTouched(const Vector2 &playerPos, const Vector2 &enemy);
+  static void contactDMG(const Vector2 &playerPos, const Vector2 &enemy);
 
   bool isAlive() const { return currentHP > 0; }
 

@@ -41,13 +41,13 @@ void ItemManager::updateItems(Vector2 playerPos) {
 
         switch (item.category) {
         case ItemCategory::Food:
-          Player::addAmmo(20);
-          FeedbackSystem::instance().addFeedback("+20 AMMO", playerPos);
+          Player::addAmmo(100);
+          FeedbackSystem::instance().addFeedback("+100 AMMO", playerPos);
           break;
 
         case ItemCategory::Drink:
-          Player::changePlayerHealth(20);
-          FeedbackSystem::instance().addFeedback("+20 HP", playerPos);
+          Player::changePlayerHealth(50);
+          FeedbackSystem::instance().addFeedback("+50 HP", playerPos);
           break;
         }
       }

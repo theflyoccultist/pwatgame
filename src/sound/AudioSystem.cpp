@@ -1,19 +1,26 @@
 #include "AudioSystem.hpp"
 #include "SoundEffect.hpp"
+#include <memory>
+#include <vector>
 
 AudioSystem::AudioSystem() {
   InitAudioDevice();
-  pwatSteps = std::make_unique<std::array<SoundEffect, 5>>(
-      std::array<SoundEffect, 5>{SoundEffect("../assets/sfx/pwatwalk1.wav"),
-                                 SoundEffect("../assets/sfx/pwatwalk2.wav"),
-                                 SoundEffect("../assets/sfx/pwatwalk3.wav"),
-                                 SoundEffect("../assets/sfx/pwatwalk4.wav"),
-                                 SoundEffect("../assets/sfx/pwatwalk5.wav")});
 
-  combatSFX =
-      std::make_unique<std::array<SoundEffect, 2>>(std::array<SoundEffect, 2>{
+  fxBank[SoundType::pwatSteps] = std::make_unique<std::vector<SoundEffect>>(
+      std::initializer_list<SoundEffect>{
+          SoundEffect("../assets/sfx/pwatwalk1.wav"),
+          SoundEffect("../assets/sfx/pwatwalk2.wav"),
+          SoundEffect("../assets/sfx/pwatwalk3.wav"),
+          SoundEffect("../assets/sfx/pwatwalk4.wav"),
+          SoundEffect("../assets/sfx/pwatwalk5.wav"),
+      });
+
+  fxBank[SoundType::combatSFX] = std::make_unique<std::vector<SoundEffect>>(
+      std::initializer_list<SoundEffect>{
+          SoundEffect("../assets/sfx/8bit_explosion.wav"),
           SoundEffect("../assets/sfx/8bit_shoot.wav"),
-          SoundEffect("../assets/sfx/8bit_explosion.wav")});
+          SoundEffect("../assets/sfx/longrange.wav"),
+      });
 
   gameScores = std::make_unique<std::array<GameScore, 2>>(
       std::array<GameScore, 2>{GameScore("../assets/music/right_to_rave.ogg"),
@@ -23,17 +30,21 @@ AudioSystem::AudioSystem() {
 AudioSystem::~AudioSystem() { CloseAudioDevice(); }
 
 void AudioSystem::playRandSteps() {
-  int index = GetRandomValue(0, static_cast<int>(pwatSteps->size()) - 1);
-  (*pwatSteps)[index].play();
+  int index = GetRandomValue(
+      0, static_cast<int>(fxBank[SoundType::pwatSteps]->size()) - 1);
+  (*fxBank[SoundType::pwatSteps])[index].play();
 }
 
-void AudioSystem::gunshotSounds() { (*combatSFX)[0].play(); }
-void AudioSystem::enemyKilled() { (*combatSFX)[1].play(); }
+void AudioSystem::enemyKilled() { (*fxBank[SoundType::combatSFX])[0].play(); }
+void AudioSystem::defaultGun() { (*fxBank[SoundType::combatSFX])[1].play(); }
+void AudioSystem::longrangeGun() { (*fxBank[SoundType::combatSFX])[2].play(); }
 
 void AudioSystem::changeSfxVolume(int vol) {
   float volume = static_cast<float>(vol) / 100;
-  for (auto &s : *pwatSteps)
-    s.changeSoundVolume(volume);
+  for (auto &[type, sounds] : fxBank) {
+    for (auto &s : *sounds)
+      s.changeSoundVolume(volume);
+  }
 };
 
 void AudioSystem::playTitleTrack() {

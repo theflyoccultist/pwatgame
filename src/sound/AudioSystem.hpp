@@ -3,6 +3,10 @@
 #include "SoundEffect.hpp"
 #include <array>
 #include <memory>
+#include <unordered_map>
+#include <vector>
+
+enum class SoundType { pwatSteps, combatSFX, bonusPickup };
 
 class AudioSystem {
 public:
@@ -15,7 +19,8 @@ public:
   AudioSystem &operator=(const AudioSystem &) = delete;
 
   void playRandSteps();
-  void gunshotSounds();
+  void defaultGun();
+  void longrangeGun();
   void enemyKilled();
   void changeSfxVolume(int vol);
 
@@ -33,8 +38,8 @@ private:
   AudioSystem();
   ~AudioSystem();
 
-  std::unique_ptr<std::array<SoundEffect, 5>> pwatSteps;
-  std::unique_ptr<std::array<SoundEffect, 2>> combatSFX;
+  std::unordered_map<SoundType, std::unique_ptr<std::vector<SoundEffect>>>
+      fxBank;
 
   std::unique_ptr<std::array<GameScore, 2>> gameScores;
   int currentTrack = -1;

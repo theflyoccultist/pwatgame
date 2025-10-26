@@ -20,7 +20,7 @@ void Enemy::takeBulletIfHit(const std::unique_ptr<Enemy> &enemy,
   }
 }
 
-void Enemy::giveDMGIfTouched(const Vector2 &playerPos, const Vector2 &enemy) {
+void Enemy::contactDMG(const Vector2 &playerPos, const Vector2 &enemy) {
   if (Collisions::checkPlayerInteraction(playerPos, enemy)) {
     if (PlayerState::damageCooldown <= 0.0f) {
       PlayerState::health--;
