@@ -66,9 +66,6 @@ PlayerState Player::playerMovements(PlayerState state, float dt) {
 
   shootTimer = std::max(0.0f, shootTimer - dt);
 
-  if (shooting)
-    shoot(state.position, moveDir);
-
   state.position.x += moveDir.x * state.playerSpeed * dt;
   state.position.y += moveDir.y * state.playerSpeed * dt;
 
@@ -76,6 +73,10 @@ PlayerState Player::playerMovements(PlayerState state, float dt) {
 
   if (moveDir.x != 0 || moveDir.y != 0)
     state.direction = moveDir;
+
+  if (shooting)
+    shoot({state.position.x + pwatCenter, state.position.y + pwatCenter},
+          state.direction);
 
   if (facingLeft && facingUp)
     state.texture = 4;

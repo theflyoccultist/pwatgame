@@ -11,8 +11,8 @@ public:
                    straightLifetime) {}
 
   void update(float dt) override {
-    position.x += velocity.x * speed * dt;
-    position.y += velocity.y * speed * dt;
+    position.x += velocity.x * dt;
+    position.y += velocity.y * dt;
     lifetime -= dt;
   };
 
