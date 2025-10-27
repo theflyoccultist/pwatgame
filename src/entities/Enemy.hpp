@@ -36,7 +36,7 @@ public:
                               const std::unique_ptr<Enemy> &enemy);
   static void contactDMG(const Vector2 &playerPos, float playerSize,
                          const Vector2 &enemyPos, float enemySize);
-  // static void shootPlayer(Vector2 startPosition, Vector2 dir);
+  void shootPlayer(Vector2 startPosition, Vector2 dir);
 
   bool isAlive() const { return currentHP > 0; }
 
@@ -61,4 +61,8 @@ protected:
   }
 
   std::array<Texture2D *, 3> textures;
+
+private:
+  float shootCooldown = 1.0f;
+  float shootTimer = 0.0f;
 };

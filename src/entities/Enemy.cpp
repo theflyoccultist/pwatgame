@@ -1,7 +1,7 @@
 #include "Enemy.hpp"
 #include "../Player.hpp"
 #include "../collisions/CollisionDetection.hpp"
-// #include "../projectiles/ProjectileManager.hpp"
+#include "../projectiles/ProjectileManager.hpp"
 #include "../sound/AudioSystem.hpp"
 #include <iostream>
 #include <memory>
@@ -51,16 +51,12 @@ void Enemy::contactDMG(const Vector2 &playerPos, float playerSize,
 //   }
 // }
 
-float shootCooldown = 2.0f;
-float shootTimer = 0.0f;
+void Enemy::shootPlayer(Vector2 startPosition, Vector2 dir) {
+  if (shootTimer > 0.0f)
+    return;
 
-// void Enemy::shootPlayer(Vector2 startPosition, Vector2 dir) {
-//   if (shootTimer > 0.0f)
-//     return;
-//
-//   ProjectileManager::instance().spawn(ProjectileType::LONGRANGE,
-//   startPosition,
-//                                       dir);
-//
-//   shootTimer = shootCooldown;
-// }
+  ProjectileManager::instance().spawn(ProjectileType::LONGRANGE, startPosition,
+                                      dir);
+
+  shootTimer = shootCooldown;
+}

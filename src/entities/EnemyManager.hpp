@@ -33,14 +33,15 @@ public:
 
     for (std::unique_ptr<Enemy> &e : enemies) {
       e->update(delta, state.position);
-      Enemy::takeBulletIfHit(bulletPositions, 10.0f, e);
+      e->takeBulletIfHit(bulletPositions, 10.0f, e);
 
-      if (e->type == EnemyType::SWARMER)
-        Enemy::contactDMG(state.position, state.playerSize, e->position,
-                          e->size);
+      if (e->type == EnemyType::SWARMER) {
+        e->contactDMG(state.position, state.playerSize, e->position, e->size);
+      }
 
-      // if (e->type == EnemyType::SNIPER)
-      //   Enemy::shootPlayer(e->position, {0, -1});
+      if (e->type == EnemyType::SNIPER) {
+        e->shootPlayer(e->position, {0, -1});
+      }
 
       if (!e->isAlive())
         enemyCount--;
@@ -55,7 +56,10 @@ public:
       e->draw();
   }
 
-  void clearAll() { enemies.clear(); }
+  void clearAll() {
+    enemies.clear();
+    enemyCount = 0;
+  }
 
 private:
   std::vector<std::unique_ptr<Enemy>> enemies;
