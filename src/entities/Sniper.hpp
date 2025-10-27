@@ -10,7 +10,7 @@ class Sniper : public Enemy {
 public:
   Sniper(Vector2 pos, std::array<Texture2D *, 3> textures)
       : Enemy(EnemyType::SNIPER, pos, Random::rangeFloat(10, 20),
-              Random::rangeInt(100, 150), textures) {}
+              Random::rangeInt(100, 150), 60, textures) {}
 
   void update(float delta, Vector2 playerPos) override {
     float dist = std::sqrt(std::pow(playerPos.x - position.x, 2) +

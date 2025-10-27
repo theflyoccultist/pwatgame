@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../collisions/CollisionDetection.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include <array>
@@ -10,10 +11,10 @@ enum class EnemyType { SWARMER, SNIPER, COUNT };
 
 class Enemy {
 public:
-  Enemy(EnemyType type, Vector2 pos, float spd, int hp,
+  Enemy(EnemyType type, Vector2 pos, float spd, int hp, float sz,
         const std::array<Texture2D *, 3> &textures)
       : type(type), position(pos), speed(spd), currentHP(hp), totalHP(hp),
-        textures(textures) {}
+        size(sz), textures(textures) {}
 
   virtual ~Enemy() = default;
   virtual void update(float delta, Vector2 playerPos) = 0;
@@ -33,7 +34,8 @@ public:
 
   static void takeBulletIfHit(const std::unique_ptr<Enemy> &enemy,
                               const std::vector<Vector2> &bulletPositions);
-  static void contactDMG(const Vector2 &playerPos, const Vector2 &enemy);
+  static void contactDMG(const PlayerState &state,
+                         const std::unique_ptr<Enemy> &enemy);
 
   bool isAlive() const { return currentHP > 0; }
 
@@ -42,6 +44,7 @@ public:
   float speed;
   int currentHP;
   int totalHP;
+  float size;
 
 protected:
   const Texture2D *chooseTexture() const {

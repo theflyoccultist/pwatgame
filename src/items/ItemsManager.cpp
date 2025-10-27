@@ -1,5 +1,4 @@
 #include "ItemsManager.hpp"
-#include "../Player.hpp"
 #include "../collisions/CollisionDetection.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
@@ -33,7 +32,7 @@ void ItemManager::drawItems(ItemCategory cat) {
   FeedbackSystem::instance().draw();
 }
 
-void ItemManager::updateItems(Vector2 playerPos) {
+void ItemManager::updateItems(const Vector2 &playerPos) {
   for (auto &[category, items] : itemsByCategory) {
     for (auto &item : items) {
       if (item.active && Collisions::checkPickup(playerPos, item)) {

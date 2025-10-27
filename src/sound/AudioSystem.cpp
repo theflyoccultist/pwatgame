@@ -22,9 +22,11 @@ AudioSystem::AudioSystem() {
           SoundEffect("../assets/sfx/longrange.wav"),
       });
 
-  gameScores = std::make_unique<std::array<GameScore, 2>>(
-      std::array<GameScore, 2>{GameScore("../assets/music/right_to_rave.ogg"),
-                               GameScore("../assets/music/pseudogender.ogg")});
+  gameScores =
+      std::make_unique<std::array<GameScore, 2>>(std::array<GameScore, 2>{
+          GameScore("../assets/music/right_to_rave.ogg"),
+          GameScore("../assets/music/pseudogender.ogg"),
+      });
 }
 
 AudioSystem::~AudioSystem() { CloseAudioDevice(); }

@@ -26,7 +26,7 @@ public:
   void addItem(ItemCategory cat, int type, Vector2 pos);
   void populateItems();
   void drawItems(ItemCategory cat);
-  void updateItems(Vector2 playerPos);
+  void updateItems(const Vector2 &playerPos);
 
 private:
   Items itemsObj;

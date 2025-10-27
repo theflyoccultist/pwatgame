@@ -70,7 +70,7 @@ void Game::run() {
       ItemManager::instance().drawItems(ItemCategory::Drink);
 
       enemyManager.updateAll(
-          deltaTime, pwatState.position,
+          deltaTime, pwatState,
           ProjectileManager::instance().getProjectilePositions());
       enemyManager.drawAll();
 

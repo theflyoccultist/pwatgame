@@ -2,7 +2,7 @@
 #include <raylib.h>
 
 namespace Collisions {
-bool checkPickup(Vector2 playerPos, const Item &item) {
+bool checkPickup(const Vector2 &playerPos, const Item &item) {
 
   Rectangle playerRect = {playerPos.x, playerPos.y, 70, 70};
   Rectangle itemRect = {item.position.x, item.position.y, item.size.x,
@@ -11,18 +11,21 @@ bool checkPickup(Vector2 playerPos, const Item &item) {
   return CheckCollisionRecs(playerRect, itemRect);
 }
 
-bool checkBulletInteraction(Vector2 bulletPos, const Vector2 &enemy) {
+bool checkBulletInteraction(const Vector2 &bulletPos, const Vector2 &enemy,
+                            const float &enemySize) {
 
   Rectangle bulletRect = {bulletPos.x, bulletPos.y, 10, 10};
-  Rectangle entityRect = {enemy.x, enemy.y, 70, 70};
+  Rectangle entityRect = {enemy.x, enemy.y, enemySize, enemySize};
 
   return CheckCollisionRecs(bulletRect, entityRect);
 }
 
-bool checkPlayerInteraction(const Vector2 &playerPos, const Vector2 &enemy) {
+bool checkPlayerInteraction(const PlayerState &state, const Vector2 &enemy,
+                            const float &enemySize) {
 
-  Rectangle playerRect = {playerPos.x, playerPos.y, 70, 70};
-  Rectangle entityRect = {enemy.x, enemy.y, 70, 70};
+  Rectangle playerRect = {state.position.x, state.position.y, state.playerSize,
+                          state.playerSize};
+  Rectangle entityRect = {enemy.x, enemy.y, enemySize, enemySize};
 
   return CheckCollisionRecs(playerRect, entityRect);
 }

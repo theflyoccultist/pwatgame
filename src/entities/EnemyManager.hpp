@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Player.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
 #include <memory>
@@ -26,17 +25,17 @@ public:
     }
   }
 
-  void updateAll(float delta, Vector2 playerPos,
+  void updateAll(float delta, const PlayerState &state,
                  const std::vector<Vector2> &bulletPositions) {
     if (PlayerState::damageCooldown > 0.0f)
       PlayerState::damageCooldown -= delta;
 
     for (std::unique_ptr<Enemy> &e : enemies) {
-      e->update(delta, playerPos);
+      e->update(delta, state.position);
       Enemy::takeBulletIfHit(e, bulletPositions);
 
       if (e->type == EnemyType::SWARMER)
-        Enemy::contactDMG(playerPos, e->position);
+        Enemy::contactDMG(state, e);
 
       if (!e->isAlive())
         enemyCount--;
