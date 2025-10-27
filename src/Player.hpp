@@ -20,7 +20,7 @@ public:
   void draw(Vector2 position, int direction);
 
   PlayerState playerMovements(PlayerState state, float dt);
-  void playerFootsteps();
+  void playerFootsteps(float dt);
 
   static void changePlayerHealth(int value) { PlayerState::health += value; }
   static void addAmmo(int ammo) { PlayerState::playerAmmo += ammo; }

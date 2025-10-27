@@ -60,7 +60,7 @@ void Game::run() {
       pwatState = state;
 
       pwat.draw(pwatState.position, pwatState.texture);
-      pwat.playerFootsteps();
+      pwat.playerFootsteps(deltaTime);
 
       ProjectileManager::instance().update(deltaTime);
       ProjectileManager::instance().draw();

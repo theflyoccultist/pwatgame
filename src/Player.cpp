@@ -105,11 +105,11 @@ PlayerState Player::playerMovements(PlayerState state, float dt) {
   return state;
 }
 
-void Player::playerFootsteps() {
+void Player::playerFootsteps(float dt) {
   if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_UP) ||
       IsKeyDown(KEY_DOWN)) {
 
-    footstepTimer -= Game::deltaTime;
+    footstepTimer -= dt;
     if (footstepTimer <= 0.0f) {
       AudioSystem::instance().playRandSteps();
       footstepTimer = footstepDelay;

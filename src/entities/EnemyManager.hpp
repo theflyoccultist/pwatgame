@@ -40,7 +40,9 @@ public:
       }
 
       if (e->type == EnemyType::SNIPER) {
-        e->shootPlayer(e->position, {0, -1});
+        for (auto &pos : bulletPositions)
+          e->shootPlayer(pos, 7.0f, state.position, 70, e->position, {0, -1},
+                         delta);
       }
 
       if (!e->isAlive())

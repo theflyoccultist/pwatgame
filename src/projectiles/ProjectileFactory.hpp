@@ -15,7 +15,6 @@ public:
       AudioSystem::instance().defaultGun();
       return std::make_unique<Straight>(startPos, dir);
     case ProjectileType::LONGRANGE:
-      std::cout << "Create projectile\n";
       return std::make_unique<LongRange>(startPos, dir);
     default:
       std::cerr << "Unknown projectile type!\n";
