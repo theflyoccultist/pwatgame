@@ -32,7 +32,7 @@ public:
 
     for (std::unique_ptr<Enemy> &e : enemies) {
       e->update(delta, state.position);
-      Enemy::takeBulletIfHit(e, bulletPositions);
+      Enemy::takeBulletIfHit(bulletPositions, 10.0f, e);
 
       if (e->type == EnemyType::SWARMER)
         Enemy::contactDMG(state, e);

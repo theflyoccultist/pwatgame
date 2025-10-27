@@ -1,14 +1,13 @@
 #pragma once
 
-#include "../Player.hpp"
-#include "../items/ItemsManager.hpp"
 #include <raylib.h>
 
 namespace Collisions {
-bool checkPickup(const Vector2 &playerPos, const Item &item);
-bool checkBulletInteraction(const Vector2 &bulletPos, const Vector2 &enemy,
-                            const float &enemySize);
-bool checkPlayerInteraction(const PlayerState &state, const Vector2 &enemy,
-                            const float &enemySize);
+bool checkPickup(const Vector2 &playerPos, float playerSize,
+                 const Vector2 &itemPos, const Vector2 &itemSize);
+bool checkBulletInteraction(const Vector2 &bulletPos, float bulletSize,
+                            const Vector2 &entity, float enemySize);
+bool checkPlayerInteraction(const Vector2 &playerPos, float playerSize,
+                            const Vector2 &enemyPos, float enemySize);
 
 } // namespace Collisions

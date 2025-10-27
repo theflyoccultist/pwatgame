@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../collisions/CollisionDetection.hpp"
+#include "../Player.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include <array>
@@ -32,8 +32,9 @@ public:
              position.y - 20, 10, BLACK);
   }
 
-  static void takeBulletIfHit(const std::unique_ptr<Enemy> &enemy,
-                              const std::vector<Vector2> &bulletPositions);
+  static void takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
+                              const float &bulletSize,
+                              const std::unique_ptr<Enemy> &enemy);
   static void contactDMG(const PlayerState &state,
                          const std::unique_ptr<Enemy> &enemy);
 

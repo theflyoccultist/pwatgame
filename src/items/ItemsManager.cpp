@@ -1,7 +1,9 @@
 #include "ItemsManager.hpp"
+#include "../Player.hpp"
 #include "../collisions/CollisionDetection.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
+#include <raylib.h>
 
 void ItemManager::addItem(ItemCategory cat, int type, Vector2 pos) {
   itemsByCategory[cat].emplace_back(cat, type, pos);
@@ -32,10 +34,13 @@ void ItemManager::drawItems(ItemCategory cat) {
   FeedbackSystem::instance().draw();
 }
 
-void ItemManager::updateItems(const Vector2 &playerPos) {
+void ItemManager::updateItems(const Vector2 &playerPos,
+                              const float &playerSize) {
   for (auto &[category, items] : itemsByCategory) {
     for (auto &item : items) {
-      if (item.active && Collisions::checkPickup(playerPos, item)) {
+      if (item.active &&
+          Collisions::checkPickup(playerPos, playerSize, item.position,
+                                  {item.size.x, item.size.y})) {
         item.active = false;
 
         switch (item.category) {

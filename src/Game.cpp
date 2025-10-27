@@ -65,7 +65,8 @@ void Game::run() {
       ProjectileManager::instance().update(deltaTime);
       ProjectileManager::instance().draw();
 
-      ItemManager::instance().updateItems(pwatState.position);
+      ItemManager::instance().updateItems(pwatState.position,
+                                          PlayerState::playerSize);
       ItemManager::instance().drawItems(ItemCategory::Food);
       ItemManager::instance().drawItems(ItemCategory::Drink);
 
