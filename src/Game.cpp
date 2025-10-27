@@ -70,9 +70,10 @@ void Game::run() {
       ItemManager::instance().drawItems(ItemCategory::Food);
       ItemManager::instance().drawItems(ItemCategory::Drink);
 
-      enemyManager.updateAll(
-          deltaTime, pwatState,
-          ProjectileManager::instance().getProjectilePositions());
+      auto playerBulletPositions =
+          ProjectileManager::instance().getProjectilePositions();
+
+      enemyManager.updateAll(deltaTime, pwatState, playerBulletPositions);
       enemyManager.drawAll();
 
       if (IsKeyPressed(KEY_P))

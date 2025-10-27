@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Player.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
 #include <memory>
@@ -35,7 +36,11 @@ public:
       Enemy::takeBulletIfHit(bulletPositions, 10.0f, e);
 
       if (e->type == EnemyType::SWARMER)
-        Enemy::contactDMG(state, e);
+        Enemy::contactDMG(state.position, state.playerSize, e->position,
+                          e->size);
+
+      // if (e->type == EnemyType::SNIPER)
+      //   Enemy::shootPlayer(e->position, {0, -1});
 
       if (!e->isAlive())
         enemyCount--;

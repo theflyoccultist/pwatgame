@@ -22,6 +22,12 @@ AudioSystem::AudioSystem() {
           SoundEffect("../assets/sfx/longrange.wav"),
       });
 
+  fxBank[SoundType::bonusPickup] = std::make_unique<std::vector<SoundEffect>>(
+      std::initializer_list<SoundEffect>{
+          SoundEffect("../assets/sfx/add_ammo.wav"),
+          SoundEffect("../assets/sfx/add_health.wav"),
+      });
+
   gameScores =
       std::make_unique<std::array<GameScore, 2>>(std::array<GameScore, 2>{
           GameScore("../assets/music/right_to_rave.ogg"),
@@ -40,6 +46,9 @@ void AudioSystem::playRandSteps() {
 void AudioSystem::enemyKilled() { (*fxBank[SoundType::combatSFX])[0].play(); }
 void AudioSystem::defaultGun() { (*fxBank[SoundType::combatSFX])[1].play(); }
 void AudioSystem::longrangeGun() { (*fxBank[SoundType::combatSFX])[2].play(); }
+
+void AudioSystem::ammoAdded() { (*fxBank[SoundType::bonusPickup])[0].play(); }
+void AudioSystem::healthAdded() { (*fxBank[SoundType::bonusPickup])[1].play(); }
 
 void AudioSystem::changeSfxVolume(int vol) {
   float volume = static_cast<float>(vol) / 100;

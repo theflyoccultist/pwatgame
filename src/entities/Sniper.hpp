@@ -27,10 +27,7 @@ public:
 
       position.x += dir.x * speed * delta * 8;
       position.y += dir.y * speed * delta * 8;
-
-      ClampEntities::clamp(position, 70);
-    } else {
-      // shoot at the player
     }
+    ClampEntities::clamp(position, 70);
   }
 };

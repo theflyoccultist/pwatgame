@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Player.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include <array>
@@ -33,10 +32,11 @@ public:
   }
 
   static void takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
-                              const float &bulletSize,
+                              float bulletSize,
                               const std::unique_ptr<Enemy> &enemy);
-  static void contactDMG(const PlayerState &state,
-                         const std::unique_ptr<Enemy> &enemy);
+  static void contactDMG(const Vector2 &playerPos, float playerSize,
+                         const Vector2 &enemyPos, float enemySize);
+  // static void shootPlayer(Vector2 startPosition, Vector2 dir);
 
   bool isAlive() const { return currentHP > 0; }
 

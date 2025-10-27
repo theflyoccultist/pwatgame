@@ -1,5 +1,7 @@
 #include "Enemy.hpp"
+#include "../Player.hpp"
 #include "../collisions/CollisionDetection.hpp"
+// #include "../projectiles/ProjectileManager.hpp"
 #include "../sound/AudioSystem.hpp"
 #include <iostream>
 #include <memory>
@@ -7,7 +9,7 @@
 #include <vector>
 
 void Enemy::takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
-                            const float &bulletSize,
+                            float bulletSize,
                             const std::unique_ptr<Enemy> &enemy) {
   for (auto &bulletPos : bulletPositions) {
     if (Collisions::checkBulletInteraction(bulletPos, bulletSize,
@@ -22,10 +24,10 @@ void Enemy::takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
   }
 }
 
-void Enemy::contactDMG(const PlayerState &state,
-                       const std::unique_ptr<Enemy> &enemy) {
-  if (Collisions::checkPlayerInteraction(state.position, state.playerSize,
-                                         enemy->position, enemy->size)) {
+void Enemy::contactDMG(const Vector2 &playerPos, float playerSize,
+                       const Vector2 &enemyPos, float enemySize) {
+  if (Collisions::checkPlayerInteraction(playerPos, playerSize, enemyPos,
+                                         enemySize)) {
     if (PlayerState::damageCooldown <= 0.0f) {
       PlayerState::health--;
       PlayerState::damageCooldown = 0.10f;
@@ -34,3 +36,31 @@ void Enemy::contactDMG(const PlayerState &state,
       std::cout << "Game Over!\n";
   }
 }
+
+// void Enemy::shootPlayer(const Vector2 &bulletPos, float bulletSize,
+//                         const Vector2 &playerPos, float enemySize) {
+//   if (Collisions::checkBulletInteraction(bulletPos, bulletSize, playerPos,
+//                                          enemySize)) {
+//
+//     if (PlayerState::damageCooldown <= 0.0f) {
+//       PlayerState::health--;
+//       PlayerState::damageCooldown = 0.10f;
+//     }
+//     if (PlayerState::health <= 0)
+//       std::cout << "Game Over!\n";
+//   }
+// }
+
+float shootCooldown = 2.0f;
+float shootTimer = 0.0f;
+
+// void Enemy::shootPlayer(Vector2 startPosition, Vector2 dir) {
+//   if (shootTimer > 0.0f)
+//     return;
+//
+//   ProjectileManager::instance().spawn(ProjectileType::LONGRANGE,
+//   startPosition,
+//                                       dir);
+//
+//   shootTimer = shootCooldown;
+// }

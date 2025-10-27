@@ -21,6 +21,10 @@ public:
   void playRandSteps();
   void defaultGun();
   void longrangeGun();
+
+  void ammoAdded();
+  void healthAdded();
+
   void enemyKilled();
   void changeSfxVolume(int vol);
 
