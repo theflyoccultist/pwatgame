@@ -39,7 +39,8 @@ public:
 
   bool isAlive() const { return currentHP > 0; }
 
-  void shoot(Vector2 startPosition, Vector2 dir, float dt);
+  void shootTowardsPlayer(const Vector2 &startPos, const Vector2 &enemyPos,
+                          const Vector2 &playerPos, float dt);
 
   EnemyType type;
   Vector2 position;
@@ -47,9 +48,6 @@ public:
   int currentHP;
   int totalHP;
   float size;
-
-  float shootCooldown = 3.0f;
-  float shootTimer = 0.0f;
 
 protected:
   const Texture2D *chooseTexture() const {
@@ -67,4 +65,7 @@ protected:
   std::array<Texture2D *, 3> textures;
 
 private:
+  float shootCooldown = 3.0f;
+  float shootTimer = 0.0f;
+  void shoot(const Vector2 &startPosition, const Vector2 &dir, float dt);
 };

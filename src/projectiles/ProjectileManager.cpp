@@ -1,8 +1,8 @@
 #include "ProjectileManager.hpp"
 #include <algorithm>
 
-void ProjectileManager::spawn(ProjectileType type, Vector2 startPos,
-                              Vector2 dir) {
+void ProjectileManager::spawn(ProjectileType type, const Vector2 &startPos,
+                              const Vector2 &dir) {
   projectiles.push_back(factory.createProjectile(type, startPos, dir));
 }
 

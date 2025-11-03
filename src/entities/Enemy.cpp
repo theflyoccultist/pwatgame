@@ -3,6 +3,7 @@
 #include "../collisions/CollisionDetection.hpp"
 #include "../projectiles/ProjectileManager.hpp"
 #include "../sound/AudioSystem.hpp"
+#include <cmath>
 #include <iostream>
 #include <memory>
 #include <raylib.h>
@@ -37,7 +38,18 @@ void Enemy::contactDMG(const Vector2 &playerPos, float playerSize,
   }
 }
 
-void Enemy::shoot(Vector2 startPosition, Vector2 dir, float dt) {
+void Enemy::shootTowardsPlayer(const Vector2 &startPos, const Vector2 &enemyPos,
+                               const Vector2 &playerPos, float dt) {
+  Vector2 direction = {playerPos.x - enemyPos.x, playerPos.y - enemyPos.y};
+  float len = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+  if (len != 0) {
+    direction.x /= len;
+    direction.y /= len;
+  }
+  shoot(startPos, direction, dt);
+}
+
+void Enemy::shoot(const Vector2 &startPosition, const Vector2 &dir, float dt) {
   shootTimer -= dt;
   if (shootTimer <= 0.0f) {
     ProjectileManager::instance().spawn(ProjectileType::LONGRANGE,

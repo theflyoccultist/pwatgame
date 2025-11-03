@@ -21,7 +21,7 @@ public:
   }
 
 private:
-  static constexpr float LRSpeed = 140.0f;
+  static constexpr float LRSpeed = 440.0f;
   static constexpr int LRSize = 7;
   static constexpr float LRLifeTime = 5.0f;
 };

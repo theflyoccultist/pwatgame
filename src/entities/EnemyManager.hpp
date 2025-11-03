@@ -12,7 +12,7 @@ public:
   static inline int enemyCount;
   void init();
   void spawnEnemies(EnemyType type, int count);
-  void updateAll(float delta, const PlayerState &state,
+  void updateAll(float delta, const PlayerState &player,
                  const std::vector<Vector2> &bulletPositions);
   void drawAll();
   void clearAll();

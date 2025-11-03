@@ -4,6 +4,7 @@ void EnemyManager::init() { factory.loadAssets(); }
 
 void EnemyManager::spawnEnemies(EnemyType type, int count) {
   enemyCount += count;
+  enemies.reserve(enemies.size() + count);
   for (int i = 0; i < count; ++i) {
     Vector2 pos = {Random::rangeFloat(0, 730.0f),
                    Random::rangeFloat(0, 730.0f)};
@@ -14,22 +15,35 @@ void EnemyManager::spawnEnemies(EnemyType type, int count) {
   }
 }
 
-void EnemyManager::updateAll(float delta, const PlayerState &state,
+void EnemyManager::updateAll(float delta, const PlayerState &player,
                              const std::vector<Vector2> &bulletPositions) {
-  if (state.damageCooldown > 0.0f)
-    state.damageCooldown -= delta;
+  if (player.damageCooldown > 0.0f)
+    player.damageCooldown -= delta;
 
   for (std::unique_ptr<Enemy> &e : enemies) {
-    e->update(delta, state.position);
+    e->update(delta, player.position);
     e->takeBulletIfHit(bulletPositions, 10.0f, e);
 
     if (e->type == EnemyType::SWARMER) {
-      e->contactDMG(state.position, state.playerSize, e->position, e->size);
+      e->contactDMG(player.position, player.playerSize, e->position, e->size);
     }
 
     if (e->type == EnemyType::SNIPER) {
-      e->shoot(e->position, {0, -1}, delta);
+      e->shootTowardsPlayer(
+          {e->position.x + e->size / 2, e->position.y + e->size / 2},
+          e->position, player.position, delta);
     }
+
+    /*
+     * {0, -1} : up
+     * {-1, -1} : up left
+     * {-1, 0} : left
+     * {-1, 1} : down left
+     * {0, 1} : down
+     * {1, 1} : down rigt
+     * {1, 0} : rigt
+     * {1, -1} : up rigt
+     */
 
     if (!e->isAlive())
       enemyCount--;
