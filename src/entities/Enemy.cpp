@@ -38,9 +38,9 @@ void Enemy::contactDMG(const Vector2 &playerPos, float playerSize,
   }
 }
 
-void Enemy::shootTowardsPlayer(const Vector2 &startPos, const Vector2 &enemyPos,
+void Enemy::shootTowardsPlayer(const Vector2 &startPos,
                                const Vector2 &playerPos, float dt) {
-  Vector2 direction = {playerPos.x - enemyPos.x, playerPos.y - enemyPos.y};
+  Vector2 direction = {playerPos.x - startPos.x, playerPos.y - startPos.y};
   float len = std::sqrt(direction.x * direction.x + direction.y * direction.y);
   if (len != 0) {
     direction.x /= len;

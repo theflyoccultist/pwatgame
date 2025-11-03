@@ -39,8 +39,8 @@ public:
 
   bool isAlive() const { return currentHP > 0; }
 
-  void shootTowardsPlayer(const Vector2 &startPos, const Vector2 &enemyPos,
-                          const Vector2 &playerPos, float dt);
+  void shootTowardsPlayer(const Vector2 &startPos, const Vector2 &playerPos,
+                          float dt);
 
   EnemyType type;
   Vector2 position;

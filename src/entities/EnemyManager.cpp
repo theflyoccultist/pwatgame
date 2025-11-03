@@ -31,19 +31,8 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     if (e->type == EnemyType::SNIPER) {
       e->shootTowardsPlayer(
           {e->position.x + e->size / 2, e->position.y + e->size / 2},
-          e->position, player.position, delta);
+          player.position, delta);
     }
-
-    /*
-     * {0, -1} : up
-     * {-1, -1} : up left
-     * {-1, 0} : left
-     * {-1, 1} : down left
-     * {0, 1} : down
-     * {1, 1} : down rigt
-     * {1, 0} : rigt
-     * {1, -1} : up rigt
-     */
 
     if (!e->isAlive())
       enemyCount--;
