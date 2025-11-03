@@ -5,19 +5,17 @@
 #include "../sound/AudioSystem.hpp"
 #include <cmath>
 #include <iostream>
-#include <memory>
 #include <raylib.h>
 #include <vector>
 
 void Enemy::takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
-                            float bulletSize,
-                            const std::unique_ptr<Enemy> &enemy) {
+                            float bulletSize) {
   for (auto &bulletPos : bulletPositions) {
-    if (Collisions::checkBulletInteraction(bulletPos, bulletSize,
-                                           enemy->position, enemy->size)) {
-      enemy->currentHP--;
+    if (Collisions::checkBulletInteraction(bulletPos, bulletSize, position,
+                                           size)) {
+      currentHP--;
       PlayerState::score++;
-      if (enemy->currentHP <= 0) {
+      if (currentHP <= 0) {
         AudioSystem::instance().enemyKilled();
         break;
       }

@@ -22,7 +22,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
 
   for (std::unique_ptr<Enemy> &e : enemies) {
     e->update(delta, player.position);
-    e->takeBulletIfHit(bulletPositions, 10.0f, e);
+    e->takeBulletIfHit(bulletPositions, 10.0f);
 
     if (e->type == EnemyType::SWARMER) {
       e->contactDMG(player.position, player.playerSize, e->position, e->size);

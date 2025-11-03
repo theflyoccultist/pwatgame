@@ -3,7 +3,6 @@
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include <array>
-#include <memory>
 #include <raylib.h>
 
 enum class EnemyType { SWARMER, SNIPER, COUNT };
@@ -31,9 +30,8 @@ public:
              position.y - 20, 10, BLACK);
   }
 
-  static void takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
-                              float bulletSize,
-                              const std::unique_ptr<Enemy> &enemy);
+  void takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
+                       float bulletSize);
   static void contactDMG(const Vector2 &playerPos, float playerSize,
                          const Vector2 &enemyPos, float enemySize);
 
