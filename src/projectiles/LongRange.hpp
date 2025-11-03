@@ -7,7 +7,8 @@ class LongRange : public Projectile {
 public:
   LongRange(Vector2 startPos, Vector2 dir)
       : Projectile(ProjectileType::LONGRANGE, startPos, dir, LRSpeed,
-                   {dir.x * LRSpeed, dir.y * LRSpeed}, LRSize, LRLifeTime) {}
+                   {dir.x * LRSpeed, dir.y * LRSpeed}, LRSize, LRLifeTime,
+                   LRDamage) {}
 
   void update(float dt) override {
     position.x += velocity.x * dt;
@@ -24,4 +25,5 @@ private:
   static constexpr float LRSpeed = 440.0f;
   static constexpr int LRSize = 7;
   static constexpr float LRLifeTime = 5.0f;
+  static constexpr int LRDamage = 5;
 };

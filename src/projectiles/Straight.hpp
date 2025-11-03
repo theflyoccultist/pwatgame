@@ -6,9 +6,9 @@
 class Straight : public Projectile {
 public:
   Straight(Vector2 startPos, Vector2 dir)
-      : Projectile(ProjectileType::STRAIGHT, startPos, dir, straightSpeed,
-                   {dir.x * straightSpeed, dir.y * straightSpeed}, straightSize,
-                   straightLifetime) {}
+      : Projectile(ProjectileType::STRAIGHT, startPos, dir, sSpeed,
+                   {dir.x * sSpeed, dir.y * sSpeed}, sSize, sLifetime,
+                   sDamage) {}
 
   void update(float dt) override {
     position.x += velocity.x * dt;
@@ -22,7 +22,8 @@ public:
   }
 
 private:
-  static constexpr float straightSpeed = 700.0f;
-  static constexpr int straightSize = 10;
-  static constexpr float straightLifetime = 2.0f;
+  static constexpr float sSpeed = 700.0f;
+  static constexpr int sSize = 10;
+  static constexpr float sLifetime = 2.0f;
+  static constexpr int sDamage = 7;
 };
