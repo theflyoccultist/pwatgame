@@ -15,6 +15,8 @@ public:
   virtual void update(float dt) = 0;
   virtual void draw() const = 0;
 
+  void expire() { lifetime = 0; }
+
   ProjectileType type;
   Vector2 position;
   Vector2 direction;

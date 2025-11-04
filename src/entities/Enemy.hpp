@@ -30,10 +30,8 @@ public:
              position.y - 20, 10, BLACK);
   }
 
-  void takeBulletIfHit(const std::vector<Vector2> &bulletPositions,
-                       float bulletSize);
-  static void contactDMG(const Vector2 &playerPos, float playerSize,
-                         const Vector2 &enemyPos, float enemySize);
+  bool takeBulletIfHit();
+  void contactDMG();
 
   bool isAlive() const { return currentHP > 0; }
 
