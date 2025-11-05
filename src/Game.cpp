@@ -41,6 +41,8 @@ void Game::run() {
       pwat.resetPlayerHealth();
       pwat.resetPlayerScore();
       pwat.resetPlayerAmmo();
+      pwatState.position = {static_cast<float>(screenWidth / 2.0),
+                            static_cast<float>(screenHeight / 2.0)};
 
       ItemManager::instance().populateItems();
       enemyManager.clearAll();
@@ -70,10 +72,9 @@ void Game::run() {
       ItemManager::instance().drawItems(ItemCategory::Food);
       ItemManager::instance().drawItems(ItemCategory::Drink);
 
-      auto playerBulletPositions =
-          ProjectileManager::instance().getProjectilePositions();
+      auto bullets = ProjectileManager::instance().view();
 
-      enemyManager.updateAll(deltaTime, pwatState, playerBulletPositions);
+      enemyManager.updateAll(deltaTime, pwatState, bullets);
       enemyManager.drawAll();
 
       if (IsKeyPressed(KEY_P))

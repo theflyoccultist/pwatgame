@@ -1,10 +1,12 @@
 #pragma once
 
 #include "../Player.hpp"
+#include "../projectiles/Projectile.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
 #include <memory>
 #include <raylib.h>
+#include <span>
 #include <vector>
 
 class EnemyManager {
@@ -13,7 +15,8 @@ public:
   void init();
   void spawnEnemies(EnemyType type, int count);
   void updateAll(float delta, const PlayerState &player,
-                 const std::vector<Vector2> &bulletPositions);
+                 std::span<Projectile *const> bullets);
+
   void drawAll();
   void clearAll();
 

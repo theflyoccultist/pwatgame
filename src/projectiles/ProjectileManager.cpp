@@ -22,14 +22,14 @@ void ProjectileManager::draw() {
     p->draw();
 }
 
-std::vector<Vector2> ProjectileManager::getProjectilePositions() const {
-  std::vector<Vector2> positions;
-  positions.reserve(projectiles.size());
+std::span<Projectile *const> ProjectileManager::view() {
+  tempView.clear();
+  tempView.reserve(projectiles.size());
 
   for (auto &p : projectiles)
-    positions.push_back(p->position);
+    tempView.push_back(p.get());
 
-  return positions;
+  return tempView;
 }
 
 void ProjectileManager::clearAll() { projectiles.clear(); }

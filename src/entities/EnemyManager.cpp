@@ -14,23 +14,24 @@ void EnemyManager::spawnEnemies(EnemyType type, int count) {
     if (e)
       enemies.push_back(std::move(e));
   }
-  enemyCount = enemies.size();
 }
 
 void EnemyManager::updateAll(float delta, const PlayerState &player,
-                             const std::vector<Vector2> &bulletPositions) {
+                             std::span<Projectile *const> bullets) {
   if (player.damageCooldown > 0.0f)
     player.damageCooldown -= delta;
 
   for (auto &e : enemies) {
     e->update(delta, player.position);
 
-    for (auto &bulletPos : bulletPositions) {
-      if (Collisions::checkBulletInteraction(bulletPos, 10.0f, e->position,
+    for (auto &b : bullets) {
+      if (Collisions::checkBulletInteraction(b->position, b->size, e->position,
                                              e->size)) {
-        player.score++;
-        if (e->takeBulletIfHit(7))
+        b->expire();
+        if (e->takeBulletIfHit(b->damage)) {
+          player.score++;
           AudioSystem::instance().enemyKilled();
+        }
       }
     }
 
@@ -50,13 +51,12 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
           {e->position.x + e->size / 2, e->position.y + e->size / 2},
           player.position, delta);
     }
-
-    if (!e->isAlive())
-      enemyCount--;
   }
 
   std::erase_if(enemies,
                 [](const std::unique_ptr<Enemy> &p) { return !p->isAlive(); });
+
+  enemyCount = enemies.size();
 }
 
 void EnemyManager::drawAll() {
