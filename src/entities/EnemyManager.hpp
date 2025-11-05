@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Player.hpp"
 #include "../projectiles/Projectile.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
+#include "Player.hpp"
 #include <memory>
 #include <raylib.h>
 #include <span>

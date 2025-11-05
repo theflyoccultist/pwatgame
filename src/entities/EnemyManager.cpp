@@ -28,8 +28,8 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       if (Collisions::checkBulletInteraction(b->position, b->size, e->position,
                                              e->size)) {
         b->expire();
+        player.score++;
         if (e->takeBulletIfHit(b->damage)) {
-          player.score++;
           AudioSystem::instance().enemyKilled();
         }
       }

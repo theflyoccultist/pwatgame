@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Enemy.hpp"
-#include "Sniper.hpp"
-#include "Swarmer.hpp"
+#include "Enemy_Sniper.hpp"
+#include "Enemy_Swarmer.hpp"
 #include <array>
 #include <memory>
 

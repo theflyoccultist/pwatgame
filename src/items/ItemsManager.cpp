@@ -1,6 +1,6 @@
 #include "ItemsManager.hpp"
-#include "../Player.hpp"
 #include "../collisions/CollisionDetection.hpp"
+#include "../entities/Player.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"

@@ -1,8 +1,8 @@
 #include "Player.hpp"
-#include "projectiles/ProjectileManager.hpp"
-#include "sound/AudioSystem.hpp"
-#include "texture/AssetSystem.hpp"
-#include "utils/clampEntities.hpp"
+#include "../projectiles/ProjectileManager.hpp"
+#include "../sound/AudioSystem.hpp"
+#include "../texture/AssetSystem.hpp"
+#include "../utils/clampEntities.hpp"
 
 #include <algorithm>
 #include <raylib.h>
