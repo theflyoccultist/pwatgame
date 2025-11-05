@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "entities/EnemyManager.hpp"
+#include "entities/PlayerManager.hpp"
 #include "items/ItemsManager.hpp"
 #include "projectiles/ProjectileManager.hpp"
 #include "sound/AudioSystem.hpp"
@@ -7,19 +8,13 @@
 #include <raylib.h>
 
 void Game::run() {
-  Player pwat;
+  PlayerManager playerManager;
+  PlayerState pwatState = playerManager.init();
 
   EnemyManager enemyManager;
   enemyManager.init();
 
   UIManager::loadUI();
-
-  int pwatTexture = 0;
-  Vector2 pwatPosition = {static_cast<float>(screenWidth / 2.0),
-                          static_cast<float>(screenHeight / 2.0)};
-  Vector2 pwatDirection = {0.0f, 0.0f};
-
-  PlayerState pwatState = {pwatTexture, pwatPosition, pwatDirection};
 
   AudioSystem::instance().playTitleTrack();
 
@@ -38,11 +33,7 @@ void Game::run() {
     case GameState::Restarting: {
       AudioSystem::instance().stopMusic();
       AudioSystem::instance().playLevelTrack();
-      pwat.resetPlayerHealth();
-      pwat.resetPlayerScore();
-      pwat.resetPlayerAmmo();
-      pwatState.position = {static_cast<float>(screenWidth / 2.0),
-                            static_cast<float>(screenHeight / 2.0)};
+      playerManager.reset(pwatState);
 
       ItemManager::instance().populateItems();
       enemyManager.clearAll();
@@ -58,11 +49,7 @@ void Game::run() {
     case GameState::Playing: {
       UIManager::updatePlayerHUD();
 
-      auto state = pwat.playerMovements(pwatState, deltaTime);
-      pwatState = state;
-
-      pwat.draw(pwatState.position, pwatState.texture);
-      pwat.playerFootsteps(deltaTime);
+      playerManager.update(deltaTime, pwatState);
 
       ProjectileManager::instance().update(deltaTime);
       ProjectileManager::instance().draw();
