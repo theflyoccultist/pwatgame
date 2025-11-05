@@ -1,23 +1,11 @@
 #include "Enemy.hpp"
-#include "../Player.hpp"
 #include "../projectiles/ProjectileManager.hpp"
 #include <cmath>
-#include <iostream>
 #include <raylib.h>
 
-bool Enemy::takeBulletIfHit() {
-  currentHP--;
-  PlayerState::score++;
+bool Enemy::takeBulletIfHit(int dmg) {
+  currentHP -= dmg;
   return currentHP <= 0;
-}
-
-void Enemy::contactDMG() {
-  if (PlayerState::damageCooldown <= 0.0f) {
-    PlayerState::health--;
-    PlayerState::damageCooldown = 0.10f;
-  }
-  if (PlayerState::health <= 0)
-    std::cout << "Game Over!\n";
 }
 
 void Enemy::shootTowardsPlayer(const Vector2 &startPos,

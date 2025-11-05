@@ -5,7 +5,6 @@
 void EnemyManager::init() { factory.loadAssets(); }
 
 void EnemyManager::spawnEnemies(EnemyType type, int count) {
-  enemyCount += count;
   enemies.reserve(enemies.size() + count);
   for (int i = 0; i < count; ++i) {
     Vector2 pos = {Random::rangeFloat(0, 730.0f),
@@ -15,6 +14,7 @@ void EnemyManager::spawnEnemies(EnemyType type, int count) {
     if (e)
       enemies.push_back(std::move(e));
   }
+  enemyCount = enemies.size();
 }
 
 void EnemyManager::updateAll(float delta, const PlayerState &player,
@@ -28,15 +28,21 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     for (auto &bulletPos : bulletPositions) {
       if (Collisions::checkBulletInteraction(bulletPos, 10.0f, e->position,
                                              e->size)) {
-        if (e->takeBulletIfHit())
+        player.score++;
+        if (e->takeBulletIfHit(7))
           AudioSystem::instance().enemyKilled();
       }
     }
 
     if (e->type == EnemyType::SWARMER) {
       if (Collisions::checkPlayerInteraction(player.position, player.playerSize,
-                                             e->position, e->size))
-        e->contactDMG();
+                                             e->position, e->size)) {
+
+        if (player.damageCooldown <= 0.0f) {
+          player.health--;
+          player.damageCooldown = 0.10f;
+        }
+      }
     }
 
     if (e->type == EnemyType::SNIPER) {

@@ -30,8 +30,7 @@ public:
              position.y - 20, 10, BLACK);
   }
 
-  bool takeBulletIfHit();
-  void contactDMG();
+  bool takeBulletIfHit(int dmg);
 
   bool isAlive() const { return currentHP > 0; }
 
