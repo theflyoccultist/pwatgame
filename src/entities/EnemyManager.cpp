@@ -25,23 +25,30 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     e->update(delta, player.position);
 
     for (auto &b : bullets) {
-      if (b->faction != Faction::Player)
-        continue;
-
-      if (Collisions::checkBulletInteraction(b->position, b->size, e->position,
+      if (b->faction == Faction::Player &&
+          Collisions::checkBulletInteraction(b->position, b->size, e->position,
                                              e->size)) {
-        b->expire();
         player.score++;
+        b->expire();
         if (e->takeBulletIfHit(b->damage)) {
           AudioSystem::instance().enemyKilled();
         }
+      }
+      if (b->faction == Faction::Enemy &&
+          Collisions::checkBulletInteraction(
+              b->position, b->size, player.position, player.playerSize)) {
+        if (player.damageCooldown <= 0.0f) {
+          player.health -= b->damage;
+          player.damageCooldown = 0.10f;
+        }
+        b->expire();
+        break;
       }
     }
 
     if (e->type == EnemyType::SWARMER) {
       if (Collisions::checkPlayerInteraction(player.position, player.playerSize,
                                              e->position, e->size)) {
-
         if (player.damageCooldown <= 0.0f) {
           player.health--;
           player.damageCooldown = 0.10f;

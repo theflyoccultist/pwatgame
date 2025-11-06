@@ -16,7 +16,7 @@ public:
   virtual void update(float dt) = 0;
   virtual void draw() const = 0;
 
-  void expire() { lifetime = 0; }
+  void expire() { lifetime = 0.0f; }
 
   Faction faction;
   ProjectileType type;
