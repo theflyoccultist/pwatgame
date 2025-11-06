@@ -1,4 +1,5 @@
 #include "Enemy.hpp"
+#include "../entities/Faction.hpp"
 #include "../projectiles/ProjectileManager.hpp"
 #include <cmath>
 #include <raylib.h>
@@ -22,8 +23,8 @@ void Enemy::shootTowardsPlayer(const Vector2 &startPos,
 void Enemy::shoot(const Vector2 &startPosition, const Vector2 &dir, float dt) {
   shootTimer -= dt;
   if (shootTimer <= 0.0f) {
-    ProjectileManager::instance().spawn(ProjectileType::LONGRANGE,
-                                        startPosition, dir);
+    ProjectileManager::instance().spawn(
+        Faction::Enemy, ProjectileType::LONGRANGE, startPosition, dir);
     shootTimer = shootCooldown;
   }
 }

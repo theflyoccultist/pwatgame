@@ -1,14 +1,15 @@
 #pragma once
 
+#include "../entities/Faction.hpp"
 #include <raylib.h>
 
 enum class ProjectileType { STRAIGHT, LONGRANGE, COUNT };
 
 class Projectile {
 public:
-  Projectile(ProjectileType type, Vector2 startPos, Vector2 dir, float spd,
-             Vector2 vel, int s, float l, int d)
-      : type(type), position(startPos), direction(dir), speed(spd),
+  Projectile(Faction f, ProjectileType type, Vector2 startPos, Vector2 dir,
+             float spd, Vector2 vel, int s, float l, int d)
+      : faction(f), type(type), position(startPos), direction(dir), speed(spd),
         velocity(vel), size(s), lifetime(l), damage(d) {}
 
   virtual ~Projectile() = default;
@@ -17,6 +18,7 @@ public:
 
   void expire() { lifetime = 0; }
 
+  Faction faction;
   ProjectileType type;
   Vector2 position;
   Vector2 direction;

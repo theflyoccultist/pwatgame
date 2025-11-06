@@ -5,8 +5,8 @@
 
 class LongRange : public Projectile {
 public:
-  LongRange(Vector2 startPos, Vector2 dir)
-      : Projectile(ProjectileType::LONGRANGE, startPos, dir, LRSpeed,
+  LongRange(Faction f, Vector2 startPos, Vector2 dir)
+      : Projectile(f, ProjectileType::LONGRANGE, startPos, dir, LRSpeed,
                    {dir.x * LRSpeed, dir.y * LRSpeed}, LRSize, LRLifeTime,
                    LRDamage) {}
 

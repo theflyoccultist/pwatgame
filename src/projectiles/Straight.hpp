@@ -5,8 +5,8 @@
 
 class Straight : public Projectile {
 public:
-  Straight(Vector2 startPos, Vector2 dir)
-      : Projectile(ProjectileType::STRAIGHT, startPos, dir, sSpeed,
+  Straight(Faction f, Vector2 startPos, Vector2 dir)
+      : Projectile(f, ProjectileType::STRAIGHT, startPos, dir, sSpeed,
                    {dir.x * sSpeed, dir.y * sSpeed}, sSize, sLifetime,
                    sDamage) {}
 

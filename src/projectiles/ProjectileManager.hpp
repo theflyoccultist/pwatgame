@@ -13,7 +13,8 @@ public:
     return instance;
   }
 
-  void spawn(ProjectileType type, const Vector2 &startPos, const Vector2 &dir);
+  void spawn(Faction f, ProjectileType type, const Vector2 &startPos,
+             const Vector2 &dir);
   void update(float dt);
   void draw();
   void clearAll();

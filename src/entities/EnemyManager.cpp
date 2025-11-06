@@ -25,6 +25,9 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     e->update(delta, player.position);
 
     for (auto &b : bullets) {
+      if (b->faction != Faction::Player)
+        continue;
+
       if (Collisions::checkBulletInteraction(b->position, b->size, e->position,
                                              e->size)) {
         b->expire();

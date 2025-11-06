@@ -3,6 +3,7 @@
 #include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/clampEntities.hpp"
+#include "Faction.hpp"
 
 #include <algorithm>
 #include <raylib.h>
@@ -31,8 +32,8 @@ void Player::shoot(Vector2 startPosition, Vector2 dir) {
   if (PlayerState::playerAmmo <= 0 || shootTimer > 0.0f)
     return;
 
-  ProjectileManager::instance().spawn(ProjectileType::STRAIGHT, startPosition,
-                                      dir);
+  ProjectileManager::instance().spawn(Faction::Player, ProjectileType::STRAIGHT,
+                                      startPosition, dir);
 
   PlayerState::playerAmmo--;
   shootTimer = shootCooldown;

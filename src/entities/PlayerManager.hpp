@@ -9,7 +9,7 @@ public:
     int pwatTexture = 0;
     Vector2 pwatPosition = {static_cast<float>(screenWidth / 2.0),
                             static_cast<float>(screenHeight / 2.0)};
-    Vector2 pwatDirection = {0.0f, 0.0f};
+    Vector2 pwatDirection = {0, 0};
     return {pwatTexture, pwatPosition, pwatDirection};
   }
 
@@ -21,7 +21,7 @@ public:
                           static_cast<float>(screenHeight / 2.0)};
   }
 
-  void update(float deltaTime, PlayerState &pwatState) {
+  void update(PlayerState &pwatState, float deltaTime) {
     auto state = pwat.playerMovements(pwatState, deltaTime);
     pwatState = state;
 
@@ -31,6 +31,6 @@ public:
 
 private:
   Player pwat;
-  int screenHeight = GetScreenHeight();
-  int screenWidth = GetScreenWidth();
+  const int screenHeight = GetScreenHeight();
+  const int screenWidth = GetScreenWidth();
 };

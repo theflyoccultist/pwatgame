@@ -49,7 +49,7 @@ void Game::run() {
     case GameState::Playing: {
       UIManager::updatePlayerHUD();
 
-      playerManager.update(deltaTime, pwatState);
+      playerManager.update(pwatState, deltaTime);
 
       ProjectileManager::instance().update(deltaTime);
       ProjectileManager::instance().draw();

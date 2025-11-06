@@ -1,9 +1,9 @@
 #include "ProjectileManager.hpp"
 #include <algorithm>
 
-void ProjectileManager::spawn(ProjectileType type, const Vector2 &startPos,
-                              const Vector2 &dir) {
-  projectiles.push_back(factory.createProjectile(type, startPos, dir));
+void ProjectileManager::spawn(Faction f, ProjectileType type,
+                              const Vector2 &startPos, const Vector2 &dir) {
+  projectiles.push_back(factory.createProjectile(f, type, startPos, dir));
 }
 
 void ProjectileManager::update(float dt) {
