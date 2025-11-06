@@ -34,6 +34,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
           AudioSystem::instance().enemyKilled();
         }
       }
+
       if (b->faction == Faction::Enemy &&
           Collisions::checkBulletInteraction(
               b->position, b->size, player.position, player.playerSize)) {
@@ -42,7 +43,6 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
           player.damageCooldown = 0.10f;
         }
         b->expire();
-        break;
       }
     }
 
@@ -63,8 +63,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     }
   }
 
-  std::erase_if(enemies,
-                [](const std::unique_ptr<Enemy> &p) { return !p->isAlive(); });
+  std::erase_if(enemies, [](auto &p) { return !p->isAlive(); });
 
   enemyCount = enemies.size();
 }

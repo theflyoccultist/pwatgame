@@ -10,14 +10,14 @@ void ItemManager::addItem(ItemCategory cat, int type, Vector2 pos) {
   itemsByCategory[cat].emplace_back(cat, type, pos);
 }
 
-void ItemManager::populateItems() {
+void ItemManager::populateItems(size_t num) {
   itemsByCategory.clear();
 
   std::unordered_map<ItemCategory, std::vector<Vector2>> itemPositions = {
       {ItemCategory::Food, {}}, {ItemCategory::Drink, {}}};
 
   for (auto &[category, positions] : itemPositions) {
-    for (size_t i = 0; i < 5; ++i) {
+    for (size_t i = 0; i < num; ++i) {
       addItem(
           category, static_cast<int>(i),
           {Random::rangeFloat(0.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});

@@ -1,10 +1,12 @@
 #include "Game.hpp"
+#include "entities/Enemy.hpp"
 #include "entities/EnemyManager.hpp"
 #include "entities/PlayerManager.hpp"
 #include "items/ItemsManager.hpp"
 #include "projectiles/ProjectileManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
+#include "utils/Scheduler.hpp"
 #include <raylib.h>
 
 void Game::run() {
@@ -13,6 +15,7 @@ void Game::run() {
 
   EnemyManager enemyManager;
   enemyManager.init();
+  Scheduler scheduler;
 
   UIManager::loadUI();
 
@@ -33,14 +36,33 @@ void Game::run() {
     case GameState::Restarting: {
       AudioSystem::instance().stopMusic();
       AudioSystem::instance().playLevelTrack();
-      playerManager.reset(pwatState);
 
-      ItemManager::instance().populateItems();
+      playerManager.reset(pwatState);
       enemyManager.clearAll();
-      enemyManager.spawnEnemies(EnemyType::SWARMER, 5);
-      enemyManager.spawnEnemies(EnemyType::SNIPER, 5);
 
       ProjectileManager::instance().clearAll();
+
+      ItemManager::instance().populateItems(5);
+
+      enemyManager.spawnEnemies(EnemyType::SNIPER, 5);
+
+      scheduler.schedule(10.0f, [&enemyManager] {
+        enemyManager.spawnEnemies(EnemyType::SWARMER, 5);
+      });
+
+      scheduler.schedule(15.0f,
+                         [] { ItemManager::instance().populateItems(3); });
+
+      scheduler.schedule(30.0f, [&enemyManager] {
+        enemyManager.spawnEnemies(EnemyType::SWARMER, 25);
+      });
+
+      scheduler.schedule(50.0f, [&enemyManager] {
+        enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
+      });
+
+      scheduler.schedule(60.0f,
+                         [] { ItemManager::instance().populateItems(2); });
 
       Game::currentState = GameState::Playing;
       break;
@@ -58,6 +80,8 @@ void Game::run() {
                                           PlayerState::playerSize);
       ItemManager::instance().drawItems(ItemCategory::Food);
       ItemManager::instance().drawItems(ItemCategory::Drink);
+
+      scheduler.update(deltaTime);
 
       auto bullets = ProjectileManager::instance().view();
 
