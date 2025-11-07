@@ -6,28 +6,47 @@
 #include <format>
 #include <raylib.h>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace UILib {
 
-std::array<Texture2D *, numAssets> uiAssets;
+enum class AssetType { Background, PwatMenu };
+
+std::unordered_map<AssetType, std::vector<std::string>> assetBank;
+std::vector<Texture2D *> uiAssets;
 
 void loadUIAssets() {
-  const std::array<std::string, numAssets> uiPaths = {
+  assetBank[AssetType::Background] = {
+      "../assets/ui/bkg1.png",
+      "../assets/ui/bkg2.png",
+      "../assets/ui/bkg3.png",
+      "../assets/ui/bkg4.png",
+  };
+
+  assetBank[AssetType::PwatMenu] = {
       "../assets/ui/pwat_menu.png",
   };
 
-  for (size_t i = 0; i < numAssets; ++i) {
-    uiAssets[i] = &AssetSystem::instance().loadTexture(uiPaths[i], 300, 300);
+  auto &asset = AssetSystem::instance();
+
+  for (auto &bkg : assetBank[AssetType::Background]) {
+    uiAssets.push_back(&asset.loadTexture(bkg, 800, 800));
   }
+
+  uiAssets.push_back(
+      &asset.loadTexture(assetBank[AssetType::PwatMenu][0], 300, 300));
 }
 
 void mainMenu() {
+  AssetSystem::instance().drawTexture(uiAssets[0], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[4], 225, 400);
   DrawText("PwatPwat - The Game", 275, 20, 20, BLACK);
   DrawText("Press Enter To Play", 165, 300, 40, BLACK);
-  AssetSystem::instance().drawTexture(uiAssets[0], 225, 400);
 }
 
 void playerHUD() {
+  AssetSystem::instance().drawTexture(uiAssets[1], 0, 0);
   DrawText(TextFormat("Enemies remaining: %d", EnemyManager::enemyCount), 20,
            20, 20, BLACK);
   DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
@@ -36,6 +55,7 @@ void playerHUD() {
 };
 
 PauseMenuOpts pauseMenu() {
+  AssetSystem::instance().drawTexture(uiAssets[2], 0, 0);
   DrawRectangle(100, 100, 600, 600, YELLOW);
   DrawText("Game Paused", 150, 140, 20, BLACK);
 
@@ -65,6 +85,7 @@ PauseMenuOpts pauseMenu() {
 }
 
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
+  AssetSystem::instance().drawTexture(uiAssets[3], 0, 0);
   DrawRectangle(100, 100, 600, 600, ORANGE);
   DrawText("OPTIONS", 150, 140, 20, BLACK);
 

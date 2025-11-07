@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "entities/Enemy.hpp"
 #include "entities/EnemyManager.hpp"
 #include "entities/PlayerManager.hpp"
 #include "items/ItemsManager.hpp"
@@ -42,16 +41,16 @@ void Game::run() {
 
       ProjectileManager::instance().clearAll();
 
-      ItemManager::instance().populateItems(5);
+      ItemManager::instance().populateItems(10, 10);
 
-      enemyManager.spawnEnemies(EnemyType::SNIPER, 5);
+      enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
 
       scheduler.schedule(10.0f, [&enemyManager] {
         enemyManager.spawnEnemies(EnemyType::SWARMER, 5);
       });
 
       scheduler.schedule(15.0f,
-                         [] { ItemManager::instance().populateItems(3); });
+                         [] { ItemManager::instance().populateItems(2, 5); });
 
       scheduler.schedule(30.0f, [&enemyManager] {
         enemyManager.spawnEnemies(EnemyType::SWARMER, 25);
@@ -62,7 +61,7 @@ void Game::run() {
       });
 
       scheduler.schedule(60.0f,
-                         [] { ItemManager::instance().populateItems(2); });
+                         [] { ItemManager::instance().populateItems(7, 0); });
 
       Game::currentState = GameState::Playing;
       break;
