@@ -18,11 +18,6 @@ struct Item {
 
 class ItemManager {
 public:
-  static ItemManager &instance() {
-    static ItemManager instance;
-    return instance;
-  }
-
   void addItem(ItemCategory cat, int type, Vector2 pos);
   void populateItems(int food, int drink);
   void drawItems(ItemCategory cat);

@@ -1,20 +1,17 @@
 #include "Game.hpp"
-#include "entities/EnemyManager.hpp"
 #include "entities/PlayerManager.hpp"
-#include "items/ItemsManager.hpp"
+#include "levels/SpawnScheduler.hpp"
 #include "projectiles/ProjectileManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
-#include "utils/Scheduler.hpp"
 #include <raylib.h>
 
 void Game::run() {
   PlayerManager playerManager;
   PlayerState pwatState = playerManager.init();
 
-  EnemyManager enemyManager;
-  enemyManager.init();
-  Scheduler scheduler;
+  SpawnScheduler spawner;
+  spawner.init();
 
   UIManager::loadUI();
 
@@ -37,39 +34,12 @@ void Game::run() {
       AudioSystem::instance().playLevelTrack();
 
       playerManager.reset(pwatState);
-      enemyManager.clearAll();
+      spawner.clearAllEnemies();
 
       ProjectileManager::instance().clearAll();
 
-      ItemManager::instance().populateItems(10, 10);
-
-      enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
-
-      scheduler.schedule(5.0f, [&enemyManager] {
-        enemyManager.spawnEnemies(EnemyType::GODSIP, 4);
-      });
-
-      scheduler.schedule(10.0f, [&enemyManager] {
-        enemyManager.spawnEnemies(EnemyType::SWARMER, 5);
-      });
-
-      scheduler.schedule(15.0f,
-                         [] { ItemManager::instance().populateItems(2, 5); });
-
-      scheduler.schedule(30.0f, [&enemyManager] {
-        enemyManager.spawnEnemies(EnemyType::SWARMER, 25);
-      });
-
-      scheduler.schedule(50.0f, [&enemyManager] {
-        enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
-      });
-
-      scheduler.schedule(55.0f, [&enemyManager] {
-        enemyManager.spawnEnemies(EnemyType::GODSIP, 7);
-      });
-
-      scheduler.schedule(60.0f,
-                         [] { ItemManager::instance().populateItems(7, 0); });
+      spawner.scheduleItems();
+      spawner.scheduleEnemies();
 
       Game::currentState = GameState::Playing;
       break;
@@ -83,17 +53,11 @@ void Game::run() {
       ProjectileManager::instance().update(deltaTime);
       ProjectileManager::instance().draw();
 
-      ItemManager::instance().updateItems(pwatState.position,
-                                          PlayerState::playerSize);
-      ItemManager::instance().drawItems(ItemCategory::Food);
-      ItemManager::instance().drawItems(ItemCategory::Drink);
-
-      scheduler.update(deltaTime);
-
       auto bullets = ProjectileManager::instance().view();
 
-      enemyManager.updateAll(deltaTime, pwatState, bullets);
-      enemyManager.drawAll();
+      spawner.updateScheduler(deltaTime);
+      spawner.updateItems(pwatState);
+      spawner.updateEnemies(deltaTime, pwatState, bullets);
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
