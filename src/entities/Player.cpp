@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include "../projectiles/ProjectileManager.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/clampEntities.hpp"
@@ -8,7 +7,7 @@
 #include <algorithm>
 #include <raylib.h>
 
-Player::Player() {
+void Player::init() {
   const std::array<std::string, numPwats> pwatPaths = {
       "../assets/player/pwatleft.png",
       "../assets/player/pwatright.png",
@@ -32,8 +31,7 @@ void Player::shoot(Vector2 startPosition, Vector2 dir) {
   if (PlayerState::playerAmmo <= 0 || shootTimer > 0.0f)
     return;
 
-  ProjectileManager::instance().spawn(Faction::Player, ProjectileType::STRAIGHT,
-                                      startPosition, dir);
+  projMan.spawn(Faction::Player, ProjectileType::STRAIGHT, startPosition, dir);
 
   PlayerState::playerAmmo--;
   shootTimer = shootCooldown;

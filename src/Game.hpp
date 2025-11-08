@@ -1,5 +1,6 @@
 #pragma once
 
+#include "World.hpp"
 #include <raylib.h>
 
 class Game {
@@ -10,4 +11,7 @@ public:
 
   enum class GameState { MainMenu, Restarting, Playing, Paused, Options };
   static inline GameState currentState = GameState::MainMenu;
+
+private:
+  World world;
 };

@@ -1,7 +1,7 @@
 #pragma once
 
+#include "../projectiles/ProjectileManager.hpp"
 #include "../texture/AssetSystem.hpp"
-#include "../utils/Random.hpp"
 #include "../utils/clampEntities.hpp"
 #include <array>
 #include <raylib.h>
@@ -35,8 +35,9 @@ public:
 
   bool isAlive() const { return currentHP > 0; }
 
-  void shootTowardsPlayer(const Vector2 &startPos, const Vector2 &playerPos,
-                          float dt);
+  void shootTowardsPlayer(ProjectileManager &projMan, const Vector2 &startPos,
+                          const Vector2 &playerPos, float dt,
+                          float shootCooldown);
 
   EnemyType type;
   Vector2 position;
@@ -59,9 +60,5 @@ protected:
   }
 
   std::array<Texture2D *, 3> textures;
-
-private:
-  float shootCooldown = 3.0f;
   float shootTimer = 0.0f;
-  void shoot(const Vector2 &startPosition, const Vector2 &dir, float dt);
 };

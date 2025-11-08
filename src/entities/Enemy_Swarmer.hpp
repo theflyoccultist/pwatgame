@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../utils/Random.hpp"
 #include "Enemy.hpp"
 #include <array>
 #include <raylib.h>

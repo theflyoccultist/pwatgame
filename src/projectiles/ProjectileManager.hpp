@@ -8,11 +8,6 @@
 
 class ProjectileManager {
 public:
-  static ProjectileManager &instance() {
-    static ProjectileManager instance;
-    return instance;
-  }
-
   void spawn(Faction f, ProjectileType type, const Vector2 &startPos,
              const Vector2 &dir);
   void update(float dt);

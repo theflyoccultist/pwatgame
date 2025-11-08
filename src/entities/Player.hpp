@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../projectiles/ProjectileManager.hpp"
 #include <array>
 #include <cstddef>
 #include <raylib.h>
@@ -18,7 +19,8 @@ struct PlayerState {
 
 class Player {
 public:
-  Player();
+  Player(ProjectileManager &pm) : projMan(pm) {}
+  void init();
   void draw(Vector2 position, int direction);
 
   PlayerState playerMovements(PlayerState state, float dt);
@@ -41,4 +43,6 @@ private:
   float shootTimer = 0.0f;
   const float pwatCenter = static_cast<float>(PlayerState::playerSize / 2.0);
   void shoot(Vector2 startPosition, Vector2 dir);
+
+  ProjectileManager &projMan;
 };

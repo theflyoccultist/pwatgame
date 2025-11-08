@@ -1,11 +1,15 @@
 #pragma once
 
+#include "../World.hpp"
 #include "Player.hpp"
 #include <raylib.h>
 
 class PlayerManager {
 public:
+  PlayerManager(World &w) : world(w) {}
+
   PlayerState init() {
+    world.pwat.init();
     int pwatTexture = 0;
     Vector2 pwatPosition = {static_cast<float>(screenWidth / 2.0),
                             static_cast<float>(screenHeight / 2.0)};
@@ -14,23 +18,23 @@ public:
   }
 
   void reset(PlayerState &pwatState) {
-    pwat.resetPlayerHealth();
-    pwat.resetPlayerScore();
-    pwat.resetPlayerAmmo();
+    world.pwat.resetPlayerHealth();
+    world.pwat.resetPlayerScore();
+    world.pwat.resetPlayerAmmo();
     pwatState.position = {static_cast<float>(screenWidth / 2.0),
                           static_cast<float>(screenHeight / 2.0)};
   }
 
   void update(PlayerState &pwatState, float deltaTime) {
-    auto state = pwat.playerMovements(pwatState, deltaTime);
+    auto state = world.pwat.playerMovements(pwatState, deltaTime);
     pwatState = state;
 
-    pwat.draw(pwatState.position, pwatState.texture);
-    pwat.playerFootsteps(deltaTime);
+    world.pwat.draw(pwatState.position, pwatState.texture);
+    world.pwat.playerFootsteps(deltaTime);
   }
 
 private:
-  Player pwat;
+  World &world;
   const int screenHeight = GetScreenHeight();
   const int screenWidth = GetScreenWidth();
 };

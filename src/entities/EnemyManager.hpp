@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../projectiles/Projectile.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
 #include "Player.hpp"
@@ -11,6 +10,7 @@
 
 class EnemyManager {
 public:
+  EnemyManager(ProjectileManager &pm) : projMan(pm) {}
   static inline int enemyCount;
   void init();
   void spawnEnemies(EnemyType type, int count);
@@ -24,4 +24,6 @@ private:
   std::vector<std::unique_ptr<Enemy>> enemies;
   EnemyFactory factory;
   void applyPlayerDmg(const PlayerState &player, int damage);
+
+  ProjectileManager &projMan;
 };

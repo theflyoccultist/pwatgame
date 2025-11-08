@@ -1,5 +1,6 @@
 #include "EnemyManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
+#include "../entities/Faction.hpp"
 #include "../sound/AudioSystem.hpp"
 
 void EnemyManager::init() { factory.loadAssets(); }
@@ -54,14 +55,15 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     if (e->type == EnemyType::SWARMER) {
       if (checkPlayerInteraction(player.position, player.playerSize,
                                  e->position, e->size)) {
-        applyPlayerDmg(player, 1);
+        applyPlayerDmg(player, 2);
       }
     }
 
     if (e->type == EnemyType::SNIPER) {
-      e->shootTowardsPlayer({e->position.x + (float)e->size / 2,
+      e->shootTowardsPlayer(projMan,
+                            {e->position.x + (float)e->size / 2,
                              e->position.y + (float)e->size / 2},
-                            player.position, delta);
+                            player.position, delta, 3.f);
     }
 
     if (e->type == EnemyType::GODSIP) {
