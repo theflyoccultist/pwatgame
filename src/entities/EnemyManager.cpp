@@ -16,8 +16,17 @@ void EnemyManager::spawnEnemies(EnemyType type, int count) {
   }
 }
 
+void EnemyManager::applyPlayerDmg(const PlayerState &player, int damage) {
+  if (player.damageCooldown <= 0.0f) {
+    player.health -= damage;
+    player.damageCooldown = 0.10f;
+  }
+}
+
 void EnemyManager::updateAll(float delta, const PlayerState &player,
                              std::span<Projectile *const> bullets) {
+  using namespace Collisions;
+
   if (player.damageCooldown > 0.0f)
     player.damageCooldown -= delta;
 
@@ -26,8 +35,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
 
     for (auto &b : bullets) {
       if (b->faction == Faction::Player &&
-          Collisions::checkBulletInteraction(b->position, b->size, e->position,
-                                             e->size)) {
+          checkBulletInteraction(b->position, b->size, e->position, e->size)) {
         player.score++;
         b->expire();
         if (e->takeBulletIfHit(b->damage)) {
@@ -36,30 +44,31 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       }
 
       if (b->faction == Faction::Enemy &&
-          Collisions::checkBulletInteraction(
-              b->position, b->size, player.position, player.playerSize)) {
-        if (player.damageCooldown <= 0.0f) {
-          player.health -= b->damage;
-          player.damageCooldown = 0.10f;
-        }
+          checkBulletInteraction(b->position, b->size, player.position,
+                                 player.playerSize)) {
+        applyPlayerDmg(player, b->damage);
         b->expire();
       }
     }
 
     if (e->type == EnemyType::SWARMER) {
-      if (Collisions::checkPlayerInteraction(player.position, player.playerSize,
-                                             e->position, e->size)) {
-        if (player.damageCooldown <= 0.0f) {
-          player.health--;
-          player.damageCooldown = 0.10f;
-        }
+      if (checkPlayerInteraction(player.position, player.playerSize,
+                                 e->position, e->size)) {
+        applyPlayerDmg(player, 1);
       }
     }
 
     if (e->type == EnemyType::SNIPER) {
-      e->shootTowardsPlayer(
-          {e->position.x + e->size / 2, e->position.y + e->size / 2},
-          player.position, delta);
+      e->shootTowardsPlayer({e->position.x + (float)e->size / 2,
+                             e->position.y + (float)e->size / 2},
+                            player.position, delta);
+    }
+
+    if (e->type == EnemyType::GODSIP) {
+      if (checkPlayerInteraction(player.position, player.playerSize,
+                                 e->position, e->size)) {
+        applyPlayerDmg(player, 10);
+      }
     }
   }
 

@@ -45,6 +45,10 @@ void Game::run() {
 
       enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
 
+      scheduler.schedule(5.0f, [&enemyManager] {
+        enemyManager.spawnEnemies(EnemyType::GODSIP, 4);
+      });
+
       scheduler.schedule(10.0f, [&enemyManager] {
         enemyManager.spawnEnemies(EnemyType::SWARMER, 5);
       });
@@ -58,6 +62,10 @@ void Game::run() {
 
       scheduler.schedule(50.0f, [&enemyManager] {
         enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
+      });
+
+      scheduler.schedule(55.0f, [&enemyManager] {
+        enemyManager.spawnEnemies(EnemyType::GODSIP, 7);
       });
 
       scheduler.schedule(60.0f,

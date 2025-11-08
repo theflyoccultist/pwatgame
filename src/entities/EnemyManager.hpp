@@ -23,4 +23,5 @@ public:
 private:
   std::vector<std::unique_ptr<Enemy>> enemies;
   EnemyFactory factory;
+  void applyPlayerDmg(const PlayerState &player, int damage);
 };

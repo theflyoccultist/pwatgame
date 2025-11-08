@@ -2,14 +2,15 @@
 
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
+#include "../utils/clampEntities.hpp"
 #include <array>
 #include <raylib.h>
 
-enum class EnemyType { SWARMER, SNIPER, COUNT };
+enum class EnemyType { SWARMER, SNIPER, GODSIP, COUNT };
 
 class Enemy {
 public:
-  Enemy(EnemyType type, Vector2 pos, float spd, int hp, float sz,
+  Enemy(EnemyType type, Vector2 pos, float spd, int hp, int sz,
         const std::array<Texture2D *, 3> &textures)
       : type(type), position(pos), speed(spd), currentHP(hp), totalHP(hp),
         size(sz), textures(textures) {}
@@ -42,7 +43,7 @@ public:
   float speed;
   int currentHP;
   int totalHP;
-  float size;
+  int size;
 
 protected:
   const Texture2D *chooseTexture() const {
