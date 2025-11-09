@@ -1,6 +1,8 @@
 #include "EnemyManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
 #include "../sound/AudioSystem.hpp"
+#include "Enemy.hpp"
+#include <raylib.h>
 
 void EnemyManager::init() { factory.loadAssets(); }
 
@@ -9,10 +11,6 @@ void EnemyManager::spawnEnemies(EnemyType type, int count) {
   for (int i = 0; i < count; ++i) {
     Vector2 pos = {Random::rangeFloat(0, 730.0f),
                    Random::rangeFloat(0, 730.0f)};
-
-    if (type == EnemyType::ZOMB) {
-      pos = {Random::rangeFloat(0, 730.0f), 20};
-    }
 
     auto e = factory.create(type, pos);
 
@@ -59,19 +57,26 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     bool touchPlayer = checkPlayerInteraction(
         player.position, player.playerSize, e->position, e->size);
 
+    Vector2 bulletStartPos = {e->position.x + (float)e->size / 2,
+                              e->position.y + (float)e->size / 2};
+
     if (e->type == EnemyType::SWARMER && touchPlayer) {
       applyPlayerDmg(player, 4);
     }
 
     if (e->type == EnemyType::SNIPER) {
-      e->shootTowardsPlayer(projMan,
-                            {e->position.x + (float)e->size / 2,
-                             e->position.y + (float)e->size / 2},
-                            player.position, delta, 3.f);
+      e->shootTowardsPlayer(projMan, {bulletStartPos, player.position, delta,
+                                      3.f, ProjectileType::LONGRANGE});
     }
 
     if (e->type == EnemyType::GODSIP && touchPlayer) {
       applyPlayerDmg(player, 10);
+    }
+
+    if (e->type == EnemyType::ZOMB) {
+      e->shootInVoid(
+          projMan,
+          {bulletStartPos, {0, 0}, delta, 6.f, ProjectileType::SLOWCANNON});
     }
   }
 

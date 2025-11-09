@@ -3,7 +3,7 @@
 #include "../entities/Faction.hpp"
 #include <raylib.h>
 
-enum class ProjectileType { STRAIGHT, LONGRANGE, COUNT };
+enum class ProjectileType { STRAIGHT, LONGRANGE, SLOWCANNON, COUNT };
 
 class Projectile {
 public:

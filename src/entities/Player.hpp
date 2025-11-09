@@ -26,7 +26,7 @@ public:
   PlayerState playerMovements(PlayerState state, float dt);
   void playerFootsteps(float dt);
 
-  static void changePlayerHealth(int value) { PlayerState::health += value; }
+  static void addHealth(int value) { PlayerState::health += value; }
   static void addAmmo(int ammo) { PlayerState::playerAmmo += ammo; }
 
   static void resetPlayerHealth() { PlayerState::health = 100; }

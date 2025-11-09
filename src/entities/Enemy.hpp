@@ -2,13 +2,26 @@
 
 #include "../projectiles/ProjectileManager.hpp"
 #include "../texture/AssetSystem.hpp"
+#include "../utils/Random.hpp"
 #include "../utils/clampEntities.hpp"
 #include <array>
 #include <raylib.h>
 
 enum class EnemyType { SWARMER, SNIPER, GODSIP, ZOMB, COUNT };
 
+struct ShootParams {
+  Vector2 startPos;
+  Vector2 playerPos;
+  float dt;
+  float cooldown;
+  ProjectileType type;
+};
+
 class Enemy {
+private:
+  float shootTimer = 0.0f;
+  const bool isX = Random::chance(.5f);
+
 public:
   Enemy(EnemyType type, Vector2 pos, float spd, int hp, int sz,
         const std::array<Texture2D *, 3> &textures)
@@ -35,9 +48,8 @@ public:
 
   bool isAlive() const { return currentHP > 0; }
 
-  void shootTowardsPlayer(ProjectileManager &projMan, const Vector2 &startPos,
-                          const Vector2 &playerPos, float dt,
-                          float shootCooldown);
+  void shootTowardsPlayer(ProjectileManager &pm, const ShootParams &p);
+  void shootInVoid(ProjectileManager &pm, const ShootParams &p);
 
   EnemyType type;
   Vector2 position;
@@ -60,5 +72,4 @@ protected:
   }
 
   std::array<Texture2D *, 3> textures;
-  float shootTimer = 0.0f;
 };

@@ -51,8 +51,8 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
           break;
 
         case ItemCategory::Drink:
-          Player::changePlayerHealth(50);
-          FeedbackSystem::instance().addFeedback("+50 HP", playerPos);
+          Player::addHealth(100);
+          FeedbackSystem::instance().addFeedback("+100 HP", playerPos);
           AudioSystem::instance().healthAdded();
           break;
         }

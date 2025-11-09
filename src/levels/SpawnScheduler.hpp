@@ -19,6 +19,10 @@ public:
     scheduler.schedule(15.0f, [&] { world.itemManager.populateItems(2, 5); });
 
     scheduler.schedule(60.0f, [&] { world.itemManager.populateItems(7, 0); });
+
+    scheduler.schedule(70.0f, [&] { world.itemManager.populateItems(1, 8); });
+
+    scheduler.schedule(80.0f, [&] { world.itemManager.populateItems(1, 5); });
   }
 
   void scheduleEnemies() {
@@ -32,15 +36,32 @@ public:
     scheduler.schedule(
         10.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::SWARMER, 5); });
 
+    scheduler.schedule(
+        22.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::ZOMB, 15); });
+
     scheduler.schedule(30.0f, [&] {
-      world.enemyManager.spawnEnemies(EnemyType::SWARMER, 25);
+      world.enemyManager.spawnEnemies(EnemyType::SWARMER, 15);
     });
 
     scheduler.schedule(
         50.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::SNIPER, 10); });
 
+    scheduler.schedule(52.0f, [&] {
+      world.enemyManager.spawnEnemies(EnemyType::SWARMER, 15);
+    });
+
     scheduler.schedule(
         55.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::GODSIP, 7); });
+
+    scheduler.schedule(
+        90.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::ZOMB, 7); });
+
+    scheduler.schedule(
+        105.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::GODSIP, 3); });
+
+    scheduler.schedule(120.0f, [&] {
+      world.enemyManager.spawnEnemies(EnemyType::SWARMER, 7);
+    });
   }
 
   void updateScheduler(float deltaTime) { scheduler.update(deltaTime); }

@@ -8,21 +8,29 @@ bool Enemy::takeBulletIfHit(int dmg) {
   return currentHP <= 0;
 }
 
-void Enemy::shootTowardsPlayer(ProjectileManager &projMan,
-                               const Vector2 &startPos,
-                               const Vector2 &playerPos, float dt,
-                               float shootCooldown) {
-  Vector2 direction = {playerPos.x - startPos.x, playerPos.y - startPos.y};
+void Enemy::shootTowardsPlayer(ProjectileManager &pm, const ShootParams &p) {
+  Vector2 direction = {p.playerPos.x - p.startPos.x,
+                       p.playerPos.y - p.startPos.y};
   float len = std::sqrt(direction.x * direction.x + direction.y * direction.y);
   if (len != 0) {
     direction.x /= len;
     direction.y /= len;
   }
 
-  shootTimer -= dt;
+  shootTimer -= p.dt;
   if (shootTimer <= 0.0f) {
-    projMan.spawn(Faction::Enemy, ProjectileType::LONGRANGE, startPos,
-                  direction);
-    shootTimer = shootCooldown;
+    pm.spawn(Faction::Enemy, p.type, p.startPos, direction);
+    shootTimer = p.cooldown;
+  }
+}
+
+void Enemy::shootInVoid(ProjectileManager &pm, const ShootParams &p) {
+  Vector2 direction = {0, 0};
+  isX ? direction = {-1, 0} : direction = {0, -1};
+
+  shootTimer -= p.dt;
+  if (shootTimer <= 0.0f) {
+    pm.spawn(Faction::Enemy, p.type, p.startPos, direction);
+    shootTimer = p.cooldown;
   }
 }
