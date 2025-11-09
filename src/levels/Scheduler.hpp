@@ -5,6 +5,8 @@
 
 class Scheduler {
 public:
+  void init() { tasks.clear(); }
+
   void schedule(float delay, std::function<void()> action) {
     tasks.push_back({currentTime + delay, std::move(action), false});
   }

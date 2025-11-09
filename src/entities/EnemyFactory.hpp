@@ -4,6 +4,7 @@
 #include "Enemy_Godsip.hpp"
 #include "Enemy_Sniper.hpp"
 #include "Enemy_Swarmer.hpp"
+#include "Enemy_Zomb.hpp"
 #include <array>
 #include <memory>
 
@@ -34,6 +35,12 @@ public:
         &assets.loadTexture("../assets/enemies/godsip_MED.png", 80, 80),
         &assets.loadTexture("../assets/enemies/godsip_LOW.png", 80, 80),
     };
+
+    enemyTextures[EnemyType::ZOMB] = {
+        &assets.loadTexture("../assets/enemies/zomb_HIGH.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/zomb_MED.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/zomb_LOW.png", 70, 70),
+    };
   }
 
   std::unique_ptr<Enemy> create(EnemyType type, Vector2 pos) {
@@ -50,6 +57,8 @@ public:
       return std::make_unique<Sniper>(pos, textures);
     case EnemyType::GODSIP:
       return std::make_unique<Godsip>(pos, textures);
+    case EnemyType::ZOMB:
+      return std::make_unique<Zomb>(pos, textures);
     default:
       return nullptr;
     }

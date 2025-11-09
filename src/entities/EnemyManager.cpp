@@ -1,6 +1,5 @@
 #include "EnemyManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
-#include "../entities/Faction.hpp"
 #include "../sound/AudioSystem.hpp"
 
 void EnemyManager::init() { factory.loadAssets(); }
@@ -11,7 +10,12 @@ void EnemyManager::spawnEnemies(EnemyType type, int count) {
     Vector2 pos = {Random::rangeFloat(0, 730.0f),
                    Random::rangeFloat(0, 730.0f)};
 
+    if (type == EnemyType::ZOMB) {
+      pos = {0, 0};
+    }
+
     auto e = factory.create(type, pos);
+
     if (e)
       enemies.push_back(std::move(e));
   }
@@ -55,7 +59,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     if (e->type == EnemyType::SWARMER) {
       if (checkPlayerInteraction(player.position, player.playerSize,
                                  e->position, e->size)) {
-        applyPlayerDmg(player, 2);
+        applyPlayerDmg(player, 4);
       }
     }
 

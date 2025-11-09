@@ -6,7 +6,7 @@
 #include <array>
 #include <raylib.h>
 
-enum class EnemyType { SWARMER, SNIPER, GODSIP, COUNT };
+enum class EnemyType { SWARMER, SNIPER, GODSIP, ZOMB, COUNT };
 
 class Enemy {
 public:
