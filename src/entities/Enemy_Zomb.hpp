@@ -11,13 +11,24 @@ public:
       : Enemy(EnemyType::ZOMB, pos, 150, Random::rangeInt(40, 70), 70,
               textures) {}
 
-  int dir = 1;
-
-  void update(float delta, Vector2 playerPos) override {
-    position.x += speed * delta * dir;
-    if (position.x >= 730.f)
-      dir = -1;
-    else if (position.x <= 0)
-      dir = 1;
+  void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
+    if (isX) {
+      position.x += speed * delta * dirX;
+      if (position.x >= 730.f)
+        dirX = -1;
+      else if (position.x <= 0)
+        dirX = 1;
+    } else {
+      position.y += speed * delta * dirY;
+      if (position.y >= 730.f)
+        dirY = -1;
+      else if (position.y <= 0)
+        dirY = 1;
+    }
   }
+
+private:
+  int dirX = 1;
+  int dirY = 1;
+  const bool isX = Random::chance(.5f);
 };

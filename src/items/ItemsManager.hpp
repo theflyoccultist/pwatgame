@@ -22,6 +22,7 @@ public:
   void populateItems(int food, int drink);
   void drawItems(ItemCategory cat);
   void updateItems(const Vector2 &playerPos, float playerSize);
+  void clearAll() { itemsByCategory.clear(); }
 
 private:
   Items itemsObj;

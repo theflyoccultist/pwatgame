@@ -11,7 +11,7 @@ void EnemyManager::spawnEnemies(EnemyType type, int count) {
                    Random::rangeFloat(0, 730.0f)};
 
     if (type == EnemyType::ZOMB) {
-      pos = {0, 0};
+      pos = {Random::rangeFloat(0, 730.0f), 20};
     }
 
     auto e = factory.create(type, pos);
@@ -56,11 +56,11 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       }
     }
 
-    if (e->type == EnemyType::SWARMER) {
-      if (checkPlayerInteraction(player.position, player.playerSize,
-                                 e->position, e->size)) {
-        applyPlayerDmg(player, 4);
-      }
+    bool touchPlayer = checkPlayerInteraction(
+        player.position, player.playerSize, e->position, e->size);
+
+    if (e->type == EnemyType::SWARMER && touchPlayer) {
+      applyPlayerDmg(player, 4);
     }
 
     if (e->type == EnemyType::SNIPER) {
@@ -70,11 +70,8 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
                             player.position, delta, 3.f);
     }
 
-    if (e->type == EnemyType::GODSIP) {
-      if (checkPlayerInteraction(player.position, player.playerSize,
-                                 e->position, e->size)) {
-        applyPlayerDmg(player, 10);
-      }
+    if (e->type == EnemyType::GODSIP && touchPlayer) {
+      applyPlayerDmg(player, 10);
     }
   }
 

@@ -34,6 +34,8 @@ void Game::run() {
 
       playerManager.reset(pwatState);
 
+      spawner.resetScheduler();
+      spawner.clearALlItems();
       spawner.clearAllEnemies();
       spawner.clearAllProjectiles();
 

@@ -6,13 +6,11 @@ class SpawnScheduler {
 public:
   SpawnScheduler(World &w) : world(w) {}
 
-  void init() {
-    world.enemyManager.init();
-    scheduler.init();
-  }
+  void init() { world.enemyManager.init(); }
 
+  void resetScheduler() { scheduler.init(); }
   void clearAllEnemies() { world.enemyManager.clearAll(); }
-
+  void clearALlItems() { world.itemManager.clearAll(); }
   void clearAllProjectiles() { world.projectileManager.clearAll(); }
 
   void scheduleItems() {
@@ -26,7 +24,7 @@ public:
   void scheduleEnemies() {
     world.enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
 
-    world.enemyManager.spawnEnemies(EnemyType::ZOMB, 1);
+    world.enemyManager.spawnEnemies(EnemyType::ZOMB, 8);
 
     scheduler.schedule(
         5.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::GODSIP, 4); });
