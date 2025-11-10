@@ -1,6 +1,7 @@
 #include "../World.hpp"
 #include "../levels/Scheduler.hpp"
 #include <raylib.h>
+#include <vector>
 
 class SpawnScheduler {
 public:
@@ -14,54 +15,46 @@ public:
   void clearAllProjectiles() { world.projectileManager.clearAll(); }
 
   void scheduleItems() {
-    world.itemManager.populateItems(10, 10);
+    struct spawnItem {
+      float delay;
+      int food;
+      int drink;
+    };
 
-    scheduler.schedule(15.0f, [&] { world.itemManager.populateItems(2, 5); });
+    const std::vector<spawnItem> itemSpawnData = {
+        {0.f, 2, 5},   {35.2f, 0, 7}, {60.f, 7, 0},
+        {70.1f, 1, 8}, {73.8f, 4, 2}, {85.9f, 1, 5},
+    };
 
-    scheduler.schedule(60.0f, [&] { world.itemManager.populateItems(7, 0); });
-
-    scheduler.schedule(70.0f, [&] { world.itemManager.populateItems(1, 8); });
-
-    scheduler.schedule(80.0f, [&] { world.itemManager.populateItems(1, 5); });
+    for (const auto &spawn : itemSpawnData) {
+      scheduler.schedule(spawn.delay, [f = spawn.food, d = spawn.drink, this] {
+        world.itemManager.populateItems(f, d);
+      });
+    }
   }
 
   void scheduleEnemies() {
-    world.enemyManager.spawnEnemies(EnemyType::SNIPER, 10);
+    struct spawnEnemy {
+      float delay;
+      EnemyType type;
+      int numEnemies;
+    };
 
-    world.enemyManager.spawnEnemies(EnemyType::ZOMB, 8);
+    const std::vector<spawnEnemy> enemySpawnData = {
+        {0.f, EnemyType::SNIPER, 10},   {0.7f, EnemyType::ZOMB, 8},
+        {5.2f, EnemyType::GODSIP, 4},   {10.f, EnemyType::SWARMER, 5},
+        {22.1f, EnemyType::ZOMB, 15},   {30.f, EnemyType::SWARMER, 15},
+        {50.1f, EnemyType::SNIPER, 10}, {52.f, EnemyType::SWARMER, 15},
+        {55.4f, EnemyType::GODSIP, 7},  {90.f, EnemyType::ZOMB, 7},
+        {105.f, EnemyType::GODSIP, 3},  {120.f, EnemyType::SWARMER, 7},
+    };
 
-    scheduler.schedule(
-        5.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::GODSIP, 4); });
-
-    scheduler.schedule(
-        10.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::SWARMER, 5); });
-
-    scheduler.schedule(
-        22.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::ZOMB, 15); });
-
-    scheduler.schedule(30.0f, [&] {
-      world.enemyManager.spawnEnemies(EnemyType::SWARMER, 15);
-    });
-
-    scheduler.schedule(
-        50.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::SNIPER, 10); });
-
-    scheduler.schedule(52.0f, [&] {
-      world.enemyManager.spawnEnemies(EnemyType::SWARMER, 15);
-    });
-
-    scheduler.schedule(
-        55.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::GODSIP, 7); });
-
-    scheduler.schedule(
-        90.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::ZOMB, 7); });
-
-    scheduler.schedule(
-        105.0f, [&] { world.enemyManager.spawnEnemies(EnemyType::GODSIP, 3); });
-
-    scheduler.schedule(120.0f, [&] {
-      world.enemyManager.spawnEnemies(EnemyType::SWARMER, 7);
-    });
+    for (const auto &spawn : enemySpawnData) {
+      scheduler.schedule(spawn.delay,
+                         [type = spawn.type, n = spawn.numEnemies, this] {
+                           world.enemyManager.spawnEnemies(type, n);
+                         });
+    }
   }
 
   void updateScheduler(float deltaTime) { scheduler.update(deltaTime); }

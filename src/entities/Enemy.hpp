@@ -21,6 +21,8 @@ class Enemy {
 private:
   float shootTimer = 0.0f;
   const bool isX = Random::chance(.5f);
+  void shoot(ProjectileManager &pm, const ShootParams &p,
+             const Vector2 &direction);
 
 public:
   Enemy(EnemyType type, Vector2 pos, float spd, int hp, int sz,
