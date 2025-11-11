@@ -40,6 +40,7 @@ void Game::run() {
       spawner.clearAllProjectiles();
 
       spawner.scheduleItems();
+      spawner.schedulePowerUpItems();
       spawner.scheduleEnemies();
 
       Game::currentState = GameState::Playing;
@@ -59,6 +60,9 @@ void Game::run() {
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
 
+      if (pwatState.health <= 0)
+        Game::currentState = GameState::Lost;
+
       break;
     }
 
@@ -68,6 +72,10 @@ void Game::run() {
 
     case GameState::Options:
       UIManager::updateOptionsMenu();
+      break;
+
+    case GameState::Lost:
+      UIManager::updateLostMenu();
       break;
     }
 

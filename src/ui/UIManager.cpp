@@ -85,4 +85,26 @@ void updateOptionsMenu() {
   sfxVol = std::clamp(sfxVol, 0, 100);
 }
 
+void updateLostMenu() {
+  auto lossChoice = UILib::losingScreen();
+  AudioSystem::instance().pauseMusic();
+
+  if (IsKeyPressed(KEY_ENTER)) {
+    switch (lossChoice) {
+    case UILib::LostMenuOpts::Restart:
+      Game::currentState = Game::GameState::Restarting;
+      break;
+
+    case UILib::LostMenuOpts::Menu:
+      Game::currentState = Game::GameState::MainMenu;
+      AudioSystem::instance().stopMusic();
+      AudioSystem::instance().playTitleTrack();
+      break;
+
+    default:
+      break;
+    }
+  }
+}
+
 } // namespace UIManager

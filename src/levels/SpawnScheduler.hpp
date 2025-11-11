@@ -20,18 +20,34 @@ public:
       float delay;
       int food;
       int drink;
-      int weapon;
     };
 
     const std::vector<spawnItem> itemSpawnData = {
-        {0.f, 7, 2, 0},   {35.2f, 0, 7, 0}, {60.f, 7, 0, 1},
-        {70.1f, 1, 8, 0}, {73.8f, 4, 2, 0}, {85.9f, 1, 5, 0},
+        {0.f, 7, 2},   {35.2f, 0, 7}, {60.f, 7, 0},
+        {70.1f, 1, 8}, {73.8f, 4, 2}, {85.9f, 1, 5},
     };
 
     for (const auto &spawn : itemSpawnData) {
-      scheduler.schedule(spawn.delay,
-                         [f = spawn.food, d = spawn.drink, w = spawn.weapon,
-                          this] { world.itemManager.populateItems(f, d, w); });
+      scheduler.schedule(spawn.delay, [f = spawn.food, d = spawn.drink, this] {
+        world.itemManager.populateItems(f, d);
+      });
+    }
+  }
+
+  void schedulePowerUpItems() {
+    struct spawnPowerup {
+      float delay;
+      int weapon;
+    };
+
+    const std::vector<spawnPowerup> powerupSpawnData = {
+        {3.0f, 1},
+    };
+
+    for (const auto &spawn : powerupSpawnData) {
+      scheduler.schedule(spawn.delay, [w = spawn.weapon, this] {
+        world.itemManager.populatePowerUps(w);
+      });
     }
   }
 

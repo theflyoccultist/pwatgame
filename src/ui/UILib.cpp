@@ -5,6 +5,7 @@
 #include <array>
 #include <format>
 #include <raylib.h>
+#include <span>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -54,65 +55,64 @@ void playerHUD() {
   DrawText(TextFormat("Score: %d", PlayerState::score), 20, 110, 20, BLACK);
 };
 
-PauseMenuOpts pauseMenu() {
+template <typename Enum>
+Enum runMenuEnum(const char *title, std::span<std::string const> items,
+                 int &selectedIndex, int x, int y) {
   AssetSystem::instance().drawTexture(uiAssets[2], 0, 0);
-  DrawRectangle(100, 100, 600, 600, YELLOW);
-  DrawText("Game Paused", 150, 140, 20, BLACK);
-
-  static int pauseSelectedIndex = 0;
-
   if (IsKeyPressed(KEY_DOWN))
-    pauseSelectedIndex++;
+    selectedIndex++;
   if (IsKeyPressed(KEY_UP))
-    pauseSelectedIndex--;
+    selectedIndex--;
 
-  pauseSelectedIndex =
-      std::clamp(pauseSelectedIndex, 0, (int)PauseMenuOpts::Count - 1);
+  selectedIndex = std::clamp(selectedIndex, 0, (int)items.size() - 1);
 
-  int posPauseMenu = baseY + pauseSelectedIndex * spacing;
-  DrawRectangle(140, posPauseMenu, 490, 40, GREEN);
+  DrawText(title, x, y, 20, BLACK);
 
-  std::array<const char *, 4> menuItems = {"Resume Game", "Restart Level",
-                                           "Options", "Back to Menu"};
+  for (int i = 0; i < (int)items.size(); i++) {
+    int pos = y + 40 + i * 40;
 
-  int menuPosition = baseY + 10;
-  for (auto text : menuItems) {
-    DrawText(text, 150, menuPosition, 20, BLACK);
-    menuPosition += spacing;
+    if (i == selectedIndex) {
+      DrawRectangle(x - 10, pos - 5, 400, 30, PURPLE);
+    }
+
+    DrawText(items[i].c_str(), x, pos, 20, BLACK);
   }
 
-  return static_cast<PauseMenuOpts>(pauseSelectedIndex);
+  return static_cast<Enum>(selectedIndex);
+}
+
+PauseMenuOpts pauseMenu() {
+  static int index = 0;
+  std::array<std::string, 4> items = {
+      "Resume Game",
+      "Restart Level",
+      "Options",
+      "Back to Menu",
+  };
+
+  return runMenuEnum<PauseMenuOpts>("Game Paused", items, index, 150, 140);
 }
 
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
-  AssetSystem::instance().drawTexture(uiAssets[3], 0, 0);
-  DrawRectangle(100, 100, 600, 600, ORANGE);
-  DrawText("OPTIONS", 150, 140, 20, BLACK);
+  static int index = 0;
 
-  static int optionsSelectedIndex = 0;
-
-  if (IsKeyPressed(KEY_DOWN))
-    optionsSelectedIndex++;
-  if (IsKeyPressed(KEY_UP))
-    optionsSelectedIndex--;
-
-  optionsSelectedIndex =
-      std::clamp(optionsSelectedIndex, 0, (int)OptionMenuOpts::Count - 1);
-  int posOptionsMenu = baseY + optionsSelectedIndex * spacing;
-  DrawRectangle(140, posOptionsMenu, 490, 40, PURPLE);
-
-  std::array<std::string, 2> optionItems = {
+  std::array<std::string, 2> items = {
       std::format("Music : {}%", musicVol),
       std::format("Sound Effects : {}%", sfxVol),
   };
 
-  int menuPosition = baseY + 10;
-  for (auto text : optionItems) {
-    DrawText(text.c_str(), 150, menuPosition, 20, BLACK);
-    menuPosition += spacing;
-  }
+  return runMenuEnum<OptionMenuOpts>("OPTIONS", items, index, 150, 140);
+}
 
-  return static_cast<OptionMenuOpts>(optionsSelectedIndex);
+LostMenuOpts losingScreen() {
+  static int index = 0;
+
+  std::array<std::string, 2> items = {
+      "Restart Level",
+      "Back to Menu",
+  };
+
+  return runMenuEnum<LostMenuOpts>("Game Over!", items, index, 150, 140);
 }
 
 } // namespace UILib

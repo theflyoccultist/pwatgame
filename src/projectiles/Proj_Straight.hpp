@@ -16,7 +16,7 @@ public:
   }
 
 private:
-  static constexpr float sSpeed = 700.0f;
+  static constexpr float sSpeed = 650.0f;
   static constexpr int sSize = 10;
   static constexpr float sLifetime = 2.0f;
   static constexpr int sDamage = 7;

@@ -21,6 +21,7 @@ public:
     world.pwat.resetPlayerHealth();
     world.pwat.resetPlayerScore();
     world.pwat.resetPlayerAmmo();
+    world.pwat.resetDefaultWeapon();
     pwatState.position = {static_cast<float>(screenWidth / 2.0),
                           static_cast<float>(screenHeight / 2.0)};
   }

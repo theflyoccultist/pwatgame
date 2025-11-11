@@ -7,4 +7,5 @@ void updateMainMenu();
 void updatePlayerHUD();
 void updatePauseMenu();
 void updateOptionsMenu();
+void updateLostMenu();
 }; // namespace UIManager

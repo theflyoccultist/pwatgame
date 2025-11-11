@@ -10,7 +10,7 @@ void ItemManager::addItem(ItemCategory cat, int type, Vector2 pos) {
   itemsByCategory[cat].emplace_back(cat, type, pos);
 }
 
-void ItemManager::populateItems(int food, int drink, int weapon) {
+void ItemManager::populateItems(int food, int drink) {
   itemsByCategory.clear();
 
   for (int i = 0; i < food; ++i) {
@@ -23,11 +23,13 @@ void ItemManager::populateItems(int food, int drink, int weapon) {
         ItemCategory::Drink, Random::rangeInt(0, 4),
         {Random::rangeFloat(130.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
   }
+}
 
+void ItemManager::populatePowerUps(int weapon) {
   for (int i = 0; i < weapon; ++i) {
     addItem(
         ItemCategory::Weapon, 0,
-        {Random::rangeFloat(130.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
+        {Random::rangeFloat(0.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
   }
 }
 
