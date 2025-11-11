@@ -12,42 +12,54 @@
 
 namespace UILib {
 
-enum class AssetType { Background, PwatMenu };
+enum class AssetType { Background, PwatMenu, PwatSprite };
 
 std::unordered_map<AssetType, std::vector<std::string>> assetBank;
-std::vector<Texture2D *> uiAssets;
+std::unordered_map<AssetType, std::vector<Texture2D *>> uiAssets;
 
 void loadUIAssets() {
   assetBank[AssetType::Background] = {
-      "../assets/ui/bkg1.png",
-      "../assets/ui/bkg2.png",
-      "../assets/ui/bkg3.png",
-      "../assets/ui/bkg4.png",
+      "../assets/ui/bkg1.png", "../assets/ui/bkg2.png", "../assets/ui/bkg3.png",
+      "../assets/ui/bkg4.png", "../assets/ui/bkg5.png",
   };
 
   assetBank[AssetType::PwatMenu] = {
       "../assets/ui/pwat_menu.png",
+      "../assets/ui/pwat_pause.png",
+      "../assets/ui/pwat_options.png",
+  };
+
+  assetBank[AssetType::PwatSprite] = {
+      "../assets/ui/pwat_lost.png",
+      "../assets/ui/pwat_win.png",
   };
 
   auto &asset = AssetSystem::instance();
 
   for (auto &bkg : assetBank[AssetType::Background]) {
-    uiAssets.push_back(&asset.loadTexture(bkg, 800, 800));
+    uiAssets[AssetType::Background].push_back(
+        &asset.loadTexture(bkg, 800, 800));
   }
 
-  uiAssets.push_back(
-      &asset.loadTexture(assetBank[AssetType::PwatMenu][0], 300, 300));
+  for (auto &mnu : assetBank[AssetType::PwatMenu]) {
+    uiAssets[AssetType::PwatMenu].push_back(&asset.loadTexture(mnu, 300, 300));
+  }
+
+  for (auto &spr : assetBank[AssetType::PwatSprite]) {
+    uiAssets[AssetType::PwatSprite].push_back(&asset.loadSprite(spr));
+  }
 }
 
 void mainMenu() {
-  AssetSystem::instance().drawTexture(uiAssets[0], 0, 0);
-  AssetSystem::instance().drawTexture(uiAssets[4], 225, 400);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][0], 225,
+                                      400);
   DrawText("PwatPwat - The Game", 275, 20, 20, BLACK);
   DrawText("Press Enter To Play", 165, 300, 40, BLACK);
 }
 
 void playerHUD() {
-  AssetSystem::instance().drawTexture(uiAssets[1], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][1], 0, 0);
   DrawText(TextFormat("Enemies remaining: %d", EnemyManager::enemyCount), 20,
            20, 20, BLACK);
   DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
@@ -58,7 +70,6 @@ void playerHUD() {
 template <typename Enum>
 Enum runMenuEnum(const char *title, std::span<std::string const> items,
                  int &selectedIndex, int x, int y) {
-  AssetSystem::instance().drawTexture(uiAssets[2], 0, 0);
   if (IsKeyPressed(KEY_DOWN))
     selectedIndex++;
   if (IsKeyPressed(KEY_UP))
@@ -82,6 +93,7 @@ Enum runMenuEnum(const char *title, std::span<std::string const> items,
 }
 
 PauseMenuOpts pauseMenu() {
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][2], 0, 0);
   static int index = 0;
   std::array<std::string, 4> items = {
       "Resume Game",
@@ -90,10 +102,14 @@ PauseMenuOpts pauseMenu() {
       "Back to Menu",
   };
 
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][1], 225,
+                                      400);
+
   return runMenuEnum<PauseMenuOpts>("Game Paused", items, index, 150, 140);
 }
 
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][3], 0, 0);
   static int index = 0;
 
   std::array<std::string, 2> items = {
@@ -101,10 +117,13 @@ OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
       std::format("Sound Effects : {}%", sfxVol),
   };
 
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][2], 225,
+                                      400);
   return runMenuEnum<OptionMenuOpts>("OPTIONS", items, index, 150, 140);
 }
 
 LostMenuOpts losingScreen() {
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
   static int index = 0;
 
   std::array<std::string, 2> items = {
@@ -112,6 +131,8 @@ LostMenuOpts losingScreen() {
       "Back to Menu",
   };
 
+  AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][0],
+                                     350.0f, 400.0f);
   return runMenuEnum<LostMenuOpts>("Game Over!", items, index, 150, 140);
 }
 

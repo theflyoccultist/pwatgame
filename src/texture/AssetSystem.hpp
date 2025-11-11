@@ -18,6 +18,9 @@ public:
   void drawTexture(const Texture2D *tex, int posX, int posY,
                    Color tint = WHITE);
 
+  Texture2D &loadSprite(const std::string &path);
+  void drawSprite(const Texture2D &sprite, float posX, float posY);
+
   void unloadAll();
 
 private:
@@ -25,4 +28,9 @@ private:
   ~AssetSystem() = default;
 
   std::unordered_map<std::string, Texture2D> textures;
+
+  Rectangle frameRec;
+  int currentFrame = 0;
+  int framesCounter = 0;
+  const int framesSpeed = 16;
 };

@@ -41,7 +41,7 @@ public:
     };
 
     const std::vector<spawnPowerup> powerupSpawnData = {
-        {3.0f, 1},
+        {70.0f, 1},
     };
 
     for (const auto &spawn : powerupSpawnData) {
@@ -70,7 +70,7 @@ public:
       s = {Random::rangeFloat(0.0f, 200.0f),
            static_cast<EnemyType>(
                Random::rangeInt(0, (int)EnemyType::COUNT - 1)),
-           Random::rangeInt(3, 13)};
+           Random::rangeInt(3, 7)};
     }
 
     world.enemyManager.spawnEnemies(EnemyType::SNIPER, Random::rangeInt(3, 8));
