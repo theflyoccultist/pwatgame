@@ -43,7 +43,7 @@ private:
 
   float footstepTimer = 0.0f;
   static constexpr float footstepDelay = 0.44f;
-  float shootCooldown = 0.15f;
+  float shootCooldown;
   float shootTimer = 0.0f;
   const float pwatCenter = static_cast<float>(PlayerState::playerSize / 2.0);
   void shoot(Vector2 startPosition, Vector2 dir);

@@ -24,6 +24,7 @@ public:
 
   void ammoAdded();
   void healthAdded();
+  void newWeapon();
 
   void enemyKilled();
   void changeSfxVolume(int vol);

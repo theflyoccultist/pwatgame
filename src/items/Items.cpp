@@ -17,21 +17,21 @@ Items::Items() {
       "../assets/items/icecoffee.png",
   };
 
-  const std::array<std::string, 1> weapons = {
+  const std::array<std::string, weaponKinds> weapons = {
       "../assets/items/rocket.png",
   };
 
-  for (const auto &path : foods)
+  for (const auto &f : foods)
     allAssets[ItemCategory::Food].push_back(
-        &assets.loadTexture(path, foodSize, foodSize));
+        &assets.loadTexture(f, itemSize, itemSize));
 
-  for (const auto &path : drinks)
+  for (const auto &d : drinks)
     allAssets[ItemCategory::Drink].push_back(
-        &assets.loadTexture(path, foodSize, foodSize));
+        &assets.loadTexture(d, itemSize, itemSize));
 
-  for (const auto &path : weapons)
+  for (const auto &w : weapons)
     allAssets[ItemCategory::Weapon].push_back(
-        &assets.loadTexture(path, 60, 60));
+        &assets.loadTexture(w, itemSize, itemSize));
 }
 
 void Items::draw(ItemCategory category, Vector2 position, size_t index) {

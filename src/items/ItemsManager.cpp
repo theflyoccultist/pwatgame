@@ -26,7 +26,7 @@ void ItemManager::populateItems(int food, int drink, int weapon) {
 
   for (int i = 0; i < weapon; ++i) {
     addItem(
-        ItemCategory::Weapon, Random::rangeInt(0, 4),
+        ItemCategory::Weapon, 0,
         {Random::rangeFloat(130.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
   }
 }
@@ -66,7 +66,7 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
         case ItemCategory::Weapon:
           Player::upgradeAmmo(ProjectileType::ROCKET);
           FeedbackSystem::instance().addFeedback("Weapon Upgraded", playerPos);
-          AudioSystem::instance().healthAdded();
+          AudioSystem::instance().newWeapon();
           break;
         }
       }

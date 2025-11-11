@@ -9,7 +9,7 @@ struct Item {
   ItemCategory category;
   int type;
   Vector2 position;
-  Vector2 size = {55, 55};
+  Vector2 size = {50, 50};
   bool active = true;
 
   Item(ItemCategory c, int t, Vector2 pos)

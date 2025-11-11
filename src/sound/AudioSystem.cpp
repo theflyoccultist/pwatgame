@@ -50,6 +50,7 @@ void AudioSystem::rocketGun() { (*fxBank[SoundType::combatSFX])[2].play(); }
 
 void AudioSystem::ammoAdded() { (*fxBank[SoundType::bonusPickup])[0].play(); }
 void AudioSystem::healthAdded() { (*fxBank[SoundType::bonusPickup])[1].play(); }
+void AudioSystem::newWeapon() { (*fxBank[SoundType::bonusPickup])[2].play(); }
 
 void AudioSystem::changeSfxVolume(int vol) {
   float volume = static_cast<float>(vol) / 100;
