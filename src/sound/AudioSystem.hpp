@@ -20,7 +20,7 @@ public:
 
   void playRandSteps();
   void defaultGun();
-  void longrangeGun();
+  void rocketGun();
 
   void ammoAdded();
   void healthAdded();

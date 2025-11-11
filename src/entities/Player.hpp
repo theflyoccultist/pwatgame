@@ -9,6 +9,7 @@ struct PlayerState {
   int texture;
   Vector2 position;
   Vector2 direction;
+  static inline ProjectileType currWeapon;
   static inline int health;
   static inline float damageCooldown = 0.0f;
   static inline float playerSpeed = 600.0f;
@@ -28,6 +29,9 @@ public:
 
   static void addHealth(int value) { PlayerState::health += value; }
   static void addAmmo(int ammo) { PlayerState::playerAmmo += ammo; }
+  static void upgradeAmmo(ProjectileType newWeapon) {
+    PlayerState::currWeapon = newWeapon;
+  }
 
   static void resetPlayerHealth() { PlayerState::health = 100; }
   static void resetPlayerScore() { PlayerState::score = 0; }

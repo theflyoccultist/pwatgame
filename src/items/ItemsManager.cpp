@@ -10,7 +10,7 @@ void ItemManager::addItem(ItemCategory cat, int type, Vector2 pos) {
   itemsByCategory[cat].emplace_back(cat, type, pos);
 }
 
-void ItemManager::populateItems(int food, int drink) {
+void ItemManager::populateItems(int food, int drink, int weapon) {
   itemsByCategory.clear();
 
   for (int i = 0; i < food; ++i) {
@@ -23,7 +23,14 @@ void ItemManager::populateItems(int food, int drink) {
         ItemCategory::Drink, Random::rangeInt(0, 4),
         {Random::rangeFloat(130.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
   }
+
+  for (int i = 0; i < weapon; ++i) {
+    addItem(
+        ItemCategory::Weapon, Random::rangeInt(0, 4),
+        {Random::rangeFloat(130.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
+  }
 }
+
 void ItemManager::drawItems(ItemCategory cat) {
   auto it = itemsByCategory.find(cat);
   if (it == itemsByCategory.end())
@@ -53,6 +60,12 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
         case ItemCategory::Drink:
           Player::addHealth(100);
           FeedbackSystem::instance().addFeedback("+100 HP", playerPos);
+          AudioSystem::instance().healthAdded();
+          break;
+
+        case ItemCategory::Weapon:
+          Player::upgradeAmmo(ProjectileType::ROCKET);
+          FeedbackSystem::instance().addFeedback("Weapon Upgraded", playerPos);
           AudioSystem::instance().healthAdded();
           break;
         }

@@ -10,12 +10,6 @@ public:
                    {dir.x * sSpeed, dir.y * sSpeed}, sSize, sLifetime,
                    sDamage) {}
 
-  void update(float dt) override {
-    position.x += velocity.x * dt;
-    position.y += velocity.y * dt;
-    lifetime -= dt;
-  };
-
   void draw() const override {
     DrawCircleV(position, size, BLUE);
     DrawCircleV(position, 4, RED);

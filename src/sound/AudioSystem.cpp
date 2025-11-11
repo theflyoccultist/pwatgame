@@ -19,13 +19,14 @@ AudioSystem::AudioSystem() {
       std::initializer_list<SoundEffect>{
           SoundEffect("../assets/sfx/8bit_explosion.wav"),
           SoundEffect("../assets/sfx/8bit_shoot.wav"),
-          SoundEffect("../assets/sfx/longrange.wav"),
+          SoundEffect("../assets/sfx/8bit_rocket.wav"),
       });
 
   fxBank[SoundType::bonusPickup] = std::make_unique<std::vector<SoundEffect>>(
       std::initializer_list<SoundEffect>{
           SoundEffect("../assets/sfx/add_ammo.wav"),
           SoundEffect("../assets/sfx/add_health.wav"),
+          SoundEffect("../assets/sfx/upgrade_weapon.wav"),
       });
 
   gameScores =
@@ -45,7 +46,7 @@ void AudioSystem::playRandSteps() {
 
 void AudioSystem::enemyKilled() { (*fxBank[SoundType::combatSFX])[0].play(); }
 void AudioSystem::defaultGun() { (*fxBank[SoundType::combatSFX])[1].play(); }
-void AudioSystem::longrangeGun() { (*fxBank[SoundType::combatSFX])[2].play(); }
+void AudioSystem::rocketGun() { (*fxBank[SoundType::combatSFX])[2].play(); }
 
 void AudioSystem::ammoAdded() { (*fxBank[SoundType::bonusPickup])[0].play(); }
 void AudioSystem::healthAdded() { (*fxBank[SoundType::bonusPickup])[1].play(); }

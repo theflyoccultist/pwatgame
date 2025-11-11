@@ -25,6 +25,7 @@ void Player::init() {
 
   shootTimer = 0.0f;
   PlayerState::playerAmmo = 500;
+  PlayerState::currWeapon = ProjectileType::STRAIGHT;
 }
 
 void Player::shoot(Vector2 startPosition, Vector2 dir) {

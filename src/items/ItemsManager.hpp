@@ -19,7 +19,7 @@ struct Item {
 class ItemManager {
 public:
   void addItem(ItemCategory cat, int type, Vector2 pos);
-  void populateItems(int food, int drink);
+  void populateItems(int food, int drink, int weapon);
   void drawItems(ItemCategory cat);
   void updateItems(const Vector2 &playerPos, float playerSize);
   void clearAll() { itemsByCategory.clear(); }

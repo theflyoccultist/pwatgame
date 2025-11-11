@@ -3,7 +3,7 @@
 #include "../entities/Faction.hpp"
 #include <raylib.h>
 
-enum class ProjectileType { STRAIGHT, LONGRANGE, SLOWCANNON, COUNT };
+enum class ProjectileType { STRAIGHT, LONGRANGE, SLOWCANNON, ROCKET, COUNT };
 
 class Projectile {
 public:
@@ -13,7 +13,13 @@ public:
         velocity(vel), size(s), lifetime(l), damage(d) {}
 
   virtual ~Projectile() = default;
-  virtual void update(float dt) = 0;
+
+  virtual void update(float dt) {
+    position.x += velocity.x * dt;
+    position.y += velocity.y * dt;
+    lifetime -= dt;
+  };
+
   virtual void draw() const = 0;
 
   void expire() { lifetime = 0.0f; }
