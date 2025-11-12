@@ -70,7 +70,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     }
 
     if (e->type == EnemyType::GODSIP && touchPlayer) {
-      applyPlayerDmg(player, 10);
+      applyPlayerDmg(player, 6);
     }
 
     if (e->type == EnemyType::ZOMB) {

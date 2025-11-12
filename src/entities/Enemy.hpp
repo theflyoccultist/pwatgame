@@ -7,7 +7,7 @@
 #include <array>
 #include <raylib.h>
 
-enum class EnemyType { SWARMER, SNIPER, GODSIP, ZOMB, COUNT };
+enum class EnemyType { SWARMER, SNIPER, ZOMB, GODSIP };
 
 struct ShootParams {
   Vector2 startPos;

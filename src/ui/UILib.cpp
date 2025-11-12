@@ -126,6 +126,9 @@ LostMenuOpts losingScreen() {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
   static int index = 0;
 
+  DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
+           PURPLE);
+
   std::array<std::string, 2> items = {
       "Restart Level",
       "Back to Menu",
