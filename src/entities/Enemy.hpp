@@ -7,7 +7,7 @@
 #include <array>
 #include <raylib.h>
 
-enum class EnemyType { SWARMER, SNIPER, ZOMB, GODSIP };
+enum class EnemyType { SWARMER, SNIPER, ZOMB, GODSIP, GOST };
 
 struct ShootParams {
   Vector2 startPos;
@@ -36,14 +36,18 @@ public:
   virtual void draw() const {
     if (!isAlive())
       return;
-    const Texture2D *tex = chooseTexture();
+
+    float ratio = static_cast<float>(currentHP) / static_cast<float>(totalHP);
+    const Texture2D *tex = chooseTexture(ratio);
 
     if (tex) {
       AssetSystem::instance().drawTexture(const_cast<Texture2D *>(tex),
                                           position.x, position.y);
     }
-    DrawText(TextFormat("%d / %d", currentHP, totalHP), position.x + 20,
-             position.y - 20, 10, BLACK);
+
+    DrawRectangle(position.x + 5, position.y - 15, 50 * ratio, 10,
+                  healthbarColor(ratio));
+    DrawRectangleLines(position.x + 5, position.y - 15, 50, 10, BLACK);
   }
 
   bool takeBulletIfHit(int dmg);
@@ -61,16 +65,23 @@ public:
   int size;
 
 protected:
-  const Texture2D *chooseTexture() const {
+  const Texture2D *chooseTexture(float ratio) const {
     if (textures[0] == nullptr)
       return nullptr;
-
-    float ratio = static_cast<float>(currentHP) / static_cast<float>(totalHP);
     if (ratio > 0.66f)
       return textures[0];
     if (ratio > 0.33f)
       return textures[1];
     return textures[2];
+  }
+
+  const Color healthbarColor(float ratio) const {
+    Color health = GREEN;
+    if (ratio < 0.66)
+      health = YELLOW;
+    if (ratio <= 0.33)
+      health = RED;
+    return health;
   }
 
   std::array<Texture2D *, 3> textures;
