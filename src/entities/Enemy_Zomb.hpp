@@ -8,7 +8,7 @@
 class Zomb : public Enemy {
 public:
   Zomb(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::ZOMB, pos, 150, Random::rangeInt(40, 70), 70,
+      : Enemy(EnemyType::ZOMB, pos, {150, Random::rangeInt(40, 70), 70},
               textures) {}
 
   void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
@@ -28,7 +28,7 @@ public:
   }
 
 private:
-  int dirX = 1;
-  int dirY = 1;
+  float dirX = 1;
+  float dirY = 1;
   const bool isX = Random::chance(.5f);
 };

@@ -44,8 +44,8 @@ void Player::shoot(Vector2 startPosition, Vector2 dir) {
 }
 
 void Player::draw(Vector2 position, int direction) {
-  AssetSystem::instance().drawTexture(pwatAssets[direction], position.x,
-                                      position.y);
+  AssetSystem::instance().drawTexture(pwatAssets[direction], (int)position.x,
+                                      (int)position.y);
 }
 
 PlayerState Player::playerMovements(PlayerState state, float dt) {

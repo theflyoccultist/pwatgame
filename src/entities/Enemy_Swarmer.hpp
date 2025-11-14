@@ -8,8 +8,9 @@
 class Swarmer : public Enemy {
 public:
   Swarmer(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::SWARMER, pos, Random::rangeFloat(60, 120),
-              Random::rangeInt(28, 60), 70, textures) {}
+      : Enemy(EnemyType::SWARMER, pos,
+              {Random::rangeFloat(60, 120), Random::rangeInt(28, 60), 70},
+              textures) {}
 
   void update(float delta, Vector2 playerPos) override {
     Vector2 dir = {playerPos.x - position.x, playerPos.y - position.y};

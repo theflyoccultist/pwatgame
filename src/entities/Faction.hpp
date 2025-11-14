@@ -1,3 +1,4 @@
 #pragma once
+#include <cstdint>
 
-enum class Faction { Player, Enemy };
+enum class Faction : uint8_t { Player, Enemy };

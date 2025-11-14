@@ -21,7 +21,8 @@ public:
   void updateScheduler(float deltaTime);
 
   void updateItems(const PlayerState &pwatState) {
-    world.itemManager.updateItems(pwatState.position, pwatState.playerSize);
+    world.itemManager.updateItems(pwatState.position,
+                                  (float)pwatState.playerSize);
     world.itemManager.drawItems(ItemCategory::Food);
     world.itemManager.drawItems(ItemCategory::Drink);
     world.itemManager.drawItems(ItemCategory::Weapon);

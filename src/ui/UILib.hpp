@@ -1,10 +1,19 @@
 #pragma once
 
+#include <cstdint>
 namespace UILib {
 
-enum class LostMenuOpts { Restart, Menu, Count };
-enum class PauseMenuOpts { Resume, Restart, Options, BackToMenu, Count };
-enum class OptionMenuOpts { MusicVol, SfxVol, Count };
+enum class LostMenuOpts : uint8_t { Restart, Menu, Count };
+
+enum class PauseMenuOpts : uint8_t {
+  Resume,
+  Restart,
+  Options,
+  BackToMenu,
+  Count
+};
+
+enum class OptionMenuOpts : uint8_t { MusicVol, SfxVol, Count };
 
 void loadUIAssets();
 

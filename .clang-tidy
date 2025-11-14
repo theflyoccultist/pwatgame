@@ -1,0 +1,1 @@
+Checks: '-*,bugprone-*,performance-*,-bugprone-unused-return-value'

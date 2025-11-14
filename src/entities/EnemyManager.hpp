@@ -11,7 +11,7 @@
 class EnemyManager {
 public:
   EnemyManager(ProjectileManager &pm) : projMan(pm) {}
-  static inline int enemyCount;
+  static inline u_int enemyCount;
   void init();
   void spawnEnemies(EnemyType type, int count);
   void updateAll(float delta, const PlayerState &player,

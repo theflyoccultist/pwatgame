@@ -6,9 +6,14 @@
 class SlowCannon : public Projectile {
 public:
   SlowCannon(Faction f, Vector2 startPos, Vector2 dir)
-      : Projectile(f, ProjectileType::SLOWCANNON, startPos, dir, cSpeed,
-                   {dir.x * cSpeed, dir.y * cSpeed}, cSize, cLifetime,
-                   cDamage) {}
+      : Projectile(f, ProjectileType::SLOWCANNON,
+                   {startPos,
+                    dir,
+                    cSpeed,
+                    {dir.x * cSpeed, dir.y * cSpeed},
+                    cSize,
+                    cLifetime,
+                    cDamage}) {}
 
   void draw() const override {
     DrawCircleV(position, size, PURPLE);

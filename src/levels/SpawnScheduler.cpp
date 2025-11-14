@@ -66,10 +66,10 @@ void SpawnScheduler::scheduleEnemies() {
     int minRangeI = static_cast<int>(minRangeI_f);
     int maxRangeI = static_cast<int>(maxRangeI_f);
 
-    enemySpawnData[i] = {
-        Random::rangeFloat(minRangeF, maxRangeF),
-        static_cast<EnemyType>(Random::rangeInt(0, level1Enemies.size() - 1)),
-        Random::rangeInt(minRangeI, maxRangeI)};
+    enemySpawnData[i] = {Random::rangeFloat(minRangeF, maxRangeF),
+                         static_cast<EnemyType>(Random::rangeInt(
+                             0, (int)level1Enemies.size() - 1)),
+                         Random::rangeInt(minRangeI, maxRangeI)};
   }
 
   for (const auto &spawn : enemySpawnData) {
@@ -86,8 +86,8 @@ void SpawnScheduler::scheduleEnemies() {
 void SpawnScheduler::updateScheduler(float deltaTime) {
   scheduler.update(deltaTime);
   if (world.enemyManager.enemyCount <= 2) {
-    world.enemyManager.spawnEnemies(
-        static_cast<EnemyType>(Random::rangeInt(0, level1Enemies.size() - 1)),
-        Random::rangeInt(3, 7));
+    world.enemyManager.spawnEnemies(static_cast<EnemyType>(Random::rangeInt(
+                                        0, (int)level1Enemies.size() - 1)),
+                                    Random::rangeInt(3, 7));
   }
 }

@@ -8,8 +8,9 @@
 class Godsip : public Enemy {
 public:
   Godsip(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::GODSIP, pos, Random::rangeFloat(50, 51),
-              Random::rangeInt(50, 70), 80, textures) {}
+      : Enemy(EnemyType::GODSIP, pos,
+              {Random::rangeFloat(50, 51), Random::rangeInt(50, 70), 80},
+              textures) {}
 
   void update(float delta, Vector2 playerPos) override {
     dashTimer += delta;

@@ -38,7 +38,8 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
 
     for (auto &b : bullets) {
       if (b->faction == Faction::Player &&
-          checkBulletInteraction(b->position, b->size, e->position, e->size)) {
+          checkBulletInteraction(b->position, (float)b->size, e->position,
+                                 (float)e->size)) {
         player.score++;
         b->expire();
         if (e->takeBulletIfHit(b->damage)) {
@@ -47,15 +48,15 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       }
 
       if (b->faction == Faction::Enemy &&
-          checkBulletInteraction(b->position, b->size, player.position,
-                                 player.playerSize)) {
+          checkBulletInteraction(b->position, (float)b->size, player.position,
+                                 (float)player.playerSize)) {
         applyPlayerDmg(player, b->damage);
         b->expire();
       }
     }
 
     bool touchPlayer = checkPlayerInteraction(
-        player.position, player.playerSize, e->position, e->size);
+        player.position, (float)player.playerSize, e->position, (float)e->size);
 
     Vector2 bulletStartPos = {e->position.x + (float)e->size / 2,
                               e->position.y + (float)e->size / 2};

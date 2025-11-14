@@ -35,27 +35,28 @@ Texture2D &AssetSystem::loadSprite(const std::string &path) {
   if (!IsImageValid(tempImg))
     throw std::runtime_error("Failed to load sprite: " + path);
 
-  ImageResize(&tempImg, tempImg.width * 1.5, tempImg.height * 1.5);
+  ImageResize(&tempImg, (int)tempImg.width, (int)tempImg.height);
   Texture2D sprite = LoadTextureFromImage(tempImg);
 
   UnloadImage(tempImg);
-  frameRec = {0.0f, 0.0f, (float)sprite.width / 14, (float)sprite.height};
 
   auto [inserted, _] = textures.emplace(path, sprite);
   return inserted->second;
 }
 
-void AssetSystem::drawSprite(const Texture2D &sprite, float posX, float posY) {
+void AssetSystem::drawSprite(const Texture2D &sprite, Vector2 position,
+                             int frames) {
   framesCounter++;
 
   if (framesCounter >= (60 / framesSpeed)) {
     framesCounter = 0;
     currentFrame++;
 
-    frameRec.x = (float)currentFrame * (float)sprite.width / 14;
+    frameRec = {(float)currentFrame * (float)sprite.width / (float)frames, 0.0f,
+                (float)sprite.width / (float)frames, (float)sprite.height};
   }
 
-  DrawTextureRec(sprite, frameRec, {posX, posY}, WHITE);
+  DrawTextureRec(sprite, frameRec, position, WHITE);
 }
 
 void AssetSystem::unloadAll() {

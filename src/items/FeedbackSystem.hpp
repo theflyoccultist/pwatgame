@@ -37,7 +37,7 @@ public:
 
   void draw() const {
     for (auto &fb : feedbacks) {
-      DrawText(fb.text.c_str(), fb.position.x, fb.position.y, 16,
+      DrawText(fb.text.c_str(), (int)fb.position.x, (int)fb.position.y, 16,
                Fade(BLUE, fb.alpha / 255.0f));
     }
   }

@@ -19,7 +19,7 @@ public:
                    Color tint = WHITE);
 
   Texture2D &loadSprite(const std::string &path);
-  void drawSprite(const Texture2D &sprite, float posX, float posY);
+  void drawSprite(const Texture2D &sprite, Vector2 position, int frames);
 
   void unloadAll();
 

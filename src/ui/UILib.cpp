@@ -3,6 +3,7 @@
 #include "../texture/AssetSystem.hpp"
 #include <algorithm>
 #include <array>
+#include <cstdint>
 #include <format>
 #include <raylib.h>
 #include <span>
@@ -12,7 +13,7 @@
 
 namespace UILib {
 
-enum class AssetType { Background, PwatMenu, PwatSprite };
+enum class AssetType : uint8_t { Background, PwatMenu, PwatSprite };
 
 std::unordered_map<AssetType, std::vector<std::string>> assetBank;
 std::unordered_map<AssetType, std::vector<Texture2D *>> uiAssets;
@@ -135,7 +136,7 @@ LostMenuOpts losingScreen() {
   };
 
   AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][0],
-                                     350.0f, 400.0f);
+                                     {350.0f, 400.0f}, 14);
   return runMenuEnum<LostMenuOpts>("Game Over!", items, index, 150, 140);
 }
 

@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <vector>
 
-enum class ItemCategory { Food, Drink, Weapon };
+enum class ItemCategory : uint8_t { Food, Drink, Weapon };
 
 class Items {
 public:

@@ -5,9 +5,10 @@
 #include "../utils/Random.hpp"
 #include "../utils/clampEntities.hpp"
 #include <array>
+#include <cstdint>
 #include <raylib.h>
 
-enum class EnemyType { SWARMER, SNIPER, ZOMB, GODSIP, GOST };
+enum class EnemyType : uint8_t { SWARMER, SNIPER, ZOMB, GODSIP, GOST };
 
 struct ShootParams {
   Vector2 startPos;
@@ -24,11 +25,18 @@ private:
   void shoot(ProjectileManager &pm, const ShootParams &p,
              const Vector2 &direction);
 
+protected:
+  struct EnemyStats {
+    float speed;
+    int hp;
+    int size;
+  };
+
 public:
-  Enemy(EnemyType type, Vector2 pos, float spd, int hp, int sz,
+  Enemy(EnemyType type, Vector2 pos, EnemyStats stats,
         const std::array<Texture2D *, 3> &textures)
-      : type(type), position(pos), speed(spd), currentHP(hp), totalHP(hp),
-        size(sz), textures(textures) {}
+      : type(type), position(pos), speed(stats.speed), currentHP(stats.hp),
+        totalHP(stats.hp), size(stats.size), textures(textures) {}
 
   virtual ~Enemy() = default;
   virtual void update(float delta, Vector2 playerPos) = 0;
@@ -42,20 +50,14 @@ public:
 
     if (tex) {
       AssetSystem::instance().drawTexture(const_cast<Texture2D *>(tex),
-                                          position.x, position.y);
+                                          (int)position.x, (int)position.y);
     }
 
-    DrawRectangle(position.x + 5, position.y - 15, 50 * ratio, 10,
-                  healthbarColor(ratio));
-    DrawRectangleLines(position.x + 5, position.y - 15, 50, 10, BLACK);
+    DrawRectangle((int)position.x + 5, (int)position.y - 15, (int)(50 * ratio),
+                  10, healthbarColor(ratio));
+    DrawRectangleLines((int)position.x + 5, (int)position.y - 15, 50, 10,
+                       BLACK);
   }
-
-  bool takeBulletIfHit(int dmg);
-
-  bool isAlive() const { return currentHP > 0; }
-
-  void shootTowardsPlayer(ProjectileManager &pm, const ShootParams &p);
-  void shootInVoid(ProjectileManager &pm, const ShootParams &p);
 
   EnemyType type;
   Vector2 position;
@@ -63,6 +65,13 @@ public:
   int currentHP;
   int totalHP;
   int size;
+
+  bool takeBulletIfHit(int dmg);
+
+  bool isAlive() const { return currentHP > 0; }
+
+  void shootTowardsPlayer(ProjectileManager &pm, const ShootParams &p);
+  void shootInVoid(ProjectileManager &pm, const ShootParams &p);
 
 protected:
   const Texture2D *chooseTexture(float ratio) const {

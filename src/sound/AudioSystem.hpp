@@ -2,11 +2,12 @@
 #include "GameScore.hpp"
 #include "SoundEffect.hpp"
 #include <array>
+#include <cstdint>
 #include <memory>
 #include <unordered_map>
 #include <vector>
 
-enum class SoundType { pwatSteps, combatSFX, bonusPickup };
+enum class SoundType : uint8_t { pwatSteps, combatSFX, bonusPickup };
 
 class AudioSystem {
 public:

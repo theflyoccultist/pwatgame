@@ -1,16 +1,34 @@
 #pragma once
 
 #include "../entities/Faction.hpp"
+#include <cstdint>
 #include <raylib.h>
 
-enum class ProjectileType { STRAIGHT, LONGRANGE, SLOWCANNON, ROCKET, COUNT };
+enum class ProjectileType : uint8_t {
+  STRAIGHT,
+  LONGRANGE,
+  SLOWCANNON,
+  ROCKET,
+  COUNT
+};
 
 class Projectile {
+protected:
+  struct ProjectileStats {
+    Vector2 startPos;
+    Vector2 dir;
+    float speed;
+    Vector2 vel;
+    float size;
+    float lifetime;
+    int damage;
+  };
+
 public:
-  Projectile(Faction f, ProjectileType type, Vector2 startPos, Vector2 dir,
-             float spd, Vector2 vel, int s, float l, int d)
-      : faction(f), type(type), position(startPos), direction(dir), speed(spd),
-        velocity(vel), size(s), lifetime(l), damage(d) {}
+  Projectile(Faction f, ProjectileType type, ProjectileStats stats)
+      : faction(f), type(type), position(stats.startPos), direction(stats.dir),
+        speed(stats.speed), velocity(stats.vel), size(stats.size),
+        lifetime(stats.lifetime), damage(stats.damage) {}
 
   virtual ~Projectile() = default;
 
@@ -30,7 +48,7 @@ public:
   Vector2 direction;
   float speed;
   Vector2 velocity;
-  int size;
+  float size;
   float lifetime;
   int damage;
 };

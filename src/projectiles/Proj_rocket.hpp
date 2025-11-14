@@ -6,9 +6,14 @@
 class Rocket : public Projectile {
 public:
   Rocket(Faction f, Vector2 startPos, Vector2 dir)
-      : Projectile(f, ProjectileType::STRAIGHT, startPos, dir, rSpeed,
-                   {dir.x * rSpeed, dir.y * rSpeed}, rSize, rLifetime,
-                   rDamage) {}
+      : Projectile(f, ProjectileType::STRAIGHT,
+                   {startPos,
+                    dir,
+                    rSpeed,
+                    {dir.x * rSpeed, dir.y * rSpeed},
+                    rSize,
+                    rLifetime,
+                    rDamage}) {}
 
   void update(float dt) override {
     position.x += velocity.x * dt;

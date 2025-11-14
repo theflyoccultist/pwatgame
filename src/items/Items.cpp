@@ -39,5 +39,6 @@ void Items::draw(ItemCategory category, Vector2 position, size_t index) {
   if (index >= vec.size())
     return;
 
-  AssetSystem::instance().drawTexture(vec[index], position.x, position.y);
+  AssetSystem::instance().drawTexture(vec[index], (int)position.x,
+                                      (int)position.y);
 }
