@@ -10,7 +10,7 @@ class Sniper : public Enemy {
 public:
   Sniper(Vector2 pos, std::array<Texture2D *, 3> textures)
       : Enemy(EnemyType::SNIPER, pos,
-              {Random::rangeFloat(10, 20), Random::rangeInt(40, 70), 60},
+              {Random::rangeFloat(10, 20), Random::rangeInt(40, 70)},
               textures) {}
 
   void update(float delta, Vector2 playerPos) override {
@@ -19,7 +19,7 @@ public:
 
     if (dist < 300) {
       Vector2 dir = {position.x - playerPos.x, position.y - playerPos.y};
-      float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+      float len = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
 
       if (len > 0.0001f) {
         dir.x /= len;

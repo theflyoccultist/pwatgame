@@ -8,29 +8,29 @@
 #include <cstdint>
 #include <raylib.h>
 
-enum class EnemyType : uint8_t { SWARMER, SNIPER, ZOMB, GODSIP, GOST };
-
-struct ShootParams {
-  Vector2 startPos;
-  Vector2 playerPos;
-  float dt;
-  float cooldown;
-  ProjectileType type;
-};
+enum class EnemyType : uint8_t { SWARMER, SNIPER, ZOMB, GODSIP, GOST, COUNT };
 
 class Enemy {
+protected:
+  struct EnemyStats {
+    float speed;
+    int hp;
+    int size = 70;
+  };
+
+  struct ShootParams {
+    Vector2 startPos;
+    Vector2 playerPos;
+    float dt;
+    float cooldown;
+    ProjectileType type;
+  };
+
 private:
   float shootTimer = 0.0f;
   const bool isX = Random::chance(.5f);
   void shoot(ProjectileManager &pm, const ShootParams &p,
              const Vector2 &direction);
-
-protected:
-  struct EnemyStats {
-    float speed;
-    int hp;
-    int size;
-  };
 
 public:
   Enemy(EnemyType type, Vector2 pos, EnemyStats stats,
@@ -85,12 +85,11 @@ protected:
   }
 
   const Color healthbarColor(float ratio) const {
-    Color health = GREEN;
-    if (ratio < 0.66)
-      health = YELLOW;
-    if (ratio <= 0.33)
-      health = RED;
-    return health;
+    if (ratio > 0.66f)
+      return GREEN;
+    if (ratio > 0.33f)
+      return YELLOW;
+    return RED;
   }
 
   std::array<Texture2D *, 3> textures;

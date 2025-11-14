@@ -17,7 +17,6 @@ protected:
   struct ProjectileStats {
     Vector2 startPos;
     Vector2 dir;
-    float speed;
     Vector2 vel;
     float size;
     float lifetime;
@@ -27,8 +26,8 @@ protected:
 public:
   Projectile(Faction f, ProjectileType type, ProjectileStats stats)
       : faction(f), type(type), position(stats.startPos), direction(stats.dir),
-        speed(stats.speed), velocity(stats.vel), size(stats.size),
-        lifetime(stats.lifetime), damage(stats.damage) {}
+        velocity(stats.vel), size(stats.size), lifetime(stats.lifetime),
+        damage(stats.damage) {}
 
   virtual ~Projectile() = default;
 

@@ -6,29 +6,12 @@
 class Rocket : public Projectile {
 public:
   Rocket(Faction f, Vector2 startPos, Vector2 dir)
-      : Projectile(f, ProjectileType::STRAIGHT,
-                   {startPos,
-                    dir,
-                    rSpeed,
-                    {dir.x * rSpeed, dir.y * rSpeed},
-                    rSize,
-                    rLifetime,
-                    rDamage}) {}
-
-  void update(float dt) override {
-    position.x += velocity.x * dt;
-    position.y += velocity.y * dt;
-    lifetime -= dt;
-  };
+      : Projectile(
+            f, ProjectileType::STRAIGHT,
+            {startPos, dir, {dir.x * 800.0f, dir.y * 800.0f}, 45, 5.0f, 55}) {}
 
   void draw() const override {
     DrawCircleV(position, size, RED);
     DrawCircleV(position, 15, BLACK);
   }
-
-private:
-  static constexpr float rSpeed = 800.0f;
-  static constexpr int rSize = 50;
-  static constexpr float rLifetime = 5.0f;
-  static constexpr int rDamage = 65;
 };

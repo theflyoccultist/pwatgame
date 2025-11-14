@@ -40,10 +40,8 @@ void SpawnScheduler::schedulePowerUpItems() {
 }
 
 const std::unordered_set<EnemyType> SpawnScheduler::level1Enemies = {
-    EnemyType::SWARMER,
-    EnemyType::SNIPER,
-    EnemyType::ZOMB,
-    EnemyType::GODSIP,
+    EnemyType::SWARMER, EnemyType::SNIPER, EnemyType::ZOMB,
+    EnemyType::GODSIP,  EnemyType::GOST,
 };
 
 void SpawnScheduler::scheduleEnemies() {
@@ -81,6 +79,16 @@ void SpawnScheduler::scheduleEnemies() {
 
   world.enemyManager.spawnEnemies(EnemyType::SNIPER, Random::rangeInt(3, 8));
   world.enemyManager.spawnEnemies(EnemyType::ZOMB, Random::rangeInt(3, 8));
+
+  for (int i = 0; i < 6; i++) {
+    scheduler.schedule(static_cast<float>(i), [&] {
+      world.enemyManager.spawnEnemies(EnemyType::GOST, 1);
+    });
+
+    scheduler.schedule(static_cast<float>(i + 50), [&] {
+      world.enemyManager.spawnEnemies(EnemyType::GOST, 1);
+    });
+  }
 }
 
 void SpawnScheduler::updateScheduler(float deltaTime) {

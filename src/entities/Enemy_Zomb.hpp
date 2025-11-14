@@ -8,8 +8,8 @@
 class Zomb : public Enemy {
 public:
   Zomb(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::ZOMB, pos, {150, Random::rangeInt(40, 70), 70},
-              textures) {}
+      : Enemy(EnemyType::ZOMB, pos, {150, Random::rangeInt(40, 70)}, textures) {
+  }
 
   void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
     if (isX) {
