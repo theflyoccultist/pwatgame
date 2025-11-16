@@ -4,13 +4,14 @@
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include "../utils/clampEntities.hpp"
+#include "Actor.hpp"
 #include <array>
 #include <cstdint>
 #include <raylib.h>
 
 enum class EnemyType : uint8_t { SWARMER, SNIPER, ZOMB, GODSIP, GOST, COUNT };
 
-class Enemy {
+class Enemy : public Actor {
 protected:
   struct EnemyStats {
     float speed;
@@ -38,10 +39,9 @@ public:
       : type(type), position(pos), speed(stats.speed), currentHP(stats.hp),
         totalHP(stats.hp), size(stats.size), textures(textures) {}
 
-  virtual ~Enemy() = default;
-  virtual void update(float delta, Vector2 playerPos) = 0;
+  void update(float dt, Vector2 playerPos) override = 0;
 
-  virtual void draw() const {
+  void draw() const override {
     if (!isAlive())
       return;
 
