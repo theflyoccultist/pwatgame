@@ -45,6 +45,8 @@ public:
     }
   }
 
+  bool isAlive() const { return currentHP > 0; }
+
 protected:
   std::array<Texture2D *, 3> textures;
 

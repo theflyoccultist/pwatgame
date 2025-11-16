@@ -10,7 +10,7 @@ void Game::run() {
   PlayerState pwatState = playerManager.init();
 
   SpawnScheduler spawner(world);
-  spawner.init();
+  spawner.initEnemies();
 
   UIManager::loadUI();
 
@@ -35,7 +35,7 @@ void Game::run() {
       playerManager.reset(pwatState);
 
       spawner.resetScheduler();
-      spawner.clearALlItems();
+      spawner.clearAllItems();
       spawner.clearAllEnemies();
       spawner.clearAllProjectiles();
 
@@ -57,7 +57,7 @@ void Game::run() {
       spawner.updateItems(pwatState);
       spawner.updateProjectiles(deltaTime);
       spawner.updateEnemies(deltaTime, pwatState);
-      // spawner.updateMiniBoss(deltaTime);
+      spawner.updateMiniBoss(deltaTime, pwatState);
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;

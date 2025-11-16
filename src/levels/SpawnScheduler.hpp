@@ -7,11 +7,19 @@ class SpawnScheduler {
 public:
   SpawnScheduler(World &w) : world(w) {}
 
-  void init() { world.enemyManager.init(); }
+  void initEnemies() {
+    world.enemyManager.init();
+    world.minibossManager.init();
+  }
 
   void resetScheduler() { scheduler.init(); }
-  void clearAllEnemies() { world.enemyManager.clearAll(); }
-  void clearALlItems() { world.itemManager.clearAll(); }
+
+  void clearAllEnemies() {
+    world.enemyManager.clearAll();
+    world.minibossManager.clearAll();
+  }
+
+  void clearAllItems() { world.itemManager.clearAll(); }
   void clearAllProjectiles() { world.projectileManager.clearAll(); }
 
   void scheduleItems();
@@ -40,10 +48,10 @@ public:
     world.enemyManager.drawAll();
   }
 
-  // void updateMiniBoss(float deltaTime) {
-  //   world.minibossManager.updateMiniBoss(deltaTime);
-  //   world.minibossManager.drawMiniBoss();
-  // }
+  void updateMiniBoss(float deltaTime, const PlayerState &pwatState) {
+    world.minibossManager.updateAll(deltaTime, pwatState);
+    world.minibossManager.drawAll();
+  }
 
 private:
   World &world;
