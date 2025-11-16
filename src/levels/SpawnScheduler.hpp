@@ -17,6 +17,7 @@ public:
   void scheduleItems();
   void schedulePowerUpItems();
   void scheduleEnemies();
+  void scheduleMiniBoss();
 
   void updateScheduler(float deltaTime);
 
@@ -38,6 +39,11 @@ public:
     world.enemyManager.updateAll(deltaTime, pwatState, bullets);
     world.enemyManager.drawAll();
   }
+
+  // void updateMiniBoss(float deltaTime) {
+  //   world.minibossManager.updateMiniBoss(deltaTime);
+  //   world.minibossManager.drawMiniBoss();
+  // }
 
 private:
   World &world;

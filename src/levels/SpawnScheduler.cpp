@@ -30,6 +30,7 @@ void SpawnScheduler::schedulePowerUpItems() {
 
   const std::vector<spawnPowerup> powerupSpawnData = {
       {78.0f, 1},
+      {115.0f, 1},
   };
 
   for (const auto &spawn : powerupSpawnData) {
@@ -79,16 +80,10 @@ void SpawnScheduler::scheduleEnemies() {
 
   world.enemyManager.spawnEnemies(EnemyType::SNIPER, Random::rangeInt(3, 8));
   world.enemyManager.spawnEnemies(EnemyType::ZOMB, Random::rangeInt(3, 8));
+}
 
-  for (int i = 0; i < 6; i++) {
-    scheduler.schedule(static_cast<float>(i), [&] {
-      world.enemyManager.spawnEnemies(EnemyType::GOST, 1);
-    });
-
-    scheduler.schedule(static_cast<float>(i + 50), [&] {
-      world.enemyManager.spawnEnemies(EnemyType::GOST, 1);
-    });
-  }
+void SpawnScheduler::scheduleMiniBoss() {
+  world.minibossManager.spawnMiniBoss(BossType::WINDOWS);
 }
 
 void SpawnScheduler::updateScheduler(float deltaTime) {

@@ -42,6 +42,7 @@ void Game::run() {
       spawner.scheduleItems();
       spawner.schedulePowerUpItems();
       spawner.scheduleEnemies();
+      spawner.scheduleMiniBoss();
 
       Game::currentState = GameState::Playing;
       break;
@@ -56,6 +57,7 @@ void Game::run() {
       spawner.updateItems(pwatState);
       spawner.updateProjectiles(deltaTime);
       spawner.updateEnemies(deltaTime, pwatState);
+      // spawner.updateMiniBoss(deltaTime);
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;

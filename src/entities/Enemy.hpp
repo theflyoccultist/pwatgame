@@ -39,6 +39,13 @@ public:
       : type(type), position(pos), speed(stats.speed), currentHP(stats.hp),
         totalHP(stats.hp), size(stats.size), textures(textures) {}
 
+  EnemyType type;
+  Vector2 position;
+  float speed;
+  int currentHP;
+  int totalHP;
+  int size;
+
   void update(float dt, Vector2 playerPos) override = 0;
 
   void draw() const override {
@@ -53,18 +60,11 @@ public:
                                           (int)position.x, (int)position.y);
     }
 
-    DrawRectangle((int)position.x + 5, (int)position.y - 15, (int)(50 * ratio),
-                  10, healthbarColor(ratio));
-    DrawRectangleLines((int)position.x + 5, (int)position.y - 15, 50, 10,
+    DrawRectangle((int)position.x + 5, (int)position.y - 15,
+                  (int)((float)size * ratio), 10, healthbarColor(ratio));
+    DrawRectangleLines((int)position.x + 5, (int)position.y - 15, size, 10,
                        BLACK);
   }
-
-  EnemyType type;
-  Vector2 position;
-  float speed;
-  int currentHP;
-  int totalHP;
-  int size;
 
   bool takeBulletIfHit(int dmg);
 

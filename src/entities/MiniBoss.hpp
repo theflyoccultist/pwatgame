@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../texture/AssetSystem.hpp"
 #include "Actor.hpp"
 #include <array>
 #include <cstdint>
@@ -9,30 +10,51 @@ enum class BossType : uint8_t { WINDOWS, LISP };
 
 class MiniBoss : public Actor {
 protected:
-  BossType type;
-
-  Vector2 position;
-
   struct BossStats {
     float speed;
     int hp;
     int size = 200;
   };
 
-  BossStats stats;
-
-  std::array<Texture2D *, 3> textures;
-
   float bossTimer = 0.0f;
 
 public:
   MiniBoss(BossType type, Vector2 pos, BossStats stats,
            const std::array<Texture2D *, 3> &textures)
-      : type(type), stats(stats), textures(textures) {
-    position = pos;
+      : type(type), position(pos), speed(stats.speed), currentHP(stats.hp),
+        totalHP(stats.hp), size(stats.size), textures(textures) {}
+
+  BossType type;
+  Vector2 position;
+  float speed;
+  int currentHP;
+  int totalHP;
+  int size;
+
+  void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
+    bossTimer += dt;
   }
 
-  void update(float dt, Vector2 playerPOs) override;
+  void draw() const override {
+    float ratio = static_cast<float>(currentHP) / static_cast<float>(totalHP);
+    const Texture2D *tex = chooseTexture(ratio);
 
-  virtual void draw() const override;
+    if (tex) {
+      AssetSystem::instance().drawTexture(const_cast<Texture2D *>(tex),
+                                          (int)position.x, (int)position.y);
+    }
+  }
+
+protected:
+  std::array<Texture2D *, 3> textures;
+
+  const Texture2D *chooseTexture(float ratio) const {
+    if (textures[0] == nullptr)
+      return nullptr;
+    if (ratio > 0.66f)
+      return textures[0];
+    if (ratio > 0.33f)
+      return textures[1];
+    return textures[2];
+  }
 };
