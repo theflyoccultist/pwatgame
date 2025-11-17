@@ -56,19 +56,19 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
         case ItemCategory::Food:
           Player::addAmmo(100);
           FeedbackSystem::instance().addFeedback("+100 AMMO", playerPos);
-          AudioSystem::instance().ammoAdded();
+          AudioSystem::instance().sfx->ammoAdded();
           break;
 
         case ItemCategory::Drink:
           Player::addHealth(100);
           FeedbackSystem::instance().addFeedback("+100 HP", playerPos);
-          AudioSystem::instance().healthAdded();
+          AudioSystem::instance().sfx->healthAdded();
           break;
 
         case ItemCategory::Weapon:
           Player::upgradeAmmo(ProjectileType::ROCKET);
           FeedbackSystem::instance().addFeedback("Weapon Upgraded", playerPos);
-          AudioSystem::instance().newWeapon();
+          AudioSystem::instance().sfx->newWeapon();
           break;
         }
       }

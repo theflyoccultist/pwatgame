@@ -14,14 +14,15 @@ void Game::run() {
 
   UIManager::loadUI();
 
-  AudioSystem::instance().playTitleTrack();
+  auto &audio = AudioSystem::instance();
+  audio.music->playTitleTrack();
 
   while (!WindowShouldClose()) {
     deltaTime = GetFrameTime();
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    AudioSystem::instance().updateMusic();
+    audio.music->updateMusic();
 
     switch (currentState) {
     case GameState::MainMenu:
@@ -29,8 +30,8 @@ void Game::run() {
       break;
 
     case GameState::Restarting: {
-      AudioSystem::instance().stopMusic();
-      AudioSystem::instance().playLevelTrack();
+      audio.music->stopMusic();
+      audio.music->playLevelTrack();
 
       playerManager.reset(pwatState);
 

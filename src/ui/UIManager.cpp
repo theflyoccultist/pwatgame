@@ -8,13 +8,15 @@ namespace UIManager {
 
 void loadUI() { UILib::loadUIAssets(); }
 
+auto &audio = AudioSystem::instance();
+
 void updateMainMenu() {
   UILib::mainMenu();
 
   if (IsKeyPressed(KEY_ENTER)) {
     Game::currentState = Game::GameState::Restarting;
-    AudioSystem::instance().stopMusic();
-    AudioSystem::instance().playLevelTrack();
+    audio.music->stopMusic();
+    audio.music->playLevelTrack();
   }
 }
 
@@ -22,13 +24,13 @@ void updatePlayerHUD() { UILib::playerHUD(); }
 
 void updatePauseMenu() {
   auto pauseChoice = UILib::pauseMenu();
-  AudioSystem::instance().pauseMusic();
+  audio.music->pauseMusic();
 
   if (IsKeyPressed(KEY_ENTER)) {
     switch (pauseChoice) {
     case UILib::PauseMenuOpts::Resume:
       Game::currentState = Game::GameState::Playing;
-      AudioSystem::instance().resumeMusic();
+      audio.music->resumeMusic();
       break;
     case UILib::PauseMenuOpts::Restart:
       Game::currentState = Game::GameState::Restarting;
@@ -38,8 +40,8 @@ void updatePauseMenu() {
       break;
     case UILib::PauseMenuOpts::BackToMenu:
       Game::currentState = Game::GameState::MainMenu;
-      AudioSystem::instance().stopMusic();
-      AudioSystem::instance().playTitleTrack();
+      audio.music->stopMusic();
+      audio.music->playTitleTrack();
       break;
     default:
       break;
@@ -58,10 +60,10 @@ void updateOptionsMenu() {
   if (IsKeyPressed(KEY_LEFT)) {
     switch (optionsChoice) {
     case UILib::OptionMenuOpts::MusicVol:
-      AudioSystem::instance().changeMusicVolume(musicVol -= 5);
+      audio.music->changeMusicVolume(musicVol -= 5);
       break;
     case UILib::OptionMenuOpts::SfxVol:
-      AudioSystem::instance().changeSfxVolume(sfxVol -= 5);
+      audio.sfx->changeSfxVolume(sfxVol -= 5);
       break;
     default:
       break;
@@ -71,10 +73,10 @@ void updateOptionsMenu() {
   if (IsKeyPressed(KEY_RIGHT)) {
     switch (optionsChoice) {
     case UILib::OptionMenuOpts::MusicVol:
-      AudioSystem::instance().changeMusicVolume(musicVol += 5);
+      audio.music->changeMusicVolume(musicVol += 5);
       break;
     case UILib::OptionMenuOpts::SfxVol:
-      AudioSystem::instance().changeSfxVolume(sfxVol += 5);
+      audio.sfx->changeSfxVolume(sfxVol += 5);
       break;
     default:
       break;
@@ -87,7 +89,7 @@ void updateOptionsMenu() {
 
 void updateLostMenu() {
   auto lossChoice = UILib::losingScreen();
-  AudioSystem::instance().pauseMusic();
+  audio.music->pauseMusic();
 
   if (IsKeyPressed(KEY_ENTER)) {
     switch (lossChoice) {
@@ -97,8 +99,8 @@ void updateLostMenu() {
 
     case UILib::LostMenuOpts::Menu:
       Game::currentState = Game::GameState::MainMenu;
-      AudioSystem::instance().stopMusic();
-      AudioSystem::instance().playTitleTrack();
+      audio.music->stopMusic();
+      audio.music->playTitleTrack();
       break;
 
     default:

@@ -43,7 +43,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
         player.score++;
         b->expire();
         if (e->takeBulletIfHit(b->damage)) {
-          AudioSystem::instance().enemyKilled();
+          AudioSystem::instance().sfx->enemyKilled();
         }
       }
 

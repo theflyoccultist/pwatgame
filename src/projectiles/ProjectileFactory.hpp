@@ -13,17 +13,23 @@ class ProjectileFactory {
 public:
   std::unique_ptr<Projectile> createProjectile(Faction f, ProjectileType type,
                                                Vector2 startPos, Vector2 dir) {
+    auto &audio = AudioSystem::instance();
+
     switch (type) {
     case ProjectileType::STRAIGHT:
-      AudioSystem::instance().defaultGun();
+      audio.sfx->defaultGun();
       return std::make_unique<Straight>(f, startPos, dir);
+
     case ProjectileType::LONGRANGE:
       return std::make_unique<LongRange>(f, startPos, dir);
+
     case ProjectileType::SLOWCANNON:
       return std::make_unique<SlowCannon>(f, startPos, dir);
+
     case ProjectileType::ROCKET:
-      AudioSystem::instance().rocketGun();
+      audio.sfx->rocketGun();
       return std::make_unique<Rocket>(f, startPos, dir);
+
     default:
       std::cerr << "Unknown projectile type!\n";
       return nullptr;

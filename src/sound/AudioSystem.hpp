@@ -1,13 +1,7 @@
 #pragma once
-#include "GameScore.hpp"
-#include "SoundEffect.hpp"
-#include <array>
-#include <cstdint>
+#include "MusicSystem.hpp"
+#include "SfxSystem.hpp"
 #include <memory>
-#include <unordered_map>
-#include <vector>
-
-enum class SoundType : uint8_t { pwatSteps, combatSFX, bonusPickup };
 
 class AudioSystem {
 public:
@@ -16,37 +10,21 @@ public:
     return instance;
   }
 
+  std::unique_ptr<SfxSystem> sfx;
+  std::unique_ptr<MusicSystem> music;
+
   AudioSystem(const AudioSystem &) = delete;
   AudioSystem &operator=(const AudioSystem &) = delete;
 
-  void playRandSteps();
-  void defaultGun();
-  void rocketGun();
-
-  void ammoAdded();
-  void healthAdded();
-  void newWeapon();
-
-  void enemyKilled();
-  void changeSfxVolume(int vol);
-
-  void playTitleTrack();
-  void playLevelTrack();
-
-  void pauseMusic();
-  void resumeMusic();
-  void updateMusic();
-  void stopMusic();
-
-  void changeMusicVolume(int vol);
-
 private:
-  AudioSystem();
-  ~AudioSystem();
-
-  std::unordered_map<SoundType, std::unique_ptr<std::vector<SoundEffect>>>
-      fxBank;
-
-  std::unique_ptr<std::array<GameScore, 2>> gameScores;
-  int currentTrack = -1;
+  AudioSystem() {
+    InitAudioDevice();
+    sfx = std::make_unique<SfxSystem>();
+    music = std::make_unique<MusicSystem>();
+  }
+  ~AudioSystem() {
+    music.reset();
+    sfx.reset();
+    CloseAudioDevice();
+  }
 };

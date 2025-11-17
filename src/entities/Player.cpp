@@ -116,7 +116,7 @@ void Player::playerFootsteps(float dt) {
 
     footstepTimer -= dt;
     if (footstepTimer <= 0.0f) {
-      AudioSystem::instance().playRandSteps();
+      AudioSystem::instance().sfx->playRandSteps();
       footstepTimer = footstepDelay;
     }
   } else {
