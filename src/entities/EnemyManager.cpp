@@ -79,6 +79,10 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
           projMan,
           {bulletStartPos, {0, 0}, delta, 6.f, ProjectileType::SLOWCANNON});
     }
+
+    if (e->type == EnemyType::MONITOR && touchPlayer) {
+      applyPlayerDmg(player, 3);
+    }
   }
 
   std::erase_if(enemies, [](auto &p) { return !p->isAlive(); });

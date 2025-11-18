@@ -24,10 +24,6 @@ protected:
     int size = 70;
   };
 
-private:
-  void shoot(ProjectileManager &pm, const ShootParams &p,
-             const Vector2 &direction);
-
 public:
   Enemy(EnemyType type, Vector2 pos, EnemyStats stats,
         const std::array<Texture2D *, 3> &textures)

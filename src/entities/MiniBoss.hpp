@@ -44,6 +44,11 @@ public:
                        BLACK);
   }
 
+  bool takeBulletIfHit(int dmg) {
+    currentHP -= dmg;
+    return currentHP <= 0;
+  }
+
   bool isAlive() const { return currentHP > 0; }
 
 protected:

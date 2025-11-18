@@ -24,8 +24,17 @@ public:
   };
 
   void updateAll(float dt, const PlayerState &player) {
-    for (auto &m : miniBosses)
+    for (auto &m : miniBosses) {
       m->update(dt, player.position);
+
+      Vector2 bulletStartPos = {m->position.x + (float)m->size / 2,
+                                m->position.y + (float)m->size / 2};
+
+      if (m->type == BossType::WINDOWS) {
+        m->shootTowardsPlayer(projMan, {bulletStartPos, player.position, dt,
+                                        0.3f, ProjectileType::STRAIGHT});
+      }
+    }
 
     std::erase_if(miniBosses, [](auto &p) { return !p->isAlive(); });
   };
