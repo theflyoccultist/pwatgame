@@ -3,8 +3,6 @@
 #include <cstdint>
 namespace UILib {
 
-enum class LostMenuOpts : uint8_t { Restart, Menu, Count };
-
 enum class PauseMenuOpts : uint8_t {
   Resume,
   Restart,
@@ -15,6 +13,10 @@ enum class PauseMenuOpts : uint8_t {
 
 enum class OptionMenuOpts : uint8_t { MusicVol, SfxVol, Count };
 
+enum class LostMenuOpts : uint8_t { Restart, Menu, Count };
+
+enum class WinMenuOpts : uint8_t { NextLevel, Restart, Menu, Count };
+
 void loadUIAssets();
 
 void mainMenu();
@@ -22,7 +24,6 @@ void playerHUD();
 PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
 LostMenuOpts losingScreen();
-
-void winningAnim();
+WinMenuOpts winningMenu();
 
 }; // namespace UILib

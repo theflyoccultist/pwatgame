@@ -141,13 +141,21 @@ LostMenuOpts losingScreen() {
   return runMenuEnum<LostMenuOpts>("Game Over!", items, index, 150, 140);
 }
 
-void winningAnim() {
+WinMenuOpts winningMenu() {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
-  DrawText("You WON!!", 100, 100, 20, BLACK);
+  static int index = 0;
   DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
            PURPLE);
+
+  std::array<std::string, 3> items = {
+      "Next Level",
+      "Restart Level",
+      "Back to Menu",
+  };
   AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][1],
                                      {350.0f, 400.0f}, 14);
+
+  return runMenuEnum<WinMenuOpts>("You WON!!", items, index, 150, 140);
 }
 
 } // namespace UILib

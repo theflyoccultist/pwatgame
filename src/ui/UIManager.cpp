@@ -3,6 +3,8 @@
 #include "../sound/AudioSystem.hpp"
 #include "UILib.hpp"
 #include <algorithm>
+#include <iostream>
+#include <raylib.h>
 
 namespace UIManager {
 
@@ -109,6 +111,28 @@ void updateLostMenu() {
   }
 }
 
-void winningMenu() { UILib::winningAnim(); }
+void winningMenu() {
+  auto winChoice = UILib::winningMenu();
+  if (IsKeyPressed(KEY_ENTER)) {
+    switch (winChoice) {
+    case UILib::WinMenuOpts::NextLevel:
+      std::cout << "Not implemented yet\n";
+      break;
+
+    case UILib::WinMenuOpts::Restart:
+      Game::currentState = Game::GameState::Restarting;
+      break;
+
+    case UILib::WinMenuOpts::Menu:
+      Game::currentState = Game::GameState::MainMenu;
+      audio.music->stopMusic();
+      audio.music->playTitleTrack();
+      break;
+
+    default:
+      break;
+    }
+  }
+}
 
 } // namespace UIManager
