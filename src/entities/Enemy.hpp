@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../projectiles/ProjectileManager.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/Random.hpp"
 #include "../utils/clampEntities.hpp"
@@ -24,14 +23,6 @@ protected:
     float speed;
     int hp;
     int size = 70;
-  };
-
-  struct ShootParams {
-    Vector2 startPos;
-    Vector2 playerPos;
-    float dt;
-    float cooldown;
-    ProjectileType type;
   };
 
 private:

@@ -37,6 +37,11 @@ public:
       AssetSystem::instance().drawTexture(const_cast<Texture2D *>(tex),
                                           (int)position.x, (int)position.y);
     }
+
+    DrawRectangle((int)position.x + 5, (int)position.y - 15,
+                  (int)((float)size * ratio), 10, healthbarColor(ratio));
+    DrawRectangleLines((int)position.x + 5, (int)position.y - 15, size, 10,
+                       BLACK);
   }
 
   bool isAlive() const { return currentHP > 0; }

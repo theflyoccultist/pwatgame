@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../projectiles/ProjectileManager.hpp"
 #include <array>
 #include <raylib.h>
 
@@ -11,6 +12,14 @@ public:
   virtual void draw() const = 0;
 
 protected:
+  struct ShootParams {
+    Vector2 startPos;
+    Vector2 playerPos;
+    float dt;
+    float cooldown;
+    ProjectileType type;
+  };
+
   const Texture2D *
   chooseTexture(float ratio, const std::array<Texture2D *, 3> &textures) const {
     if (textures[0] == nullptr)
