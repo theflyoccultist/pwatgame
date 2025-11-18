@@ -48,10 +48,13 @@ public:
     world.enemyManager.drawAll();
   }
 
-  void updateMiniBoss(float deltaTime, const PlayerState &pwatState) {
+  bool updateMiniBoss(float deltaTime, const PlayerState &pwatState) {
     auto bullets = world.projectileManager.view();
-    world.minibossManager.updateAll(deltaTime, pwatState, bullets);
+    if (world.minibossManager.updateAll(deltaTime, pwatState, bullets))
+      return true;
+
     world.minibossManager.drawAll();
+    return false;
   }
 
 private:

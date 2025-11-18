@@ -10,7 +10,7 @@ void MiniBossManager::spawnMiniBoss(BossType type) {
     miniBosses.push_back(std::move(e));
 };
 
-void MiniBossManager::updateAll(float dt, const PlayerState &player,
+bool MiniBossManager::updateAll(float dt, const PlayerState &player,
                                 std::span<Projectile *const> bullets) {
   using namespace Collisions;
 
@@ -23,9 +23,7 @@ void MiniBossManager::updateAll(float dt, const PlayerState &player,
                                  (float)m->size)) {
         player.score++;
         b->expire();
-        if (m->takeBulletIfHit(b->damage)) {
-          factory.explodeAnim();
-        }
+        m->takeBulletIfHit(b->damage);
       }
     }
 
@@ -38,5 +36,8 @@ void MiniBossManager::updateAll(float dt, const PlayerState &player,
     }
   }
 
-  std::erase_if(miniBosses, [](auto &p) { return !p->isAlive(); });
+  bool isMiniBossKilled = static_cast<bool>(
+      std::erase_if(miniBosses, [](auto &p) { return !p->isAlive(); }));
+
+  return isMiniBossKilled;
 };

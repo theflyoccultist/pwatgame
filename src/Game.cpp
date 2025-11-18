@@ -3,6 +3,7 @@
 #include "player/PlayerManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
+#include <iostream>
 #include <raylib.h>
 
 void Game::run() {
@@ -58,7 +59,9 @@ void Game::run() {
       spawner.updateItems(pwatState);
       spawner.updateProjectiles(deltaTime);
       spawner.updateEnemies(deltaTime, pwatState);
-      spawner.updateMiniBoss(deltaTime, pwatState);
+
+      if (spawner.updateMiniBoss(deltaTime, pwatState))
+        std::cout << "you have beaten the mini boss\n";
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;

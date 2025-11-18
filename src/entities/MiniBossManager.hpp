@@ -16,7 +16,7 @@ public:
 
   void spawnMiniBoss(BossType type);
 
-  void updateAll(float dt, const PlayerState &player,
+  bool updateAll(float dt, const PlayerState &player,
                  std::span<Projectile *const> bullets);
 
   void drawAll() {
