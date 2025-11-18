@@ -16,8 +16,6 @@ protected:
     int size = 200;
   };
 
-  float bossTimer = 0.0f;
-
 public:
   MiniBoss(BossType type, Vector2 pos, BossStats stats,
            const std::array<Texture2D *, 3> &textures)
@@ -30,10 +28,6 @@ public:
   int currentHP;
   int totalHP;
   int size;
-
-  void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
-    bossTimer += dt;
-  }
 
   void draw() const override {
     float ratio = static_cast<float>(currentHP) / static_cast<float>(totalHP);

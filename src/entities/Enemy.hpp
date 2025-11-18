@@ -9,7 +9,14 @@
 #include <cstdint>
 #include <raylib.h>
 
-enum class EnemyType : uint8_t { SWARMER, SNIPER, ZOMB, GODSIP, GOST, COUNT };
+enum class EnemyType : uint8_t {
+  SWARMER,
+  SNIPER,
+  ZOMB,
+  GODSIP,
+  MONITOR,
+  COUNT
+};
 
 class Enemy : public Actor {
 protected:

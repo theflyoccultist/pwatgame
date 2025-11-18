@@ -16,7 +16,7 @@ public:
   void init() { factory.loadAssets(); };
 
   void spawnMiniBoss(BossType type) {
-    Vector2 pos = {400, 400};
+    Vector2 pos = {320, 320};
     auto e = factory.create(type, pos);
 
     if (e)

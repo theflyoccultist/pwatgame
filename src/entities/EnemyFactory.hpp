@@ -2,7 +2,7 @@
 
 #include "Enemy.hpp"
 #include "Enemy_Godsip.hpp"
-#include "Enemy_Gost.hpp"
+#include "Enemy_Monitor.hpp"
 #include "Enemy_Sniper.hpp"
 #include "Enemy_Swarmer.hpp"
 #include "Enemy_Zomb.hpp"
@@ -42,10 +42,10 @@ public:
         &assets.loadTexture("../assets/enemies/zomb_LOW.png", 70, 70),
     };
 
-    enemyTextures[EnemyType::GOST] = {
-        &assets.loadTexture("../assets/enemies/gost_HIGH.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/gost_MED.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/gost_LOW.png", 70, 70),
+    enemyTextures[EnemyType::MONITOR] = {
+        &assets.loadTexture("../assets/enemies/monitor_HIGH.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/monitor_MED.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/monitor_LOW.png", 70, 70),
     };
   }
 
@@ -65,7 +65,7 @@ public:
       return std::make_unique<Godsip>(pos, textures);
     case EnemyType::ZOMB:
       return std::make_unique<Zomb>(pos, textures);
-    case EnemyType::GOST:
+    case EnemyType::MONITOR:
       return std::make_unique<Gost>(pos, textures);
     default:
       return nullptr;

@@ -6,7 +6,7 @@
 class Gost : public Enemy {
 public:
   Gost(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::GOST, pos, {200, Random::rangeInt(60, 200)},
+      : Enemy(EnemyType::MONITOR, pos, {200, Random::rangeInt(60, 200)},
               textures) {}
 
   void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
