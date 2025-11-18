@@ -18,8 +18,11 @@ void Game::run() {
   auto &audio = AudioSystem::instance();
   audio.music->playTitleTrack();
 
+  float timer = 0.0f;
+
   while (!WindowShouldClose()) {
     deltaTime = GetFrameTime();
+    timer += deltaTime;
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
@@ -34,6 +37,12 @@ void Game::run() {
       audio.music->stopMusic();
       audio.music->playLevelTrack();
 
+      // std::cout << timer << "\n";
+      // if (timer >= 128.0f) {
+      //   audio.music->stopMusic();
+      //   audio.music->playBossMusic();
+      // }
+      //
       playerManager.reset(pwatState);
 
       spawner.resetScheduler();
@@ -61,7 +70,7 @@ void Game::run() {
       spawner.updateEnemies(deltaTime, pwatState);
 
       if (spawner.updateMiniBoss(deltaTime, pwatState))
-        std::cout << "you have beaten the mini boss\n";
+        Game::currentState = GameState::Won;
 
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
@@ -82,6 +91,10 @@ void Game::run() {
 
     case GameState::Lost:
       UIManager::updateLostMenu();
+      break;
+
+    case GameState::Won:
+      UIManager::winningMenu();
       break;
     }
 

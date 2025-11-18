@@ -33,6 +33,7 @@ void loadUIAssets() {
   assetBank[AssetType::PwatSprite] = {
       "../assets/ui/pwat_lost.png",
       "../assets/ui/pwat_win.png",
+      "../assets/bosses/explosion.png",
   };
 
   auto &asset = AssetSystem::instance();
@@ -138,6 +139,15 @@ LostMenuOpts losingScreen() {
   AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][0],
                                      {350.0f, 400.0f}, 14);
   return runMenuEnum<LostMenuOpts>("Game Over!", items, index, 150, 140);
+}
+
+void winningAnim() {
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
+  DrawText("You WON!!", 100, 100, 20, BLACK);
+  DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
+           PURPLE);
+  AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][1],
+                                     {350.0f, 400.0f}, 14);
 }
 
 } // namespace UILib

@@ -109,4 +109,6 @@ void updateLostMenu() {
   }
 }
 
+void winningMenu() { UILib::winningAnim(); }
+
 } // namespace UIManager

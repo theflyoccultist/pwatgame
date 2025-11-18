@@ -16,7 +16,8 @@ public:
     Playing,
     Paused,
     Options,
-    Lost
+    Lost,
+    Won,
   };
 
   static inline GameState currentState = GameState::MainMenu;

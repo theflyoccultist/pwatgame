@@ -23,7 +23,8 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
                                  (float)m->size)) {
         player.score++;
         b->expire();
-        m->takeBulletIfHit(b->damage);
+        if (m->takeBulletIfHit(b->damage))
+          AudioSystem::instance().sfx->enemyKilled();
       }
     }
 

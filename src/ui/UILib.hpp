@@ -23,4 +23,6 @@ PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
 LostMenuOpts losingScreen();
 
+void winningAnim();
+
 }; // namespace UILib

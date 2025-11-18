@@ -2,9 +2,10 @@
 
 MusicSystem::MusicSystem() {
   gameScores =
-      std::make_unique<std::array<GameScore, 2>>(std::array<GameScore, 2>{
+      std::make_unique<std::array<GameScore, 3>>(std::array<GameScore, 3>{
           GameScore("../assets/music/right_to_rave.ogg"),
           GameScore("../assets/music/pseudogender.ogg"),
+          GameScore("../assets/music/hasuta.ogg"),
       });
 }
 
@@ -16,6 +17,11 @@ void MusicSystem::playTitleTrack() {
 void MusicSystem::playLevelTrack() {
   currentTrack = 1;
   (*gameScores)[1].play();
+}
+
+void MusicSystem::playBossMusic() {
+  currentTrack = 2;
+  (*gameScores)[2].play();
 }
 
 void MusicSystem::pauseMusic() {
