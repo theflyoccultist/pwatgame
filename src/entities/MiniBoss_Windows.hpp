@@ -3,16 +3,23 @@
 #include "MiniBoss.hpp"
 #include <array>
 #include <cmath>
+#include <iostream>
 #include <raylib.h>
 
 class Windows : public MiniBoss {
 public:
   Windows(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : MiniBoss(BossType::WINDOWS, pos, {0.0f, 1600}, textures) {}
+      : MiniBoss(BossType::WINDOWS, pos, {180.0f, 3200}, textures) {}
 
-  void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
+  void update(float dt, Vector2 playerPos) override {
     bossTimer += dt;
     position = {position.x, position.y + (sinf(bossTimer) * .25f)};
+
+    if (bossTimer >= 10.0f && bossTimer <= 20.0f) {
+      std::cout << "Phase 2\n";
+    } else if (bossTimer >= 20.0f) {
+      std::cout << "Phase 3\n";
+    }
   }
 
 private:

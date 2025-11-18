@@ -33,7 +33,7 @@ public:
     PlayerState::currWeapon = newWeapon;
   }
 
-  static void resetPlayerHealth() { PlayerState::health = 100; }
+  static void resetPlayerHealth() { PlayerState::health = 200; }
   static void resetPlayerScore() { PlayerState::score = 0; }
   static void resetPlayerAmmo() { PlayerState::playerAmmo = 500; }
   static void resetDefaultWeapon() {
