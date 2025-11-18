@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../texture/AssetSystem.hpp"
-#include "../utils/Random.hpp"
 #include "../utils/clampEntities.hpp"
 #include "Actor.hpp"
 #include <array>
@@ -26,8 +25,6 @@ protected:
   };
 
 private:
-  float shootTimer = 0.0f;
-  const bool isX = Random::chance(.5f);
   void shoot(ProjectileManager &pm, const ShootParams &p,
              const Vector2 &direction);
 
@@ -64,12 +61,12 @@ public:
                        BLACK);
   }
 
-  bool takeBulletIfHit(int dmg);
+  bool takeBulletIfHit(int dmg) {
+    currentHP -= dmg;
+    return currentHP <= 0;
+  }
 
   bool isAlive() const { return currentHP > 0; }
-
-  void shootTowardsPlayer(ProjectileManager &pm, const ShootParams &p);
-  void shootInVoid(ProjectileManager &pm, const ShootParams &p);
 
 protected:
   std::array<Texture2D *, 3> textures;
