@@ -16,10 +16,15 @@ struct Item {
       : category(c), type(t), position(pos) {}
 };
 
+struct itemTypes {
+  int food;
+  int drink;
+};
+
 class ItemManager {
 public:
   void addItem(ItemCategory cat, int type, Vector2 pos);
-  void populateItems(int food, int drink);
+  void populateItems(const itemTypes &items);
   void populatePowerUps(int weapon);
   void drawItems(ItemCategory cat);
   void updateItems(const Vector2 &playerPos, float playerSize);

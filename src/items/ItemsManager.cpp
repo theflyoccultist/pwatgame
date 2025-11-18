@@ -1,6 +1,6 @@
 #include "ItemsManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
-#include "../entities/Player.hpp"
+#include "../player/Player.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
@@ -10,15 +10,15 @@ void ItemManager::addItem(ItemCategory cat, int type, Vector2 pos) {
   itemsByCategory[cat].emplace_back(cat, type, pos);
 }
 
-void ItemManager::populateItems(int food, int drink) {
+void ItemManager::populateItems(const itemTypes &items) {
   itemsByCategory.clear();
 
-  for (int i = 0; i < food; ++i) {
+  for (int i = 0; i < items.food; ++i) {
     addItem(
         ItemCategory::Food, Random::rangeInt(0, 4),
         {Random::rangeFloat(0.0f, 430.0f), Random::rangeFloat(0.0f, 730.0f)});
   }
-  for (int i = 0; i < drink; ++i) {
+  for (int i = 0; i < items.drink; ++i) {
     addItem(
         ItemCategory::Drink, Random::rangeInt(0, 4),
         {Random::rangeFloat(130.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});

@@ -49,7 +49,8 @@ public:
   }
 
   void updateMiniBoss(float deltaTime, const PlayerState &pwatState) {
-    world.minibossManager.updateAll(deltaTime, pwatState);
+    auto bullets = world.projectileManager.view();
+    world.minibossManager.updateAll(deltaTime, pwatState, bullets);
     world.minibossManager.drawAll();
   }
 

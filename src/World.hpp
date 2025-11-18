@@ -2,8 +2,8 @@
 
 #include "entities/EnemyManager.hpp"
 #include "entities/MiniBossManager.hpp"
-#include "entities/Player.hpp"
 #include "items/ItemsManager.hpp"
+#include "player/Player.hpp"
 #include "projectiles/ProjectileManager.hpp"
 
 struct World {

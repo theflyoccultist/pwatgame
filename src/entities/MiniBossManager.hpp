@@ -1,13 +1,12 @@
 #pragma once
 
+#include "../player/Player.hpp"
 #include "../projectiles/ProjectileManager.hpp"
 #include "MiniBoss.hpp"
 #include "MiniBossFactory.hpp"
-#include "Player.hpp"
 #include <memory>
 #include <raylib.h>
-#include <utility>
-#include <vector>
+#include <span>
 
 class MiniBossManager {
 public:
@@ -15,29 +14,10 @@ public:
 
   void init() { factory.loadAssets(); };
 
-  void spawnMiniBoss(BossType type) {
-    Vector2 pos = {320, 320};
-    auto e = factory.create(type, pos);
+  void spawnMiniBoss(BossType type);
 
-    if (e)
-      miniBosses.push_back(std::move(e));
-  };
-
-  void updateAll(float dt, const PlayerState &player) {
-    for (auto &m : miniBosses) {
-      m->update(dt, player.position);
-
-      Vector2 bulletStartPos = {m->position.x + (float)m->size / 2,
-                                m->position.y + (float)m->size / 2};
-
-      if (m->type == BossType::WINDOWS) {
-        m->shootTowardsPlayer(projMan, {bulletStartPos, player.position, dt,
-                                        0.3f, ProjectileType::STRAIGHT});
-      }
-    }
-
-    std::erase_if(miniBosses, [](auto &p) { return !p->isAlive(); });
-  };
+  void updateAll(float dt, const PlayerState &player,
+                 std::span<Projectile *const> bullets);
 
   void drawAll() {
     for (auto &m : miniBosses)

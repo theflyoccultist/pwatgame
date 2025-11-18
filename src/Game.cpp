@@ -1,6 +1,6 @@
 #include "Game.hpp"
-#include "entities/PlayerManager.hpp"
 #include "levels/SpawnScheduler.hpp"
+#include "player/PlayerManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
 #include <raylib.h>

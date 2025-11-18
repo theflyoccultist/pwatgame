@@ -18,7 +18,7 @@ void SpawnScheduler::scheduleItems() {
 
   for (const auto &spawn : itemSpawnData) {
     scheduler.schedule(spawn.delay, [f = spawn.food, d = spawn.drink, this] {
-      world.itemManager.populateItems(f, d);
+      world.itemManager.populateItems({f, d});
     });
   }
 }

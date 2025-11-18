@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../player/Player.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
-#include "Player.hpp"
 #include <memory>
 #include <raylib.h>
 #include <span>
