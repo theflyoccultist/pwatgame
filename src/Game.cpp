@@ -3,7 +3,6 @@
 #include "player/PlayerManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
-#include <iostream>
 #include <raylib.h>
 
 void Game::run() {
@@ -18,11 +17,8 @@ void Game::run() {
   auto &audio = AudioSystem::instance();
   audio.music->playTitleTrack();
 
-  float timer = 0.0f;
-
   while (!WindowShouldClose()) {
     deltaTime = GetFrameTime();
-    timer += deltaTime;
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
@@ -34,15 +30,6 @@ void Game::run() {
       break;
 
     case GameState::Restarting: {
-      audio.music->stopMusic();
-      audio.music->playLevelTrack();
-
-      // std::cout << timer << "\n";
-      // if (timer >= 128.0f) {
-      //   audio.music->stopMusic();
-      //   audio.music->playBossMusic();
-      // }
-      //
       playerManager.reset(pwatState);
 
       spawner.resetScheduler();
@@ -50,6 +37,7 @@ void Game::run() {
       spawner.clearAllEnemies();
       spawner.clearAllProjectiles();
 
+      spawner.scheduleMusic();
       spawner.scheduleItems();
       spawner.schedulePowerUpItems();
       spawner.scheduleEnemies();

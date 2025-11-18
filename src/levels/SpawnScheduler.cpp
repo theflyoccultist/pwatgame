@@ -3,6 +3,17 @@
 #include <cmath>
 #include <vector>
 
+void SpawnScheduler::scheduleMusic() {
+  auto &audio = AudioSystem::instance();
+  audio.music->stopMusic();
+  audio.music->playLevelTrack();
+
+  scheduler.schedule(128.0f, [&] {
+    audio.music->stopMusic();
+    audio.music->playBossMusic();
+  });
+}
+
 void SpawnScheduler::scheduleItems() {
   struct spawnItem {
     float delay;

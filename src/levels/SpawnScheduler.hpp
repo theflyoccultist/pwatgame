@@ -22,6 +22,7 @@ public:
   void clearAllItems() { world.itemManager.clearAll(); }
   void clearAllProjectiles() { world.projectileManager.clearAll(); }
 
+  void scheduleMusic();
   void scheduleItems();
   void schedulePowerUpItems();
   void scheduleEnemies();
