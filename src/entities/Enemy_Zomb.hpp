@@ -7,22 +7,31 @@
 
 class Zomb : public Enemy {
 public:
-  Zomb(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::ZOMB, pos, {150, Random::rangeInt(40, 70)}, textures) {
+  static std::array<Texture2D *, 3> sharedTextures;
+  Zomb() : Enemy(EnemyType::ZOMB, sharedTextures) {}
+
+  void reset(Vector2 pos) {
+    stats.active = true;
+    stats.pos = pos;
+    stats.speed = 150;
+    stats.totalHP = Random::rangeInt(40, 70);
+    stats.currentHP = stats.totalHP;
+
+    textures = sharedTextures;
   }
 
   void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
     if (isX) {
-      position.x += speed * delta * dirX;
-      if (position.x >= 730.f)
+      stats.pos.x += stats.speed * delta * dirX;
+      if (stats.pos.x >= 730.f)
         dirX = -1;
-      else if (position.x <= 0)
+      else if (stats.pos.x <= 0)
         dirX = 1;
     } else {
-      position.y += speed * delta * dirY;
-      if (position.y >= 730.f)
+      stats.pos.y += stats.speed * delta * dirY;
+      if (stats.pos.y >= 730.f)
         dirY = -1;
-      else if (position.y <= 0)
+      else if (stats.pos.y <= 0)
         dirY = 1;
     }
   }

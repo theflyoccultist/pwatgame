@@ -3,17 +3,26 @@
 #include <cmath>
 #include <raylib.h>
 
-class Gost : public Enemy {
+class Monitor : public Enemy {
 public:
-  Gost(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::MONITOR, pos, {200, Random::rangeInt(60, 200)},
-              textures) {}
+  static std::array<Texture2D *, 3> sharedTextures;
+  Monitor() : Enemy(EnemyType::MONITOR, sharedTextures) {}
+
+  void reset(Vector2 pos) {
+    stats.active = true;
+    stats.pos = pos;
+    stats.speed = 200.0f;
+    stats.totalHP = Random::rangeInt(60, 200);
+    stats.currentHP = stats.totalHP;
+
+    textures = sharedTextures;
+  }
 
   void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
     timer += delta;
 
-    position.x = std::cosf(timer) * speed + 400;
-    position.y = std::sinf(timer) * speed + 400;
+    stats.pos.x = std::cosf(timer) * stats.speed + 400;
+    stats.pos.y = std::sinf(timer) * stats.speed + 400;
   }
 
 private:

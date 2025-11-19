@@ -7,13 +7,21 @@
 
 class Swarmer : public Enemy {
 public:
-  Swarmer(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::SWARMER, pos,
-              {Random::rangeFloat(60, 120), Random::rangeInt(28, 60)},
-              textures) {}
+  static std::array<Texture2D *, 3> sharedTextures;
+  Swarmer() : Enemy(EnemyType::SWARMER, sharedTextures) {}
+
+  void reset(Vector2 pos) {
+    stats.active = true;
+    stats.pos = pos;
+    stats.speed = Random::rangeFloat(60, 120);
+    stats.totalHP = Random::rangeInt(28, 60);
+    stats.currentHP = stats.totalHP;
+
+    textures = sharedTextures;
+  }
 
   void update(float delta, Vector2 playerPos) override {
-    Vector2 dir = {playerPos.x - position.x, playerPos.y - position.y};
+    Vector2 dir = {playerPos.x - stats.pos.x, playerPos.y - stats.pos.y};
 
     float length = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
     if (length > 0.0f) {
@@ -21,7 +29,7 @@ public:
       dir.y /= length;
     }
 
-    position.x += dir.x * speed * delta;
-    position.y += dir.y * speed * delta;
+    stats.pos.x += dir.x * stats.speed * delta;
+    stats.pos.y += dir.y * stats.speed * delta;
   };
 };

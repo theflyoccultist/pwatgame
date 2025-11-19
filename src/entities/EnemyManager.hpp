@@ -3,10 +3,9 @@
 #include "../player/Player.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
-#include <memory>
+#include <array>
 #include <raylib.h>
 #include <span>
-#include <vector>
 
 class EnemyManager {
 public:
@@ -21,7 +20,8 @@ public:
   void clearAll();
 
 private:
-  std::vector<std::unique_ptr<Enemy>> enemies;
+  static constexpr int ENEMY_POOL = 350;
+  std::array<Enemy *, ENEMY_POOL> enemies{};
   EnemyFactory factory;
   void applyPlayerDmg(const PlayerState &player, int damage);
 

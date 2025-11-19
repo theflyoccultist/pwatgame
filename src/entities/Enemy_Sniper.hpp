@@ -8,17 +8,25 @@
 
 class Sniper : public Enemy {
 public:
-  Sniper(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : Enemy(EnemyType::SNIPER, pos,
-              {Random::rangeFloat(10, 20), Random::rangeInt(40, 70)},
-              textures) {}
+  static std::array<Texture2D *, 3> sharedTextures;
+  Sniper() : Enemy(EnemyType::SNIPER, sharedTextures) {}
+
+  void reset(Vector2 pos) {
+    stats.active = true;
+    stats.pos = pos;
+    stats.speed = Random::rangeFloat(10, 20);
+    stats.totalHP = Random::rangeInt(40, 70);
+    stats.currentHP = stats.totalHP;
+
+    textures = sharedTextures;
+  }
 
   void update(float delta, Vector2 playerPos) override {
-    float dist = std::sqrtf(std::powf(playerPos.x - position.x, 2) +
-                            std::powf(playerPos.y - position.y, 2));
+    float dist = std::sqrtf(std::powf(playerPos.x - stats.pos.x, 2) +
+                            std::powf(playerPos.y - stats.pos.y, 2));
 
     if (dist < 300) {
-      Vector2 dir = {position.x - playerPos.x, position.y - playerPos.y};
+      Vector2 dir = {stats.pos.x - playerPos.x, stats.pos.y - playerPos.y};
       float len = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
 
       if (len > 0.0001f) {
@@ -26,9 +34,9 @@ public:
         dir.y /= len;
       }
 
-      position.x += dir.x * speed * delta * 8;
-      position.y += dir.y * speed * delta * 8;
+      stats.pos.x += dir.x * stats.speed * delta * 8;
+      stats.pos.y += dir.y * stats.speed * delta * 8;
     }
-    ClampEntities::clamp(position, 60);
+    ClampEntities::clamp(stats.pos, 60);
   }
 };

@@ -7,15 +7,23 @@
 void EnemyManager::init() { factory.loadAssets(); }
 
 void EnemyManager::spawnEnemies(EnemyType type, int count) {
-  enemies.reserve(enemies.size() + count);
-  for (int i = 0; i < count; ++i) {
-    Vector2 pos = {Random::rangeFloat(0, 730.0f),
-                   Random::rangeFloat(0, 730.0f)};
+  int spawned = 0;
 
-    auto e = factory.create(type, pos);
+  for (auto *&slot : enemies) {
+    if (!slot || !slot->isActive()) {
+      Vector2 pos = {Random::rangeFloat(0, 730.0f),
+                     Random::rangeFloat(0, 730.0f)};
+      Enemy *e = factory.create(type, pos);
 
-    if (e)
-      enemies.push_back(std::move(e));
+      if (e) {
+        slot = e;
+        e->activate();
+        ++spawned;
+      }
+
+      if (spawned >= count)
+        break;
+    }
   }
 }
 
@@ -33,15 +41,22 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
   if (player.damageCooldown > 0.0f)
     player.damageCooldown -= delta;
 
-  for (auto &e : enemies) {
+  for (auto *e : enemies) {
+    if (!e || !e->isAlive())
+      continue;
+
     e->update(delta, player.position);
 
     for (auto &b : bullets) {
+      if (!b || !b->isActive())
+        continue;
+
       if (b->faction == Faction::Player &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
-                                 e->position, (float)e->size)) {
+                                 e->stats.pos, (float)e->stats.size)) {
         player.score++;
         b->expire();
+
         if (e->takeBulletIfHit(b->stats.damage)) {
           AudioSystem::instance().sfx->enemyKilled();
         }
@@ -55,11 +70,12 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       }
     }
 
-    bool touchPlayer = checkPlayerInteraction(
-        player.position, (float)player.playerSize, e->position, (float)e->size);
+    bool touchPlayer =
+        checkPlayerInteraction(player.position, (float)player.playerSize,
+                               e->stats.pos, (float)e->stats.size);
 
-    Vector2 bulletStartPos = {e->position.x + (float)e->size / 2,
-                              e->position.y + (float)e->size / 2};
+    Vector2 bulletStartPos = {e->stats.pos.x + (float)e->stats.size / 2,
+                              e->stats.pos.y + (float)e->stats.size / 2};
 
     if (e->type == EnemyType::SWARMER && touchPlayer) {
       applyPlayerDmg(player, 4);
@@ -85,17 +101,29 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     }
   }
 
-  std::erase_if(enemies, [](auto &p) { return !p->isAlive(); });
+  for (auto &e : enemies) {
+    if (e && !e->isAlive()) {
+      e->deactivate();
+      e = nullptr;
+    }
+  }
 
   enemyCount = enemies.size();
 }
 
 void EnemyManager::drawAll() {
-  for (auto &e : enemies)
-    e->draw();
+  for (auto *e : enemies) {
+    if (e && e->isAlive())
+      e->draw();
+  }
 }
 
 void EnemyManager::clearAll() {
-  enemies.clear();
+  for (auto *&p : enemies) {
+    if (p) {
+      p->deactivate();
+      p = nullptr;
+    }
+  }
   enemyCount = 0;
 }
