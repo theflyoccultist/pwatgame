@@ -5,13 +5,21 @@
 
 class SlowCannon : public Projectile {
 public:
-  SlowCannon(Faction f, Vector2 startPos, Vector2 dir)
-      : Projectile(
-            f, ProjectileType::SLOWCANNON,
-            {startPos, dir, {dir.x * 150.0f, dir.y * 100.0f}, 20, 8.0f, 15}) {}
+  SlowCannon() : Projectile(Faction::None, ProjectileType::SLOWCANNON) {}
+
+  void reset(Faction f, Vector2 pos, Vector2 dir) {
+    stats.active = true;
+    faction = f;
+    stats.pos = pos;
+    stats.dir = dir;
+    stats.vel = {dir.x * 150.0f, dir.y * 100.0f};
+    stats.size = 20.0f;
+    stats.lifetime = 8.0f;
+    stats.damage = 15;
+  }
 
   void draw() const override {
-    DrawCircleV(position, size, PURPLE);
-    DrawCircleV(position, 4, GREEN);
+    DrawCircleV(stats.pos, stats.size, PURPLE);
+    DrawCircleV(stats.pos, 4, GREEN);
   }
 };

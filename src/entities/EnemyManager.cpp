@@ -38,19 +38,19 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
 
     for (auto &b : bullets) {
       if (b->faction == Faction::Player &&
-          checkBulletInteraction(b->position, (float)b->size, e->position,
-                                 (float)e->size)) {
+          checkBulletInteraction(b->stats.pos, (float)b->stats.size,
+                                 e->position, (float)e->size)) {
         player.score++;
         b->expire();
-        if (e->takeBulletIfHit(b->damage)) {
+        if (e->takeBulletIfHit(b->stats.damage)) {
           AudioSystem::instance().sfx->enemyKilled();
         }
       }
 
       if (b->faction == Faction::Enemy &&
-          checkBulletInteraction(b->position, (float)b->size, player.position,
-                                 (float)player.playerSize)) {
-        applyPlayerDmg(player, b->damage);
+          checkBulletInteraction(b->stats.pos, (float)b->stats.size,
+                                 player.position, (float)player.playerSize)) {
+        applyPlayerDmg(player, b->stats.damage);
         b->expire();
       }
     }

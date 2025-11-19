@@ -5,13 +5,21 @@
 
 class LongRange : public Projectile {
 public:
-  LongRange(Faction f, Vector2 startPos, Vector2 dir)
-      : Projectile(
-            f, ProjectileType::LONGRANGE,
-            {startPos, dir, {dir.x * 440.0f, dir.y * 440.0f}, 7, 5.0f, 5}) {}
+  LongRange() : Projectile(Faction::None, ProjectileType::LONGRANGE) {}
+
+  void reset(Faction f, Vector2 pos, Vector2 dir) {
+    stats.active = true;
+    faction = f;
+    stats.pos = pos;
+    stats.dir = dir;
+    stats.vel = {dir.x * 440.0f, dir.y * 440.0f};
+    stats.size = 7.0f;
+    stats.lifetime = 5.0f;
+    stats.damage = 5;
+  }
 
   void draw() const override {
-    DrawCircleV(position, size, PURPLE);
-    DrawCircleV(position, 3, GREEN);
+    DrawCircleV(stats.pos, stats.size, PURPLE);
+    DrawCircleV(stats.pos, 3, GREEN);
   }
 };

@@ -5,13 +5,21 @@
 
 class Rocket : public Projectile {
 public:
-  Rocket(Faction f, Vector2 startPos, Vector2 dir)
-      : Projectile(
-            f, ProjectileType::STRAIGHT,
-            {startPos, dir, {dir.x * 800.0f, dir.y * 800.0f}, 25, 5.0f, 55}) {}
+  Rocket() : Projectile(Faction::None, ProjectileType::STRAIGHT) {}
+
+  void reset(Faction f, Vector2 pos, Vector2 dir) {
+    stats.active = true;
+    faction = f;
+    stats.pos = pos;
+    stats.dir = dir;
+    stats.vel = {dir.x * 800.0f, dir.y * 800.0f};
+    stats.size = 25.0f;
+    stats.lifetime = 5.0f;
+    stats.damage = 55;
+  }
 
   void draw() const override {
-    DrawCircleV(position, size, RED);
-    DrawCircleV(position, 15, BLACK);
+    DrawCircleV(stats.pos, stats.size, RED);
+    DrawCircleV(stats.pos, 15, BLACK);
   }
 };

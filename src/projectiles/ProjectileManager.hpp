@@ -1,10 +1,9 @@
 #pragma once
 
 #include "ProjectileFactory.hpp"
-#include <memory>
+#include <array>
 #include <raylib.h>
 #include <span>
-#include <vector>
 
 class ProjectileManager {
 public:
@@ -17,7 +16,8 @@ public:
   std::span<Projectile *const> view();
 
 private:
-  std::vector<std::unique_ptr<Projectile>> projectiles;
-  std::vector<Projectile *> tempView;
+  static constexpr int BULLET_POOL = 350;
+  std::array<Projectile *, BULLET_POOL> projectiles{};
+  std::array<Projectile *, BULLET_POOL> tempView{};
   ProjectileFactory factory;
 };

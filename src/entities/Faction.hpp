@@ -2,4 +2,4 @@
 
 #include <cstdint>
 
-enum class Faction : uint8_t { Player, Enemy };
+enum class Faction : uint8_t { Player, Enemy, None };

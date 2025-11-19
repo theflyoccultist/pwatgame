@@ -2,29 +2,53 @@
 
 void ProjectileManager::spawn(Faction f, ProjectileType type,
                               const Vector2 &startPos, const Vector2 &dir) {
-  projectiles.push_back(factory.createProjectile(f, type, startPos, dir));
+  Projectile *p = factory.createProjectile(f, type, startPos, dir);
+  if (!p)
+    return;
+
+  for (auto &slot : projectiles) {
+    if (slot == nullptr) {
+      slot = p;
+      return;
+    }
+  }
 }
 
 void ProjectileManager::update(float dt) {
-  for (auto &p : projectiles)
-    p->update(dt);
+  for (auto *p : projectiles)
+    if (p && p->isActive())
+      p->update(dt);
 
-  std::erase_if(projectiles, [](auto &p) { return p->lifetime <= 0.0f; });
+  for (auto &p : projectiles) {
+    if (p && p->lifetime() <= 0.0f) {
+      p->deactivate();
+      p = nullptr;
+    }
+  }
 }
 
 void ProjectileManager::draw() {
-  for (auto &p : projectiles)
-    p->draw();
+  for (auto *p : projectiles) {
+    if (p && p->isActive())
+      p->draw();
+  }
 }
 
 std::span<Projectile *const> ProjectileManager::view() {
-  tempView.clear();
-  tempView.reserve(projectiles.size());
+  size_t count = 0;
 
-  for (auto &p : projectiles)
-    tempView.push_back(p.get());
+  for (auto *p : projectiles)
+    if (p && p->isActive())
+      tempView[count++] = p;
 
-  return tempView;
+  return {tempView.data(), count};
 }
 
-void ProjectileManager::clearAll() { projectiles.clear(); }
+void ProjectileManager::clearAll() {
+  for (auto *&p : projectiles) {
+    if (p) {
+      p->deactivate();
+      p = nullptr;
+    }
+  }
+}

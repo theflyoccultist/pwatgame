@@ -19,11 +19,11 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
 
     for (auto &b : bullets) {
       if (b->faction == Faction::Player &&
-          checkBulletInteraction(b->position, (float)b->size, m->position,
-                                 (float)m->size)) {
+          checkBulletInteraction(b->stats.pos, (float)b->stats.size,
+                                 m->position, (float)m->size)) {
         player.score++;
         b->expire();
-        if (m->takeBulletIfHit(b->damage))
+        if (m->takeBulletIfHit(b->stats.damage))
           AudioSystem::instance().sfx->enemyKilled();
       }
     }
