@@ -14,7 +14,7 @@ public:
   void reset(Vector2 pos) {
     stats.active = true;
     stats.pos = pos;
-    stats.speed = Random::rangeFloat(10, 20);
+    stats.speed = Random::rangeFloat(80, 160);
     stats.totalHP = Random::rangeInt(40, 70);
     stats.currentHP = stats.totalHP;
 
@@ -34,8 +34,8 @@ public:
         dir.y /= len;
       }
 
-      stats.pos.x += dir.x * stats.speed * delta * 8;
-      stats.pos.y += dir.y * stats.speed * delta * 8;
+      stats.pos.x += dir.x * stats.speed * delta;
+      stats.pos.y += dir.y * stats.speed * delta;
     }
     ClampEntities::clamp(stats.pos, 60);
   }

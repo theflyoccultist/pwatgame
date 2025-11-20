@@ -2,7 +2,6 @@
 
 #include "../entities/Faction.hpp"
 #include "../sound/AudioSystem.hpp"
-#include "Projectile.hpp"
 #include "ProjectilePool.hpp"
 #include <iostream>
 #include <memory>
