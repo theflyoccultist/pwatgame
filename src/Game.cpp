@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "levels/SpawnScheduler.hpp"
 #include "player/PlayerManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
@@ -9,7 +8,7 @@ void Game::run() {
   PlayerManager playerManager(world);
   PlayerState pwatState = playerManager.init();
 
-  SpawnScheduler spawner(world);
+  SpawnScheduler spawner(world, lua);
   spawner.initEnemies();
 
   UIManager::loadUI();
