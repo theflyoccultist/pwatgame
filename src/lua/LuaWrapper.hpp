@@ -31,6 +31,7 @@ public:
 
   LuaResult runFile(const std::string &file);
   LuaResultT<int> getInt(lua_State *L, const char *key);
+  LuaResultT<double> getNumber(lua_State *L, const char *key);
   LuaResultT<std::string> getString(lua_State *L, const char *key);
 
   EnemyType enemyTypeFromString(std::string_view s);

@@ -63,7 +63,20 @@ LuaResultT<int> LuaWrapper::getInt(lua_State *L, const char *key) {
   }
 
   int value = lua_tointeger(L, -1);
-  lua_pop(L, -1);
+  lua_pop(L, 1);
+  return value;
+}
+
+LuaResultT<double> LuaWrapper::getNumber(lua_State *L, const char *key) {
+  lua_getfield(L, -1, key);
+
+  if (!lua_isnumber(L, -1)) {
+    lua_pop(L, 1);
+    return std::unexpected(LuaError::TypeError);
+  }
+
+  int value = lua_tonumber(L, -1);
+  lua_pop(L, 1);
   return value;
 }
 
