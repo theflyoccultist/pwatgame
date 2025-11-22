@@ -14,8 +14,8 @@ find_package(raylib REQUIRED)
 target_link_libraries(pwatgame PRIVATE raylib lua)
 
 # Normal
-# target_compile_options(pwatgame PRIVATE -Wall -Wextra -Wpedantic)
+target_compile_options(pwatgame PRIVATE -Wall -Wextra -Wpedantic)
 
 # For leaks and segfaults
-target_compile_options(pwatgame PRIVATE -fsanitize=address -fno-omit-frame-pointer -g)
-target_link_options(pwatgame PRIVATE -fsanitize=address)
+# target_compile_options(pwatgame PRIVATE -fsanitize=address -fno-omit-frame-pointer -g)
+# target_link_options(pwatgame PRIVATE -fsanitize=address)

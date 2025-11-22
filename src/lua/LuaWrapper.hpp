@@ -5,18 +5,14 @@
 #include <expected>
 #include <lua.hpp>
 #include <ostream>
-#include <string>
 #include <string_view>
 
 enum class LuaError : uint8_t {
-  FileNotFound,
-  SyntaxError,
+  FileOpenError,
   RuntimeError,
-  TypeError,
-  MissingField,
-  InvalidValue,
-  StackCorruption,
-  CFunctionError,
+  IntegerNotFound,
+  NumberNotFound,
+  StringNotFound,
 };
 
 std::ostream &operator<<(std::ostream &os, const LuaError &err);
@@ -26,13 +22,16 @@ template <typename T> using LuaResultT = std::expected<T, LuaError>;
 
 class LuaWrapper {
 public:
-  LuaWrapper();
-  ~LuaWrapper();
+  LuaWrapper() : L{luaL_newstate()} { luaL_openlibs(L); }
+  ~LuaWrapper() {
+    if (L)
+      lua_close(L);
+  };
 
-  LuaResult runFile(const std::string &file);
-  LuaResultT<int> getInt(lua_State *L, const char *key);
-  LuaResultT<double> getNumber(lua_State *L, const char *key);
-  LuaResultT<std::string> getString(lua_State *L, const char *key);
+  LuaResult runFile(const char *filename);
+  LuaResultT<int> getInt(const char *key);
+  LuaResultT<double> getNumber(const char *key);
+  LuaResultT<std::string> getString(const char *key);
 
   EnemyType enemyTypeFromString(std::string_view s);
 

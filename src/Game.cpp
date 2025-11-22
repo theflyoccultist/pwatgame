@@ -8,7 +8,7 @@ void Game::run() {
   PlayerManager playerManager(world);
   PlayerState pwatState = playerManager.init();
 
-  SpawnScheduler spawner(world, lua);
+  SpawnScheduler spawner(world);
   spawner.initEnemies();
 
   UIManager::loadUI();

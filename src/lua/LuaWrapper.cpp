@@ -1,33 +1,24 @@
 #include "LuaWrapper.hpp"
 #include <expected>
-#include <lua.h>
+#include <iostream>
 #include <string>
 
 std::ostream &operator<<(std::ostream &os, const LuaError err) {
   switch (err) {
-  case LuaError::FileNotFound:
+  case LuaError::FileOpenError:
     os << "File not found";
-    break;
-  case LuaError::SyntaxError:
-    os << "Lua syntax error";
     break;
   case LuaError::RuntimeError:
     os << "Lua runtime error";
     break;
-  case LuaError::TypeError:
-    os << "Lua type mismatch";
+  case LuaError::IntegerNotFound:
+    os << "Lua integer not found";
     break;
-  case LuaError::MissingField:
-    os << "Missing required field";
+  case LuaError::NumberNotFound:
+    os << "Lua number not found";
     break;
-  case LuaError::InvalidValue:
-    os << "Invalid value";
-    break;
-  case LuaError::StackCorruption:
-    os << "Lua stack corruption";
-    break;
-  case LuaError::CFunctionError:
-    os << "C function threw an error";
+  case LuaError::StringNotFound:
+    os << "Lua string not found";
     break;
   default:
     os << "Unknown Lua error";
@@ -36,30 +27,27 @@ std::ostream &operator<<(std::ostream &os, const LuaError err) {
   return os;
 };
 
-LuaWrapper::LuaWrapper() {
-  lua_State *L = luaL_newstate();
-  luaL_openlibs(L);
-};
-
-LuaWrapper::~LuaWrapper() {
-  if (L)
-    lua_close(L);
-};
-
-LuaResult LuaWrapper::runFile(const std::string &file) {
-  if (luaL_dofile(L, file.c_str()) != LUA_OK) {
+LuaResult LuaWrapper::runFile(const char *filename) {
+  if (luaL_dofile(L, filename) != LUA_OK) {
     lua_pop(L, 1);
-    return std::unexpected(LuaError::FileNotFound);
+    return std::unexpected(LuaError::FileOpenError);
   }
+
+  if (lua_pcall(L, 0, LUA_MULTRET, 0) != LUA_OK) {
+    std::cerr << lua_tostring(L, -1) << "\n";
+    lua_pop(L, 1);
+    return std::unexpected(LuaError::RuntimeError);
+  }
+
   return {};
 }
 
-LuaResultT<int> LuaWrapper::getInt(lua_State *L, const char *key) {
+LuaResultT<int> LuaWrapper::getInt(const char *key) {
   lua_getfield(L, -1, key);
 
   if (!lua_isinteger(L, -1)) {
     lua_pop(L, 1);
-    return std::unexpected(LuaError::TypeError);
+    return std::unexpected(LuaError::IntegerNotFound);
   }
 
   int value = lua_tointeger(L, -1);
@@ -67,12 +55,12 @@ LuaResultT<int> LuaWrapper::getInt(lua_State *L, const char *key) {
   return value;
 }
 
-LuaResultT<double> LuaWrapper::getNumber(lua_State *L, const char *key) {
+LuaResultT<double> LuaWrapper::getNumber(const char *key) {
   lua_getfield(L, -1, key);
 
   if (!lua_isnumber(L, -1)) {
     lua_pop(L, 1);
-    return std::unexpected(LuaError::TypeError);
+    return std::unexpected(LuaError::NumberNotFound);
   }
 
   int value = lua_tonumber(L, -1);
@@ -80,12 +68,12 @@ LuaResultT<double> LuaWrapper::getNumber(lua_State *L, const char *key) {
   return value;
 }
 
-LuaResultT<std::string> getString(lua_State *L, const char *key) {
+LuaResultT<std::string> LuaWrapper::getString(const char *key) {
   lua_getfield(L, -1, key);
 
   if (!lua_isstring(L, -1)) {
     lua_pop(L, 1);
-    return std::unexpected(LuaError::TypeError);
+    return std::unexpected(LuaError::StringNotFound);
   }
 
   std::string value = lua_tostring(L, -1);
