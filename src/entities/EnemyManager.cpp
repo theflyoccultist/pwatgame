@@ -107,8 +107,6 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       e = nullptr;
     }
   }
-
-  enemyCount = enemies.size();
 }
 
 void EnemyManager::drawAll() {
@@ -125,5 +123,4 @@ void EnemyManager::clearAll() {
       p = nullptr;
     }
   }
-  enemyCount = 0;
 }

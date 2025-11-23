@@ -1,6 +1,10 @@
 EnemySpawns = {
 	{ type = "zomb", delay = 1.25, numEnemies = 6 },
-	{ type = "sniper", delay = 5.25, numEnemies = 40 },
+	{ type = "sniper", delay = 2.25, numEnemies = 1 },
+	{ type = "sniper", delay = 3.25, numEnemies = 1 },
+	{ type = "sniper", delay = 5.25, numEnemies = 2 },
+	{ type = "sniper", delay = 6.25, numEnemies = 5 },
+	{ type = "sniper", delay = 8.25, numEnemies = 5 },
 	{ type = "swarmer", delay = 26.15, numEnemies = 23 },
 	{ type = "godsip", delay = 34.25, numEnemies = 85 },
 	{ type = "zomb", delay = 64.10, numEnemies = 100 },

@@ -72,6 +72,8 @@ void SpawnScheduler::scheduleEnemies() {
     int numEnemies;
   };
 
+  std::vector<spawnEnemy> waves;
+
   lua.runFile("../scripts/enemyspawn.lua").or_else([](LuaError e) {
     std::cerr << e << "\n";
     return std::expected<void, LuaError>();
@@ -92,11 +94,10 @@ void SpawnScheduler::scheduleEnemies() {
                           .value_or(EnemyType::ZOMB);
           wave.delay = lua.getNumber("delay").value_or(0.0);
 
-          wave.numEnemies = (int)lua.getInt("numEnemies").value_or(0);
+          wave.numEnemies =
+              static_cast<int>(lua.getInt("numEnemies").value_or(0));
 
-          scheduler.schedule(wave.delay, [&] {
-            world.enemyManager.spawnEnemies(wave.type, wave.numEnemies);
-          });
+          waves.push_back(wave);
 
           lua_pop(lua.getState(), 1);
         }
@@ -108,6 +109,13 @@ void SpawnScheduler::scheduleEnemies() {
         std::cerr << "Expected spawn table: " << e << "\n";
         return std::expected<void, LuaError>();
       });
+
+  for (auto &wave : waves) {
+    scheduler.schedule(wave.delay,
+                       [type = wave.type, n = wave.numEnemies, this] {
+                         world.enemyManager.spawnEnemies(type, n);
+                       });
+  }
 }
 
 void SpawnScheduler::scheduleMiniBoss() {
@@ -123,9 +131,9 @@ void SpawnScheduler::scheduleMiniBoss() {
 
 void SpawnScheduler::updateScheduler(float deltaTime) {
   scheduler.update(deltaTime);
-  if (world.enemyManager.enemyCount <= 2) {
-    world.enemyManager.spawnEnemies(static_cast<EnemyType>(Random::rangeInt(
-                                        0, (int)level1Enemies.size() - 1)),
-                                    Random::rangeInt(3, 7));
-  }
+  // if (world.enemyManager.enemyCount <= 2) {
+  //   world.enemyManager.spawnEnemies(static_cast<EnemyType>(Random::rangeInt(
+  //                                       0, (int)level1Enemies.size() - 1)),
+  //                                   Random::rangeInt(3, 7));
+  // }
 }
