@@ -4,6 +4,7 @@
 #include "../sound/AudioSystem.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
+#include <iostream>
 #include <raylib.h>
 
 void ItemManager::addItem(ItemCategory cat, int asset, Vector2 pos) {
@@ -49,8 +50,11 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
           break;
 
         case ItemCategory::Weapon:
-          Player::upgradeAmmo(static_cast<ProjectileType>(Random::rangeInt(
-              0, static_cast<int>(ProjectileType::COUNT) - 1)));
+          auto p = static_cast<ProjectileType>(
+              Random::rangeInt(0, static_cast<int>(ProjectileType::COUNT) - 1));
+          std::cout << "Picked projectile type: " << p << '\n';
+          Player::upgradeAmmo(p);
+
           FeedbackSystem::instance().addFeedback("Weapon Upgraded", playerPos);
           AudioSystem::instance().sfx->newWeapon();
           break;
