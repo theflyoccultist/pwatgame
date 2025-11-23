@@ -2,6 +2,7 @@
 
 #include "../entities/Faction.hpp"
 #include "../sound/AudioSystem.hpp"
+#include "Projectile.hpp"
 #include "ProjectilePool.hpp"
 #include <iostream>
 #include <memory>
@@ -27,6 +28,9 @@ public:
     case ProjectileType::ROCKET:
       audio.sfx->rocketGun();
       return ProjectilePool::getFreeProjectile<Rocket>(f, startPos, dir);
+
+    case ProjectileType::UZI:
+      return ProjectilePool::getFreeProjectile<Uzi>(f, startPos, dir);
 
     default:
       std::cerr << "Unknown projectile type!\n";

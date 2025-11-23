@@ -49,7 +49,8 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
           break;
 
         case ItemCategory::Weapon:
-          Player::upgradeAmmo(ProjectileType::ROCKET);
+          Player::upgradeAmmo(static_cast<ProjectileType>(Random::rangeInt(
+              0, static_cast<int>(ProjectileType::COUNT) - 1)));
           FeedbackSystem::instance().addFeedback("Weapon Upgraded", playerPos);
           AudioSystem::instance().sfx->newWeapon();
           break;

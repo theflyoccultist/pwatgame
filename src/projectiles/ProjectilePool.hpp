@@ -3,6 +3,7 @@
 #include "Proj_LongRange.hpp"
 #include "Proj_SlowCannon.hpp"
 #include "Proj_Straight.hpp"
+#include "Proj_Uzi.hpp"
 #include "Proj_rocket.hpp"
 #include <array>
 
@@ -13,6 +14,7 @@ private:
   static inline std::array<LongRange, BULLET_POOL> longRangePool;
   static inline std::array<SlowCannon, BULLET_POOL> slowCannonPool;
   static inline std::array<Rocket, BULLET_POOL> rocketPool;
+  static inline std::array<Uzi, BULLET_POOL> uziPool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -52,4 +54,10 @@ template <>
 inline std::array<Rocket, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<Rocket>() {
   return rocketPool;
+}
+
+template <>
+inline std::array<Uzi, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Uzi>() {
+  return uziPool;
 }
