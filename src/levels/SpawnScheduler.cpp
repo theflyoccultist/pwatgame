@@ -1,5 +1,4 @@
 #include "SpawnScheduler.hpp"
-#include <array>
 #include <expected>
 #include <iostream>
 #include <string_view>
@@ -18,16 +17,41 @@ void SpawnScheduler::scheduleMusic() {
 
 void SpawnScheduler::scheduleItems() {
   struct spawnItem {
-    float delay;
     int food;
     int drink;
+    double delay;
   };
 
-  std::array<spawnItem, 10> itemSpawnData{};
-  for (size_t i = 0; i < itemSpawnData.size(); i++) {
-    itemSpawnData[i] = {Random::rangeFloat(0, 120.0f), Random::rangeInt(0, 8),
-                        Random::rangeInt(0, 8)};
-  }
+  std::vector<spawnItem> itemSpawnData{};
+
+  lua.runFile("../scripts/itemspawn.lua").or_else([](LuaError e) {
+    std::cerr << e << "\n";
+    return std::expected<void, LuaError>();
+  });
+
+  lua.getTable("ItemSpawns")
+      .and_then([&](void) -> LuaResultT<void> {
+        int len = (int)lua_rawlen(lua.getState(), -1);
+
+        for (int i = 1; i <= len; i++) {
+          lua_rawgeti(lua.getState(), -1, i);
+
+          spawnItem item;
+          item.food = static_cast<int>(lua.getInt("food").value_or(0));
+          item.drink = static_cast<int>(lua.getInt("drink").value_or(0));
+          item.delay = lua.getNumber("delay").value_or(0.0);
+
+          itemSpawnData.push_back(item);
+
+          lua_pop(lua.getState(), 1);
+        }
+
+        return {};
+      })
+      .or_else([](LuaError e) {
+        std::cerr << "Expected item table: " << e << "\n";
+        return std::expected<void, LuaError>();
+      });
 
   for (const auto &spawn : itemSpawnData) {
     scheduler.schedule(spawn.delay, [f = spawn.food, d = spawn.drink, this] {
@@ -54,17 +78,6 @@ void SpawnScheduler::schedulePowerUpItems() {
   }
 }
 
-const std::unordered_set<EnemyType> SpawnScheduler::level1Enemies = {
-    EnemyType::SWARMER,
-    EnemyType::SNIPER,
-    EnemyType::ZOMB,
-    EnemyType::GODSIP,
-};
-
-template <typename T> std::expected<T, LuaError> default_value(T v) {
-  return v;
-}
-
 void SpawnScheduler::scheduleEnemies() {
   struct spawnEnemy {
     EnemyType type;
@@ -72,7 +85,7 @@ void SpawnScheduler::scheduleEnemies() {
     int numEnemies;
   };
 
-  std::vector<spawnEnemy> waves;
+  std::vector<spawnEnemy> waves{};
 
   lua.runFile("../scripts/enemyspawn.lua").or_else([](LuaError e) {
     std::cerr << e << "\n";
@@ -131,9 +144,4 @@ void SpawnScheduler::scheduleMiniBoss() {
 
 void SpawnScheduler::updateScheduler(float deltaTime) {
   scheduler.update(deltaTime);
-  // if (world.enemyManager.enemyCount <= 2) {
-  //   world.enemyManager.spawnEnemies(static_cast<EnemyType>(Random::rangeInt(
-  //                                       0, (int)level1Enemies.size() - 1)),
-  //                                   Random::rangeInt(3, 7));
-  // }
 }
