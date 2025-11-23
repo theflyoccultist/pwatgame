@@ -23,6 +23,10 @@ Items::Items() {
 
   allAssets[ItemCategory::Weapon] = {
       &assets.loadTexture("../assets/items/rocket.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/grenade.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/hellfire.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/uzi.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/scythe.png", itemSize, itemSize),
   };
 }
 

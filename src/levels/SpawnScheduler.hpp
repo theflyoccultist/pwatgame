@@ -26,7 +26,6 @@ public:
 
   void scheduleMusic();
   void scheduleItems();
-  void schedulePowerUpItems();
   void scheduleEnemies();
   void scheduleMiniBoss();
 

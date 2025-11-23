@@ -23,14 +23,14 @@ struct itemTypes {
 
 class ItemManager {
 public:
-  void addItem(ItemCategory cat, int type, Vector2 pos);
   void populateItems(ItemCategory cat, Vector2 pos);
-  void populatePowerUps(int weapon);
   void drawItems(ItemCategory cat);
   void updateItems(const Vector2 &playerPos, float playerSize);
   void clearAll() { itemsByCategory.clear(); }
 
 private:
+  void addItem(ItemCategory cat, int asset, Vector2 pos);
+
   Items itemsObj;
   std::unordered_map<ItemCategory, std::vector<Item>> itemsByCategory;
 };

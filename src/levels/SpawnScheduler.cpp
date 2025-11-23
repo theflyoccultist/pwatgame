@@ -69,24 +69,6 @@ void SpawnScheduler::scheduleItems() {
   }
 }
 
-void SpawnScheduler::schedulePowerUpItems() {
-  struct spawnPowerup {
-    float delay;
-    int weapon;
-  };
-
-  const std::vector<spawnPowerup> powerupSpawnData = {
-      {78.0f, 1},
-      {115.0f, 1},
-  };
-
-  for (const auto &spawn : powerupSpawnData) {
-    scheduler.schedule(spawn.delay, [w = spawn.weapon, this] {
-      world.itemManager.populatePowerUps(w);
-    });
-  }
-}
-
 void SpawnScheduler::scheduleEnemies() {
   struct spawnEnemy {
     EnemyType type;

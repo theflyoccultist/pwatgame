@@ -41,7 +41,6 @@ void Game::run() {
       spawner.loadScript("../scripts/spawnlvl1.lua");
 
       spawner.scheduleItems();
-      spawner.schedulePowerUpItems();
       spawner.scheduleEnemies();
       spawner.scheduleMiniBoss();
 

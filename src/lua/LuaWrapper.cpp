@@ -110,6 +110,8 @@ ItemCategory LuaWrapper::itemTypeFromString(std::string_view s) {
     return ItemCategory::Food;
   if (s == "drink")
     return ItemCategory::Drink;
+  if (s == "weapon")
+    return ItemCategory::Weapon;
 
   return ItemCategory::Food;
 }

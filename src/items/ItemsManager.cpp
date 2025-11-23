@@ -6,22 +6,14 @@
 #include "FeedbackSystem.hpp"
 #include <raylib.h>
 
-void ItemManager::addItem(ItemCategory cat, int type, Vector2 pos) {
-  itemsByCategory[cat].emplace_back(cat, type, pos);
+void ItemManager::addItem(ItemCategory cat, int asset, Vector2 pos) {
+  itemsByCategory[cat].emplace_back(cat, asset, pos);
 }
 
 void ItemManager::populateItems(ItemCategory cat, Vector2 pos) {
   itemsByCategory.clear();
 
   addItem(cat, Random::rangeInt(0, 4), pos);
-}
-
-void ItemManager::populatePowerUps(int weapon) {
-  for (int i = 0; i < weapon; ++i) {
-    addItem(
-        ItemCategory::Weapon, 0,
-        {Random::rangeFloat(0.0f, 730.0f), Random::rangeFloat(0.0f, 730.0f)});
-  }
 }
 
 void ItemManager::drawItems(ItemCategory cat) {
