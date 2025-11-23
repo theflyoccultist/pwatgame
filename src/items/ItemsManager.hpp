@@ -24,7 +24,7 @@ struct itemTypes {
 class ItemManager {
 public:
   void addItem(ItemCategory cat, int type, Vector2 pos);
-  void populateItems(const itemTypes &items);
+  void populateItems(ItemCategory cat, Vector2 pos);
   void populatePowerUps(int weapon);
   void drawItems(ItemCategory cat);
   void updateItems(const Vector2 &playerPos, float playerSize);

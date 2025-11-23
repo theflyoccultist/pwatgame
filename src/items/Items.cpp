@@ -1,43 +1,37 @@
 #include "Items.hpp"
 #include "../texture/AssetSystem.hpp"
-#include <array>
+#include <iostream>
 
 Items::Items() {
   auto &assets = AssetSystem::instance();
 
-  const std::array<std::string, foodKinds> foods = {
-      "../assets/items/buldak.png",     "../assets/items/pho.png",
-      "../assets/items/shinramyun.png", "../assets/items/tomyum.png",
-      "../assets/items/yopokki.png",
+  allAssets[ItemCategory::Food] = {
+      &assets.loadTexture("../assets/items/buldak.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/pho.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/shinramyun.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/tomyum.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/yopokki.png", itemSize, itemSize),
   };
 
-  const std::array<std::string, drinkKinds> drinks = {
-      "../assets/items/monster.png",   "../assets/items/soju.png",
-      "../assets/items/calpis.png",    "../assets/items/bobatea.png",
-      "../assets/items/icecoffee.png",
+  allAssets[ItemCategory::Drink] = {
+      &assets.loadTexture("../assets/items/monster.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/soju.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/calpis.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/bobatea.png", itemSize, itemSize),
+      &assets.loadTexture("../assets/items/icecoffee.png", itemSize, itemSize),
   };
 
-  const std::array<std::string, weaponKinds> weapons = {
-      "../assets/items/rocket.png",
+  allAssets[ItemCategory::Weapon] = {
+      &assets.loadTexture("../assets/items/rocket.png", itemSize, itemSize),
   };
-
-  for (const auto &f : foods)
-    allAssets[ItemCategory::Food].push_back(
-        &assets.loadTexture(f, itemSize, itemSize));
-
-  for (const auto &d : drinks)
-    allAssets[ItemCategory::Drink].push_back(
-        &assets.loadTexture(d, itemSize, itemSize));
-
-  for (const auto &w : weapons)
-    allAssets[ItemCategory::Weapon].push_back(
-        &assets.loadTexture(w, itemSize, itemSize));
 }
 
 void Items::draw(ItemCategory category, Vector2 position, size_t index) {
   auto &vec = allAssets[category];
-  if (index >= vec.size())
+  if (index >= vec.size()) {
+    std::cerr << "Items::draw - index not supported!\n";
     return;
+  }
 
   AssetSystem::instance().drawTexture(vec[index], (int)position.x,
                                       (int)position.y);

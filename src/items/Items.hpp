@@ -15,7 +15,4 @@ private:
   std::unordered_map<ItemCategory, std::vector<Texture2D *>> allAssets;
 
   constexpr static int itemSize = 50;
-  constexpr static std::uint8_t foodKinds = 5;
-  constexpr static std::uint8_t drinkKinds = 5;
-  constexpr static std::uint8_t weaponKinds = 1;
 };

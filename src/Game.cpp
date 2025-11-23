@@ -37,6 +37,9 @@ void Game::run() {
       spawner.clearAllProjectiles();
 
       spawner.scheduleMusic();
+
+      spawner.loadScript("../scripts/spawnlvl1.lua");
+
       spawner.scheduleItems();
       spawner.schedulePowerUpItems();
       spawner.scheduleEnemies();

@@ -104,3 +104,12 @@ EnemyType LuaWrapper::enemyTypeFromString(std::string_view s) {
 
   return EnemyType::ZOMB;
 }
+
+ItemCategory LuaWrapper::itemTypeFromString(std::string_view s) {
+  if (s == "food")
+    return ItemCategory::Food;
+  if (s == "drink")
+    return ItemCategory::Drink;
+
+  return ItemCategory::Food;
+}

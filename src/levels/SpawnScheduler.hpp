@@ -22,6 +22,8 @@ public:
   void clearAllItems() { world.itemManager.clearAll(); }
   void clearAllProjectiles() { world.projectileManager.clearAll(); }
 
+  void loadScript(const char *filename);
+
   void scheduleMusic();
   void scheduleItems();
   void schedulePowerUpItems();

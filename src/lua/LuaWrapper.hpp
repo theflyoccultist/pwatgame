@@ -1,11 +1,13 @@
 #pragma once
 
 #include "../entities/Enemy.hpp"
+#include "../items/ItemsManager.hpp"
 #include <cstdint>
 #include <expected>
 #include <lua.hpp>
 #include <ostream>
 #include <string>
+#include <string_view>
 
 enum class LuaError : uint8_t {
   FileOpenError,
@@ -41,6 +43,7 @@ public:
   LuaResultT<std::string> getString(const char *key);
 
   EnemyType enemyTypeFromString(std::string_view s);
+  ItemCategory itemTypeFromString(std::string_view s);
 
 private:
   lua_State *L;

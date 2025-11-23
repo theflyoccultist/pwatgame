@@ -1,3 +1,8 @@
+ItemSpawns = {
+	{ type = "food", x = 250, y = 350, delay = 1.0 },
+	{ type = "drink", x = 450, y = 650, delay = 3.0 },
+}
+
 EnemySpawns = {
 	{ type = "zomb", delay = 1.25, numEnemies = 6 },
 	{ type = "sniper", delay = 2.25, numEnemies = 1 },
