@@ -2,6 +2,7 @@
 
 #include "World.hpp"
 #include "levels/SpawnScheduler.hpp"
+#include "lua/LuaWrapper.hpp"
 #include <cstdint>
 #include <raylib.h>
 
@@ -25,4 +26,5 @@ public:
 
 private:
   World world;
+  LuaWrapper lua;
 };

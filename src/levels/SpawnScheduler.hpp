@@ -1,11 +1,12 @@
 #include "../World.hpp"
 #include "../levels/Scheduler.hpp"
+#include "../lua/LuaWrapper.hpp"
 #include <raylib.h>
 #include <unordered_set>
 
 class SpawnScheduler {
 public:
-  SpawnScheduler(World &w) : world(w) {}
+  SpawnScheduler(LuaWrapper &lua, World &w) : lua(lua), world(w) {}
 
   void initEnemies() {
     world.enemyManager.init();
@@ -59,7 +60,8 @@ public:
   }
 
 private:
+  LuaWrapper &lua;
   World &world;
-  Scheduler scheduler;
   static const std::unordered_set<EnemyType> level1Enemies;
+  Scheduler scheduler;
 };

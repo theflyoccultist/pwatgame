@@ -1,6 +1,8 @@
 #include "SpawnScheduler.hpp"
 #include <array>
-#include <cmath>
+#include <expected>
+#include <iostream>
+#include <string_view>
 #include <vector>
 
 void SpawnScheduler::scheduleMusic() {
@@ -59,41 +61,53 @@ const std::unordered_set<EnemyType> SpawnScheduler::level1Enemies = {
     EnemyType::GODSIP,
 };
 
+template <typename T> std::expected<T, LuaError> default_value(T v) {
+  return v;
+}
+
 void SpawnScheduler::scheduleEnemies() {
   struct spawnEnemy {
-    float delay;
     EnemyType type;
+    double delay;
     int numEnemies;
   };
 
-  std::array<spawnEnemy, 25> enemySpawnData{};
-  for (size_t i = 0; i < enemySpawnData.size(); i++) {
-    float t = static_cast<float>(i) / (enemySpawnData.size() - 1);
+  lua.runFile("../scripts/enemyspawn.lua").or_else([](LuaError e) {
+    std::cerr << e << "\n";
+    return std::expected<void, LuaError>();
+  });
 
-    float minRangeF = std::lerp(0.0f, 70.0f, t);
-    float maxRangeF = std::lerp(50.0f, 120.0f, t);
+  lua.getTable("EnemySpawns")
+      .and_then([&](void) -> LuaResultT<void> {
+        int len = (int)lua_rawlen(lua.getState(), -1);
 
-    float minRangeI_f = std::lerp(3.0f, 7.0f, t);
-    float maxRangeI_f = std::lerp(7.0f, 12.0f, t);
+        for (int i = 1; i <= len; i++) {
+          lua_rawgeti(lua.getState(), -1, i);
 
-    int minRangeI = static_cast<int>(minRangeI_f);
-    int maxRangeI = static_cast<int>(maxRangeI_f);
+          spawnEnemy wave;
+          wave.type = lua.getString("type")
+                          .transform([&](const std::string_view &s) {
+                            return lua.enemyTypeFromString(s);
+                          })
+                          .value_or(EnemyType::ZOMB);
+          wave.delay = lua.getNumber("delay").value_or(0.0);
 
-    enemySpawnData[i] = {Random::rangeFloat(minRangeF, maxRangeF),
-                         static_cast<EnemyType>(Random::rangeInt(
-                             0, (int)level1Enemies.size() - 1)),
-                         Random::rangeInt(minRangeI, maxRangeI)};
-  }
+          wave.numEnemies = (int)lua.getInt("numEnemies").value_or(0);
 
-  for (const auto &spawn : enemySpawnData) {
-    scheduler.schedule(spawn.delay,
-                       [type = spawn.type, n = spawn.numEnemies, this] {
-                         world.enemyManager.spawnEnemies(type, n);
-                       });
-  }
+          scheduler.schedule(wave.delay, [&] {
+            world.enemyManager.spawnEnemies(wave.type, wave.numEnemies);
+          });
 
-  world.enemyManager.spawnEnemies(EnemyType::SNIPER, Random::rangeInt(3, 8));
-  world.enemyManager.spawnEnemies(EnemyType::ZOMB, Random::rangeInt(3, 8));
+          lua_pop(lua.getState(), 1);
+        }
+
+        return {};
+      })
+
+      .or_else([](LuaError e) {
+        std::cerr << "Expected spawn table: " << e << "\n";
+        return std::expected<void, LuaError>();
+      });
 }
 
 void SpawnScheduler::scheduleMiniBoss() {

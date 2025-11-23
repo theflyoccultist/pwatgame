@@ -3,13 +3,16 @@
 #include <iostream>
 #include <string>
 
-std::ostream &operator<<(std::ostream &os, const LuaError err) {
+std::ostream &operator<<(std::ostream &os, const LuaError &err) {
   switch (err) {
   case LuaError::FileOpenError:
-    os << "File not found";
+    os << "Lua error: File not found";
     break;
   case LuaError::RuntimeError:
     os << "Lua runtime error";
+    break;
+  case LuaError::SyntaxError:
+    os << "Lua Syntax error";
     break;
   case LuaError::IntegerNotFound:
     os << "Lua integer not found";
@@ -27,22 +30,28 @@ std::ostream &operator<<(std::ostream &os, const LuaError err) {
   return os;
 };
 
-LuaResult LuaWrapper::runFile(const char *filename) {
+LuaResultT<void> LuaWrapper::runFile(const char *filename) {
   if (luaL_dofile(L, filename) != LUA_OK) {
-    lua_pop(L, 1);
-    return std::unexpected(LuaError::FileOpenError);
-  }
-
-  if (lua_pcall(L, 0, LUA_MULTRET, 0) != LUA_OK) {
     std::cerr << lua_tostring(L, -1) << "\n";
     lua_pop(L, 1);
-    return std::unexpected(LuaError::RuntimeError);
+    return std::unexpected(LuaError::FileOpenError);
   }
 
   return {};
 }
 
-LuaResultT<int> LuaWrapper::getInt(const char *key) {
+LuaResultT<void> LuaWrapper::getTable(const char *name) {
+  lua_getglobal(L, name);
+
+  if (!lua_istable(L, -1)) {
+    lua_pop(L, 1);
+    return std::unexpected(LuaError::TypeError);
+  }
+
+  return {};
+}
+
+LuaResultT<long long> LuaWrapper::getInt(const char *key) {
   lua_getfield(L, -1, key);
 
   if (!lua_isinteger(L, -1)) {
@@ -81,7 +90,7 @@ LuaResultT<std::string> LuaWrapper::getString(const char *key) {
   return value;
 }
 
-EnemyType enemyTypeFromString(std::string_view s) {
+EnemyType LuaWrapper::enemyTypeFromString(std::string_view s) {
   if (s == "godsip")
     return EnemyType::GODSIP;
   if (s == "monitor")

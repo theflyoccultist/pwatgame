@@ -7,10 +7,10 @@ class Scheduler {
 public:
   void init() {
     tasks.clear();
-    currentTime = 0.0f;
+    currentTime = 0.0;
   }
 
-  void schedule(float delay, std::function<void()> action) {
+  void schedule(double delay, std::function<void()> action) {
     tasks.push_back({currentTime + delay, std::move(action), false});
   }
 
@@ -26,11 +26,11 @@ public:
 
 private:
   struct Task {
-    float triggerTime;
+    double triggerTime;
     std::function<void()> action;
     bool done;
   };
 
-  float currentTime = 0.0f;
+  double currentTime = 0.0;
   std::vector<Task> tasks;
 };
