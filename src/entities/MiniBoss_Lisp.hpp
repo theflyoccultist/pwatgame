@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "MiniBoss.hpp"
@@ -6,10 +7,10 @@
 #include <iostream>
 #include <raylib.h>
 
-class Windows : public MiniBoss {
+class Lisp : public MiniBoss {
 public:
-  Windows(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : MiniBoss(MiniBossType::WINDOWS, pos, {180.0f, 2600}, textures) {}
+  Lisp(Vector2 pos, std::array<Texture2D *, 3> textures)
+      : MiniBoss(MiniBossType::LISP, pos, {180.0f, 2600}, textures) {}
 
   void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
     bossTimer += dt;
@@ -17,9 +18,9 @@ public:
 
     if (bossTimer >= 10.0f && bossTimer <= 20.0f) {
       if (currentHP <= totalHP)
-        currentHP += 1;
+        currentHP -= 30;
     } else if (bossTimer >= 20.0f) {
-      std::cout << "MiniBoss Windows : Phase 3\n";
+      std::cout << "MiniBoss Lisp : Phase 3\n";
     }
   }
 

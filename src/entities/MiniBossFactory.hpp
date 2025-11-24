@@ -2,6 +2,7 @@
 
 #include "MiniBoss.hpp"
 #include "MiniBossType.hpp"
+#include "MiniBoss_Lisp.hpp"
 #include "MiniBoss_Windows.hpp"
 #include <array>
 #include <iostream>
@@ -41,6 +42,8 @@ public:
     switch (type) {
     case MiniBossType::WINDOWS:
       return std::make_unique<Windows>(pos, textures);
+    case MiniBossType::LISP:
+      return std::make_unique<Lisp>(pos, textures);
     default:
       return nullptr;
     }
