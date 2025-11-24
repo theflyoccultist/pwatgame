@@ -32,7 +32,7 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
                               m->position.y + (float)m->size / 2};
 
     if (m->type == BossType::WINDOWS) {
-      m->shootTowardsPlayer(projMan, {bulletStartPos, player.position, dt, 0.3f,
+      m->shootTowardsPlayer(projMan, {bulletStartPos, player.position, dt,
                                       ProjectileType::STRAIGHT});
     }
   }

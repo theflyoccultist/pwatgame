@@ -7,15 +7,15 @@
 #include <raylib.h>
 
 class Actor {
-protected:
+public:
   float shootTimer = 0.0f;
 
   struct ShootParams {
     Vector2 startPos;
     Vector2 playerPos;
     float dt;
-    float cooldown;
     ProjectileType type;
+    WeaponSpec spec;
   };
 
 private:
@@ -23,8 +23,8 @@ private:
              const Vector2 &direction) {
     shootTimer -= p.dt;
     if (shootTimer <= 0.0f) {
-      pm.spawn(Faction::Enemy, p.type, p.startPos, direction);
-      shootTimer = p.cooldown;
+      pm.spawn(Faction::Enemy, p.type, p.startPos, direction, p.spec);
+      shootTimer = p.spec.fireRate;
     }
   }
 
@@ -39,6 +39,7 @@ public:
   void shootTowardsPlayer(ProjectileManager &pm, const ShootParams &p) {
     Vector2 direction = {p.playerPos.x - p.startPos.x,
                          p.playerPos.y - p.startPos.y};
+
     float len =
         std::sqrt(direction.x * direction.x + direction.y * direction.y);
     if (len != 0) {

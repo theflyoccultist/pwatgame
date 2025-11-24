@@ -1,8 +1,10 @@
 #include "ProjectileManager.hpp"
+#include "WeaponSpec.hpp"
 
 void ProjectileManager::spawn(Faction f, ProjectileType type,
-                              const Vector2 &startPos, const Vector2 &dir) {
-  Projectile *p = factory.createProjectile(f, type, startPos, dir);
+                              const Vector2 &startPos, const Vector2 &dir,
+                              const WeaponSpec &spec) {
+  Projectile *p = factory.createProjectile(f, type, startPos, dir, spec);
   if (!p)
     return;
 

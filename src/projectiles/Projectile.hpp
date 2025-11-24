@@ -1,18 +1,10 @@
 #pragma once
 
 #include "../entities/Faction.hpp"
-#include <cstdint>
+#include "ProjectileType.hpp"
+#include "WeaponSpec.hpp"
 #include <ostream>
 #include <raylib.h>
-
-enum class ProjectileType : uint8_t {
-  STRAIGHT,
-  LONGRANGE,
-  SLOWCANNON,
-  ROCKET,
-  UZI,
-  COUNT
-};
 
 inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
   switch (type) {
@@ -38,6 +30,23 @@ inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
   return os;
 }
 
+inline const char *toString(ProjectileType type) {
+  switch (type) {
+  case ProjectileType::STRAIGHT:
+    return "STRAIGHT";
+  case ProjectileType::LONGRANGE:
+    return "LONGRANGE";
+  case ProjectileType::SLOWCANNON:
+    return "SLOWCANNON";
+  case ProjectileType::ROCKET:
+    return "ROCKET";
+  case ProjectileType::UZI:
+    return "UZI";
+  default:
+    return "UNKNOWN_PROJECTILE";
+  }
+}
+
 class Projectile {
 protected:
   struct ProjectileStats {
@@ -45,6 +54,7 @@ protected:
     Vector2 pos{};
     Vector2 dir{};
     Vector2 vel{};
+    float cooldown = 0.0f;
     float size = 0.0f;
     float lifetime = 0.0f;
     int damage = 0;
@@ -66,6 +76,18 @@ public:
   };
 
   virtual void draw() const = 0;
+
+  void reset(Faction f, Vector2 pos, Vector2 dir, const WeaponSpec &spec) {
+    stats.active = true;
+    faction = f;
+    stats.pos = pos;
+    stats.dir = dir;
+    stats.vel = {dir.x * spec.speed, dir.y * spec.speed};
+    stats.cooldown = spec.fireRate;
+    stats.size = spec.size;
+    stats.lifetime = spec.lifetime;
+    stats.damage = spec.damage;
+  }
 
   void expire() { stats.lifetime = 0.0f; }
 

@@ -3,19 +3,10 @@
 #include "../texture/AssetSystem.hpp"
 #include "../utils/clampEntities.hpp"
 #include "Actor.hpp"
+#include "EnemyType.hpp"
 #include <array>
-#include <cstdint>
 #include <iostream>
 #include <raylib.h>
-
-enum class EnemyType : uint8_t {
-  SWARMER,
-  SNIPER,
-  ZOMB,
-  GODSIP,
-  MONITOR,
-  COUNT
-};
 
 class Enemy : public Actor {
 protected:

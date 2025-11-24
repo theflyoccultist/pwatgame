@@ -5,6 +5,7 @@
 #include "Proj_Straight.hpp"
 #include "Proj_Uzi.hpp"
 #include "Proj_rocket.hpp"
+#include "WeaponSpec.hpp"
 #include <array>
 
 class ProjectilePool {
@@ -20,11 +21,12 @@ public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
 
   template <typename T>
-  static T *getFreeProjectile(Faction f, Vector2 pos, Vector2 dir) {
+  static T *getFreeProjectile(Faction f, Vector2 pos, Vector2 dir,
+                              WeaponSpec spec) {
     auto &pool = poolForType<T>();
     for (auto &p : pool) {
       if (!p.isActive()) {
-        p.reset(f, pos, dir);
+        p.reset(f, pos, dir, spec);
         return &p;
       }
     }

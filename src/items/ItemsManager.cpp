@@ -1,6 +1,7 @@
 #include "ItemsManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
 #include "../player/Player.hpp"
+#include "../projectiles/WeaponDatabase.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
@@ -50,12 +51,13 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
           break;
 
         case ItemCategory::Weapon:
-          auto p = static_cast<ProjectileType>(
+          auto newType = static_cast<ProjectileType>(
               Random::rangeInt(0, static_cast<int>(ProjectileType::COUNT) - 1));
-          std::cout << "Picked projectile type: " << p << '\n';
-          Player::upgradeAmmo(p);
+          std::cout << "Picked projectile type: " << newType << '\n';
+          PlayerState::currWeapon = newType;
+          PlayerState::currentWeaponSpec = WeaponDataBase::get(newType);
 
-          FeedbackSystem::instance().addFeedback("Weapon Upgraded", playerPos);
+          FeedbackSystem::instance().addFeedback(toString(newType), playerPos);
           AudioSystem::instance().sfx->newWeapon();
           break;
         }

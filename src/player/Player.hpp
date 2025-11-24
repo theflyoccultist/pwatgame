@@ -9,7 +9,8 @@ struct PlayerState {
   int texture;
   Vector2 position;
   Vector2 direction;
-  static inline ProjectileType currWeapon;
+  static inline ProjectileType currWeapon = ProjectileType::STRAIGHT;
+  static inline WeaponSpec currentWeaponSpec{};
   static inline int health;
   static inline float damageCooldown = 0.0f;
   static inline float playerSpeed = 600.0f;
@@ -46,7 +47,6 @@ private:
 
   float footstepTimer = 0.0f;
   static constexpr float footstepDelay = 0.44f;
-  float shootCooldown;
   float shootTimer = 0.0f;
   const float pwatCenter = static_cast<float>(PlayerState::playerSize / 2.0);
   void shoot(Vector2 startPosition, Vector2 dir);

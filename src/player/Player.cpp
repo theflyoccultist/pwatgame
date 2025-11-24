@@ -29,18 +29,16 @@ void Player::init() {
 }
 
 void Player::shoot(Vector2 startPosition, Vector2 dir) {
-  if (PlayerState::currWeapon == ProjectileType::STRAIGHT)
-    shootCooldown = 0.15f;
-  if (PlayerState::currWeapon == ProjectileType::ROCKET)
-    shootCooldown = 0.25f;
-
   if (PlayerState::playerAmmo <= 0 || shootTimer > 0.0f)
     return;
 
-  projMan.spawn(Faction::Player, PlayerState::currWeapon, startPosition, dir);
+  const auto &spec = PlayerState::currentWeaponSpec;
+
+  projMan.spawn(Faction::Player, PlayerState::currWeapon, startPosition, dir,
+                spec);
 
   PlayerState::playerAmmo--;
-  shootTimer = shootCooldown;
+  shootTimer = spec.fireRate;
 }
 
 void Player::draw(Vector2 position, int direction) {
