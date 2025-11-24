@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MiniBoss.hpp"
+#include "MiniBossType.hpp"
 #include "MiniBoss_Windows.hpp"
 #include <array>
 #include <iostream>
@@ -16,20 +17,20 @@ public:
   void loadAssets() {
     auto &assets = AssetSystem::instance();
 
-    bossTextures[BossType::WINDOWS] = {
+    bossTextures[MiniBossType::WINDOWS] = {
         &assets.loadTexture("../assets/bosses/win_HIGH.png", 200, 200),
         &assets.loadTexture("../assets/bosses/win_MED.png", 200, 200),
         &assets.loadTexture("../assets/bosses/win_LOW.png", 200, 200),
     };
 
-    bossTextures[BossType::LISP] = {
+    bossTextures[MiniBossType::LISP] = {
         &assets.loadTexture("../assets/bosses/lisp_HIGH.png", 200, 200),
         &assets.loadTexture("../assets/bosses/lisp_MED.png", 200, 200),
         &assets.loadTexture("../assets/bosses/lisp_LOW.png", 200, 200),
     };
   }
 
-  std::unique_ptr<MiniBoss> create(BossType type, Vector2 pos) {
+  std::unique_ptr<MiniBoss> create(MiniBossType type, Vector2 pos) {
     auto it = bossTextures.find(type);
     if (it == bossTextures.end()) {
       std::cerr << "MiniBossFactory::create: No textures for type\n";
@@ -38,7 +39,7 @@ public:
 
     const auto textures = it->second;
     switch (type) {
-    case BossType::WINDOWS:
+    case MiniBossType::WINDOWS:
       return std::make_unique<Windows>(pos, textures);
     default:
       return nullptr;
@@ -46,5 +47,5 @@ public:
   }
 
 private:
-  std::unordered_map<BossType, std::array<Texture2D *, 3>> bossTextures;
+  std::unordered_map<MiniBossType, std::array<Texture2D *, 3>> bossTextures;
 };

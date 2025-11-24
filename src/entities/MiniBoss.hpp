@@ -15,12 +15,12 @@ protected:
   };
 
 public:
-  MiniBoss(BossType type, Vector2 pos, BossStats stats,
+  MiniBoss(MiniBossType type, Vector2 pos, BossStats stats,
            const std::array<Texture2D *, 3> &textures)
       : type(type), position(pos), speed(stats.speed), currentHP(stats.hp),
         totalHP(stats.hp), size(stats.size), textures(textures) {}
 
-  BossType type;
+  MiniBossType type;
   Vector2 position;
   float speed;
   int currentHP;

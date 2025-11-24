@@ -14,7 +14,7 @@ public:
 
   void init() { factory.loadAssets(); };
 
-  void spawnMiniBoss(BossType type);
+  void spawnMiniBoss(MiniBossType type);
 
   bool updateAll(float dt, const PlayerState &player,
                  std::span<Projectile *const> bullets);

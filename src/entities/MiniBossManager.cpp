@@ -2,7 +2,7 @@
 #include "../collisions/CollisionDetection.hpp"
 #include <utility>
 
-void MiniBossManager::spawnMiniBoss(BossType type) {
+void MiniBossManager::spawnMiniBoss(MiniBossType type) {
   Vector2 pos = {320, 320};
   auto e = factory.create(type, pos);
 
@@ -31,7 +31,7 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     Vector2 bulletStartPos = {m->position.x + (float)m->size / 2,
                               m->position.y + (float)m->size / 2};
 
-    if (m->type == BossType::WINDOWS) {
+    if (m->type == MiniBossType::WINDOWS) {
       m->shootTowardsPlayer(projMan, {bulletStartPos, player.position, dt,
                                       ProjectileType::STRAIGHT});
     }

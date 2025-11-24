@@ -9,7 +9,7 @@
 class Windows : public MiniBoss {
 public:
   Windows(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : MiniBoss(BossType::WINDOWS, pos, {180.0f, 2600}, textures) {}
+      : MiniBoss(MiniBossType::WINDOWS, pos, {180.0f, 2600}, textures) {}
 
   void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
     bossTimer += dt;

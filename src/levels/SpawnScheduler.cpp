@@ -125,8 +125,9 @@ void SpawnScheduler::scheduleMiniBoss() {
     });
   }
 
-  scheduler.schedule(
-      128.0f, [&] { world.minibossManager.spawnMiniBoss(BossType::WINDOWS); });
+  scheduler.schedule(128.0f, [&] {
+    world.minibossManager.spawnMiniBoss(MiniBossType::WINDOWS);
+  });
 }
 
 void SpawnScheduler::updateScheduler(float deltaTime) {

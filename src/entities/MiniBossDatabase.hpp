@@ -8,10 +8,10 @@ struct MiniBossSpec {
   int maxHealth;
   float speed;
   ProjectileType weapon;
-  WeaponSpec WeaponSpec;
+  WeaponSpec weaponSpec;
 };
 
 class MiniBossDatabase {
 public:
-  static const MiniBossSpec &get(BossType type);
+  static const MiniBossSpec &get(MiniBossType type);
 };
