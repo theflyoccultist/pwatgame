@@ -13,5 +13,6 @@ struct MiniBossSpec {
 
 class MiniBossDatabase {
 public:
-  static const MiniBossSpec &get(MiniBossType type);
+  static ProjectileType getWeaponType(MiniBossType m);
+  static WeaponSpec getWeaponSpec(MiniBossType m);
 };

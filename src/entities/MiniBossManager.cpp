@@ -1,5 +1,7 @@
 #include "MiniBossManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
+#include "Actor.hpp"
+#include "MiniBossDatabase.hpp"
 #include <utility>
 
 void MiniBossManager::spawnMiniBoss(MiniBossType type) {
@@ -31,9 +33,16 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     Vector2 bulletStartPos = {m->position.x + (float)m->size / 2,
                               m->position.y + (float)m->size / 2};
 
+    Actor::ShootParams p;
+    p.startPos = bulletStartPos;
+    p.playerPos = player.position;
+    p.dt = dt;
+
+    p.type = MiniBossDatabase::getWeaponType(m->type);
+    p.spec = MiniBossDatabase::getWeaponSpec(m->type);
+
     if (m->type == MiniBossType::WINDOWS) {
-      m->shootTowardsPlayer(projMan, {bulletStartPos, player.position, dt,
-                                      ProjectileType::STRAIGHT});
+      m->shootTowardsPlayer(projMan, p);
     }
   }
 
