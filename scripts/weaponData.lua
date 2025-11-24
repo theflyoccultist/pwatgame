@@ -1,7 +1,19 @@
+local function make_weapon(type, speed, fireRate, size, lifetime, damage, spread)
+	return {
+		type = type,
+		speed = speed,
+		fireRate = fireRate,
+		size = size,
+		lifetime = lifetime,
+		damage = damage,
+		spread = spread,
+	}
+end
+
 Weapons = {
-	{ type = "longrange", speed = 400, fireRate = 0.1, size = 8, lifetime = 3, damage = 60, spread = 4 },
-	{ type = "slowcannon", speed = 800, fireRate = 0.08, size = 3, lifetime = 6, damage = 100, spread = 1 },
-	{ type = "straight", speed = 1600, fireRate = 0.21, size = 5, lifetime = 8, damage = 22, spread = 3 },
-	{ type = "uzi", speed = 560, fireRate = 0.3, size = 10, lifetime = 1, damage = 10, spread = 8 },
-	{ type = "rocket", speed = 444, fireRate = 0.15, size = 20, lifetime = 3, damage = 40, spread = 4 },
+	make_weapon("longrange", 400, 0.1, 8, 8, 70, 0),
+	make_weapon("slowcannon", 800, 0.7, 1, 6, 10, 0),
+	make_weapon("straight", 1600, 0.2, 5, 1.6, 55, 0),
+	make_weapon("uzi", 1100, 0.5, 6, 2.1, 88, 0),
+	make_weapon("rocket", 1200, 0.6, 3, 4, 46, 0),
 }

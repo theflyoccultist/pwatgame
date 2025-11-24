@@ -1,14 +1,50 @@
+local function create_item(type, x, y, delay)
+	return {
+		type = type,
+		x = x,
+		y = y,
+		delay = delay,
+	}
+end
+
 ItemSpawns = {
-	{ type = "food", x = 250, y = 350, delay = 1.0 },
-	{ type = "drink", x = 450, y = 650, delay = 3.0 },
-	{ type = "weapon", x = 150, y = 250, delay = 4.0 },
+	create_item("food", 250, 350, 1.0),
+	create_item("food", 280, 350, 4.0),
+	create_item("food", 290, 450, 9.5),
+	create_item("food", 280, 150, 16.8),
+	create_item("food", 210, 650, 22.1),
+	create_item("food", 150, 750, 29.0),
+	create_item("food", 50, 150, 15.0),
+	create_item("drink", 50, 150, 16.0),
+	create_item("drink", 50, 180, 18.0),
+	create_item("drink", 50, 250, 22.0),
+	create_item("drink", 50, 350, 24.0),
+	create_item("drink", 50, 390, 31.0),
+	create_item("drink", 50, 440, 43.0),
+	create_item("drink", 50, 560, 55.0),
+	create_item("drink", 50, 650, 67.0),
+	create_item("weapon", 10, 650, 5.0),
+	create_item("weapon", 10, 650, 11.0),
+	create_item("weapon", 10, 650, 19.0),
+	create_item("weapon", 10, 650, 43.0),
+	create_item("weapon", 10, 650, 55.0),
+	create_item("weapon", 10, 650, 64.0),
+	create_item("weapon", 10, 650, 88.0),
 }
 
+local function create_enemy(type, delay, numEnemies)
+	return {
+		type = type,
+		delay = delay,
+		numEnemies = numEnemies,
+	}
+end
+
 EnemySpawns = {
-	{ type = "zomb", delay = 1.25, numEnemies = 6 },
-	{ type = "sniper", delay = 2.25, numEnemies = 1 },
-	{ type = "sniper", delay = 8.25, numEnemies = 5 },
-	{ type = "swarmer", delay = 26.15, numEnemies = 23 },
-	{ type = "godsip", delay = 34.25, numEnemies = 85 },
-	{ type = "zomb", delay = 64.10, numEnemies = 100 },
+	create_enemy("zomb", 1.25, 1),
+	create_enemy("sniper", 8.25, 3),
+	create_enemy("swarmer", 26.15, 1),
+	create_enemy("godsip", 33.15, 1),
+	create_enemy("zomb", 43.15, 5),
+	create_enemy("monitor", 43.15, 5),
 }
