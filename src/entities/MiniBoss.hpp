@@ -2,11 +2,9 @@
 
 #include "../texture/AssetSystem.hpp"
 #include "Actor.hpp"
+#include "MiniBossType.hpp"
 #include <array>
-#include <cstdint>
 #include <raylib.h>
-
-enum class BossType : uint8_t { WINDOWS, LISP };
 
 class MiniBoss : public Actor {
 protected:
