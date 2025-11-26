@@ -1,15 +1,12 @@
 #pragma once
 
 #include "MiniBoss.hpp"
+#include "MiniBossPool.hpp"
 #include "MiniBossType.hpp"
-#include "MiniBoss_Lisp.hpp"
-#include "MiniBoss_Windows.hpp"
 #include <array>
 #include <iostream>
-#include <memory>
 #include <raylib.h>
 #include <string>
-#include <unordered_map>
 
 class MiniBossFactory {
 public:
@@ -18,37 +15,32 @@ public:
   void loadAssets() {
     auto &assets = AssetSystem::instance();
 
-    bossTextures[MiniBossType::WINDOWS] = {
+    Windows::sharedTextures = {
         &assets.loadTexture("../assets/bosses/win_HIGH.png", 200, 200),
         &assets.loadTexture("../assets/bosses/win_MED.png", 200, 200),
         &assets.loadTexture("../assets/bosses/win_LOW.png", 200, 200),
     };
 
-    bossTextures[MiniBossType::LISP] = {
+    Lisp::sharedTextures = {
         &assets.loadTexture("../assets/bosses/lisp_HIGH.png", 200, 200),
         &assets.loadTexture("../assets/bosses/lisp_MED.png", 200, 200),
         &assets.loadTexture("../assets/bosses/lisp_LOW.png", 200, 200),
     };
   }
 
-  std::unique_ptr<MiniBoss> create(MiniBossType type, Vector2 pos) {
-    auto it = bossTextures.find(type);
-    if (it == bossTextures.end()) {
-      std::cerr << "MiniBossFactory::create: No textures for type\n";
-      return nullptr;
-    }
-
-    const auto textures = it->second;
+  MiniBoss *create(MiniBossType type, Vector2 pos) {
     switch (type) {
     case MiniBossType::WINDOWS:
-      return std::make_unique<Windows>(pos, textures);
+      return MiniBossPool::getFreeMiniBoss<Windows>(pos);
+
     case MiniBossType::LISP:
-      return std::make_unique<Lisp>(pos, textures);
+      return MiniBossPool::getFreeMiniBoss<Lisp>(pos);
+
     default:
+      std::cerr << "Unknown MiniBoss Type!\n";
       return nullptr;
     }
   }
 
 private:
-  std::unordered_map<MiniBossType, std::array<Texture2D *, 3>> bossTextures;
 };

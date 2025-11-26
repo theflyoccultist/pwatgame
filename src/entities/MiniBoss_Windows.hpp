@@ -8,16 +8,26 @@
 
 class Windows : public MiniBoss {
 public:
-  Windows(Vector2 pos, std::array<Texture2D *, 3> textures)
-      : MiniBoss(MiniBossType::WINDOWS, pos, {180.0f, 2600}, textures) {}
+  static std::array<Texture2D *, 3> sharedTextures;
+  Windows() : MiniBoss(MiniBossType::WINDOWS, sharedTextures) {}
+
+  void reset(Vector2 pos) {
+    stats.active = true;
+    stats.pos = pos;
+    stats.speed = 0;
+    stats.totalHP = 1000;
+    stats.currentHP = stats.totalHP;
+
+    textures = sharedTextures;
+  }
 
   void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
     bossTimer += dt;
-    position = {position.x, position.y + (sinf(bossTimer) * .25f)};
+    stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossTimer) * .25f)};
 
     if (bossTimer >= 10.0f && bossTimer <= 20.0f) {
-      if (currentHP <= totalHP)
-        currentHP += 1;
+      if (stats.currentHP <= stats.totalHP)
+        stats.currentHP += 1;
     } else if (bossTimer >= 20.0f) {
       std::cout << "MiniBoss Windows : Phase 3\n";
     }

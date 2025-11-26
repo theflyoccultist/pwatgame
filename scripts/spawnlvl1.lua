@@ -1,3 +1,5 @@
+-- item type, x and y position and their time of spawning can be scripted.
+
 local function create_item(type, x, y, delay)
 	return {
 		type = type,
@@ -31,6 +33,9 @@ ItemSpawns = {
 	create_item("weapon", 10, 650, 64.0),
 	create_item("weapon", 10, 650, 88.0),
 }
+
+-- enemy type, their time of spawning and their number can be scripted.
+-- their position is randomized at the moment.
 
 local function create_enemy(type, delay, numEnemies)
 	return {

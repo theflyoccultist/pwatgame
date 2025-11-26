@@ -1,3 +1,5 @@
+-- yet to be implemented: weapon characteristics that are configurable without recompiling
+
 local function make_weapon(type, speed, fireRate, size, lifetime, damage, spread)
 	return {
 		type = type,

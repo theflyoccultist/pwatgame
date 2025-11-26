@@ -4,7 +4,7 @@
 #include "../projectiles/ProjectileManager.hpp"
 #include "MiniBoss.hpp"
 #include "MiniBossFactory.hpp"
-#include <memory>
+#include <array>
 #include <raylib.h>
 #include <span>
 
@@ -20,14 +20,23 @@ public:
                  std::span<Projectile *const> bullets);
 
   void drawAll() {
-    for (auto &m : miniBosses)
-      m->draw();
+    for (auto *m : miniBosses)
+      if (m && m->isAlive())
+        m->draw();
   };
 
-  void clearAll() { miniBosses.clear(); }
+  void clearAll() {
+    for (auto *&m : miniBosses) {
+      if (m) {
+        m->deactivate();
+        m = nullptr;
+      }
+    }
+  }
 
 private:
-  std::vector<std::unique_ptr<MiniBoss>> miniBosses;
+  static constexpr int MINIBOSS_POOL = 10;
+  std::array<MiniBoss *, MINIBOSS_POOL> miniBosses{};
   MiniBossFactory factory;
 
   ProjectileManager &projMan;

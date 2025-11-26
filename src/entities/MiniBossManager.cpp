@@ -2,36 +2,48 @@
 #include "../collisions/CollisionDetection.hpp"
 #include "Actor.hpp"
 #include "MiniBossDatabase.hpp"
-#include <utility>
 
 void MiniBossManager::spawnMiniBoss(MiniBossType type) {
-  Vector2 pos = {320, 320};
-  auto e = factory.create(type, pos);
+  for (auto *&slot : miniBosses) {
+    if (!slot || !slot->isActive()) {
+      Vector2 pos = {320, 320};
+      MiniBoss *m = factory.create(type, pos);
 
-  if (e)
-    miniBosses.push_back(std::move(e));
+      if (m) {
+        slot = m;
+        m->activate();
+      }
+    }
+  }
 };
 
 bool MiniBossManager::updateAll(float dt, const PlayerState &player,
                                 std::span<Projectile *const> bullets) {
   using namespace Collisions;
 
-  for (auto &m : miniBosses) {
+  for (auto *m : miniBosses) {
+    if (!m || !m->isAlive())
+      continue;
+
     m->update(dt, player.position);
 
     for (auto &b : bullets) {
+      if (!b || !b->isActive())
+        continue;
+
       if (b->faction == Faction::Player &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
-                                 m->position, (float)m->size)) {
+                                 m->stats.pos, (float)m->stats.size)) {
         player.score++;
         b->expire();
+
         if (m->takeBulletIfHit(b->stats.damage))
           AudioSystem::instance().sfx->enemyKilled();
       }
     }
 
-    Vector2 bulletStartPos = {m->position.x + (float)m->size / 2,
-                              m->position.y + (float)m->size / 2};
+    Vector2 bulletStartPos = {m->stats.pos.x + (float)m->stats.size / 2,
+                              m->stats.pos.y + (float)m->stats.size / 2};
 
     Actor::ShootParams p;
     p.startPos = bulletStartPos;
@@ -41,13 +53,18 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     p.type = MiniBossDatabase::getWeaponType(m->type);
     p.spec = MiniBossDatabase::getWeaponSpec(m->type);
 
-    if (m->type == MiniBossType::WINDOWS) {
-      m->shootTowardsPlayer(projMan, p);
-    }
+    m->shootTowardsPlayer(projMan, p);
   }
 
-  bool isMiniBossKilled = static_cast<bool>(
-      std::erase_if(miniBosses, [](auto &p) { return !p->isAlive(); }));
+  bool isMiniBossKilled = false;
+
+  for (auto &m : miniBosses) {
+    if (m && !m->isAlive()) {
+      m->deactivate();
+      m = nullptr;
+      isMiniBossKilled = true;
+    }
+  }
 
   return isMiniBossKilled;
 };
