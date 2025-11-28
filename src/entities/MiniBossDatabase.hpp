@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../projectiles/ProjectileType.hpp"
+#include "../projectiles/WeaponSpec.hpp"
 #include "MiniBossSpec.hpp"
 #include "MiniBossType.hpp"
 
@@ -8,6 +10,5 @@ public:
   static ProjectileType getWeaponType(MiniBossType m);
   static WeaponSpec getWeaponSpec(MiniBossType m);
 
-  // TODO: Put MiniBoss Data here instead of in each class
-  static const MiniBossSpec &get(MiniBossType t);
+  static const MiniBossSpec &get(MiniBossType type);
 };

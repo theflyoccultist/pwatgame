@@ -11,7 +11,7 @@ file(GLOB_RECURSE SOURCES src/*.cpp)
 add_executable(pwatgame ${SOURCES})
 
 find_package(raylib REQUIRED)
-target_link_libraries(pwatgame PRIVATE raylib lua)
+target_link_libraries(pwatgame PRIVATE raylib lua5.4)
 
 # Normal
 target_compile_options(pwatgame PRIVATE -Wall -Wextra -Wpedantic)

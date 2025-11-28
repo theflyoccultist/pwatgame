@@ -2,6 +2,7 @@
 
 #include "../texture/AssetSystem.hpp"
 #include "Actor.hpp"
+#include "MiniBossSpec.hpp"
 #include "MiniBossType.hpp"
 #include <array>
 #include <iostream>
@@ -24,6 +25,16 @@ public:
 
   MiniBossStats stats;
   MiniBossType type;
+
+  void reset(Vector2 pos, const MiniBossSpec &spec) {
+    stats.active = true;
+    stats.pos = pos;
+    stats.speed = spec.speed;
+    stats.totalHP = spec.totalHP;
+    stats.currentHP = stats.totalHP;
+  }
+
+  virtual void setTexture() = 0;
 
   void draw() const override {
     float ratio =

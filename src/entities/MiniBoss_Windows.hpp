@@ -11,15 +11,7 @@ public:
   static std::array<Texture2D *, 3> sharedTextures;
   Windows() : MiniBoss(MiniBossType::WINDOWS, sharedTextures) {}
 
-  void reset(Vector2 pos) {
-    stats.active = true;
-    stats.pos = pos;
-    stats.speed = 0;
-    stats.totalHP = 1000;
-    stats.currentHP = stats.totalHP;
-
-    textures = sharedTextures;
-  }
+  void setTexture() override { textures = sharedTextures; }
 
   void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
     bossTimer += dt;

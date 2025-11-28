@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../entities/Enemy.hpp"
+#include "../entities/EnemyType.hpp"
 #include "../items/ItemsManager.hpp"
 #include <cstdint>
 #include <expected>
-#include <lua.hpp>
+#include <lua5.4/lua.hpp>
 #include <ostream>
 #include <string>
 #include <string_view>

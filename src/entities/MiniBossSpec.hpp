@@ -1,11 +1,6 @@
 #pragma once
 
-#include "../projectiles/ProjectileType.hpp"
-#include "../projectiles/WeaponSpec.hpp"
-
 struct MiniBossSpec {
-  int maxHealth;
-  float speed;
-  ProjectileType weapon;
-  WeaponSpec weaponSpec;
+  float speed = 0.0f;
+  int totalHP = 500;
 };

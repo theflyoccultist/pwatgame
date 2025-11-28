@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MiniBossSpec.hpp"
 #include "MiniBoss_Lisp.hpp"
 #include "MiniBoss_Windows.hpp"
 #include <array>
@@ -14,11 +15,13 @@ private:
 public:
   template <typename T> static std::array<T, MINIBOSS_POOL> &poolForType();
 
-  template <typename T> static T *getFreeMiniBoss(Vector2 pos) {
+  template <typename T>
+  static T *getFreeMiniBoss(Vector2 pos, MiniBossSpec spec) {
     auto &pool = poolForType<T>();
     for (auto &p : pool) {
       if (!p.isActive()) {
-        p.reset(pos);
+        p.reset(pos, spec);
+        p.setTexture();
         return &p;
       }
     }

@@ -1,15 +1,17 @@
 #include "MiniBossDatabase.hpp"
 #include "../projectiles/WeaponDatabase.hpp"
+#include "MiniBossSpec.hpp"
 #include "MiniBossType.hpp"
 #include <iostream>
 
-// static const MiniBossSpec miniBossTable[] = {
-//     {1000, 15, ProjectileType::STRAIGHT,
-//      WeaponDataBase::get(ProjectileType::STRAIGHT)},
-//
-//     {2000, 150, ProjectileType::LONGRANGE,
-//      WeaponDataBase::get(ProjectileType::LONGRANGE)},
-// };
+static const MiniBossSpec miniBossTable[] = {
+    {15, 1000},
+    {150, 100},
+};
+
+const MiniBossSpec &MiniBossDatabase::get(MiniBossType type) {
+  return miniBossTable[static_cast<int>(type)];
+}
 
 ProjectileType MiniBossDatabase::getWeaponType(MiniBossType m) {
   switch (m) {
