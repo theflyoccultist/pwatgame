@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../utils/Random.hpp"
 #include "Enemy.hpp"
 #include <array>
 #include <cmath>
@@ -11,15 +10,7 @@ public:
   static std::array<Texture2D *, 3> sharedTextures;
   Sniper() : Enemy(EnemyType::SNIPER, sharedTextures) {}
 
-  void reset(Vector2 pos) {
-    stats.active = true;
-    stats.pos = pos;
-    stats.speed = Random::rangeFloat(80, 160);
-    stats.totalHP = Random::rangeInt(40, 70);
-    stats.currentHP = stats.totalHP;
-
-    textures = sharedTextures;
-  }
+  void setTexture() override { textures = sharedTextures; }
 
   void update(float delta, Vector2 playerPos) override {
     float dist = std::sqrtf(std::powf(playerPos.x - stats.pos.x, 2) +

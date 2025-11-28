@@ -7,8 +7,8 @@
 
 class MiniBossDatabase {
 public:
+  static const MiniBossSpec &get(MiniBossType t);
+
   static ProjectileType getWeaponType(MiniBossType m);
   static WeaponSpec getWeaponSpec(MiniBossType m);
-
-  static const MiniBossSpec &get(MiniBossType type);
 };

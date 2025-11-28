@@ -3,6 +3,7 @@
 #include "../texture/AssetSystem.hpp"
 #include "../utils/clampEntities.hpp"
 #include "Actor.hpp"
+#include "EnemySpec.hpp"
 #include "EnemyType.hpp"
 #include <array>
 #include <iostream>
@@ -25,6 +26,16 @@ public:
 
   EnemyStats stats;
   EnemyType type;
+
+  void reset(Vector2 pos, const EnemySpec &spec) {
+    stats.active = true;
+    stats.pos = pos;
+    stats.speed = spec.speed;
+    stats.totalHP = spec.totalHP;
+    stats.currentHP = stats.totalHP;
+  }
+
+  virtual void setTexture() = 0;
 
   void update(float dt, Vector2 playerPos) override = 0;
 

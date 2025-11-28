@@ -29,7 +29,7 @@ public:
     };
   }
 
-  MiniBoss *create(MiniBossType type, Vector2 pos, MiniBossSpec spec) {
+  MiniBoss *create(MiniBossType type, Vector2 pos, const MiniBossSpec &spec) {
     switch (type) {
     case MiniBossType::WINDOWS:
       return MiniBossPool::getFreeMiniBoss<Windows>(pos, spec);

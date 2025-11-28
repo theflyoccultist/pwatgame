@@ -8,15 +8,7 @@ public:
   static std::array<Texture2D *, 3> sharedTextures;
   Monitor() : Enemy(EnemyType::MONITOR, sharedTextures) {}
 
-  void reset(Vector2 pos) {
-    stats.active = true;
-    stats.pos = pos;
-    stats.speed = 200.0f;
-    stats.totalHP = Random::rangeInt(60, 200);
-    stats.currentHP = stats.totalHP;
-
-    textures = sharedTextures;
-  }
+  void setTexture() override { textures = sharedTextures; }
 
   void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
     timer += delta;

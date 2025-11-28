@@ -2,6 +2,7 @@
 
 #include "Enemy.hpp"
 #include "EnemyPool.hpp"
+#include "EnemySpec.hpp"
 #include <array>
 #include <iostream>
 #include <raylib.h>
@@ -44,22 +45,22 @@ public:
     };
   }
 
-  Enemy *create(EnemyType type, Vector2 pos) {
+  Enemy *create(EnemyType type, Vector2 pos, const EnemySpec &spec) {
     switch (type) {
     case EnemyType::GODSIP:
-      return EnemyPool::getFreeEnemy<Godsip>(pos);
+      return EnemyPool::getFreeEnemy<Godsip>(pos, spec);
 
     case EnemyType::MONITOR:
-      return EnemyPool::getFreeEnemy<Monitor>(pos);
+      return EnemyPool::getFreeEnemy<Monitor>(pos, spec);
 
     case EnemyType::SNIPER:
-      return EnemyPool::getFreeEnemy<Sniper>(pos);
+      return EnemyPool::getFreeEnemy<Sniper>(pos, spec);
 
     case EnemyType::SWARMER:
-      return EnemyPool::getFreeEnemy<Swarmer>(pos);
+      return EnemyPool::getFreeEnemy<Swarmer>(pos, spec);
 
     case EnemyType::ZOMB:
-      return EnemyPool::getFreeEnemy<Zomb>(pos);
+      return EnemyPool::getFreeEnemy<Zomb>(pos, spec);
 
     default:
       std::cerr << "Unknown Enemy type!\n";

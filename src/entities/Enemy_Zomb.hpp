@@ -10,15 +10,7 @@ public:
   static std::array<Texture2D *, 3> sharedTextures;
   Zomb() : Enemy(EnemyType::ZOMB, sharedTextures) {}
 
-  void reset(Vector2 pos) {
-    stats.active = true;
-    stats.pos = pos;
-    stats.speed = 150;
-    stats.totalHP = Random::rangeInt(40, 70);
-    stats.currentHP = stats.totalHP;
-
-    textures = sharedTextures;
-  }
+  void setTexture() override { textures = sharedTextures; }
 
   void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
     if (isX) {

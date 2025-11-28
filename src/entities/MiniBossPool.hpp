@@ -16,7 +16,7 @@ public:
   template <typename T> static std::array<T, MINIBOSS_POOL> &poolForType();
 
   template <typename T>
-  static T *getFreeMiniBoss(Vector2 pos, MiniBossSpec spec) {
+  static T *getFreeMiniBoss(Vector2 pos, const MiniBossSpec &spec) {
     auto &pool = poolForType<T>();
     for (auto &p : pool) {
       if (!p.isActive()) {

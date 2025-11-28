@@ -1,5 +1,6 @@
 #pragma once
 
+#include "EnemySpec.hpp"
 #include "Enemy_Godsip.hpp"
 #include "Enemy_Monitor.hpp"
 #include "Enemy_Sniper.hpp"
@@ -20,11 +21,13 @@ private:
 public:
   template <typename T> static std::array<T, ENEMY_POOL> &poolForType();
 
-  template <typename T> static T *getFreeEnemy(Vector2 pos) {
+  template <typename T>
+  static T *getFreeEnemy(Vector2 pos, const EnemySpec &spec) {
     auto &pool = poolForType<T>();
     for (auto &p : pool) {
       if (!p.isActive()) {
-        p.reset(pos);
+        p.reset(pos, spec);
+        p.setTexture();
         return &p;
       }
     }
