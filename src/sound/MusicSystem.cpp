@@ -40,7 +40,7 @@ void MusicSystem::updateMusic() {
 }
 
 void MusicSystem::stopMusic() {
-  if (currentTrack >= -1)
+  if (currentTrack >= 0)
     (*gameScores)[currentTrack].stop();
 }
 

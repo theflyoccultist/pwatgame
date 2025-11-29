@@ -1,14 +1,10 @@
 #pragma once
 
-#include "../entities/EnemyType.hpp"
-#include "../items/ItemType.hpp"
-#include "../projectiles/ProjectileType.hpp"
 #include <cstdint>
 #include <expected>
 #include <lua5.4/lua.hpp>
 #include <ostream>
 #include <string>
-#include <string_view>
 
 enum class LuaError : uint8_t {
   FileOpenError,
@@ -30,6 +26,7 @@ public:
     L = luaL_newstate();
     luaL_openlibs(L);
   }
+
   ~LuaWrapper() {
     if (L)
       lua_close(L);
@@ -42,10 +39,6 @@ public:
   LuaResultT<long long> getInt(const char *key);
   LuaResultT<double> getNumber(const char *key);
   LuaResultT<std::string> getString(const char *key);
-
-  EnemyType enemyTypeFromString(std::string_view s);
-  ItemCategory itemTypeFromString(std::string_view s);
-  ProjectileType projTypeFromString(std::string_view s);
 
 private:
   lua_State *L;

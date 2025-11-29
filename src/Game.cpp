@@ -1,4 +1,7 @@
 #include "Game.hpp"
+#include "levels/ItemScheduler.hpp"
+#include "levels/ScheduleManager.hpp"
+#include "levels/SpawnScheduler.hpp"
 #include "player/PlayerManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
@@ -8,8 +11,10 @@ void Game::run() {
   PlayerManager playerManager(world);
   PlayerState pwatState = playerManager.init();
 
-  SpawnScheduler spawner(lua, world);
-  spawner.initEnemies();
+  ScheduleManager sm(lua, world);
+  SpawnScheduler spawnScheduler(lua, world, sm);
+  ItemScheduler itemScheduler(lua, world, sm);
+  spawnScheduler.initEnemies();
 
   UIManager::loadUI();
 
@@ -31,18 +36,18 @@ void Game::run() {
     case GameState::Restarting: {
       playerManager.reset(pwatState);
 
-      spawner.resetScheduler();
-      spawner.clearAllItems();
-      spawner.clearAllEnemies();
-      spawner.clearAllProjectiles();
+      sm.resetScheduler();
+      itemScheduler.clearAllItems();
+      spawnScheduler.clearAllEnemies();
+      sm.clearAllProjectiles();
 
-      spawner.scheduleMusic();
+      sm.scheduleMusic();
 
-      spawner.loadScript("../scripts/lvl1Data.lua");
+      sm.loadScript("../scripts/lvl1Data.lua");
 
-      spawner.scheduleItems();
-      spawner.scheduleEnemies();
-      spawner.scheduleMiniBoss();
+      itemScheduler.scheduleItems();
+      spawnScheduler.scheduleEnemies();
+      spawnScheduler.scheduleMiniBoss();
 
       Game::currentState = GameState::Playing;
       break;
@@ -53,12 +58,12 @@ void Game::run() {
 
       playerManager.update(pwatState, deltaTime);
 
-      spawner.updateScheduler(deltaTime);
-      spawner.updateItems(pwatState);
-      spawner.updateProjectiles(deltaTime);
-      spawner.updateEnemies(deltaTime, pwatState);
+      sm.updateScheduler(deltaTime);
+      itemScheduler.updateItems(pwatState);
+      sm.updateProjectiles(deltaTime);
+      spawnScheduler.updateEnemies(deltaTime, pwatState);
 
-      if (spawner.updateMiniBoss(deltaTime, pwatState))
+      if (spawnScheduler.updateMiniBoss(deltaTime, pwatState))
         Game::currentState = GameState::Won;
 
       if (IsKeyPressed(KEY_P))

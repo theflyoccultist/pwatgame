@@ -16,7 +16,7 @@ void updateMainMenu() {
   UILib::mainMenu();
 
   if (IsKeyPressed(KEY_ENTER)) {
-    Game::currentState = Game::GameState::Restarting;
+    Game::currentState = GameState::Restarting;
     audio.music->stopMusic();
     audio.music->playLevelTrack();
   }
@@ -31,17 +31,17 @@ void updatePauseMenu() {
   if (IsKeyPressed(KEY_ENTER)) {
     switch (pauseChoice) {
     case UILib::PauseMenuOpts::Resume:
-      Game::currentState = Game::GameState::Playing;
+      Game::currentState = GameState::Playing;
       audio.music->resumeMusic();
       break;
     case UILib::PauseMenuOpts::Restart:
-      Game::currentState = Game::GameState::Restarting;
+      Game::currentState = GameState::Restarting;
       break;
     case UILib::PauseMenuOpts::Options:
-      Game::currentState = Game::GameState::Options;
+      Game::currentState = GameState::Options;
       break;
     case UILib::PauseMenuOpts::BackToMenu:
-      Game::currentState = Game::GameState::MainMenu;
+      Game::currentState = GameState::MainMenu;
       audio.music->stopMusic();
       audio.music->playTitleTrack();
       break;
@@ -57,7 +57,7 @@ void updateOptionsMenu() {
   auto optionsChoice = UILib::optionsMenu(musicVol, sfxVol);
 
   if (IsKeyPressed(KEY_ENTER))
-    Game::currentState = Game::GameState::Paused;
+    Game::currentState = GameState::Paused;
 
   if (IsKeyPressed(KEY_LEFT)) {
     switch (optionsChoice) {
@@ -96,11 +96,11 @@ void updateLostMenu() {
   if (IsKeyPressed(KEY_ENTER)) {
     switch (lossChoice) {
     case UILib::LostMenuOpts::Restart:
-      Game::currentState = Game::GameState::Restarting;
+      Game::currentState = GameState::Restarting;
       break;
 
     case UILib::LostMenuOpts::Menu:
-      Game::currentState = Game::GameState::MainMenu;
+      Game::currentState = GameState::MainMenu;
       audio.music->stopMusic();
       audio.music->playTitleTrack();
       break;
@@ -120,11 +120,11 @@ void winningMenu() {
       break;
 
     case UILib::WinMenuOpts::Restart:
-      Game::currentState = Game::GameState::Restarting;
+      Game::currentState = GameState::Restarting;
       break;
 
     case UILib::WinMenuOpts::Menu:
-      Game::currentState = Game::GameState::MainMenu;
+      Game::currentState = GameState::MainMenu;
       audio.music->stopMusic();
       audio.music->playTitleTrack();
       break;

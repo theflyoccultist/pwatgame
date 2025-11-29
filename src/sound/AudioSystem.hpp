@@ -22,6 +22,7 @@ private:
     sfx = std::make_unique<SfxSystem>();
     music = std::make_unique<MusicSystem>();
   }
+
   ~AudioSystem() {
     music.reset();
     sfx.reset();
