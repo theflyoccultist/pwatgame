@@ -14,6 +14,9 @@ std::ostream &operator<<(std::ostream &os, const LuaError &err) {
   case LuaError::SyntaxError:
     os << "Lua Syntax error";
     break;
+  case LuaError::TypeError:
+    os << "Lua Type error";
+    break;
   case LuaError::IntegerNotFound:
     os << "Lua integer not found";
     break;
@@ -114,4 +117,19 @@ ItemCategory LuaWrapper::itemTypeFromString(std::string_view s) {
     return ItemCategory::Weapon;
 
   return ItemCategory::Food;
+}
+
+ProjectileType LuaWrapper::projTypeFromString(std::string_view s) {
+  if (s == "longrange")
+    return ProjectileType::LONGRANGE;
+  if (s == "slowcannon")
+    return ProjectileType::SLOWCANNON;
+  if (s == "straight")
+    return ProjectileType::STRAIGHT;
+  if (s == "uzi")
+    return ProjectileType::UZI;
+  if (s == "rocket")
+    return ProjectileType::ROCKET;
+
+  return ProjectileType::ROCKET;
 }

@@ -35,7 +35,7 @@ ItemSpawns = {
 }
 
 -- enemy type, their time of spawning and their number can be scripted.
--- their position is randomized at the moment.
+-- their x and y positions are randomized.
 
 local function spawn_enemy(type, delay, numEnemies)
 	return {

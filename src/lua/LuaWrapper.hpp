@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../entities/EnemyType.hpp"
-#include "../items/ItemsManager.hpp"
+#include "../items/ItemType.hpp"
+#include "../projectiles/ProjectileType.hpp"
 #include <cstdint>
 #include <expected>
 #include <lua5.4/lua.hpp>
@@ -44,6 +45,7 @@ public:
 
   EnemyType enemyTypeFromString(std::string_view s);
   ItemCategory itemTypeFromString(std::string_view s);
+  ProjectileType projTypeFromString(std::string_view s);
 
 private:
   lua_State *L;

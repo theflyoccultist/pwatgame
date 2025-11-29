@@ -7,7 +7,7 @@ void MiniBossManager::spawnMiniBoss(MiniBossType type) {
   for (auto *&slot : miniBosses) {
     if (!slot || !slot->isActive()) {
       Vector2 pos = {320, 320};
-      auto spec = MiniBossDatabase::get(type);
+      auto &spec = MiniBossDatabase::get(type);
       MiniBoss *m = factory.create(type, pos, spec);
 
       if (m) {

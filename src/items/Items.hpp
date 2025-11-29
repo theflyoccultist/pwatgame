@@ -1,9 +1,7 @@
-#include <cstdint>
+#include "ItemType.hpp"
 #include <raylib.h>
 #include <unordered_map>
 #include <vector>
-
-enum class ItemCategory : uint8_t { Food, Drink, Weapon };
 
 class Items {
 public:
