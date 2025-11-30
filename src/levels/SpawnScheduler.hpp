@@ -18,7 +18,7 @@ public:
     world.minibossManager.clearAll();
   }
 
-  void scheduleEnemies();
+  void scheduleEnemies(const char *filename);
   void scheduleMiniBoss();
 
   void updateEnemies(float deltaTime, const PlayerState &pwatState) {

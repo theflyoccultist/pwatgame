@@ -6,7 +6,7 @@
 #include <string_view>
 #include <vector>
 
-void SpawnScheduler::scheduleEnemies() {
+void SpawnScheduler::scheduleEnemies(const char *filename) {
   struct spawnEnemy {
     EnemyType type;
     double delay;
@@ -14,6 +14,11 @@ void SpawnScheduler::scheduleEnemies() {
   };
 
   std::vector<spawnEnemy> waves{};
+
+  lua.runFile(filename).or_else([](LuaError e) {
+    std::cerr << e << "\n";
+    return std::expected<void, LuaError>();
+  });
 
   lua.getTable("EnemySpawns")
       .and_then([&](void) -> LuaResultT<void> {

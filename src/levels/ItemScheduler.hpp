@@ -12,7 +12,7 @@ public:
 
   void clearAllItems() { world.itemManager.clearAll(); }
 
-  void scheduleItems();
+  void scheduleItems(const char *filename);
 
   void updateItems(const PlayerState &pwatState) {
     world.itemManager.updateItems(pwatState.position,

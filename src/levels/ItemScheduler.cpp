@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-void ItemScheduler::scheduleItems() {
+void ItemScheduler::scheduleItems(const char *filename) {
   struct spawnItem {
     ItemCategory cat;
     Vector2 pos;
@@ -12,6 +12,11 @@ void ItemScheduler::scheduleItems() {
   };
 
   std::vector<spawnItem> itemSpawnData{};
+
+  lua.runFile(filename).or_else([](LuaError e) {
+    std::cerr << e << "\n";
+    return std::expected<void, LuaError>();
+  });
 
   lua.getTable("ItemSpawns")
       .and_then([&](void) -> LuaResultT<void> {

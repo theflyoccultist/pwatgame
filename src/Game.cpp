@@ -3,6 +3,7 @@
 #include "levels/ScheduleManager.hpp"
 #include "levels/SpawnScheduler.hpp"
 #include "player/PlayerManager.hpp"
+#include "projectiles/WeaponDatabase.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
 #include <raylib.h>
@@ -43,10 +44,10 @@ void Game::run() {
 
       sm.scheduleMusic();
 
-      sm.loadScript("../scripts/lvl1Data.lua");
+      WeaponDataBase::loadFromLua(lua, "../scripts/weaponData.lua");
 
-      itemScheduler.scheduleItems();
-      spawnScheduler.scheduleEnemies();
+      itemScheduler.scheduleItems("../scripts/lvl1Items.lua");
+      spawnScheduler.scheduleEnemies("../scripts/lvl1Enemies.lua");
       spawnScheduler.scheduleMiniBoss();
 
       Game::currentState = GameState::Playing;
