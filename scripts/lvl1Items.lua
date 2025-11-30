@@ -10,7 +10,6 @@ local function spawn_item(type, x, y, delay)
 end
 
 ItemSpawns = {
-	spawn_item("food", 250, 350, 1.0),
 	spawn_item("food", 280, 350, 4.0),
 	spawn_item("food", 290, 450, 9.5),
 	spawn_item("food", 280, 150, 16.8),
@@ -25,6 +24,7 @@ ItemSpawns = {
 	spawn_item("drink", 50, 440, 43.0),
 	spawn_item("drink", 50, 560, 55.0),
 	spawn_item("drink", 50, 650, 67.0),
+	spawn_item("weapon", 10, 650, 0.0),
 	spawn_item("weapon", 10, 650, 5.0),
 	spawn_item("weapon", 10, 650, 11.0),
 	spawn_item("weapon", 10, 650, 19.0),

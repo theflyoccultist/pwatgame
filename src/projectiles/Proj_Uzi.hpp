@@ -7,5 +7,5 @@ class Uzi : public Projectile {
 public:
   Uzi() : Projectile(Faction::None, ProjectileType::UZI) {}
 
-  void draw() const override { DrawCircleV(stats.pos, stats.size, RED); }
+  void draw() const override { DrawCircleV(stats.pos, (float)stats.size, RED); }
 };

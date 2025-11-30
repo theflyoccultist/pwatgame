@@ -54,7 +54,7 @@ LuaResultT<void> LuaWrapper::getTable(const char *name) {
   return {};
 }
 
-LuaResultT<long long> LuaWrapper::getInt(const char *key) {
+LuaResultT<int> LuaWrapper::getInt(const char *key) {
   lua_getfield(L, -1, key);
 
   if (!lua_isinteger(L, -1)) {
@@ -67,7 +67,7 @@ LuaResultT<long long> LuaWrapper::getInt(const char *key) {
   return value;
 }
 
-LuaResultT<double> LuaWrapper::getNumber(const char *key) {
+LuaResultT<float> LuaWrapper::getNumber(const char *key) {
   lua_getfield(L, -1, key);
 
   if (!lua_isnumber(L, -1)) {
@@ -75,7 +75,7 @@ LuaResultT<double> LuaWrapper::getNumber(const char *key) {
     return std::unexpected(LuaError::NumberNotFound);
   }
 
-  int value = lua_tonumber(L, -1);
+  float value = (float)lua_tonumber(L, -1);
   lua_pop(L, 1);
   return value;
 }

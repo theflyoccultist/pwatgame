@@ -7,5 +7,7 @@ class SlowCannon : public Projectile {
 public:
   SlowCannon() : Projectile(Faction::None, ProjectileType::SLOWCANNON) {}
 
-  void draw() const override { DrawCircleV(stats.pos, stats.size, PURPLE); }
+  void draw() const override {
+    DrawCircleV(stats.pos, (float)stats.size, PURPLE);
+  }
 };

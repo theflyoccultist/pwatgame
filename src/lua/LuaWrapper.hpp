@@ -36,8 +36,8 @@ public:
 
   LuaResultT<void> runFile(const char *filename);
   LuaResultT<void> getTable(const char *name);
-  LuaResultT<long long> getInt(const char *key);
-  LuaResultT<double> getNumber(const char *key);
+  LuaResultT<int> getInt(const char *key);
+  LuaResultT<float> getNumber(const char *key);
   LuaResultT<std::string> getString(const char *key);
 
 private:

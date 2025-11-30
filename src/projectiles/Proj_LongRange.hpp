@@ -8,7 +8,7 @@ public:
   LongRange() : Projectile(Faction::None, ProjectileType::LONGRANGE) {}
 
   void draw() const override {
-    DrawCircleV(stats.pos, stats.size, PURPLE);
+    DrawCircleV(stats.pos, (float)stats.size, PURPLE);
     DrawCircleV(stats.pos, 3, GREEN);
   }
 };

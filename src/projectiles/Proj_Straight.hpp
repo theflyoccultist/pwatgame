@@ -7,5 +7,7 @@ class Straight : public Projectile {
 public:
   Straight() : Projectile(Faction::None, ProjectileType::STRAIGHT) {}
 
-  void draw() const override { DrawCircleV(stats.pos, stats.size, BLUE); }
+  void draw() const override {
+    DrawCircleV(stats.pos, (float)stats.size, BLUE);
+  }
 };

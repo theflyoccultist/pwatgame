@@ -55,7 +55,7 @@ protected:
     Vector2 dir{};
     Vector2 vel{};
     float cooldown = 0.0f;
-    float size = 0.0f;
+    int size = 0;
     float lifetime = 0.0f;
     int damage = 0;
   };
@@ -82,7 +82,7 @@ public:
     faction = f;
     stats.pos = pos;
     stats.dir = dir;
-    stats.vel = {dir.x * spec.speed, dir.y * spec.speed};
+    stats.vel = {dir.x * (float)spec.speed, dir.y * (float)spec.speed};
     stats.cooldown = spec.fireRate;
     stats.size = spec.size;
     stats.lifetime = spec.lifetime;

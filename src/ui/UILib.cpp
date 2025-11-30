@@ -62,10 +62,9 @@ void mainMenu() {
 
 void playerHUD() {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][1], 0, 0);
-  DrawText(TextFormat("Enemies remaining: %d", 0), 20, 20, 20, BLACK);
-  DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
-  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);
-  DrawText(TextFormat("Score: %d", PlayerState::score), 20, 110, 20, BLACK);
+  DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 20, 20, BLACK);
+  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 50, 20, BLACK);
+  DrawText(TextFormat("Score: %d", PlayerState::score), 20, 80, 20, BLACK);
 };
 
 template <typename Enum>

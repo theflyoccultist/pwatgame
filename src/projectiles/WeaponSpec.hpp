@@ -1,10 +1,9 @@
 #pragma once
 
 struct WeaponSpec {
-  long long speed = 1600;
-  double fireRate = 1.1;
-  unsigned int size = 5;
-  double lifetime = 1.6;
-  unsigned int damage = 55;
-  double spread = 0.0;
+  int speed = 0;
+  float fireRate = 1.1f;
+  int size = 0;
+  float lifetime = 1.6;
+  int damage = 55;
 };
