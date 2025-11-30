@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "entities/EnemyDatabase.hpp"
 #include "levels/ItemScheduler.hpp"
 #include "levels/ScheduleManager.hpp"
 #include "levels/SpawnScheduler.hpp"
@@ -45,6 +46,7 @@ void Game::run() {
       sm.scheduleMusic();
 
       WeaponDataBase::loadFromLua(lua, "../scripts/weaponData.lua");
+      EnemyDatabase::loadFromLua(lua, "../scripts/enemyData.lua");
 
       itemScheduler.scheduleItems("../scripts/lvl1Items.lua");
       spawnScheduler.scheduleEnemies("../scripts/lvl1Enemies.lua");
