@@ -32,6 +32,12 @@ public:
     case LevelID::Level2:
       itemScheduler.scheduleItems("../scripts/levels/lvl2Items.lua");
       spawnScheduler.scheduleEnemies("../scripts/levels/lvl2Enemies.lua");
+    case LevelID::Level3:
+      itemScheduler.scheduleItems("../scripts/levels/lvl3Items.lua");
+      spawnScheduler.scheduleEnemies("../scripts/levels/lvl3Enemies.lua");
+    case LevelID::Level4:
+      itemScheduler.scheduleItems("../scripts/levels/lvl4Items.lua");
+      spawnScheduler.scheduleEnemies("../scripts/levels/lvl4Enemies.lua");
     default:
       break;
     }

@@ -29,8 +29,6 @@ public:
   void clearAll() { itemsByCategory.clear(); }
 
 private:
-  void addItem(ItemCategory cat, int asset, Vector2 pos);
-
   Items itemsObj;
   std::unordered_map<ItemCategory, std::vector<Item>> itemsByCategory;
 };

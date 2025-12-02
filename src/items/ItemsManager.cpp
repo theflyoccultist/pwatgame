@@ -5,15 +5,12 @@
 #include "../sound/AudioSystem.hpp"
 #include "../utils/Random.hpp"
 #include "FeedbackSystem.hpp"
+#include <array>
 #include <iostream>
 #include <raylib.h>
 
-void ItemManager::addItem(ItemCategory cat, int asset, Vector2 pos) {
-  itemsByCategory[cat].emplace_back(cat, asset, pos);
-}
-
 void ItemManager::populateItems(ItemCategory cat, Vector2 pos) {
-  addItem(cat, Random::rangeInt(0, 4), pos);
+  itemsByCategory[cat].emplace_back(cat, Random::rangeInt(0, 4), pos);
 }
 
 void ItemManager::drawItems(ItemCategory cat) {
@@ -26,6 +23,12 @@ void ItemManager::drawItems(ItemCategory cat) {
 
   FeedbackSystem::instance().draw();
 }
+
+const std::array<ProjectileType, 3> weaponForPlayer = {
+    ProjectileType::STRAIGHT,
+    ProjectileType::ROCKET,
+    ProjectileType::UZI,
+};
 
 void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
   for (auto &[category, items] : itemsByCategory) {
@@ -49,8 +52,10 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
           break;
 
         case ItemCategory::Weapon:
-          auto newType = static_cast<ProjectileType>(
-              Random::rangeInt(0, static_cast<int>(ProjectileType::COUNT) - 1));
+          int selectedWeapon =
+              Random::rangeInt(0, static_cast<int>(weaponForPlayer.size() - 1));
+          auto newType = weaponForPlayer.at(selectedWeapon);
+
           std::cout << "Picked projectile type: " << newType << '\n';
           PlayerState::currWeapon = newType;
           PlayerState::currentWeaponSpec = WeaponDataBase::get(newType);
