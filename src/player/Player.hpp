@@ -36,7 +36,7 @@ public:
 
   static void resetPlayerHealth() { PlayerState::health = 200; }
   static void resetPlayerScore() { PlayerState::score = 0; }
-  static void resetPlayerAmmo() { PlayerState::playerAmmo = 500; }
+  static void resetPlayerAmmo() { PlayerState::playerAmmo = 0; }
   static void resetDefaultWeapon() {
     PlayerState::currWeapon = ProjectileType::STRAIGHT;
   }

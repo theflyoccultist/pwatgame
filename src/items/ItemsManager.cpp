@@ -13,8 +13,6 @@ void ItemManager::addItem(ItemCategory cat, int asset, Vector2 pos) {
 }
 
 void ItemManager::populateItems(ItemCategory cat, Vector2 pos) {
-  itemsByCategory.clear();
-
   addItem(cat, Random::rangeInt(0, 4), pos);
 }
 

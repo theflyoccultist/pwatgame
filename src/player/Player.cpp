@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "../entities/Faction.hpp"
+#include "../projectiles/WeaponDatabase.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "../utils/clampEntities.hpp"
@@ -24,8 +25,10 @@ void Player::init() {
   }
 
   shootTimer = 0.0f;
-  PlayerState::playerAmmo = 500;
+  PlayerState::playerAmmo = 0;
   PlayerState::currWeapon = ProjectileType::STRAIGHT;
+  PlayerState::currentWeaponSpec =
+      WeaponDataBase::get(ProjectileType::STRAIGHT);
 }
 
 void Player::shoot(Vector2 startPosition, Vector2 dir) {

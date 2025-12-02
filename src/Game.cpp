@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "entities/EnemyDatabase.hpp"
+#include "entities/MiniBossDatabase.hpp"
 #include "levels/ItemScheduler.hpp"
 #include "levels/ScheduleManager.hpp"
 #include "levels/SpawnScheduler.hpp"
@@ -10,6 +11,10 @@
 #include <raylib.h>
 
 void Game::run() {
+  WeaponDataBase::loadFromLua(lua, "../scripts/weaponData.lua");
+  EnemyDatabase::loadFromLua(lua, "../scripts/enemyData.lua");
+  MiniBossDatabase::loadFromLua(lua, "../scripts/minibossData.lua");
+
   PlayerManager playerManager(world);
   PlayerState pwatState = playerManager.init();
 
@@ -44,9 +49,6 @@ void Game::run() {
       sm.clearAllProjectiles();
 
       sm.scheduleMusic();
-
-      WeaponDataBase::loadFromLua(lua, "../scripts/weaponData.lua");
-      EnemyDatabase::loadFromLua(lua, "../scripts/enemyData.lua");
 
       itemScheduler.scheduleItems("../scripts/lvl1Items.lua");
       spawnScheduler.scheduleEnemies("../scripts/lvl1Enemies.lua");
