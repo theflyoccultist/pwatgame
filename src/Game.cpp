@@ -44,15 +44,15 @@ void Game::run() {
       playerManager.reset(pwatState);
 
       sm.resetScheduler();
+      sm.clearAllProjectiles();
       itemScheduler.clearAllItems();
       spawnScheduler.clearAllEnemies();
-      sm.clearAllProjectiles();
 
       sm.scheduleMusic();
 
-      itemScheduler.scheduleItems("../scripts/lvl1Items.lua");
-      spawnScheduler.scheduleEnemies("../scripts/lvl1Enemies.lua");
-      spawnScheduler.scheduleMiniBoss();
+      itemScheduler.scheduleItems("../scripts/levels/lvl1Items.lua");
+      spawnScheduler.scheduleEnemies("../scripts/levels/lvl1Enemies.lua");
+      spawnScheduler.scheduleMiniBoss("../scripts/levels/lvl1Miniboss.lua");
 
       Game::currentState = GameState::Playing;
       break;
@@ -64,8 +64,8 @@ void Game::run() {
       playerManager.update(pwatState, deltaTime);
 
       sm.updateScheduler(deltaTime);
-      itemScheduler.updateItems(pwatState);
       sm.updateProjectiles(deltaTime);
+      itemScheduler.updateItems(pwatState);
       spawnScheduler.updateEnemies(deltaTime, pwatState);
 
       if (spawnScheduler.updateMiniBoss(deltaTime, pwatState))

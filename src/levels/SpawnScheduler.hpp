@@ -19,7 +19,7 @@ public:
   }
 
   void scheduleEnemies(const char *filename);
-  void scheduleMiniBoss();
+  void scheduleMiniBoss(const char *filename);
 
   void updateEnemies(float deltaTime, const PlayerState &pwatState) {
     auto bullets = world.projectileManager.view();

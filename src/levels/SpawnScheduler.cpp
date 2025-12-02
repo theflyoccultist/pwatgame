@@ -36,8 +36,7 @@ void SpawnScheduler::scheduleEnemies(const char *filename) {
 
           wave.delay = lua.getNumber("delay").value_or(0.0);
 
-          wave.numEnemies =
-              static_cast<int>(lua.getInt("numEnemies").value_or(0));
+          wave.numEnemies = lua.getInt("numEnemies").value_or(0);
 
           waves.push_back(wave);
 
@@ -60,13 +59,52 @@ void SpawnScheduler::scheduleEnemies(const char *filename) {
   }
 }
 
-void SpawnScheduler::scheduleMiniBoss() {
-  for (int i = 0; i < 6; i++) {
-    sm.scheduler.schedule(122.0f + static_cast<float>(i), [&] {
-      world.enemyManager.spawnEnemies(EnemyType::MONITOR);
+void SpawnScheduler::scheduleMiniBoss(const char *filename) {
+  struct spawnMiniBoss {
+    MiniBossType type;
+    float delay;
+  };
+
+  std::vector<spawnMiniBoss> waves{};
+
+  lua.runFile(filename).or_else([](LuaError e) {
+    std::cerr << e << "\n";
+    return std::expected<void, LuaError>();
+  });
+
+  lua.getTable("MinibossSpawns")
+      .and_then([&](void) -> LuaResultT<void> {
+        int len = (int)lua_rawlen(lua.getState(), -1);
+
+        for (int i = 1; i <= len; i++) {
+          lua_rawgeti(lua.getState(), -1, i);
+
+          spawnMiniBoss wave;
+
+          wave.type = lua.getString("type")
+                          .transform([&](const std::string_view &s) {
+                            return TypeFromString::mbTypeFromString(s);
+                          })
+                          .value_or(MiniBossType::LISP);
+
+          wave.delay = lua.getNumber("delay").value_or(200.0f);
+
+          waves.push_back(wave);
+
+          lua_pop(lua.getState(), 1);
+        }
+
+        return {};
+      })
+
+      .or_else([](LuaError e) {
+        std::cerr << "Expected spawn table: " << e << "\n";
+        return std::expected<void, LuaError>();
+      });
+
+  for (auto &wave : waves) {
+    sm.scheduler.schedule(wave.delay, [type = wave.type, this] {
+      world.minibossManager.spawnMiniBoss(type);
     });
   }
-
-  sm.scheduler.schedule(
-      128.0f, [&] { world.minibossManager.spawnMiniBoss(MiniBossType::LISP); });
 }
