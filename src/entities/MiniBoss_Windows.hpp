@@ -3,7 +3,6 @@
 #include "MiniBoss.hpp"
 #include <array>
 #include <cmath>
-#include <iostream>
 #include <raylib.h>
 
 class Windows : public MiniBoss {
@@ -13,18 +12,33 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float dt, [[maybe_unused]] Vector2 playerPos) override {
+  void update(float dt, Vector2 playerPos) override {
     bossTimer += dt;
     stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossTimer) * .25f)};
 
-    if (bossTimer >= 10.0f && bossTimer <= 20.0f) {
+    float bossCooldown = std::fmodf(bossTimer, 8.0f);
+
+    if (bossCooldown >= 0.0f && bossCooldown <= 4.0f) {
+      moveTowardsPlayer(dt, playerPos);
+    } else {
       if (stats.currentHP <= stats.totalHP)
-        stats.currentHP += 1;
-    } else if (bossTimer >= 20.0f) {
-      std::cout << "MiniBoss Windows : Phase 3\n";
+        stats.currentHP++;
     }
   }
 
 private:
   float bossTimer = 0.0f;
+
+  void moveTowardsPlayer(float dt, Vector2 playerPos) {
+    Vector2 dir = {playerPos.x - stats.pos.x, playerPos.y - stats.pos.y};
+
+    float length = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
+    if (length > 0.0f) {
+      dir.x /= length;
+      dir.y /= length;
+    }
+
+    stats.pos.x += dir.x * stats.speed * dt;
+    stats.pos.y += dir.y * stats.speed * dt;
+  }
 };
