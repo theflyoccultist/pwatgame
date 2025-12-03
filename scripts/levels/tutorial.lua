@@ -1,4 +1,4 @@
-TutorialNPC = {
+Dialogue = {
 	lines = {
 		"Welcome, PwatPwat!",
 		"The objectives of this game are simple:",

@@ -1,6 +1,9 @@
+// Not added to the game yet! A module to load different levels.
+
 #pragma once
 
 #include "ItemScheduler.hpp"
+#include "ScheduleManager.hpp"
 #include "SpawnScheduler.hpp"
 #include <cstdint>
 
@@ -15,12 +18,17 @@ enum class LevelID : uint8_t {
 
 class LevelLoader {
 public:
-  LevelLoader(SpawnScheduler &ss, ItemScheduler &is)
-      : spawnScheduler(ss), itemScheduler(is) {}
+  LevelLoader(ScheduleManager &sm, SpawnScheduler &ss, ItemScheduler &is)
+      : scheduleManager(sm), spawnScheduler(ss), itemScheduler(is) {}
 
   LevelID currentLevel = LevelID::Tutorial;
 
   void load(LevelID level) {
+    scheduleManager.resetScheduler();
+    scheduleManager.clearAllProjectiles();
+    itemScheduler.clearAllItems();
+    spawnScheduler.clearAllEnemies();
+
     switch (level) {
     case LevelID::Tutorial:
       itemScheduler.scheduleItems("../scripts/levels/tutorialItems.lua");
@@ -44,6 +52,7 @@ public:
   }
 
 private:
+  ScheduleManager &scheduleManager;
   SpawnScheduler &spawnScheduler;
   ItemScheduler &itemScheduler;
 };

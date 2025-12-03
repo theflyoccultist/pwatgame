@@ -52,8 +52,7 @@ void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {
           break;
 
         case ItemCategory::Weapon:
-          int selectedWeapon =
-              Random::rangeInt(0, static_cast<int>(weaponForPlayer.size() - 1));
+          int selectedWeapon = Random::rangeInt(0, weaponForPlayer.size() - 1);
           auto newType = weaponForPlayer.at(selectedWeapon);
 
           std::cout << "Picked projectile type: " << newType << '\n';

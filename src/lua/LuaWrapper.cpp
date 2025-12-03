@@ -14,8 +14,8 @@ std::ostream &operator<<(std::ostream &os, const LuaError &err) {
   case LuaError::SyntaxError:
     os << "Lua Syntax error";
     break;
-  case LuaError::TypeError:
-    os << "Lua Type error";
+  case LuaError::TableError:
+    os << "Lua Table error";
     break;
   case LuaError::IntegerNotFound:
     os << "Lua integer not found";
@@ -48,7 +48,7 @@ LuaResultT<void> LuaWrapper::getTable(const char *name) {
 
   if (!lua_istable(L, -1)) {
     lua_pop(L, 1);
-    return std::unexpected(LuaError::TypeError);
+    return std::unexpected(LuaError::TableError);
   }
 
   return {};

@@ -10,7 +10,7 @@ enum class LuaError : uint8_t {
   FileOpenError,
   RuntimeError,
   SyntaxError,
-  TypeError,
+  TableError,
   IntegerNotFound,
   NumberNotFound,
   StringNotFound,
