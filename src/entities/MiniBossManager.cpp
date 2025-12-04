@@ -21,12 +21,14 @@ void MiniBossManager::spawnMiniBoss(MiniBossType type) {
 bool MiniBossManager::updateAll(float dt, const PlayerState &player,
                                 std::span<Projectile *const> bullets) {
   using namespace Collisions;
+  miniBossTimer += dt;
+  float bossCooldown = std::fmodf(miniBossTimer, 8.0f);
 
   for (auto *m : miniBosses) {
     if (!m || !m->isAlive())
       continue;
 
-    m->update(dt, player.position);
+    m->update(dt, player.position, bossCooldown);
 
     for (auto &b : bullets) {
       if (!b || !b->isActive())
@@ -54,7 +56,8 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     p.type = MiniBossDatabase::getWeaponType(m->type);
     p.spec = MiniBossDatabase::getWeaponSpec(m->type);
 
-    m->shootTowardsPlayer(projMan, p);
+    if (bossCooldown >= 4.0f)
+      m->shootTowardsPlayer(projMan, p);
   }
 
   bool isMiniBossKilled = false;

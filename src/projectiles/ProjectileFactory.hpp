@@ -34,6 +34,7 @@ public:
       return ProjectilePool::getFreeProjectile<Rocket>(f, startPos, dir, spec);
 
     case ProjectileType::UZI:
+      audio.sfx->uziGun();
       return ProjectilePool::getFreeProjectile<Uzi>(f, startPos, dir, spec);
 
     default:

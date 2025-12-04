@@ -52,7 +52,7 @@ const MiniBossSpec &MiniBossDatabase::get(MiniBossType type) {
 ProjectileType MiniBossDatabase::getWeaponType(MiniBossType m) {
   switch (m) {
   case MiniBossType::WINDOWS:
-    return ProjectileType::LONGRANGE;
+    return ProjectileType::SLOWCANNON;
   case MiniBossType::LISP:
     return ProjectileType::STRAIGHT;
   default:

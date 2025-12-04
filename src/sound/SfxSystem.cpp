@@ -15,6 +15,7 @@ SfxSystem::SfxSystem() {
           SoundEffect("../assets/sfx/8bit_explosion.wav"),
           SoundEffect("../assets/sfx/8bit_shoot.wav"),
           SoundEffect("../assets/sfx/8bit_rocket.wav"),
+          SoundEffect("../assets/sfx/8bit_uzi.wav"),
       });
 
   fxBank[SoundType::bonusPickup] = std::make_unique<std::vector<SoundEffect>>(
@@ -34,6 +35,7 @@ void SfxSystem::playRandSteps() {
 void SfxSystem::enemyKilled() { (*fxBank[SoundType::combatSFX])[0].play(); }
 void SfxSystem::defaultGun() { (*fxBank[SoundType::combatSFX])[1].play(); }
 void SfxSystem::rocketGun() { (*fxBank[SoundType::combatSFX])[2].play(); }
+void SfxSystem::uziGun() { (*fxBank[SoundType::combatSFX])[3].play(); }
 
 void SfxSystem::ammoAdded() { (*fxBank[SoundType::bonusPickup])[0].play(); }
 void SfxSystem::healthAdded() { (*fxBank[SoundType::bonusPickup])[1].play(); }

@@ -21,6 +21,7 @@ ItemSpawns = {
 	spawn_item("food", 650, 90, 43.8),
 	spawn_item("food", 510, 155, 49.6),
 	spawn_item("food", 458, 659, 51.6),
+	spawn_item("food", 211, 354, 59.1),
 
 	spawn_item("drink", 50, 150, 16.0),
 	spawn_item("drink", 250, 180, 18.0),
@@ -38,6 +39,10 @@ ItemSpawns = {
 	spawn_item("drink", 10, 190, 110.0),
 	spawn_item("drink", 256, 166, 113.2),
 	spawn_item("drink", 451, 296, 118.2),
+	spawn_item("drink", 542, 183, 129.2),
+	spawn_item("drink", 594, 226, 129.3),
+	spawn_item("drink", 638, 251, 129.4),
+	spawn_item("drink", 684, 116, 129.5),
 
 	spawn_item("weapon", 10, 650, 11.0),
 	spawn_item("weapon", 430, 390, 43.0),

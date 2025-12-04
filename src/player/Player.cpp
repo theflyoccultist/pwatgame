@@ -31,6 +31,12 @@ void Player::init() {
       WeaponDataBase::get(ProjectileType::STRAIGHT);
 }
 
+void Player::resetDefaultWeapon() {
+  PlayerState::currWeapon = ProjectileType::STRAIGHT;
+  PlayerState::currentWeaponSpec =
+      WeaponDataBase::get(ProjectileType::STRAIGHT);
+}
+
 void Player::shoot(Vector2 startPosition, Vector2 dir) {
   if (PlayerState::playerAmmo <= 0 || shootTimer > 0.0f)
     return;

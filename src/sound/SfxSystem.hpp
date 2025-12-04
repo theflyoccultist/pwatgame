@@ -13,6 +13,7 @@ public:
   void playRandSteps();
   void defaultGun();
   void rocketGun();
+  void uziGun();
 
   void ammoAdded();
   void healthAdded();

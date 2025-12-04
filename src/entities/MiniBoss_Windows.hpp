@@ -12,23 +12,15 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float dt, Vector2 playerPos) override {
-    bossTimer += dt;
-    stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossTimer) * .25f)};
+  void update(float dt, Vector2 playerPos, float bossCooldown) override {
+    stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
 
-    float bossCooldown = std::fmodf(bossTimer, 8.0f);
-
-    if (bossCooldown >= 0.0f && bossCooldown <= 4.0f) {
+    if (bossCooldown <= 4.0f) {
       moveTowardsPlayer(dt, playerPos);
-    } else {
-      if (stats.currentHP <= stats.totalHP)
-        stats.currentHP++;
     }
   }
 
 private:
-  float bossTimer = 0.0f;
-
   void moveTowardsPlayer(float dt, Vector2 playerPos) {
     Vector2 dir = {playerPos.x - stats.pos.x, playerPos.y - stats.pos.y};
 

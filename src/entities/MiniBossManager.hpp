@@ -35,6 +35,7 @@ public:
   }
 
 private:
+  float miniBossTimer = 0.0f;
   static constexpr int MINIBOSS_POOL = 10;
   std::array<MiniBoss *, MINIBOSS_POOL> miniBosses{};
   MiniBossFactory factory;
