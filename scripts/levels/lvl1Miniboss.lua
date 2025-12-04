@@ -11,5 +11,5 @@ local function spawn_miniboss(type, delay)
 end
 
 MinibossSpawns = {
-	spawn_miniboss("windows", 128.0),
+	spawn_miniboss("lisp", 5.0),
 }

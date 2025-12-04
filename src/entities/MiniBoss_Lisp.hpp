@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include "../utils/clampEntities.hpp"
 #include "MiniBoss.hpp"
 #include <array>
 #include <cmath>
@@ -16,8 +17,29 @@ public:
   void update(float dt, Vector2 playerPos, float bossCooldown) override {
     stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
 
-    if (bossCooldown >= 4.0f && bossCooldown <= 8.0f) {
-      stats.currentHP -= 30;
+    if (bossCooldown <= 4.0f) {
+      copyPlayerMovements(playerPos);
+    } else {
+      backToCenter(dt);
     }
+  }
+
+private:
+  void copyPlayerMovements(Vector2 playerPos) {
+    stats.pos = {playerPos.x + 100.0f, playerPos.y + 100.0f};
+    ClampEntities::clamp(stats.pos, stats.size);
+  }
+
+  void backToCenter(float dt) {
+    Vector2 dir = {320.0f - stats.pos.x, 320.0f - stats.pos.y};
+
+    float length = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
+    if (length > 0.0f) {
+      dir.x /= length;
+      dir.y /= length;
+    }
+
+    stats.pos.x += dir.x * stats.speed * dt;
+    stats.pos.y += dir.y * stats.speed * dt;
   }
 };

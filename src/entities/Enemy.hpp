@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../texture/AssetSystem.hpp"
-#include "../utils/clampEntities.hpp"
 #include "Actor.hpp"
 #include "EnemySpec.hpp"
 #include "EnemyType.hpp"

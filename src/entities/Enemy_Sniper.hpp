@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../utils/clampEntities.hpp"
 #include "Enemy.hpp"
 #include <array>
 #include <cmath>
