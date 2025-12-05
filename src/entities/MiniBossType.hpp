@@ -2,4 +2,4 @@
 
 #include <cstdint>
 
-enum class MiniBossType : uint8_t { WINDOWS, LISP };
+enum class MiniBossType : uint8_t { WINDOWS, LISP, JAVA, RUST };

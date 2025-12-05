@@ -55,6 +55,10 @@ ProjectileType MiniBossDatabase::getWeaponType(MiniBossType m) {
     return ProjectileType::SLOWCANNON;
   case MiniBossType::LISP:
     return ProjectileType::STRAIGHT;
+  case MiniBossType::JAVA:
+    return ProjectileType::UZI;
+  case MiniBossType::RUST:
+    return ProjectileType::ROCKET;
   default:
     std::cerr << "MiniBossDatabase getWeaponType : unknown MiniBoss type\n";
     return ProjectileType::ROCKET;

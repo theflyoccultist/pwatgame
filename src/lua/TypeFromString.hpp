@@ -27,6 +27,10 @@ inline MiniBossType mbTypeFromString(std::string_view s) {
     return MiniBossType::WINDOWS;
   if (s == "lisp")
     return MiniBossType::LISP;
+  if (s == "java")
+    return MiniBossType::JAVA;
+  if (s == "rust")
+    return MiniBossType::RUST;
 
   return MiniBossType::WINDOWS;
 }

@@ -33,7 +33,6 @@ void loadUIAssets() {
   assetBank[AssetType::PwatSprite] = {
       "../assets/ui/pwat_lost.png",
       "../assets/ui/pwat_win.png",
-      "../assets/bosses/explosion.png",
   };
 
   auto &asset = AssetSystem::instance();
