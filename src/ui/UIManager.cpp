@@ -17,8 +17,6 @@ void updateMainMenu() {
 
   if (IsKeyPressed(KEY_ENTER)) {
     Game::currentState = GameState::Restarting;
-    audio.music->stopMusic();
-    audio.music->playLevelTrack();
   }
 }
 

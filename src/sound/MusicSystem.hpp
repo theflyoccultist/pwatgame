@@ -6,7 +6,10 @@ class MusicSystem {
 public:
   MusicSystem();
   void playTitleTrack();
-  void playLevelTrack();
+  void playLevel1Track();
+  void playLevel2Track();
+  void playLevel3Track();
+  void playLevel4Track();
   void playBossMusic();
 
   void pauseMusic();
@@ -17,6 +20,6 @@ public:
   void changeMusicVolume(int vol);
 
 private:
-  std::unique_ptr<std::array<GameScore, 3>> gameScores;
+  std::unique_ptr<std::array<GameScore, 6>> gameScores;
   int currentTrack = -1;
 };

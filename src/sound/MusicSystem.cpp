@@ -2,9 +2,12 @@
 
 MusicSystem::MusicSystem() {
   gameScores =
-      std::make_unique<std::array<GameScore, 3>>(std::array<GameScore, 3>{
+      std::make_unique<std::array<GameScore, 6>>(std::array<GameScore, 6>{
           GameScore("../assets/music/right_to_rave.ogg"),
           GameScore("../assets/music/pseudogender.ogg"),
+          GameScore("../assets/music/england.ogg"),
+          GameScore("../assets/music/boys_in_luv.ogg"),
+          GameScore("../assets/music/thoughts.ogg"),
           GameScore("../assets/music/hasuta.ogg"),
       });
 }
@@ -14,14 +17,29 @@ void MusicSystem::playTitleTrack() {
   (*gameScores)[0].play();
 }
 
-void MusicSystem::playLevelTrack() {
+void MusicSystem::playLevel1Track() {
   currentTrack = 1;
   (*gameScores)[1].play();
 }
 
-void MusicSystem::playBossMusic() {
+void MusicSystem::playLevel2Track() {
   currentTrack = 2;
   (*gameScores)[2].play();
+}
+
+void MusicSystem::playLevel3Track() {
+  currentTrack = 3;
+  (*gameScores)[3].play();
+}
+
+void MusicSystem::playLevel4Track() {
+  currentTrack = 4;
+  (*gameScores)[4].play();
+}
+
+void MusicSystem::playBossMusic() {
+  currentTrack = 5;
+  (*gameScores)[5].play();
 }
 
 void MusicSystem::pauseMusic() {

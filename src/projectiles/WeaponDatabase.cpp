@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string_view>
 
-void WeaponDataBase::loadFromLua(LuaWrapper &lua, const char *filename) {
+void WeaponDataBase::loadFromLua(const char *filename) {
   lua.runFile(filename).or_else([](LuaError e) {
     std::cerr << e << "\n";
     return std::expected<void, LuaError>();

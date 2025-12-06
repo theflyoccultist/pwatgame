@@ -11,9 +11,13 @@
 #include <raylib.h>
 
 void Game::run() {
-  WeaponDataBase::loadFromLua(lua, "../scripts/weaponData.lua");
-  EnemyDatabase::loadFromLua(lua, "../scripts/enemyData.lua");
-  MiniBossDatabase::loadFromLua(lua, "../scripts/minibossData.lua");
+  WeaponDataBase weaponDatabase(lua);
+  EnemyDatabase enemyDatabase(lua);
+  MiniBossDatabase minibossDatabase(lua);
+
+  weaponDatabase.loadFromLua("../scripts/level1/WeaponData.lua");
+  enemyDatabase.loadFromLua("../scripts/level1/EnemyData.lua");
+  minibossDatabase.loadFromLua("../scripts/MinibossData.lua");
 
   PlayerManager playerManager(world);
   PlayerState pwatState = playerManager.init();
@@ -50,9 +54,9 @@ void Game::run() {
 
       sm.scheduleMusic();
 
-      itemScheduler.scheduleItems("../scripts/levels/lvl1Items.lua");
-      spawnScheduler.scheduleEnemies("../scripts/levels/lvl1Enemies.lua");
-      spawnScheduler.scheduleMiniBoss("../scripts/levels/lvl1Miniboss.lua");
+      spawnScheduler.scheduleEnemies("../scripts/level1/EnemySchedule.lua");
+      itemScheduler.scheduleItems("../scripts/level1/ItemSchedule.lua");
+      spawnScheduler.scheduleMiniBoss("../scripts/level1/MinibossSchedule.lua");
 
       Game::currentState = GameState::Playing;
       break;

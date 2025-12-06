@@ -9,12 +9,16 @@
 
 class MiniBossDatabase {
 public:
-  static void loadFromLua(LuaWrapper &lua, const char *filename);
+  MiniBossDatabase(LuaWrapper &lua) : lua(lua) {}
+
+  void loadFromLua(const char *filename);
   static const MiniBossSpec &get(MiniBossType t);
 
   static ProjectileType getWeaponType(MiniBossType m);
   static WeaponSpec getWeaponSpec(MiniBossType m);
 
 private:
+  LuaWrapper &lua;
+
   static inline std::unordered_map<MiniBossType, MiniBossSpec> mbTable;
 };

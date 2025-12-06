@@ -9,12 +9,16 @@
 
 class EnemyDatabase {
 public:
-  static void loadFromLua(LuaWrapper &lua, const char *filename);
+  EnemyDatabase(LuaWrapper &lua) : lua(lua) {}
+
+  void loadFromLua(const char *filename);
   static const EnemySpec &get(EnemyType e);
 
   static ProjectileType getWeaponType(EnemyType e);
   static WeaponSpec getWeaponSpec(EnemyType e);
 
 private:
+  LuaWrapper &lua;
+
   static inline std::unordered_map<EnemyType, EnemySpec> eTable;
 };

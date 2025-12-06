@@ -7,9 +7,12 @@
 
 class WeaponDataBase {
 public:
-  static void loadFromLua(LuaWrapper &lua, const char *filename);
+  WeaponDataBase(LuaWrapper &lua) : lua(lua) {}
+
+  void loadFromLua(const char *filename);
   static const WeaponSpec &get(ProjectileType t);
 
 private:
   static inline std::unordered_map<ProjectileType, WeaponSpec> wTable;
+  LuaWrapper &lua;
 };
