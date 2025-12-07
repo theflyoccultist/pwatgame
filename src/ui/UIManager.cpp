@@ -3,6 +3,7 @@
 #include "../sound/AudioSystem.hpp"
 #include "UILib.hpp"
 #include <algorithm>
+#include <iostream>
 #include <raylib.h>
 
 namespace UIManager {
@@ -12,10 +13,19 @@ void loadUI() { UILib::loadUIAssets(); }
 auto &audio = AudioSystem::instance();
 
 void updateMainMenu() {
-  UILib::mainMenu();
+  auto menuChoice = UILib::mainMenu();
 
   if (IsKeyPressed(KEY_ENTER)) {
-    Game::currentState = GameState::Restarting;
+    switch (menuChoice) {
+    case UILib::MainMenuOpts::PlayGame:
+      Game::currentState = GameState::Restarting;
+      break;
+    case UILib::MainMenuOpts::SelectLevel:
+      std::cout << "Level Selection Screen\n";
+      break;
+    default:
+      break;
+    }
   }
 }
 
@@ -139,8 +149,11 @@ void winningMenu(int currentLevel) {
 void updateCredits() {
   UILib::CreditsMenu();
 
-  if (IsKeyPressed(KEY_ENTER))
+  if (IsKeyPressed(KEY_ENTER)) {
     Game::currentState = GameState::MainMenu;
+    audio.music->stopMusic();
+    audio.music->playTitleTrack();
+  }
 }
 
 } // namespace UIManager

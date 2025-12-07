@@ -31,7 +31,6 @@ void Game::run() {
 
   auto &audio = AudioSystem::instance();
   audio.music->playTitleTrack();
-
   LevelID currentLevel = LevelID::Level1;
 
   while (!WindowShouldClose()) {
@@ -46,12 +45,14 @@ void Game::run() {
       UIManager::updateMainMenu();
       break;
 
-    case GameState::Restarting:
+    case GameState::Restarting: {
+      currentLevel = LevelID::Level1;
       playerManager.reset(pwatState);
       levelLoader.load(currentLevel);
       musicScheduler.scheduleMusic(currentLevel);
       Game::currentState = GameState::Playing;
       break;
+    }
 
     case GameState::NewLevel:
       levelLoader.load(currentLevel);

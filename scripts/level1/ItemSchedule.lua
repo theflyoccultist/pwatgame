@@ -44,7 +44,6 @@ ItemSpawns = {
 	spawn_item("drink", 638, 251, 129.4),
 	spawn_item("drink", 684, 116, 129.5),
 
-	spawn_item("weapon", 10, 650, 11.0),
 	spawn_item("weapon", 430, 390, 43.0),
 	spawn_item("weapon", 50, 110, 64.0),
 	spawn_item("weapon", 250, 150, 88.0),

@@ -3,6 +3,8 @@
 #include <cstdint>
 namespace UILib {
 
+enum class MainMenuOpts : uint8_t { PlayGame, SelectLevel, Count };
+
 enum class PauseMenuOpts : uint8_t {
   Resume,
   Restart,
@@ -19,7 +21,7 @@ enum class WinMenuOpts : uint8_t { NextLevel, Restart, Menu, Count };
 
 void loadUIAssets();
 
-void mainMenu();
+MainMenuOpts mainMenu();
 void playerHUD(int currentLevel);
 PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);

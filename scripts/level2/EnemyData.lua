@@ -9,9 +9,9 @@ local function make_enemy(type, speed, hp)
 end
 
 Enemies = {
-	make_enemy("swarmer", 120, 60),
-	make_enemy("sniper", 150, 30),
-	make_enemy("godsip", 80, 70),
-	make_enemy("zomb", 70, 40),
-	make_enemy("monitor", 300, 10),
+	make_enemy("swarmer", 150, 70),
+	make_enemy("sniper", 200, 40),
+	make_enemy("godsip", 100, 80),
+	make_enemy("zomb", 90, 40),
+	make_enemy("monitor", 300, 40),
 }

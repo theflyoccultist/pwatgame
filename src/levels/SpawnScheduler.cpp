@@ -43,6 +43,9 @@ void SpawnScheduler::scheduleEnemies(const char *filename) {
           lua_pop(lua.getState(), 1);
         }
 
+        std::cout
+            << "Spawn Scheduler - Successfully loaded lua script for enemies: "
+            << filename << "\n";
         return {};
       })
 
@@ -94,6 +97,9 @@ void SpawnScheduler::scheduleMiniBoss(const char *filename) {
           lua_pop(lua.getState(), 1);
         }
 
+        std::cout
+            << "Spawn Scheduler - Successfully loaded lua script for Miniboss: "
+            << filename << "\n";
         return {};
       })
 

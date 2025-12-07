@@ -51,12 +51,28 @@ void loadUIAssets() {
   }
 }
 
-void mainMenu() {
+MainMenuOpts mainMenu() {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0);
   AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][0], 225,
-                                      400);
-  DrawText("PwatPwat - The Game", 275, 20, 20, BLACK);
-  DrawText("Press Enter To Play", 165, 300, 40, BLACK);
+                                      225);
+  DrawText("PwatPwat - The Game", 165, 80, 40, BLACK);
+
+  static int selectedIndex = 0;
+
+  if (IsKeyPressed(KEY_DOWN))
+    selectedIndex++;
+  if (IsKeyPressed(KEY_UP))
+    selectedIndex--;
+
+  selectedIndex = std::clamp(selectedIndex, 0, (int)MainMenuOpts::Count - 1);
+
+  int posMainMenu = 540 + selectedIndex * 60;
+  DrawRectangle(180, posMainMenu, 400, 50, GREEN);
+
+  DrawText("Play Game", 305, 550, 30, BLACK);
+  DrawText("Select Level", 285, 610, 30, BLACK);
+
+  return static_cast<MainMenuOpts>(selectedIndex);
 }
 
 void playerHUD(int currentLevel) {

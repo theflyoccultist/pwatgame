@@ -36,6 +36,8 @@ void EnemyDatabase::loadFromLua(const char *filename) {
           lua_pop(lua.getState(), 1);
         }
 
+        std::cout << "Enemy Database - Successfully loaded lua script: "
+                  << filename << "\n";
         return {};
       })
 

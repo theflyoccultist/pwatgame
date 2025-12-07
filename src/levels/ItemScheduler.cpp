@@ -41,6 +41,8 @@ void ItemScheduler::scheduleItems(const char *filename) {
           lua_pop(lua.getState(), 1);
         }
 
+        std::cout << "Item Scheduler - Successfully loaded lua script: "
+                  << filename << "\n";
         return {};
       })
       .or_else([](LuaError e) {
