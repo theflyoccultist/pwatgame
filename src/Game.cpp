@@ -1,5 +1,4 @@
 #include "Game.hpp"
-
 #include "GameState.hpp"
 #include "levels/LevelID.hpp"
 #include "levels/LevelLoader.hpp"
@@ -47,15 +46,18 @@ void Game::run() {
       UIManager::updateMainMenu();
       break;
 
-    case GameState::Restarting: {
-      levelLoader.load(currentLevel);
+    case GameState::Restarting:
       playerManager.reset(pwatState);
-
+      levelLoader.load(currentLevel);
       musicScheduler.scheduleMusic(currentLevel);
-
       Game::currentState = GameState::Playing;
       break;
-    }
+
+    case GameState::NewLevel:
+      levelLoader.load(currentLevel);
+      musicScheduler.scheduleMusic(currentLevel);
+      Game::currentState = GameState::Playing;
+      break;
 
     case GameState::Playing: {
       UIManager::updatePlayerHUD(displayCurrentLevel(currentLevel));
@@ -97,7 +99,7 @@ void Game::run() {
 
     case GameState::NextLevel:
       currentLevel++;
-      Game::currentState = GameState::Restarting;
+      Game::currentState = GameState::NewLevel;
       break;
 
     case GameState::ShowCredits:
