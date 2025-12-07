@@ -10,4 +10,5 @@ enum class GameState : uint8_t {
   Options,
   Lost,
   Won,
+  NextLevel,
 };

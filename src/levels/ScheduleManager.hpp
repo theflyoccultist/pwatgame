@@ -2,24 +2,12 @@
 
 #include "../World.hpp"
 #include "../levels/Scheduler.hpp"
-#include "../lua/LuaWrapper.hpp"
 
 class ScheduleManager {
 public:
-  ScheduleManager(LuaWrapper &lua, World &w) : lua(lua), world(w) {}
+  ScheduleManager(World &w) : world(w) {}
 
   void resetScheduler() { scheduler.init(); }
-
-  void scheduleMusic() {
-    auto &audio = AudioSystem::instance();
-    audio.music->stopMusic();
-    audio.music->playLevel1Track();
-
-    scheduler.schedule(128.0f, [&] {
-      audio.music->stopMusic();
-      audio.music->playBossMusic();
-    });
-  }
 
   void clearAllProjectiles() { world.projectileManager.clearAll(); }
 
@@ -33,6 +21,5 @@ public:
   Scheduler scheduler;
 
 private:
-  LuaWrapper &lua;
   World &world;
 };

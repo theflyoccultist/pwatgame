@@ -3,7 +3,6 @@
 #include "../sound/AudioSystem.hpp"
 #include "UILib.hpp"
 #include <algorithm>
-#include <iostream>
 #include <raylib.h>
 
 namespace UIManager {
@@ -114,7 +113,7 @@ void winningMenu() {
   if (IsKeyPressed(KEY_ENTER)) {
     switch (winChoice) {
     case UILib::WinMenuOpts::NextLevel:
-      std::cout << "Not implemented yet\n";
+      Game::currentState = GameState::NextLevel;
       break;
 
     case UILib::WinMenuOpts::Restart:
