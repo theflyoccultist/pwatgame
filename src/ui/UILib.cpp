@@ -59,11 +59,13 @@ void mainMenu() {
   DrawText("Press Enter To Play", 165, 300, 40, BLACK);
 }
 
-void playerHUD() {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][1], 0, 0);
-  DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 20, 20, BLACK);
-  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 50, 20, BLACK);
-  DrawText(TextFormat("Score: %d", PlayerState::score), 20, 80, 20, BLACK);
+void playerHUD(int currentLevel) {
+  AssetSystem::instance().drawTexture(
+      uiAssets[AssetType::Background][currentLevel], 0, 0);
+  DrawText(TextFormat("Current Level: %d", currentLevel), 20, 20, 20, BLACK);
+  DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
+  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);
+  DrawText(TextFormat("Score: %d", PlayerState::score), 20, 110, 20, BLACK);
 };
 
 template <typename Enum>
@@ -138,7 +140,7 @@ LostMenuOpts losingScreen() {
   return runMenuEnum<LostMenuOpts>("Game Over!", items, index, 150, 140);
 }
 
-WinMenuOpts winningMenu() {
+WinMenuOpts winningMenu(int currentLevel) {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
   static int index = 0;
   DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
@@ -149,10 +151,16 @@ WinMenuOpts winningMenu() {
       "Restart Level",
       "Back to Menu",
   };
+
+  if (currentLevel == 4)
+    items[0] = "Show Credits";
+
   AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][1],
                                      {350.0f, 400.0f}, 14);
 
   return runMenuEnum<WinMenuOpts>("You WON!!", items, index, 150, 140);
 }
+
+void CreditsMenu() { DrawText("Rin Delahaije: Everyhing", 225, 225, 50, BLUE); }
 
 } // namespace UILib

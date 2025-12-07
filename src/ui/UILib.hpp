@@ -20,10 +20,11 @@ enum class WinMenuOpts : uint8_t { NextLevel, Restart, Menu, Count };
 void loadUIAssets();
 
 void mainMenu();
-void playerHUD();
+void playerHUD(int currentLevel);
 PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
 LostMenuOpts losingScreen();
-WinMenuOpts winningMenu();
+WinMenuOpts winningMenu(int currentLevel);
+void CreditsMenu();
 
 }; // namespace UILib

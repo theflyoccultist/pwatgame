@@ -4,7 +4,6 @@
 #include "MiniBossPool.hpp"
 #include "MiniBossSpec.hpp"
 #include "MiniBossType.hpp"
-#include "MiniBoss_Java.hpp"
 #include <array>
 #include <iostream>
 #include <raylib.h>

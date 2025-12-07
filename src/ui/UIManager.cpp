@@ -19,7 +19,7 @@ void updateMainMenu() {
   }
 }
 
-void updatePlayerHUD() { UILib::playerHUD(); }
+void updatePlayerHUD(int currentLevel) { UILib::playerHUD(currentLevel); }
 
 void updatePauseMenu() {
   auto pauseChoice = UILib::pauseMenu();
@@ -108,12 +108,16 @@ void updateLostMenu() {
   }
 }
 
-void winningMenu() {
-  auto winChoice = UILib::winningMenu();
+void winningMenu(int currentLevel) {
+  auto winChoice = UILib::winningMenu(currentLevel);
   if (IsKeyPressed(KEY_ENTER)) {
     switch (winChoice) {
     case UILib::WinMenuOpts::NextLevel:
-      Game::currentState = GameState::NextLevel;
+      if (currentLevel == 4) {
+        Game::currentState = GameState::ShowCredits;
+      } else {
+        Game::currentState = GameState::NextLevel;
+      }
       break;
 
     case UILib::WinMenuOpts::Restart:
@@ -130,6 +134,13 @@ void winningMenu() {
       break;
     }
   }
+}
+
+void updateCredits() {
+  UILib::CreditsMenu();
+
+  if (IsKeyPressed(KEY_ENTER))
+    Game::currentState = GameState::MainMenu;
 }
 
 } // namespace UIManager
