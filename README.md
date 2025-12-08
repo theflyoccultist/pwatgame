@@ -1,14 +1,24 @@
-## Pwatgame: A bullet hell game engine in C++ and Raylib
+# Pwatgame: A bullet hell game engine in C++ and Raylib
 
-### Features:
-- **Lua scripting layer**: allows the editing of Enemy, Projectiles, Mini boss data, enemy and item spawning without recompiling the game engine. It uses `std::expected` for error handling and monadic operation chaining.
+You will play as PwatPwat, a cute blob cat plush who needs to claim her throne as the cutest one ever! But some jealous enemies are getting on your way. Fight your way throughout different levels, refill your health with drinks, and refill your ammo with food, scattered across the map. Discover different weapons to use and fight different, equally evil mini bosses.
 
-- **Statically templated cache pools for Enemies, Projectiles and Minibosses:** allows stack allocation, optimal performance and prevents the game engine from spawning an excessive amount of them, therefore preventing frame lags as well.
+## Features:
+- **Game Modes**: 
+  Each level has different data, with slightly increasing difficulty and a different miniboss with different behavior for each level.
+
+  - **Default Deathless mode**: Complete all four levels at once. If you run out of health, you will simply restart from that specific level. Access it by selecting "Play Game" in the Main Menu.
+  - **Level Selection Screen**: Start from a specific level. Access it by selecting "Select Level" in the Main Menu.
+
+- **Music Composed and Arranged by myself**: The sound effects were picked up from opengameart.org, but I composed the soundtrack that you can hear throughout the game. 
+
+- **Lua scripting layer**: allows the editing of Enemy, Projectiles, Mini Boss data, Enemy and Item scheduling without recompiling the game engine, using some simple Lua tables with data. On the C++ side, it is handled using `std::expected` for safety and monadic operation chaining.
+
+- **Statically templated cache pools for Enemies, Projectiles and Mini Bosses:** these spawns without heap allocation, allowing optimal performance and prevents the game engine from spawning an excessive amount of objects, therefore preventing frame losses as well.
 
 - **Usage of CMake as a build tool**: for better multi platform compatibility and reliable compilation.
 
-### Building:
-- Make sure to have a C++23 compatible compiler. This project was built using GCC 14.2 on Trixie Debian and Arch Linux.
-- Make sure to have the Lua and Raylib libraries installed on your machine.
+## Building:
+- Make sure to have a C++23 compatible compiler. This project was built using GCC 14.2 across my Trixie Debian and Arch Linux computers.
+- Make sure to have the Lua and Raylib C libraries installed on your machine.
 
 Use the Linux_build.sh script to compile on Linux. This shell script will automatically create a new `build/` folder and generate a `pwatgame` binary that is compatible with Unix systems.
