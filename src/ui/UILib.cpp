@@ -13,7 +13,7 @@
 
 namespace UILib {
 
-enum class AssetType : uint8_t { Background, PwatMenu, PwatSprite };
+enum class AssetType : uint8_t { Background, PwatMenu, PwatSprite, PwatLevels };
 
 std::unordered_map<AssetType, std::vector<std::string>> assetBank;
 std::unordered_map<AssetType, std::vector<Texture2D *>> uiAssets;
@@ -35,6 +35,13 @@ void loadUIAssets() {
       "../assets/ui/pwat_win.png",
   };
 
+  assetBank[AssetType::PwatLevels] = {
+      "../assets/ui/pwatlevel1.png",
+      "../assets/ui/pwatlevel2.png",
+      "../assets/ui/pwatlevel3.png",
+      "../assets/ui/pwatlevel4.png",
+  };
+
   auto &asset = AssetSystem::instance();
 
   for (auto &bkg : assetBank[AssetType::Background]) {
@@ -48,6 +55,11 @@ void loadUIAssets() {
 
   for (auto &spr : assetBank[AssetType::PwatSprite]) {
     uiAssets[AssetType::PwatSprite].push_back(&asset.loadSprite(spr));
+  }
+
+  for (auto &lvl : assetBank[AssetType::PwatLevels]) {
+    uiAssets[AssetType::PwatLevels].push_back(
+        &asset.loadTexture(lvl, 150, 150));
   }
 }
 
@@ -73,6 +85,54 @@ MainMenuOpts mainMenu() {
   DrawText("Select Level", 285, 610, 30, BLACK);
 
   return static_cast<MainMenuOpts>(selectedIndex);
+}
+
+LevelOpts levelSelection() {
+  auto &asset = AssetSystem::instance();
+  asset.drawTexture(uiAssets[AssetType::Background][0], 0, 0);
+  DrawText("Level Selection", 235, 80, 40, BLACK);
+
+  static int selectedIndex = 0;
+  static int xPos = 150;
+  static int yPos = 155;
+
+  if (IsKeyPressed(KEY_RIGHT)) {
+    selectedIndex++;
+    xPos += 250;
+  }
+  if (IsKeyPressed(KEY_LEFT)) {
+    selectedIndex--;
+    xPos -= 250;
+  }
+  if (IsKeyPressed(KEY_DOWN)) {
+    selectedIndex += 2;
+    yPos += 270;
+  }
+  if (IsKeyPressed(KEY_UP)) {
+    selectedIndex -= 2;
+    yPos -= 270;
+  }
+
+  selectedIndex = std::clamp(selectedIndex, 0, (int)LevelOpts::Count - 1);
+  xPos = std::clamp(xPos, 150, 400);
+  yPos = std::clamp(yPos, 155, 425);
+
+  DrawRectangle(xPos, yPos, 200, 200, GREEN);
+  DrawText("Level 1", 210, 365, 20, BLACK);
+  asset.drawTexture(uiAssets[AssetType::PwatLevels][0], 175, 180);
+
+  DrawText("Level 2", 460, 365, 20, BLACK);
+  asset.drawTexture(uiAssets[AssetType::PwatLevels][1], 425, 180);
+
+  DrawText("Level 3", 210, 635, 20, BLACK);
+  asset.drawTexture(uiAssets[AssetType::PwatLevels][2], 175, 450);
+
+  DrawText("Level 4", 460, 635, 20, BLACK);
+  asset.drawTexture(uiAssets[AssetType::PwatLevels][3], 425, 450);
+
+  DrawText("Backspace : Back To Menu", 170, 700, 30, BLACK);
+
+  return static_cast<LevelOpts>(selectedIndex);
 }
 
 void playerHUD(int currentLevel) {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <ostream>
 
 enum class LevelID : uint8_t { Level1, Level2, Level3, Level4 };
 
@@ -10,17 +11,20 @@ inline LevelID &operator++(LevelID &level, int) {
   return level;
 }
 
-int displayCurrentLevel(LevelID level) {
+inline std::ostream &operator<<(std::ostream &os, LevelID &level) {
   switch (level) {
   case LevelID::Level1:
-    return 1;
+    os << "level 1";
+    break;
   case LevelID::Level2:
-    return 2;
+    os << "level 2";
+    break;
   case LevelID::Level3:
-    return 3;
+    os << "level 3";
+    break;
   case LevelID::Level4:
-    return 4;
-  default:
-    return 0;
+    os << "level 4";
+    break;
   }
+  return os;
 }

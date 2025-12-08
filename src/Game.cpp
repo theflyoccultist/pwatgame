@@ -1,11 +1,12 @@
 #include "Game.hpp"
 #include "GameState.hpp"
-#include "levels/LevelID.hpp"
 #include "levels/LevelLoader.hpp"
 #include "levels/MusicScheduler.hpp"
+#include "levels/displayLevel.hpp"
 #include "player/PlayerManager.hpp"
 #include "sound/AudioSystem.hpp"
 #include "ui/UIManager.hpp"
+#include <iostream>
 #include <raylib.h>
 
 void Game::run() {
@@ -42,23 +43,21 @@ void Game::run() {
 
     switch (currentState) {
     case GameState::MainMenu:
-      UIManager::updateMainMenu();
+      UIManager::updateMainMenu(currentLevel);
+      break;
+
+    case GameState::LevelSelection:
+      UIManager::updateLevelSelection(currentLevel);
       break;
 
     case GameState::Restarting: {
-      currentLevel = LevelID::Level1;
       playerManager.reset(pwatState);
       levelLoader.load(currentLevel);
       musicScheduler.scheduleMusic(currentLevel);
+      std::cout << "Current level: " << currentLevel << "\n";
       Game::currentState = GameState::Playing;
       break;
     }
-
-    case GameState::NewLevel:
-      levelLoader.load(currentLevel);
-      musicScheduler.scheduleMusic(currentLevel);
-      Game::currentState = GameState::Playing;
-      break;
 
     case GameState::Playing: {
       UIManager::updatePlayerHUD(displayCurrentLevel(currentLevel));
@@ -100,7 +99,7 @@ void Game::run() {
 
     case GameState::NextLevel:
       currentLevel++;
-      Game::currentState = GameState::NewLevel;
+      Game::currentState = GameState::Restarting;
       break;
 
     case GameState::ShowCredits:

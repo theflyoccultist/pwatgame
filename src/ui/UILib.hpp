@@ -5,6 +5,14 @@ namespace UILib {
 
 enum class MainMenuOpts : uint8_t { PlayGame, SelectLevel, Count };
 
+enum class LevelOpts : uint8_t {
+  Level1,
+  Level2,
+  Level3,
+  Level4,
+  Count,
+};
+
 enum class PauseMenuOpts : uint8_t {
   Resume,
   Restart,
@@ -22,6 +30,7 @@ enum class WinMenuOpts : uint8_t { NextLevel, Restart, Menu, Count };
 void loadUIAssets();
 
 MainMenuOpts mainMenu();
+LevelOpts levelSelection();
 void playerHUD(int currentLevel);
 PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);

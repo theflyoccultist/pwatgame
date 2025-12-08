@@ -3,7 +3,6 @@
 #include "../sound/AudioSystem.hpp"
 #include "UILib.hpp"
 #include <algorithm>
-#include <iostream>
 #include <raylib.h>
 
 namespace UIManager {
@@ -12,16 +11,47 @@ void loadUI() { UILib::loadUIAssets(); }
 
 auto &audio = AudioSystem::instance();
 
-void updateMainMenu() {
+void updateMainMenu(LevelID &currentLevel) {
   auto menuChoice = UILib::mainMenu();
 
   if (IsKeyPressed(KEY_ENTER)) {
     switch (menuChoice) {
     case UILib::MainMenuOpts::PlayGame:
+      currentLevel = LevelID::Level1;
       Game::currentState = GameState::Restarting;
       break;
     case UILib::MainMenuOpts::SelectLevel:
-      std::cout << "Level Selection Screen\n";
+      Game::currentState = GameState::LevelSelection;
+      break;
+    default:
+      break;
+    }
+  }
+}
+
+void updateLevelSelection(LevelID &currentLevel) {
+  auto levelChoice = UILib::levelSelection();
+
+  if (IsKeyPressed(KEY_BACKSPACE))
+    Game::currentState = GameState::MainMenu;
+
+  if (IsKeyPressed(KEY_ENTER)) {
+    switch (levelChoice) {
+    case UILib::LevelOpts::Level1:
+      currentLevel = LevelID::Level1;
+      Game::currentState = GameState::Restarting;
+      break;
+    case UILib::LevelOpts::Level2:
+      currentLevel = LevelID::Level2;
+      Game::currentState = GameState::Restarting;
+      break;
+    case UILib::LevelOpts::Level3:
+      currentLevel = LevelID::Level3;
+      Game::currentState = GameState::Restarting;
+      break;
+    case UILib::LevelOpts::Level4:
+      currentLevel = LevelID::Level4;
+      Game::currentState = GameState::Restarting;
       break;
     default:
       break;

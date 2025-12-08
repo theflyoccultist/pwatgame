@@ -31,6 +31,8 @@ public:
 
     switch (level) {
     case LevelID::Level1:
+      weaponDatabase.loadFromLua("../scripts/level1/WeaponData.lua");
+      enemyDatabase.loadFromLua("../scripts/level1/EnemyData.lua");
       spawnScheduler.scheduleEnemies("../scripts/level1/EnemySchedule.lua");
       itemScheduler.scheduleItems("../scripts/level1/ItemSchedule.lua");
       spawnScheduler.scheduleMiniBoss("../scripts/level1/MinibossSchedule.lua");

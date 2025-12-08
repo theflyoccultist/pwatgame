@@ -4,8 +4,8 @@
 
 enum class GameState : uint8_t {
   MainMenu,
+  LevelSelection,
   Restarting,
-  NewLevel,
   Playing,
   Paused,
   Options,
