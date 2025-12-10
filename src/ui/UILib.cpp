@@ -13,7 +13,7 @@
 
 namespace UILib {
 
-enum class AssetType : uint8_t { Background, PwatMenu, PwatSprite, PwatLevels };
+enum class AssetType : uint8_t { Background, PwatMenu, PwatSprite };
 
 std::unordered_map<AssetType, std::vector<std::string>> assetBank;
 std::unordered_map<AssetType, std::vector<Texture2D *>> uiAssets;
@@ -35,13 +35,6 @@ void loadUIAssets() {
       "../assets/ui/pwat_win.png",
   };
 
-  assetBank[AssetType::PwatLevels] = {
-      "../assets/ui/pwatlevel1.png",
-      "../assets/ui/pwatlevel2.png",
-      "../assets/ui/pwatlevel3.png",
-      "../assets/ui/pwatlevel4.png",
-  };
-
   auto &asset = AssetSystem::instance();
 
   for (auto &bkg : assetBank[AssetType::Background]) {
@@ -55,11 +48,6 @@ void loadUIAssets() {
 
   for (auto &spr : assetBank[AssetType::PwatSprite]) {
     uiAssets[AssetType::PwatSprite].push_back(&asset.loadSprite(spr));
-  }
-
-  for (auto &lvl : assetBank[AssetType::PwatLevels]) {
-    uiAssets[AssetType::PwatLevels].push_back(
-        &asset.loadTexture(lvl, 150, 150));
   }
 }
 
@@ -85,54 +73,6 @@ MainMenuOpts mainMenu() {
   DrawText("Select Level", 285, 610, 30, BLACK);
 
   return static_cast<MainMenuOpts>(selectedIndex);
-}
-
-LevelOpts levelSelection() {
-  auto &asset = AssetSystem::instance();
-  asset.drawTexture(uiAssets[AssetType::Background][0], 0, 0);
-  DrawText("Level Selection", 235, 80, 40, BLACK);
-
-  static int selectedIndex = 0;
-  static int xPos = 150;
-  static int yPos = 155;
-
-  if (IsKeyPressed(KEY_RIGHT)) {
-    selectedIndex++;
-    xPos += 250;
-  }
-  if (IsKeyPressed(KEY_LEFT)) {
-    selectedIndex--;
-    xPos -= 250;
-  }
-  if (IsKeyPressed(KEY_DOWN)) {
-    selectedIndex += 2;
-    yPos += 270;
-  }
-  if (IsKeyPressed(KEY_UP)) {
-    selectedIndex -= 2;
-    yPos -= 270;
-  }
-
-  selectedIndex = std::clamp(selectedIndex, 0, (int)LevelOpts::Count - 1);
-  xPos = std::clamp(xPos, 150, 400);
-  yPos = std::clamp(yPos, 155, 425);
-
-  DrawRectangle(xPos, yPos, 200, 200, GREEN);
-  DrawText("Level 1", 210, 365, 20, BLACK);
-  asset.drawTexture(uiAssets[AssetType::PwatLevels][0], 175, 180);
-
-  DrawText("Level 2", 460, 365, 20, BLACK);
-  asset.drawTexture(uiAssets[AssetType::PwatLevels][1], 425, 180);
-
-  DrawText("Level 3", 210, 635, 20, BLACK);
-  asset.drawTexture(uiAssets[AssetType::PwatLevels][2], 175, 450);
-
-  DrawText("Level 4", 460, 635, 20, BLACK);
-  asset.drawTexture(uiAssets[AssetType::PwatLevels][3], 425, 450);
-
-  DrawText("Backspace : Back To Menu", 170, 700, 30, BLACK);
-
-  return static_cast<LevelOpts>(selectedIndex);
 }
 
 void playerHUD(int currentLevel) {
@@ -169,9 +109,21 @@ Enum runMenuEnum(const char *title, std::span<std::string const> items,
   return static_cast<Enum>(selectedIndex);
 }
 
+LevelOpts levelSelection() {
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0);
+  static int index = 0;
+
+  std::array<std::string, 5> levels = {
+      "Level 1", "Level 2", "Level 3", "Level 4", "Back to Menu",
+  };
+
+  return runMenuEnum<LevelOpts>("Level Selection", levels, index, 150, 140);
+}
+
 PauseMenuOpts pauseMenu() {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][2], 0, 0);
   static int index = 0;
+
   std::array<std::string, 4> items = {
       "Resume Game",
       "Restart Level",
@@ -237,6 +189,26 @@ WinMenuOpts winningMenu(int currentLevel) {
   return runMenuEnum<WinMenuOpts>("You WON!!", items, index, 150, 140);
 }
 
-void CreditsMenu() { DrawText("Rin Delahaije: Everyhing", 225, 225, 50, BLUE); }
+void CreditsMenu() {
+  DrawText("Credits:", 150, 140, 20, BLUE);
+
+  int posYtxt = 180;
+  const std::array<std::string, 6> credits = {
+      "Game Engine", "Music", "Scripting", "Direction", "UI", "Marketing",
+  };
+
+  for (auto &i : credits) {
+    DrawText(std::format("{} : Rin", i).c_str(), 150, posYtxt, 20, BLACK);
+    posYtxt += 40;
+  }
+
+  AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][1],
+                                     {450.0f, 250.0f}, 14);
+
+  DrawText("Special Thanks to:", 150, 510, 20, BLUE);
+  DrawText("Mom", 150, 550, 20, BLACK);
+  DrawText("My cute girlfriend", 150, 590, 20, BLACK);
+  DrawText("Raysan5, creator of Raylib", 150, 630, 20, BLACK);
+}
 
 } // namespace UILib

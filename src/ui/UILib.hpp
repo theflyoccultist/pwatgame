@@ -10,6 +10,7 @@ enum class LevelOpts : uint8_t {
   Level2,
   Level3,
   Level4,
+  BackToMenu,
   Count,
 };
 

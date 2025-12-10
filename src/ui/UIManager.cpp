@@ -32,9 +32,6 @@ void updateMainMenu(LevelID &currentLevel) {
 void updateLevelSelection(LevelID &currentLevel) {
   auto levelChoice = UILib::levelSelection();
 
-  if (IsKeyPressed(KEY_BACKSPACE))
-    Game::currentState = GameState::MainMenu;
-
   if (IsKeyPressed(KEY_ENTER)) {
     switch (levelChoice) {
     case UILib::LevelOpts::Level1:
@@ -52,6 +49,9 @@ void updateLevelSelection(LevelID &currentLevel) {
     case UILib::LevelOpts::Level4:
       currentLevel = LevelID::Level4;
       Game::currentState = GameState::Restarting;
+      break;
+    case UILib::LevelOpts::BackToMenu:
+      Game::currentState = GameState::MainMenu;
       break;
     default:
       break;
