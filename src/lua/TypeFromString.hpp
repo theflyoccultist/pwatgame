@@ -57,6 +57,10 @@ inline ProjectileType projTypeFromString(std::string_view s) {
     return ProjectileType::UZI;
   if (s == "rocket")
     return ProjectileType::ROCKET;
+  if (s == "hellfire")
+    return ProjectileType::HELLFIRE;
+  if (s == "grenade")
+    return ProjectileType::GRENADE;
 
   return ProjectileType::ROCKET;
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Proj.Hellfire.hpp"
+#include "Proj_Grenade.hpp"
 #include "Proj_LongRange.hpp"
 #include "Proj_SlowCannon.hpp"
 #include "Proj_Straight.hpp"
@@ -16,6 +18,8 @@ private:
   static inline std::array<SlowCannon, BULLET_POOL> slowCannonPool;
   static inline std::array<Rocket, BULLET_POOL> rocketPool;
   static inline std::array<Uzi, BULLET_POOL> uziPool;
+  static inline std::array<Hellfire, BULLET_POOL> hellfirePool;
+  static inline std::array<Grenade, BULLET_POOL> grenadePool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -62,4 +66,16 @@ template <>
 inline std::array<Uzi, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<Uzi>() {
   return uziPool;
+}
+
+template <>
+inline std::array<Hellfire, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Hellfire>() {
+  return hellfirePool;
+}
+
+template <>
+inline std::array<Grenade, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Grenade>() {
+  return grenadePool;
 }

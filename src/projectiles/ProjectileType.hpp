@@ -8,5 +8,7 @@ enum class ProjectileType : uint8_t {
   SLOWCANNON,
   ROCKET,
   UZI,
+  GRENADE,
+  HELLFIRE,
   COUNT
 };

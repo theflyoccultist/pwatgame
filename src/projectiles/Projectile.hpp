@@ -23,6 +23,12 @@ inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
   case ProjectileType::UZI:
     os << "UZI";
     break;
+  case ProjectileType::GRENADE:
+    os << "GRENADE";
+    break;
+  case ProjectileType::HELLFIRE:
+    os << "HELLFIRE";
+    break;
   default:
     os << "UNKNOWN_PROJECTILE";
     break;
@@ -42,6 +48,10 @@ inline const char *toString(ProjectileType type) {
     return "ROCKET";
   case ProjectileType::UZI:
     return "UZI";
+  case ProjectileType::GRENADE:
+    return "GRENADE";
+  case ProjectileType::HELLFIRE:
+    return "HELLFIRE";
   default:
     return "UNKNOWN_PROJECTILE";
   }

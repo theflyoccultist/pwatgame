@@ -24,10 +24,9 @@ void ItemManager::drawItems(ItemCategory cat) {
   FeedbackSystem::instance().draw();
 }
 
-const std::array<ProjectileType, 3> weaponForPlayer = {
-    ProjectileType::STRAIGHT,
-    ProjectileType::ROCKET,
-    ProjectileType::UZI,
+const std::array<ProjectileType, 5> weaponForPlayer = {
+    ProjectileType::STRAIGHT, ProjectileType::ROCKET,  ProjectileType::UZI,
+    ProjectileType::HELLFIRE, ProjectileType::GRENADE,
 };
 
 void ItemManager::updateItems(const Vector2 &playerPos, float playerSize) {

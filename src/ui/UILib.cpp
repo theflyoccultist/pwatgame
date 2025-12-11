@@ -171,6 +171,7 @@ LostMenuOpts losingScreen() {
 WinMenuOpts winningMenu(int currentLevel) {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
   static int index = 0;
+
   DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
            PURPLE);
 
@@ -190,6 +191,7 @@ WinMenuOpts winningMenu(int currentLevel) {
 }
 
 void CreditsMenu() {
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
   DrawText("Credits:", 150, 140, 20, BLUE);
 
   int posYtxt = 180;

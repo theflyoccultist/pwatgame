@@ -37,6 +37,13 @@ public:
       audio.sfx->uziGun();
       return ProjectilePool::getFreeProjectile<Uzi>(f, startPos, dir, spec);
 
+    case ProjectileType::HELLFIRE:
+      return ProjectilePool::getFreeProjectile<Hellfire>(f, startPos, dir,
+                                                         spec);
+
+    case ProjectileType::GRENADE:
+      return ProjectilePool::getFreeProjectile<Grenade>(f, startPos, dir, spec);
+
     default:
       std::cerr << "Unknown projectile type!\n";
       return nullptr;
