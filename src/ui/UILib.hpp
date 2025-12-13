@@ -1,6 +1,8 @@
 #pragma once
 
+#include "../projectiles/ProjectileType.hpp"
 #include <cstdint>
+
 namespace UILib {
 
 enum class MainMenuOpts : uint8_t { PlayGame, SelectLevel, Count };
@@ -32,7 +34,10 @@ void loadUIAssets();
 
 MainMenuOpts mainMenu();
 LevelOpts levelSelection();
+
 void playerHUD(int currentLevel);
+void weaponHUD(ProjectileType currentProjectile);
+
 PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
 LostMenuOpts losingScreen();

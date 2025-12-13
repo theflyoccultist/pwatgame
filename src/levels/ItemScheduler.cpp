@@ -50,6 +50,9 @@ void ItemScheduler::scheduleItems(const char *filename) {
     return std::expected<void, LuaError>();
   });
 
+  std::cout << "Item Scheduler: successfully loaded lua script: " << filename
+            << "\n";
+
   scheduleFromLuaTable<ItemDrink>("DrinkSpawns");
   scheduleFromLuaTable<ItemFood>("FoodSpawns");
   scheduleFromLuaTable<ItemWeapon>("WeaponSpawns");

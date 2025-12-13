@@ -61,6 +61,10 @@ void updateLevelSelection(LevelID &currentLevel) {
 
 void updatePlayerHUD(int currentLevel) { UILib::playerHUD(currentLevel); }
 
+void updateweaponHUD(ProjectileType currentProjectile) {
+  UILib::weaponHUD(currentProjectile);
+}
+
 void updatePauseMenu() {
   auto pauseChoice = UILib::pauseMenu();
   audio.music->pauseMusic();

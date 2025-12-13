@@ -13,7 +13,7 @@
 
 namespace UILib {
 
-enum class AssetType : uint8_t { Background, PwatMenu, PwatSprite };
+enum class AssetType : uint8_t { Background, PwatMenu, WeaponUI, PwatSprite };
 
 std::unordered_map<AssetType, std::vector<std::string>> assetBank;
 std::unordered_map<AssetType, std::vector<Texture2D *>> uiAssets;
@@ -30,6 +30,13 @@ void loadUIAssets() {
       "../assets/ui/pwat_options.png",
   };
 
+  assetBank[AssetType::WeaponUI] = {
+      "../assets/ui/weapon_grenade.png", "../assets/ui/weapon_hellfire.png",
+      "../assets/ui/weapon_rocket.png",  "../assets/ui/weapon_straight.png",
+      "../assets/ui/weapon_uzi.png",     "../assets/ui/weapon_noweapon.png",
+
+  };
+
   assetBank[AssetType::PwatSprite] = {
       "../assets/ui/pwat_lost.png",
       "../assets/ui/pwat_win.png",
@@ -44,6 +51,10 @@ void loadUIAssets() {
 
   for (auto &mnu : assetBank[AssetType::PwatMenu]) {
     uiAssets[AssetType::PwatMenu].push_back(&asset.loadTexture(mnu, 300, 300));
+  }
+
+  for (auto &wep : assetBank[AssetType::WeaponUI]) {
+    uiAssets[AssetType::WeaponUI].push_back(&asset.loadTexture(wep, 100, 100));
   }
 
   for (auto &spr : assetBank[AssetType::PwatSprite]) {
@@ -82,6 +93,34 @@ void playerHUD(int currentLevel) {
   DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
   DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);
   DrawText(TextFormat("Score: %d", PlayerState::score), 20, 110, 20, BLACK);
+};
+
+void weaponHUD(ProjectileType currentProjectile) {
+  auto &a = AssetSystem::instance();
+
+  const int x = 680;
+  const int y = 20;
+
+  switch (currentProjectile) {
+  case ProjectileType::GRENADE:
+    a.drawTexture(uiAssets[AssetType::WeaponUI][0], x, y);
+    break;
+  case ProjectileType::HELLFIRE:
+    a.drawTexture(uiAssets[AssetType::WeaponUI][1], x, y);
+    break;
+  case ProjectileType::ROCKET:
+    a.drawTexture(uiAssets[AssetType::WeaponUI][2], x, y);
+    break;
+  case ProjectileType::STRAIGHT:
+    a.drawTexture(uiAssets[AssetType::WeaponUI][3], x, y);
+    break;
+  case ProjectileType::UZI:
+    a.drawTexture(uiAssets[AssetType::WeaponUI][4], x, y);
+    break;
+  default:
+    a.drawTexture(uiAssets[AssetType::WeaponUI][5], x, y);
+    break;
+  }
 };
 
 template <typename Enum>

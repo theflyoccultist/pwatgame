@@ -61,6 +61,7 @@ void Game::run() {
 
     case GameState::Playing: {
       UIManager::updatePlayerHUD(displayCurrentLevel(currentLevel));
+      UIManager::updateweaponHUD(pwatState.currWeapon);
 
       playerManager.update(pwatState, deltaTime);
 
