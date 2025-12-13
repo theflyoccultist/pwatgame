@@ -3,10 +3,10 @@
 
 namespace Collisions {
 bool checkPickup(const Vector2 &playerPos, float playerSize,
-                 const Vector2 &itemPos, const Vector2 &itemSize) {
+                 const Vector2 &itemPos, float itemSize) {
 
   Rectangle playerRect = {playerPos.x, playerPos.y, playerSize, playerSize};
-  Rectangle itemRect = {itemPos.x, itemPos.y, itemSize.x, itemSize.y};
+  Rectangle itemRect = {itemPos.x, itemPos.y, itemSize, itemSize};
 
   return CheckCollisionRecs(playerRect, itemRect);
 }

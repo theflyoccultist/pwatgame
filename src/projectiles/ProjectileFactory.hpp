@@ -38,10 +38,12 @@ public:
       return ProjectilePool::getFreeProjectile<Uzi>(f, startPos, dir, spec);
 
     case ProjectileType::HELLFIRE:
+      audio.sfx->hellfire();
       return ProjectilePool::getFreeProjectile<Hellfire>(f, startPos, dir,
                                                          spec);
 
     case ProjectileType::GRENADE:
+      audio.sfx->grenade();
       return ProjectilePool::getFreeProjectile<Grenade>(f, startPos, dir, spec);
 
     default:

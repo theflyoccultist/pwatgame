@@ -7,6 +7,51 @@
 #include <string_view>
 
 namespace TypeFromString {
+inline FoodType foodTypeFromString(std::string_view s) {
+  if (s == "buldak")
+    return FoodType::BULDAK;
+  if (s == "pho")
+    return FoodType::PHO;
+  if (s == "shinramyun")
+    return FoodType::SHINRAMYUN;
+  if (s == "tomyum")
+    return FoodType::TOMYUM;
+  if (s == "yopokki")
+    return FoodType::YOPOKKI;
+
+  return FoodType::BULDAK;
+}
+
+inline DrinkType drinkTypeFromString(std::string_view s) {
+  if (s == "bobatea")
+    return DrinkType::BOBATEA;
+  if (s == "calpis")
+    return DrinkType::CALPIS;
+  if (s == "icecoffee")
+    return DrinkType::ICECOFFEE;
+  if (s == "monster")
+    return DrinkType::MONSTER;
+  if (s == "soju")
+    return DrinkType::SOJU;
+
+  return DrinkType::MONSTER;
+}
+
+inline WeaponType weaponTypeFromString(std::string_view s) {
+  if (s == "straight")
+    return WeaponType::STRAIGHT;
+  if (s == "uzi")
+    return WeaponType::UZI;
+  if (s == "rocket")
+    return WeaponType::ROCKET;
+  if (s == "hellfire")
+    return WeaponType::HELLFIRE;
+  if (s == "grenade")
+    return WeaponType::GRENADE;
+
+  return WeaponType::ROCKET;
+}
+
 inline EnemyType enemyTypeFromString(std::string_view s) {
   if (s == "godsip")
     return EnemyType::GODSIP;
@@ -33,17 +78,6 @@ inline MiniBossType mbTypeFromString(std::string_view s) {
     return MiniBossType::RUST;
 
   return MiniBossType::WINDOWS;
-}
-
-inline ItemCategory itemTypeFromString(std::string_view s) {
-  if (s == "food")
-    return ItemCategory::Food;
-  if (s == "drink")
-    return ItemCategory::Drink;
-  if (s == "weapon")
-    return ItemCategory::Weapon;
-
-  return ItemCategory::Food;
 }
 
 inline ProjectileType projTypeFromString(std::string_view s) {

@@ -1,34 +1,35 @@
 #pragma once
 
-#include "Items.hpp"
+#include "Item.hpp"
+#include <memory>
 #include <raylib.h>
-#include <unordered_map>
+#include <utility>
 #include <vector>
-
-struct Item {
-  ItemCategory category;
-  int type;
-  Vector2 position;
-  Vector2 size = {50, 50};
-  bool active = true;
-
-  Item(ItemCategory c, int t, Vector2 pos)
-      : category(c), type(t), position(pos) {}
-};
-
-struct itemTypes {
-  int food;
-  int drink;
-};
 
 class ItemManager {
 public:
-  void populateItems(ItemCategory cat, Vector2 pos);
-  void drawItems(ItemCategory cat);
-  void updateItems(const Vector2 &playerPos, float playerSize);
-  void clearAll() { itemsByCategory.clear(); }
+  ItemManager() = default;
+
+  ItemManager(const ItemManager &) = delete;
+  ItemManager &operator=(const ItemManager &) = delete;
+
+  void loadItemTextures();
+
+  // Example usage :
+  // auto &food = spawnItem<ItemFood>(FoodType::Apple);
+  // food.reset(pos, spec);
+  template <typename T, typename... Args> T &spawnItem(Args &&...args);
+
+  void updateAll(const PlayerState &player);
+  void drawAll();
+  void clearAll();
 
 private:
-  Items itemsObj;
-  std::unordered_map<ItemCategory, std::vector<Item>> itemsByCategory;
+  std::vector<std::unique_ptr<Item>> items;
 };
+
+template <typename T, typename... Args>
+T &ItemManager::spawnItem(Args &&...args) {
+  items.push_back(std::make_unique<T>(std::forward<Args>(args)...));
+  return *static_cast<T *>(items.back().get());
+}

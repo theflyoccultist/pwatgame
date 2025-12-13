@@ -14,6 +14,8 @@ public:
   void defaultGun();
   void rocketGun();
   void uziGun();
+  void grenade();
+  void hellfire();
 
   void ammoAdded();
   void healthAdded();

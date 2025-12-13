@@ -17,6 +17,12 @@ struct PlayerState {
   static constexpr int playerSize = 70;
   static inline int score = 0;
   static inline int playerAmmo = 0;
+
+  static void addHealth(int value) { PlayerState::health += value; }
+  static void addAmmo(int ammo) { PlayerState::playerAmmo += ammo; }
+  static void upgradeAmmo(ProjectileType newWeapon) {
+    PlayerState::currWeapon = newWeapon;
+  }
 };
 
 class Player {
@@ -27,12 +33,6 @@ public:
 
   PlayerState playerMovements(PlayerState state, float dt);
   void playerFootsteps(float dt);
-
-  static void addHealth(int value) { PlayerState::health += value; }
-  static void addAmmo(int ammo) { PlayerState::playerAmmo += ammo; }
-  static void upgradeAmmo(ProjectileType newWeapon) {
-    PlayerState::currWeapon = newWeapon;
-  }
 
   static void resetPlayerHealth() { PlayerState::health = 200; }
   static void resetPlayerScore() { PlayerState::score = 0; }

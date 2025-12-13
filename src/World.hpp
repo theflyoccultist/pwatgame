@@ -7,13 +7,15 @@
 #include "projectiles/ProjectileManager.hpp"
 
 struct World {
+  ProjectileManager projectileManager;
   EnemyManager enemyManager;
   Player pwat;
   MiniBossManager minibossManager;
-  ProjectileManager projectileManager;
   ItemManager itemManager;
 
   World()
       : enemyManager(projectileManager), pwat(projectileManager),
-        minibossManager(projectileManager) {}
+        minibossManager(projectileManager) {
+    itemManager.loadItemTextures();
+  }
 };
