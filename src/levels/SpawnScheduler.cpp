@@ -58,7 +58,7 @@ void SpawnScheduler::scheduleEnemies(const char *filename) {
 
   for (auto &wave : waves) {
     sm.scheduler.schedule(wave.delay, [pos = wave.pos, type = wave.type, this] {
-      world.enemyManager.spawnEnemies(pos, type);
+      world.enemyManager.spawnEnemy(pos, type);
     });
   }
 }

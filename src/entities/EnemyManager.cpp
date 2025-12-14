@@ -8,7 +8,7 @@
 
 void EnemyManager::init() { factory.loadAssets(); }
 
-void EnemyManager::spawnEnemies(const Vector2 &pos, EnemyType type) {
+void EnemyManager::spawnEnemy(const Vector2 &pos, EnemyType type) {
   for (auto *&slot : enemies) {
     if (!slot || !slot->isActive()) {
       auto &spec = EnemyDatabase::get(type);
@@ -81,24 +81,16 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     p.type = EnemyDatabase::getWeaponType(e->type);
     p.spec = EnemyDatabase::getWeaponSpec(e->type);
 
-    if (e->type == EnemyType::SWARMER && touchPlayer) {
-      applyPlayerDmg(player, 4);
+    if (touchPlayer) {
+      applyPlayerDmg(player, e->stats.contactDmg);
     }
 
     if (e->type == EnemyType::SNIPER) {
       e->shootTowardsPlayer(projMan, p);
     }
 
-    if (e->type == EnemyType::GODSIP && touchPlayer) {
-      applyPlayerDmg(player, 6);
-    }
-
     if (e->type == EnemyType::ZOMB) {
       e->shootInVoid(projMan, p);
-    }
-
-    if (e->type == EnemyType::MONITOR && touchPlayer) {
-      applyPlayerDmg(player, 3);
     }
   }
 

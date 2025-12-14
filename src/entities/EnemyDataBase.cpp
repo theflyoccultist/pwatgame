@@ -30,6 +30,7 @@ void EnemyDatabase::loadFromLua(const char *filename) {
           EnemySpec spec;
           spec.speed = lua.getNumber("speed").value_or(0.0f);
           spec.totalHP = lua.getInt("hp").value_or(1);
+          spec.contactDmg = lua.getInt("contactDmg").value_or(0);
 
           eTable[type] = spec;
 

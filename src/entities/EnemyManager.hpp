@@ -11,7 +11,7 @@ class EnemyManager {
 public:
   EnemyManager(ProjectileManager &pm) : projMan(pm) {}
   void init();
-  void spawnEnemies(const Vector2 &pos, EnemyType type);
+  void spawnEnemy(const Vector2 &pos, EnemyType type);
   void updateAll(float delta, const PlayerState &player,
                  std::span<Projectile *const> bullets);
 

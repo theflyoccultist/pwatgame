@@ -17,6 +17,7 @@ protected:
     int size = 70;
     int currentHP = 0;
     int totalHP = 0;
+    int contactDmg = 0;
   };
 
 public:
@@ -32,6 +33,7 @@ public:
     stats.speed = spec.speed;
     stats.totalHP = spec.totalHP;
     stats.currentHP = stats.totalHP;
+    stats.contactDmg = spec.contactDmg;
   }
 
   virtual void setTexture() = 0;
