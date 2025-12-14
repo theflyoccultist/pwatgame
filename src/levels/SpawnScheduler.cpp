@@ -8,9 +8,9 @@
 
 void SpawnScheduler::scheduleEnemies(const char *filename) {
   struct spawnEnemy {
-    EnemyType type;
+    Vector2 pos;
     double delay;
-    int numEnemies;
+    EnemyType type;
   };
 
   std::vector<spawnEnemy> waves{};
@@ -28,15 +28,17 @@ void SpawnScheduler::scheduleEnemies(const char *filename) {
           lua_rawgeti(lua.getState(), -1, i);
 
           spawnEnemy wave;
+
+          wave.pos = {static_cast<float>(lua.getInt("x").value_or(0)),
+                      static_cast<float>(lua.getInt("y").value_or(0))};
+
+          wave.delay = lua.getNumber("delay").value_or(0.0);
+
           wave.type = lua.getString("type")
                           .transform([&](const std::string_view &s) {
                             return TypeFromString::enemyTypeFromString(s);
                           })
                           .value_or(EnemyType::ZOMB);
-
-          wave.delay = lua.getNumber("delay").value_or(0.0);
-
-          wave.numEnemies = lua.getInt("numEnemies").value_or(0);
 
           waves.push_back(wave);
 
@@ -55,10 +57,9 @@ void SpawnScheduler::scheduleEnemies(const char *filename) {
       });
 
   for (auto &wave : waves) {
-    sm.scheduler.schedule(wave.delay,
-                          [type = wave.type, n = wave.numEnemies, this] {
-                            world.enemyManager.spawnEnemies(type, n);
-                          });
+    sm.scheduler.schedule(wave.delay, [pos = wave.pos, type = wave.type, this] {
+      world.enemyManager.spawnEnemies(pos, type);
+    });
   }
 }
 

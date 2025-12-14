@@ -8,24 +8,17 @@
 
 void EnemyManager::init() { factory.loadAssets(); }
 
-void EnemyManager::spawnEnemies(EnemyType type, int count) {
-  int spawned = 0;
-
+void EnemyManager::spawnEnemies(const Vector2 &pos, EnemyType type) {
   for (auto *&slot : enemies) {
     if (!slot || !slot->isActive()) {
-      Vector2 pos = {Random::rangeFloat(0, 730.0f),
-                     Random::rangeFloat(0, 730.0f)};
       auto &spec = EnemyDatabase::get(type);
       Enemy *e = factory.create(type, pos, spec);
 
       if (e) {
         slot = e;
         e->activate();
-        ++spawned;
-      }
-
-      if (spawned >= count)
         break;
+      }
     }
   }
 }
