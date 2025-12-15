@@ -1,9 +1,7 @@
--- enemy x and y position, type, and delay before spawning can be scripted.
+local spawn = require("common.spawn_patterns")
 
-EnemySpawns = {
-	{ x = 10, y = 30, delay = 0, type = "godsip" },
-	{ x = 110, y = 30, delay = 0.3, type = "godsip" },
-	{ x = 210, y = 30, delay = 0.6, type = "godsip" },
-	{ x = 310, y = 30, delay = 0.9, type = "godsip" },
-	{ x = 410, y = 30, delay = 1.2, type = "godsip" },
-}
+EnemySpawns = {}
+
+spawn.append(EnemySpawns, spawn.swarmer_swarm(4, 10, 30, 50, 10, 5, 1.5))
+spawn.append(EnemySpawns, spawn.swarmer_swarm(4, 480, 700, 10, 60, 5, 1.5))
+spawn.append(EnemySpawns, spawn.zomb_chaos(10, 0, 0))

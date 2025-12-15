@@ -18,6 +18,7 @@ void Game::run() {
   SpawnScheduler ss(lua, world, sm);
   ItemScheduler is(lua, world, sm);
 
+  lua.initLua();
   LevelLoader levelLoader(wd, ed, md, sm, ss, is);
   levelLoader.initDatabase();
 

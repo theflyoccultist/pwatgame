@@ -33,6 +33,21 @@ std::ostream &operator<<(std::ostream &os, const LuaError &err) {
   return os;
 };
 
+void LuaWrapper::initLua() {
+  lua_getglobal(L, "package");
+  lua_getfield(L, -1, "path");
+
+  std::string path = lua_tostring(L, -1);
+  path = "../scripts/?.lua;../scripts/?/init.lua;" + path;
+
+  lua_pop(L, 1);
+  lua_pushstring(L, path.c_str());
+  lua_setfield(L, -2, "path");
+  lua_pop(L, 1);
+  std::cout << "Lua Initialized\n";
+  std::cout << path << "\n";
+}
+
 LuaResultT<void> LuaWrapper::runFile(const char *filename) {
   if (luaL_dofile(L, filename) != LUA_OK) {
     std::cerr << lua_tostring(L, -1) << "\n";

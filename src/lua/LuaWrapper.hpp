@@ -34,6 +34,7 @@ public:
 
   lua_State *getState() { return L; }
 
+  void initLua();
   LuaResultT<void> runFile(const char *filename);
   LuaResultT<void> getTable(const char *name);
   LuaResultT<int> getInt(const char *key);

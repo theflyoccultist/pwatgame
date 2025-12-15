@@ -22,7 +22,6 @@ private:
   static constexpr int ENEMY_POOL = 350;
   std::array<Enemy *, ENEMY_POOL> enemies{};
   EnemyFactory factory;
-  void applyPlayerDmg(const PlayerState &player, int damage);
 
   ProjectileManager &projMan;
 };
