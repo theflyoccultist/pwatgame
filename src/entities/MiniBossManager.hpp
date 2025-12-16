@@ -41,5 +41,4 @@ private:
   MiniBossFactory factory;
 
   ProjectileManager &projMan;
-  void applyPlayerDmg(const PlayerState &player, int damage);
 };

@@ -18,13 +18,6 @@ void MiniBossManager::spawnMiniBoss(MiniBossType type) {
   }
 };
 
-void MiniBossManager::applyPlayerDmg(const PlayerState &player, int damage) {
-  if (player.damageCooldown <= 0.0f) {
-    player.health -= damage;
-    player.damageCooldown = 0.10f;
-  }
-}
-
 bool MiniBossManager::updateAll(float dt, const PlayerState &player,
                                 std::span<Projectile *const> bullets) {
   using namespace Collisions;
@@ -54,7 +47,7 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
       if (b->faction == Faction::Enemy &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
                                  player.position, (float)player.playerSize)) {
-        applyPlayerDmg(player, b->stats.damage);
+        player.applyPlayerDmg(dt, b->stats.damage);
         b->expire();
       }
     }

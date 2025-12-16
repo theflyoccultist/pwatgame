@@ -56,7 +56,12 @@ void Game::run() {
       levelLoader.load(currentLevel);
       musicScheduler.scheduleMusic(currentLevel);
       std::cout << "Current level: " << currentLevel << "\n";
-      Game::currentState = GameState::Playing;
+      Game::currentState = GameState::LevelIntro;
+      break;
+    }
+
+    case GameState::LevelIntro: {
+      UIManager::updateLevelIntro(displayCurrentLevel(currentLevel));
       break;
     }
 

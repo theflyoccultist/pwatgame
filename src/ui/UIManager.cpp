@@ -59,6 +59,12 @@ void updateLevelSelection(LevelID &currentLevel) {
   }
 }
 
+void updateLevelIntro(int currentLevel) {
+  UILib::levelIntro(currentLevel);
+  if (IsKeyPressed(KEY_ENTER))
+    Game::currentState = GameState::Playing;
+}
+
 void updatePlayerHUD(int currentLevel) { UILib::playerHUD(currentLevel); }
 
 void updateweaponHUD(ProjectileType currentProjectile) {

@@ -33,7 +33,7 @@ function M.godsip_cardinal(delay)
 	return t
 end
 
-function M.sniper_squad(count, start_x, start_y, dx, dy, delay, delay_step)
+function M.swarm(type, count, start_x, start_y, dx, dy, delay, delay_step)
 	local t = {}
 	local x, y = start_x, start_y
 	delay_step = delay_step or 0
@@ -47,28 +47,7 @@ function M.sniper_squad(count, start_x, start_y, dx, dy, delay, delay_step)
 			x = x,
 			y = y,
 			delay = delay,
-			type = "sniper",
-		}
-	end
-
-	return t
-end
-
-function M.swarmer_swarm(count, start_x, start_y, dx, dy, delay, delay_step)
-	local t = {}
-	local x, y = start_x, start_y
-	delay_step = delay_step or 0
-
-	for _ = 1, count do
-		x = x + dx
-		y = y + dy
-		delay = delay + delay_step
-
-		t[#t + 1] = {
-			x = x,
-			y = y,
-			delay = delay,
-			type = "swarmer",
+			type = type,
 		}
 	end
 

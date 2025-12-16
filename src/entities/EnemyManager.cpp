@@ -23,16 +23,6 @@ void EnemyManager::spawnEnemy(const Vector2 &pos, EnemyType type) {
   }
 }
 
-void applyPlayerDmg(float delta, const PlayerState &player, int damage) {
-  if (player.damageCooldown > 0.0f)
-    player.damageCooldown -= delta;
-
-  if (player.damageCooldown <= 0.0f) {
-    player.health -= damage;
-    player.damageCooldown = 0.30f;
-  }
-}
-
 void EnemyManager::updateAll(float delta, const PlayerState &player,
                              std::span<Projectile *const> bullets) {
   using namespace Collisions;
@@ -61,7 +51,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       if (b->faction == Faction::Enemy &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
                                  player.position, (float)player.playerSize)) {
-        applyPlayerDmg(delta, player, b->stats.damage);
+        player.applyPlayerDmg(delta, b->stats.damage);
         b->expire();
       }
     }
@@ -82,7 +72,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     p.spec = EnemyDatabase::getWeaponSpec(e->type);
 
     if (touchPlayer) {
-      applyPlayerDmg(delta, player, e->stats.contactDmg);
+      player.applyPlayerDmg(delta, e->stats.contactDmg);
     }
 
     if (e->type == EnemyType::SNIPER) {

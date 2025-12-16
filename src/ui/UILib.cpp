@@ -87,6 +87,8 @@ MainMenuOpts mainMenu() {
 }
 
 void levelIntro(int currentLevel) {
+  AssetSystem::instance().drawTexture(
+      uiAssets[AssetType::Background][currentLevel], 0, 0);
   const char *levelName = "";
 
   switch (currentLevel) {
@@ -106,15 +108,16 @@ void levelIntro(int currentLevel) {
     break;
   }
 
-  DrawText(TextFormat("Level %d : %s", currentLevel, levelName), 100, 400, 40,
-           BLACK);
+  DrawRectangle(50, 250, 600, 300, PINK);
+  DrawText(TextFormat("Level %d", currentLevel), 100, 300, 40, BLACK);
+  DrawText(levelName, 100, 400, 30, BLACK);
+  DrawText("Press Enter to continue", 100, 470, 20, BLACK);
 }
 
 void playerHUD(int currentLevel) {
   AssetSystem::instance().drawTexture(
       uiAssets[AssetType::Background][currentLevel], 0, 0);
 
-  levelIntro(currentLevel);
   DrawText(TextFormat("Current Level: %d", currentLevel), 20, 20, 20, BLACK);
   DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
   DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);

@@ -23,6 +23,16 @@ struct PlayerState {
   static void upgradeAmmo(ProjectileType newWeapon) {
     PlayerState::currWeapon = newWeapon;
   }
+
+  void applyPlayerDmg(float delta, int damage) const {
+    if (PlayerState::damageCooldown > 0.0f)
+      PlayerState::damageCooldown -= delta;
+
+    if (PlayerState::damageCooldown <= 0.0f) {
+      PlayerState::health -= damage;
+      PlayerState::damageCooldown = 0.50f;
+    }
+  }
 };
 
 class Player {

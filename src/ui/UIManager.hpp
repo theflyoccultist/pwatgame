@@ -9,6 +9,7 @@ void loadUI();
 void updateMainMenu(LevelID &currentLevel);
 void updateLevelSelection(LevelID &currentlevel);
 
+void updateLevelIntro(int currentLevel);
 void updatePlayerHUD(int currentLevel);
 void updateweaponHUD(ProjectileType currentProjectile);
 

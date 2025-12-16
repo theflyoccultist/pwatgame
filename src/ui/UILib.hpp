@@ -35,6 +35,7 @@ void loadUIAssets();
 MainMenuOpts mainMenu();
 LevelOpts levelSelection();
 
+void levelIntro(int currentLevel);
 void playerHUD(int currentLevel);
 void weaponHUD(ProjectileType currentProjectile);
 
