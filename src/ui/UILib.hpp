@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../projectiles/ProjectileType.hpp"
+#include "UIManager.hpp"
 #include <cstdint>
 
 namespace UILib {
@@ -41,7 +42,7 @@ void weaponHUD(ProjectileType currentProjectile);
 
 PauseMenuOpts pauseMenu();
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol);
-LostMenuOpts losingScreen();
+LostMenuOpts losingScreen(GameModes &gameMode);
 WinMenuOpts winningMenu(int currentLevel);
 void CreditsMenu();
 

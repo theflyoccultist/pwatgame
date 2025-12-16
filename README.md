@@ -6,8 +6,8 @@ You will play as PwatPwat, a cute blob cat plush who needs to claim her throne a
 - **Game Modes**: 
   Each level has different data, with slightly increasing difficulty and a different miniboss with different behavior for each level.
 
-  - **Default Deathless mode**: Complete all four levels at once. If you run out of health, you will simply restart from that specific level. Access it by selecting "Play Game" in the Main Menu.
-  - **Level Selection Screen**: Start from a specific level. Access it by selecting "Select Level" in the Main Menu.
+  - **Default Deathless mode**: Complete all four levels at once. If you run out of health, you will have to restart all over from level 1 again. Access it by selecting "Play Game" in the Main Menu.
+  - **Play From Level**: Start from a specific level. Access it by selecting "Select Level" in the Main Menu. If you run out of health, you will simply restart from that level.
 
 - **Music Composed and Arranged by myself**: The sound effects were picked up from opengameart.org, but I composed the soundtrack that you can hear throughout the game. 
 

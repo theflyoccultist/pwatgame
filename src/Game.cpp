@@ -34,6 +34,7 @@ void Game::run() {
   auto &audio = AudioSystem::instance();
   audio.music->playTitleTrack();
   LevelID currentLevel = LevelID::Level1;
+  GameModes gameMode = GameModes::Dealthless;
 
   while (!WindowShouldClose()) {
     deltaTime = GetFrameTime();
@@ -44,7 +45,7 @@ void Game::run() {
 
     switch (currentState) {
     case GameState::MainMenu:
-      UIManager::updateMainMenu(currentLevel);
+      UIManager::updateMainMenu(currentLevel, gameMode);
       break;
 
     case GameState::LevelSelection:
@@ -97,7 +98,7 @@ void Game::run() {
       break;
 
     case GameState::Lost:
-      UIManager::updateLostMenu();
+      UIManager::updateLostMenu(currentLevel, gameMode);
       break;
 
     case GameState::Won:

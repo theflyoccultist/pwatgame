@@ -1,6 +1,7 @@
 #include "UILib.hpp"
 #include "../player/Player.hpp"
 #include "../texture/AssetSystem.hpp"
+#include "UIManager.hpp"
 #include <algorithm>
 #include <array>
 #include <cstdint>
@@ -81,7 +82,7 @@ MainMenuOpts mainMenu() {
   DrawRectangle(180, posMainMenu, 400, 50, GREEN);
 
   DrawText("Play Game", 305, 550, 30, BLACK);
-  DrawText("Select Level", 285, 610, 30, BLACK);
+  DrawText("Play From Level", 265, 610, 30, BLACK);
 
   return static_cast<MainMenuOpts>(selectedIndex);
 }
@@ -219,7 +220,7 @@ OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
   return runMenuEnum<OptionMenuOpts>("OPTIONS", items, index, 150, 140);
 }
 
-LostMenuOpts losingScreen() {
+LostMenuOpts losingScreen(GameModes &gameMode) {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
   static int index = 0;
 
@@ -230,6 +231,9 @@ LostMenuOpts losingScreen() {
       "Restart Level",
       "Back to Menu",
   };
+
+  if (gameMode == GameModes::Dealthless)
+    items[0] = "Restart Game";
 
   AssetSystem::instance().drawSprite(*uiAssets[AssetType::PwatSprite][0],
                                      {350.0f, 400.0f}, 14);

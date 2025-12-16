@@ -11,16 +11,18 @@ void loadUI() { UILib::loadUIAssets(); }
 
 auto &audio = AudioSystem::instance();
 
-void updateMainMenu(LevelID &currentLevel) {
+void updateMainMenu(LevelID &currentLevel, GameModes &gamemode) {
   auto menuChoice = UILib::mainMenu();
 
   if (IsKeyPressed(KEY_ENTER)) {
     switch (menuChoice) {
     case UILib::MainMenuOpts::PlayGame:
       currentLevel = LevelID::Level1;
+      gamemode = GameModes::Dealthless;
       Game::currentState = GameState::Restarting;
       break;
     case UILib::MainMenuOpts::SelectLevel:
+      gamemode = GameModes::LevelSelection;
       Game::currentState = GameState::LevelSelection;
       break;
     default:
@@ -136,13 +138,16 @@ void updateOptionsMenu() {
   sfxVol = std::clamp(sfxVol, 0, 100);
 }
 
-void updateLostMenu() {
-  auto lossChoice = UILib::losingScreen();
+void updateLostMenu(LevelID &currentLevel, GameModes &gameMode) {
+  auto lossChoice = UILib::losingScreen(gameMode);
   audio.music->pauseMusic();
 
   if (IsKeyPressed(KEY_ENTER)) {
     switch (lossChoice) {
     case UILib::LostMenuOpts::Restart:
+      if (gameMode == GameModes::Dealthless)
+        currentLevel = LevelID::Level1;
+
       Game::currentState = GameState::Restarting;
       break;
 
