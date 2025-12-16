@@ -96,11 +96,15 @@ void SpawnScheduler::scheduleMiniBoss(const char *filename) {
           waves.push_back(wave);
 
           lua_pop(lua.getState(), 1);
+
+          std::cout << "Miniboss to spawn: " << wave.type
+                    << " at: " << wave.delay << " seconds\n";
         }
 
         std::cout
             << "Spawn Scheduler - Successfully loaded lua script for Miniboss: "
             << filename << "\n";
+
         return {};
       })
 

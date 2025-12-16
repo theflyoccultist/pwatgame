@@ -86,9 +86,35 @@ MainMenuOpts mainMenu() {
   return static_cast<MainMenuOpts>(selectedIndex);
 }
 
+void levelIntro(int currentLevel) {
+  const char *levelName = "";
+
+  switch (currentLevel) {
+  case 1:
+    levelName = "The Vile Void";
+    break;
+  case 2:
+    levelName = "The Isolated Youth";
+    break;
+  case 3:
+    levelName = "Boys in Love";
+    break;
+  case 4:
+    levelName = "Inconsolable Sadness";
+    break;
+  default:
+    break;
+  }
+
+  DrawText(TextFormat("Level %d : %s", currentLevel, levelName), 100, 400, 40,
+           BLACK);
+}
+
 void playerHUD(int currentLevel) {
   AssetSystem::instance().drawTexture(
       uiAssets[AssetType::Background][currentLevel], 0, 0);
+
+  levelIntro(currentLevel);
   DrawText(TextFormat("Current Level: %d", currentLevel), 20, 20, 20, BLACK);
   DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
   DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);
