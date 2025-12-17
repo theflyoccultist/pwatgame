@@ -1,7 +1,7 @@
 #pragma once
 
+#include "../GameModes.hpp"
 #include "../projectiles/ProjectileType.hpp"
-#include "UIManager.hpp"
 #include <cstdint>
 
 namespace UILib {

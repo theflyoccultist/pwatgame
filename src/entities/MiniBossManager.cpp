@@ -55,7 +55,6 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     Vector2 bulletStartPos = {m->stats.pos.x + (float)m->stats.size / 2,
                               m->stats.pos.y + (float)m->stats.size / 2};
 
-    Actor::ShootParams p;
     p.startPos = bulletStartPos;
     p.playerPos = player.position;
     p.dt = dt;
@@ -63,8 +62,10 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     p.type = MiniBossDatabase::getWeaponType(m->type);
     p.spec = MiniBossDatabase::getWeaponSpec(m->type);
 
-    if (bossCooldown >= 4.0f)
+    if (bossCooldown >= 2.0f && bossCooldown <= 4.0f)
       m->shootTowardsPlayer(projMan, p);
+    else if (bossCooldown <= 7.0f)
+      m->shootRadialBurst(projMan, p, 8);
   }
 
   bool isMiniBossKilled = false;

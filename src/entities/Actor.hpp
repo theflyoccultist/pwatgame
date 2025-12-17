@@ -2,6 +2,7 @@
 
 #include "../projectiles/ProjectileManager.hpp"
 #include "../utils/Random.hpp"
+#include "Faction.hpp"
 #include <array>
 #include <cmath>
 #include <raylib.h>
@@ -54,6 +55,17 @@ public:
     isX ? direction = {-1, 0} : direction = {0, -1};
 
     shoot(pm, p, direction);
+  }
+
+  void shootRadialBurst(ProjectileManager &pm, const ShootParams &p,
+                        int count) {
+    const float step = 2.0f * PI / (float)count;
+
+    for (int i = 0; i < count; ++i) {
+      float angle = (float)i * step;
+      Vector2 dir = {cosf(angle), sinf(angle)};
+      pm.spawn(Faction::Enemy, p.type, p.startPos, dir, p.spec);
+    }
   }
 
 protected:

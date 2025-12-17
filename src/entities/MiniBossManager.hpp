@@ -41,4 +41,5 @@ private:
   MiniBossFactory factory;
 
   ProjectileManager &projMan;
+  Actor::ShootParams p;
 };

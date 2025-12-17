@@ -1,7 +1,6 @@
 #include "UILib.hpp"
 #include "../player/Player.hpp"
 #include "../texture/AssetSystem.hpp"
-#include "UIManager.hpp"
 #include <algorithm>
 #include <array>
 #include <cstdint>

@@ -15,7 +15,7 @@ public:
   void update(float dt, Vector2 playerPos, float bossCooldown) override {
     stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
 
-    if (bossCooldown <= 4.0f) {
+    if (bossCooldown <= 2.0f) {
       moveTowardsPlayer(dt, playerPos);
     }
   }

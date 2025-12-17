@@ -7,6 +7,7 @@ FoodSpawns = {
 }
 
 item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(4, 21, "shinramyun", 20))
+item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(4, 40.2, "tomyum", 25))
 
 DrinkSpawns = {
 	{ x = 450, y = 550, delay = 0.0, type = "soju", hpBonus = 50 },
