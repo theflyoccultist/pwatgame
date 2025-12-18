@@ -13,11 +13,11 @@ public:
 
     Texture2D *tex = ProjectileTextures::get(ProjectileType::STRAIGHT);
     if (!tex) {
-      std::cerr << "Grenade Projectile texture missing\n";
+      std::cerr << "Straight Projectile texture missing\n";
       return;
     }
 
-    AssetSystem::instance().drawTexture(tex, (int)stats.pos.x,
-                                        (int)stats.pos.y);
+    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
+                                        stats.size);
   }
 };

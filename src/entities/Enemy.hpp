@@ -14,7 +14,7 @@ protected:
     bool active = false;
     Vector2 pos{};
     float speed = 0.0f;
-    int size = 70;
+    float size = 70.0f;
     int currentHP = 0;
     int totalHP = 0;
     int contactDmg = 0;
@@ -54,12 +54,12 @@ public:
     }
 
     AssetSystem::instance().drawTexture(const_cast<Texture2D *>(tex),
-                                        (int)stats.pos.x, (int)stats.pos.y);
+                                        stats.pos.x, stats.pos.y, stats.size);
 
     DrawRectangle((int)stats.pos.x + 5, (int)stats.pos.y - 15,
                   (int)((float)stats.size * ratio), 10, healthbarColor(ratio));
-    DrawRectangleLines((int)stats.pos.x + 5, (int)stats.pos.y - 15, stats.size,
-                       10, BLACK);
+    DrawRectangleLines((int)stats.pos.x + 5, (int)stats.pos.y - 15,
+                       (int)stats.size, 10, BLACK);
   }
 
   bool takeBulletIfHit(int dmg) {

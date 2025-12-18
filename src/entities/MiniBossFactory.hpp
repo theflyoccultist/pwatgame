@@ -17,27 +17,27 @@ public:
     auto &assets = AssetSystem::instance();
 
     Windows::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/win_HIGH.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/win_MED.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/win_LOW.png", 200, 200),
+        &assets.loadTexture("../assets/bosses/win_HIGH.png"),
+        &assets.loadTexture("../assets/bosses/win_MED.png"),
+        &assets.loadTexture("../assets/bosses/win_LOW.png"),
     };
 
     Lisp::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/lisp_HIGH.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/lisp_MED.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/lisp_LOW.png", 200, 200),
+        &assets.loadTexture("../assets/bosses/lisp_HIGH.png"),
+        &assets.loadTexture("../assets/bosses/lisp_MED.png"),
+        &assets.loadTexture("../assets/bosses/lisp_LOW.png"),
     };
 
     Java::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/java_HIGH.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/java_MED.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/java_LOW.png", 200, 200),
+        &assets.loadTexture("../assets/bosses/java_HIGH.png"),
+        &assets.loadTexture("../assets/bosses/java_MED.png"),
+        &assets.loadTexture("../assets/bosses/java_LOW.png"),
     };
 
     Rust::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/rust_HIGH.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/rust_MED.png", 200, 200),
-        &assets.loadTexture("../assets/bosses/rust_LOW.png", 200, 200),
+        &assets.loadTexture("../assets/bosses/rust_HIGH.png"),
+        &assets.loadTexture("../assets/bosses/rust_MED.png"),
+        &assets.loadTexture("../assets/bosses/rust_LOW.png"),
     };
   }
 

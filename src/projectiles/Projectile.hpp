@@ -36,7 +36,7 @@ protected:
     Vector2 dir{};
     Vector2 vel{};
     float cooldown = 0.0f;
-    int size = 0;
+    float size = 0.0f;
     float lifetime = 0.0f;
     int damage = 0;
   };

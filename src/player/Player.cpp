@@ -20,8 +20,7 @@ void Player::init() {
       "../assets/player/pwatright_down.png"};
 
   for (size_t i = 0; i < numPwats; ++i) {
-    pwatAssets[i] = &AssetSystem::instance().loadTexture(
-        pwatPaths[i], PlayerState::playerSize, PlayerState::playerSize);
+    pwatAssets[i] = &AssetSystem::instance().loadTexture(pwatPaths[i]);
   }
 
   shootTimer = 0.0f;
@@ -51,8 +50,8 @@ void Player::shoot(Vector2 startPosition, Vector2 dir) {
 }
 
 void Player::draw(Vector2 position, int direction) {
-  AssetSystem::instance().drawTexture(pwatAssets[direction], (int)position.x,
-                                      (int)position.y);
+  AssetSystem::instance().drawTexture(pwatAssets[direction], position.x,
+                                      position.y, PlayerState::playerSize);
 }
 
 PlayerState Player::playerMovements(PlayerState state, float dt) {

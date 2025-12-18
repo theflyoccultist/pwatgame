@@ -10,28 +10,26 @@ public:
   static void loadTextures() {
     auto &a = AssetSystem::instance();
 
-    int size = 50;
-
     projTextures[ProjectileType::GRENADE] =
-        &a.loadTexture("../assets/bullets/bullet_check.png", size, size);
+        &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::HELLFIRE] =
-        &a.loadTexture("../assets/bullets/bullet_check.png", size, size);
+        &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::LONGRANGE] =
-        &a.loadTexture("../assets/bullets/bullet_check.png", size, size);
+        &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::ROCKET] =
-        &a.loadTexture("../assets/bullets/bullet_check.png", size, size);
+        &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::SLOWCANNON] =
-        &a.loadTexture("../assets/bullets/bullet_check.png", size, size);
+        &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::STRAIGHT] =
-        &a.loadTexture("../assets/bullets/bullet_check.png", size, size);
+        &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::UZI] =
-        &a.loadTexture("../assets/bullets/bullet_check.png", size, size);
+        &a.loadTexture("../assets/bullets/bullet_check.png");
   }
 
   static Texture2D *get(ProjectileType type) { return projTextures[type]; }

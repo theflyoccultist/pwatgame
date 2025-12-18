@@ -14,8 +14,8 @@ public:
   AssetSystem(const AssetSystem &) = delete;
   AssetSystem &operator=(const AssetSystem &) = delete;
 
-  Texture2D &loadTexture(const std::string &path, int w, int h);
-  void drawTexture(const Texture2D *tex, int posX, int posY,
+  Texture2D &loadTexture(const std::string &path);
+  void drawTexture(const Texture2D *tex, float posX, float posY, float size,
                    Color tint = WHITE);
 
   Texture2D &loadSprite(const std::string &path);

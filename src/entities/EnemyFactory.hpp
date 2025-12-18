@@ -15,33 +15,33 @@ public:
     auto &assets = AssetSystem::instance();
 
     Godsip::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/godsip_HIGH.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/godsip_MED.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/godsip_LOW.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/godsip_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/godsip_MED.png"),
+        &assets.loadTexture("../assets/enemies/godsip_LOW.png"),
     };
 
     Monitor::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/monitor_HIGH.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/monitor_MED.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/monitor_LOW.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/monitor_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/monitor_MED.png"),
+        &assets.loadTexture("../assets/enemies/monitor_LOW.png"),
     };
 
     Sniper::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/sniper_HIGH.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/sniper_MED.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/sniper_LOW.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/sniper_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/sniper_MED.png"),
+        &assets.loadTexture("../assets/enemies/sniper_LOW.png"),
     };
 
     Swarmer::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/swarmer_HIGH.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/swarmer_MED.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/swarmer_LOW.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/swarmer_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/swarmer_MED.png"),
+        &assets.loadTexture("../assets/enemies/swarmer_LOW.png"),
     };
 
     Zomb::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/zomb_HIGH.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/zomb_MED.png", 70, 70),
-        &assets.loadTexture("../assets/enemies/zomb_LOW.png", 70, 70),
+        &assets.loadTexture("../assets/enemies/zomb_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/zomb_MED.png"),
+        &assets.loadTexture("../assets/enemies/zomb_LOW.png"),
     };
   }
 

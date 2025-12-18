@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include <stdexcept>
 
-Texture2D &AssetSystem::loadTexture(const std::string &path, int w, int h) {
+Texture2D &AssetSystem::loadTexture(const std::string &path) {
   auto it = textures.find(path);
   if (it != textures.end())
     return it->second;
@@ -11,7 +11,6 @@ Texture2D &AssetSystem::loadTexture(const std::string &path, int w, int h) {
   if (!IsImageValid(img))
     throw std::runtime_error("Failed to load image: " + path);
 
-  ImageResize(&img, w, h);
   Texture2D tex = LoadTextureFromImage(img);
   UnloadImage(img);
 
@@ -19,11 +18,14 @@ Texture2D &AssetSystem::loadTexture(const std::string &path, int w, int h) {
   return inserted->second;
 }
 
-void AssetSystem::drawTexture(const Texture2D *tex, int posX, int posY,
-                              Color tint) {
+void AssetSystem::drawTexture(const Texture2D *tex, float posX, float posY,
+                              float size, Color tint) {
   if (!tex)
     return;
-  DrawTexture(*tex, posX, posY, tint);
+
+  float scale = size / (float)tex->width;
+
+  DrawTextureEx(*tex, {posX, posY}, 0.0f, scale, tint);
 }
 
 Texture2D &AssetSystem::loadSprite(const std::string &path) {

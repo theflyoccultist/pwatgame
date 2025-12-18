@@ -13,11 +13,11 @@ public:
 
     Texture2D *tex = ProjectileTextures::get(ProjectileType::LONGRANGE);
     if (!tex) {
-      std::cerr << "Grenade Projectile texture missing\n";
+      std::cerr << "Longrange Projectile texture missing\n";
       return;
     }
 
-    AssetSystem::instance().drawTexture(tex, (int)stats.pos.x,
-                                        (int)stats.pos.y);
+    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
+                                        stats.size);
   }
 };

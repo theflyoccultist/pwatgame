@@ -45,8 +45,8 @@ public:
       return;
     }
 
-    AssetSystem::instance().drawTexture(tex, (int)stats.pos.x,
-                                        (int)stats.pos.y);
+    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
+                                        stats.size);
   }
 
 private:

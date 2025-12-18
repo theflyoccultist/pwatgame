@@ -1,5 +1,5 @@
 #include "UILib.hpp"
-#include "../player/Player.hpp"
+#include "../player/PlayerState.hpp"
 #include "../texture/AssetSystem.hpp"
 #include <algorithm>
 #include <array>
@@ -45,16 +45,15 @@ void loadUIAssets() {
   auto &asset = AssetSystem::instance();
 
   for (auto &bkg : assetBank[AssetType::Background]) {
-    uiAssets[AssetType::Background].push_back(
-        &asset.loadTexture(bkg, 800, 800));
+    uiAssets[AssetType::Background].push_back(&asset.loadTexture(bkg));
   }
 
   for (auto &mnu : assetBank[AssetType::PwatMenu]) {
-    uiAssets[AssetType::PwatMenu].push_back(&asset.loadTexture(mnu, 300, 300));
+    uiAssets[AssetType::PwatMenu].push_back(&asset.loadTexture(mnu));
   }
 
   for (auto &wep : assetBank[AssetType::WeaponUI]) {
-    uiAssets[AssetType::WeaponUI].push_back(&asset.loadTexture(wep, 100, 100));
+    uiAssets[AssetType::WeaponUI].push_back(&asset.loadTexture(wep));
   }
 
   for (auto &spr : assetBank[AssetType::PwatSprite]) {
@@ -63,9 +62,10 @@ void loadUIAssets() {
 }
 
 MainMenuOpts mainMenu() {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0,
+                                      800);
   AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][0], 225,
-                                      225);
+                                      225, 300);
   DrawText("PwatPwat - The Game", 165, 80, 40, BLACK);
 
   static int selectedIndex = 0;
@@ -88,7 +88,7 @@ MainMenuOpts mainMenu() {
 
 void levelIntro(int currentLevel) {
   AssetSystem::instance().drawTexture(
-      uiAssets[AssetType::Background][currentLevel], 0, 0);
+      uiAssets[AssetType::Background][currentLevel], 0, 0, 800);
   const char *levelName = "";
 
   switch (currentLevel) {
@@ -116,7 +116,7 @@ void levelIntro(int currentLevel) {
 
 void playerHUD(int currentLevel) {
   AssetSystem::instance().drawTexture(
-      uiAssets[AssetType::Background][currentLevel], 0, 0);
+      uiAssets[AssetType::Background][currentLevel], 0, 0, 800);
 
   DrawText(TextFormat("Current Level: %d", currentLevel), 20, 20, 20, BLACK);
   DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
@@ -132,22 +132,22 @@ void weaponHUD(ProjectileType currentProjectile) {
 
   switch (currentProjectile) {
   case ProjectileType::GRENADE:
-    a.drawTexture(uiAssets[AssetType::WeaponUI][0], x, y);
+    a.drawTexture(uiAssets[AssetType::WeaponUI][0], x, y, 100);
     break;
   case ProjectileType::HELLFIRE:
-    a.drawTexture(uiAssets[AssetType::WeaponUI][1], x, y);
+    a.drawTexture(uiAssets[AssetType::WeaponUI][1], x, y, 100);
     break;
   case ProjectileType::ROCKET:
-    a.drawTexture(uiAssets[AssetType::WeaponUI][2], x, y);
+    a.drawTexture(uiAssets[AssetType::WeaponUI][2], x, y, 100);
     break;
   case ProjectileType::STRAIGHT:
-    a.drawTexture(uiAssets[AssetType::WeaponUI][3], x, y);
+    a.drawTexture(uiAssets[AssetType::WeaponUI][3], x, y, 100);
     break;
   case ProjectileType::UZI:
-    a.drawTexture(uiAssets[AssetType::WeaponUI][4], x, y);
+    a.drawTexture(uiAssets[AssetType::WeaponUI][4], x, y, 100);
     break;
   default:
-    a.drawTexture(uiAssets[AssetType::WeaponUI][5], x, y);
+    a.drawTexture(uiAssets[AssetType::WeaponUI][5], x, y, 100);
     break;
   }
 };
@@ -178,7 +178,8 @@ Enum runMenuEnum(const char *title, std::span<std::string const> items,
 }
 
 LevelOpts levelSelection() {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0,
+                                      800);
   static int index = 0;
 
   std::array<std::string, 5> levels = {
@@ -189,7 +190,8 @@ LevelOpts levelSelection() {
 }
 
 PauseMenuOpts pauseMenu() {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][2], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][2], 0, 0,
+                                      800);
   static int index = 0;
 
   std::array<std::string, 4> items = {
@@ -200,13 +202,14 @@ PauseMenuOpts pauseMenu() {
   };
 
   AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][1], 225,
-                                      400);
+                                      400, 300);
 
   return runMenuEnum<PauseMenuOpts>("Game Paused", items, index, 150, 140);
 }
 
 OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][3], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][3], 0, 0,
+                                      800);
   static int index = 0;
 
   std::array<std::string, 2> items = {
@@ -215,12 +218,13 @@ OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
   };
 
   AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][2], 225,
-                                      400);
+                                      400, 300);
   return runMenuEnum<OptionMenuOpts>("OPTIONS", items, index, 150, 140);
 }
 
 LostMenuOpts losingScreen(GameModes &gameMode) {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0,
+                                      800);
   static int index = 0;
 
   DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
@@ -240,7 +244,8 @@ LostMenuOpts losingScreen(GameModes &gameMode) {
 }
 
 WinMenuOpts winningMenu(int currentLevel) {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0,
+                                      800);
   static int index = 0;
 
   DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
@@ -262,7 +267,8 @@ WinMenuOpts winningMenu(int currentLevel) {
 }
 
 void CreditsMenu() {
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0);
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][4], 0, 0,
+                                      800);
   DrawText("Credits:", 150, 140, 20, BLUE);
 
   int posYtxt = 180;
