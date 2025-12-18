@@ -2,39 +2,10 @@
 
 #include "../entities/Faction.hpp"
 #include "ProjectileType.hpp"
+#include "TextureRegistry.hpp"
 #include "WeaponSpec.hpp"
-#include <ostream>
+#include <iostream>
 #include <raylib.h>
-
-inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
-  switch (type) {
-  case ProjectileType::STRAIGHT:
-    os << "STRAIGHT";
-    break;
-  case ProjectileType::LONGRANGE:
-    os << "LONGRANGE";
-    break;
-  case ProjectileType::SLOWCANNON:
-    os << "SLOWCANNON";
-    break;
-  case ProjectileType::ROCKET:
-    os << "ROCKET";
-    break;
-  case ProjectileType::UZI:
-    os << "UZI";
-    break;
-  case ProjectileType::GRENADE:
-    os << "GRENADE";
-    break;
-  case ProjectileType::HELLFIRE:
-    os << "HELLFIRE";
-    break;
-  default:
-    os << "UNKNOWN_PROJECTILE";
-    break;
-  }
-  return os;
-}
 
 inline const char *toString(ProjectileType type) {
   switch (type) {
@@ -101,7 +72,7 @@ public:
 
   void expire() { stats.lifetime = 0.0f; }
 
-  bool isActive() { return stats.active; }
+  bool isActive() const { return stats.active; }
   void deactivate() { stats.active = false; }
 
   float lifetime() const { return stats.lifetime; }

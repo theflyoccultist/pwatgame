@@ -15,9 +15,6 @@ public:
 
   void loadItemTextures();
 
-  // Example usage :
-  // auto &food = spawnItem<ItemFood>(FoodType::Apple);
-  // food.reset(pos, spec);
   template <typename T, typename... Args> T &spawnItem(Args &&...args);
 
   void updateAll(const PlayerState &player);
@@ -27,6 +24,10 @@ public:
 private:
   std::vector<std::unique_ptr<Item>> items;
 };
+
+// Example usage :
+// auto &food = spawnItem<ItemFood>(FoodType::Apple);
+// food.reset(pos, spec);
 
 template <typename T, typename... Args>
 T &ItemManager::spawnItem(Args &&...args) {

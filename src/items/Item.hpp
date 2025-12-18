@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../player/Player.hpp"
+#include "../player/PlayerState.hpp"
 #include "ItemType.hpp"
 #include <raylib.h>
 

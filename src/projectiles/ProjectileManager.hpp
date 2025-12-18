@@ -1,12 +1,20 @@
 #pragma once
 
 #include "ProjectileFactory.hpp"
+#include "WeaponSpec.hpp"
 #include <array>
 #include <raylib.h>
 #include <span>
 
 class ProjectileManager {
 public:
+  ProjectileManager() = default;
+
+  ProjectileManager(const ProjectileManager &) = delete;
+  ProjectileManager &operator=(const ProjectileManager &) = delete;
+
+  void loadProjectileTextures();
+
   void spawn(Faction f, ProjectileType type, const Vector2 &startPos,
              const Vector2 &dir, const WeaponSpec &spec);
   void update(float dt);
