@@ -59,13 +59,19 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     p.playerPos = player.position;
     p.dt = dt;
 
-    p.type = MiniBossDatabase::getWeaponType(m->type);
-    p.spec = MiniBossDatabase::getWeaponSpec(m->type);
-
-    if (bossCooldown >= 2.0f && bossCooldown <= 4.0f)
+    if (bossCooldown >= 2.0f && bossCooldown <= 4.0f) {
+      p.type = ProjectileType::STRAIGHT;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::STRAIGHT);
       m->shootTowardsPlayer(projMan, p);
-    else if (bossCooldown <= 7.0f)
+    } else if (bossCooldown <= 6.0f) {
+      p.type = ProjectileType::SLOWCANNON;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::SLOWCANNON);
       m->shootRadialBurst(projMan, p, 8);
+    } else if (bossCooldown <= 8.0f) {
+      p.type = ProjectileType::SLOWCANNON;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::SLOWCANNON);
+      m->shootRadialBurst(projMan, p, 4);
+    }
   }
 
   bool isMiniBossKilled = false;

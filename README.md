@@ -4,14 +4,14 @@ You will play as PwatPwat, a cute blob cat plush who needs to claim her throne a
 
 ## Features:
 - **Game Modes**: 
-  Each level has different data, with slightly increasing difficulty and a different miniboss with different behavior for each level.
+  Each level has different weapon and enemy data, with slightly increasing difficulty and a different miniboss for each level.
 
-  - **Default Deathless mode**: Complete all four levels at once. If you run out of health, you will have to restart all over from level 1 again. Access it by selecting "Play Game" in the Main Menu.
+  - **Default Deathless mode**: Complete all four levels at once. Score and ammo persists throughout levels, so try to get the highest score you can. If you run out of health, you will have to restart all over from level 1 again. Access it by selecting "Play Game" in the Main Menu.
   - **Play From Level**: Start from a specific level. Access it by selecting "Select Level" in the Main Menu. If you run out of health, you will simply restart from that level.
 
 - **Music Composed and Arranged by myself**: The sound effects were picked up from opengameart.org, but I composed the soundtrack that you can hear throughout the game. 
 
-- **Lua scripting layer**: allows the editing of Enemy, Projectiles, Mini Boss data, Enemy and Item scheduling without recompiling the game engine, using some simple Lua tables with data. On the C++ side, it is handled using `std::expected` for safety and monadic operation chaining.
+- **Lua scripting layer**: allows the editing of Enemy, Projectiles, Mini Boss data, Enemy and Item scheduling without recompiling the game engine, using some simple Lua tables with data. On the C++ side, it is handled using `std::expected` for safety and monadic operation chaining. I also made usage of `Concepts` for Item scheduling.
 
 - **Statically templated cache pools for Enemies, Projectiles and Mini Bosses:** these spawns without heap allocation, allowing optimal performance and prevents the game engine from spawning an excessive amount of objects, therefore preventing frame losses as well.
 

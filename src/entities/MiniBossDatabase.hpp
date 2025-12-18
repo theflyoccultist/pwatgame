@@ -13,9 +13,7 @@ public:
 
   void loadFromLua(const char *filename);
   static const MiniBossSpec &get(MiniBossType t);
-
-  static ProjectileType getWeaponType(MiniBossType m);
-  static WeaponSpec getWeaponSpec(MiniBossType m);
+  static WeaponSpec getWeaponSpec(ProjectileType pt);
 
 private:
   LuaWrapper &lua;

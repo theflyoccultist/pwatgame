@@ -7,5 +7,5 @@ DrinkSpawns = {
 }
 
 WeaponSpawns = {
-	{ x = 230, y = 331, delay = 0.0, type = "rocket", ammoBonus = 10 },
+	{ x = 400, y = 400, delay = 0.0, type = "rocket", ammoBonus = 10 },
 }

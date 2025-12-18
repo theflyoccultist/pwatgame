@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Proj.Hellfire.hpp"
 #include "Proj_Grenade.hpp"
+#include "Proj_Hellfire.hpp"
 #include "Proj_LongRange.hpp"
+#include "Proj_Rocket.hpp"
 #include "Proj_SlowCannon.hpp"
 #include "Proj_Straight.hpp"
 #include "Proj_Uzi.hpp"
-#include "Proj_rocket.hpp"
 #include "WeaponSpec.hpp"
 #include <array>
 

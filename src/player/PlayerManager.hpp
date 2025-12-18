@@ -17,13 +17,17 @@ public:
     return {pwatTexture, pwatPosition, pwatDirection};
   }
 
-  void reset(PlayerState &pwatState) {
+  void resetStatus() {
     world.pwat.resetPlayerHealth();
     world.pwat.resetPlayerScore();
     world.pwat.resetPlayerAmmo();
     world.pwat.resetDefaultWeapon();
+  }
+
+  void resetPosition(PlayerState &pwatState) {
     pwatState.position = {static_cast<float>(screenWidth / 2.0),
                           static_cast<float>(screenHeight / 2.0)};
+    pwatState.direction = {0, 0};
   }
 
   void update(PlayerState &pwatState, float deltaTime) {

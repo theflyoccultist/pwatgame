@@ -51,23 +51,6 @@ const MiniBossSpec &MiniBossDatabase::get(MiniBossType type) {
   return mbTable.at(type);
 }
 
-ProjectileType MiniBossDatabase::getWeaponType(MiniBossType m) {
-  switch (m) {
-  case MiniBossType::WINDOWS:
-    return ProjectileType::SLOWCANNON;
-  case MiniBossType::LISP:
-    return ProjectileType::STRAIGHT;
-  case MiniBossType::JAVA:
-    return ProjectileType::UZI;
-  case MiniBossType::RUST:
-    return ProjectileType::ROCKET;
-  default:
-    std::cerr << "MiniBossDatabase getWeaponType : unknown MiniBoss type\n";
-    return ProjectileType::ROCKET;
-  }
-}
-
-WeaponSpec MiniBossDatabase::getWeaponSpec(MiniBossType m) {
-  ProjectileType pt = getWeaponType(m);
+WeaponSpec MiniBossDatabase::getWeaponSpec(ProjectileType pt) {
   return WeaponDataBase::get(pt);
 }

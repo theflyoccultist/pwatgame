@@ -1,5 +1,7 @@
 #include "Game.hpp"
+#include "GameModes.hpp"
 #include "GameState.hpp"
+#include "levels/LevelID.hpp"
 #include "levels/LevelLoader.hpp"
 #include "levels/MusicScheduler.hpp"
 #include "levels/displayLevel.hpp"
@@ -53,7 +55,17 @@ void Game::run() {
       break;
 
     case GameState::Restarting: {
-      playerManager.reset(pwatState);
+      if (gameMode == GameModes::LevelSelection) {
+        playerManager.resetStatus();
+      }
+
+      if (gameMode == GameModes::Dealthless &&
+          currentLevel == LevelID::Level1) {
+        playerManager.resetStatus();
+      }
+
+      playerManager.resetPosition(pwatState);
+
       levelLoader.load(currentLevel);
       musicScheduler.scheduleMusic(currentLevel);
       std::cout << "Current level: " << currentLevel << "\n";
