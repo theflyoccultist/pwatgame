@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MiniBoss.hpp"
+#include "MiniBossDatabase.hpp"
 #include <array>
 #include <cmath>
 #include <raylib.h>
@@ -12,11 +13,26 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float dt, Vector2 playerPos, float bossCooldown) override {
+  void update(ShootParams &p, ProjectileManager &projMan,
+              float bossCooldown) override {
     stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
 
     if (bossCooldown <= 2.0f) {
-      moveTowardsPlayer(dt, playerPos);
+      moveTowardsPlayer(p.dt, p.playerPos);
+    } else if (bossCooldown <= 3.0f) {
+      stats.currentHP++;
+    } else if (bossCooldown <= 4.0f) {
+      p.type = ProjectileType::INTERNET;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::INTERNET);
+      shootTowardsPlayer(projMan, p);
+    } else if (bossCooldown <= 6.0f) {
+      p.type = ProjectileType::EXECUTABLE;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::EXECUTABLE);
+      shootRadialBurst(projMan, p, 8);
+    } else if (bossCooldown <= 8.0f) {
+      p.type = ProjectileType::EXECUTABLE;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::EXECUTABLE);
+      shootRadialBurst(projMan, p, 3);
     }
   }
 

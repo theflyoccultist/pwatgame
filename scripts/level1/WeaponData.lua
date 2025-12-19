@@ -12,11 +12,16 @@ local function make_weapon(type, speed, fireRate, size, lifetime, damage)
 end
 
 Weapons = {
-	make_weapon("longrange", 400, 1.0, 8, 3, 5),
+	-- Miniboss projectiles
+	make_weapon("exe", 450, 0.5, 40, 3, 7),
+	make_weapon("ie", 700, 0.35, 50, 3, 5),
+
+	-- Enemy projectiles
+	make_weapon("longrange", 400, 1.0, 15, 3, 5),
 	make_weapon("slowcannon", 800, 0.1, 20, 3, 1),
-	make_weapon("straight", 1600, 0.3, 50, 1.6, 5),
-	make_weapon("uzi", 1100, 0.18, 40, 2.1, 7),
-	make_weapon("rocket", 1200, 0.2, 30, 2, 46),
-	make_weapon("hellfire", 100, 0.1, 60, 2, 100),
-	make_weapon("grenade", 900, 2.0, 150, 3, 300),
+
+	-- Player projectiles
+	make_weapon("straight", 750, 0.3, 20, 1.6, 5),
+	make_weapon("uzi", 1100, 0.18, 25, 2.1, 8),
+	make_weapon("rocket", 1200, 0.3, 30, 2, 46),
 }

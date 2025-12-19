@@ -46,6 +46,14 @@ public:
       audio.sfx->grenade();
       return ProjectilePool::getFreeProjectile<Grenade>(f, startPos, dir, spec);
 
+    case ProjectileType::EXECUTABLE:
+      return ProjectilePool::getFreeProjectile<Executable>(f, startPos, dir,
+                                                           spec);
+
+    case ProjectileType::INTERNET:
+      return ProjectilePool::getFreeProjectile<Internet>(f, startPos, dir,
+                                                         spec);
+
     default:
       std::cerr << "Unknown projectile type!\n";
       return nullptr;

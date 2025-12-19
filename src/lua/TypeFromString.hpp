@@ -95,6 +95,10 @@ inline ProjectileType projTypeFromString(std::string_view s) {
     return ProjectileType::HELLFIRE;
   if (s == "grenade")
     return ProjectileType::GRENADE;
+  if (s == "ie")
+    return ProjectileType::INTERNET;
+  if (s == "exe")
+    return ProjectileType::EXECUTABLE;
 
   return ProjectileType::ROCKET;
 }

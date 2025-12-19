@@ -40,7 +40,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       if (b->faction == Faction::Player &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
                                  e->stats.pos, (float)e->stats.size)) {
-        player.score++;
+        player.addScore(1);
         b->expire();
 
         if (e->takeBulletIfHit(b->stats.damage)) {

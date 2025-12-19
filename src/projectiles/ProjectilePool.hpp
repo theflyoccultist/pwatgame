@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Proj_Executable.hpp"
 #include "Proj_Grenade.hpp"
 #include "Proj_Hellfire.hpp"
+#include "Proj_Internet.hpp"
 #include "Proj_LongRange.hpp"
 #include "Proj_Rocket.hpp"
 #include "Proj_SlowCannon.hpp"
@@ -20,6 +22,8 @@ private:
   static inline std::array<Uzi, BULLET_POOL> uziPool;
   static inline std::array<Hellfire, BULLET_POOL> hellfirePool;
   static inline std::array<Grenade, BULLET_POOL> grenadePool;
+  static inline std::array<Executable, BULLET_POOL> exePool;
+  static inline std::array<Internet, BULLET_POOL> iePool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -78,4 +82,16 @@ template <>
 inline std::array<Grenade, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<Grenade>() {
   return grenadePool;
+}
+
+template <>
+inline std::array<Executable, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Executable>() {
+  return exePool;
+}
+
+template <>
+inline std::array<Internet, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Internet>() {
+  return iePool;
 }

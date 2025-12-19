@@ -1,7 +1,6 @@
 #include "MiniBossManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
 #include "Actor.hpp"
-#include "MiniBossDatabase.hpp"
 
 void MiniBossManager::spawnMiniBoss(MiniBossType type) {
   for (auto *&slot : miniBosses) {
@@ -13,6 +12,7 @@ void MiniBossManager::spawnMiniBoss(MiniBossType type) {
       if (m) {
         slot = m;
         m->activate();
+        break;
       }
     }
   }
@@ -28,7 +28,14 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
     if (!m || !m->isAlive())
       continue;
 
-    m->update(dt, player.position, bossCooldown);
+    Vector2 bulletStartPos = {m->stats.pos.x + (float)m->stats.size / 2,
+                              m->stats.pos.y + (float)m->stats.size / 2};
+
+    p.startPos = bulletStartPos;
+    p.playerPos = player.position;
+    p.dt = dt;
+
+    m->update(p, projMan, bossCooldown);
 
     for (auto &b : bullets) {
       if (!b || !b->isActive())
@@ -37,7 +44,7 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
       if (b->faction == Faction::Player &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
                                  m->stats.pos, (float)m->stats.size)) {
-        player.score++;
+        player.addScore(1);
         b->expire();
 
         if (m->takeBulletIfHit(b->stats.damage))
@@ -51,27 +58,6 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
         b->expire();
       }
     }
-
-    Vector2 bulletStartPos = {m->stats.pos.x + (float)m->stats.size / 2,
-                              m->stats.pos.y + (float)m->stats.size / 2};
-
-    p.startPos = bulletStartPos;
-    p.playerPos = player.position;
-    p.dt = dt;
-
-    if (bossCooldown >= 2.0f && bossCooldown <= 4.0f) {
-      p.type = ProjectileType::STRAIGHT;
-      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::STRAIGHT);
-      m->shootTowardsPlayer(projMan, p);
-    } else if (bossCooldown <= 6.0f) {
-      p.type = ProjectileType::SLOWCANNON;
-      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::SLOWCANNON);
-      m->shootRadialBurst(projMan, p, 8);
-    } else if (bossCooldown <= 8.0f) {
-      p.type = ProjectileType::SLOWCANNON;
-      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::SLOWCANNON);
-      m->shootRadialBurst(projMan, p, 4);
-    }
   }
 
   bool isMiniBossKilled = false;
@@ -81,6 +67,7 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
       m->deactivate();
       m = nullptr;
       isMiniBossKilled = true;
+      player.addScore(500);
     }
   }
 

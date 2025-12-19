@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../player/Player.hpp"
+#include "../player/PlayerState.hpp"
 #include "../projectiles/ProjectileManager.hpp"
 #include "MiniBoss.hpp"
 #include "MiniBossFactory.hpp"

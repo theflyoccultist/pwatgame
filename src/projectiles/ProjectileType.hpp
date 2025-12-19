@@ -11,6 +11,8 @@ enum class ProjectileType : uint8_t {
   UZI,
   GRENADE,
   HELLFIRE,
+  INTERNET,
+  EXECUTABLE,
   COUNT
 };
 
@@ -36,6 +38,12 @@ inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
     break;
   case ProjectileType::HELLFIRE:
     os << "HELLFIRE";
+    break;
+  case ProjectileType::INTERNET:
+    os << "INTERNET EXPLORER";
+    break;
+  case ProjectileType::EXECUTABLE:
+    os << "EXE";
     break;
   default:
     os << "UNKNOWN_PROJECTILE";

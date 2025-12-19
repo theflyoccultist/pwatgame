@@ -19,6 +19,8 @@ struct PlayerState {
 
   static void addHealth(int value) { PlayerState::health += value; }
   static void addAmmo(int ammo) { PlayerState::playerAmmo += ammo; }
+  static void addScore(int score) { PlayerState::score += score; }
+
   static void upgradeAmmo(ProjectileType newWeapon) {
     PlayerState::currWeapon = newWeapon;
   }

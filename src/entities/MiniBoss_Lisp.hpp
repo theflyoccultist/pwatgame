@@ -14,20 +14,21 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float dt, Vector2 playerPos, float bossCooldown) override {
+  void update(ShootParams &p, ProjectileManager &projMan,
+              float bossCooldown) override {
     stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
 
     if (bossCooldown <= 4.0f) {
-      copyPlayerMovements(playerPos);
+      copyPlayerMovements(p.playerPos);
     } else {
-      backToCenter(dt);
+      backToCenter(p.dt);
     }
   }
 
 private:
   void copyPlayerMovements(Vector2 playerPos) {
     stats.pos = {playerPos.x + 100.0f, playerPos.y + 100.0f};
-    ClampEntities::clamp(stats.pos, stats.size);
+    ClampEntities::clamp(stats.pos, (int)stats.size);
   }
 
   void backToCenter(float dt) {

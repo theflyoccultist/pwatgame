@@ -30,6 +30,12 @@ public:
 
     projTextures[ProjectileType::UZI] =
         &a.loadTexture("../assets/bullets/bullet_check.png");
+
+    projTextures[ProjectileType::EXECUTABLE] =
+        &a.loadTexture("../assets/bullets/bullet_exe.png");
+
+    projTextures[ProjectileType::INTERNET] =
+        &a.loadTexture("../assets/bullets/bullet_ie.png");
   }
 
   static Texture2D *get(ProjectileType type) { return projTextures[type]; }

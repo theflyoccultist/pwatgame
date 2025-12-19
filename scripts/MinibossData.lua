@@ -9,7 +9,7 @@ local function make_miniboss(type, speed, hp)
 end
 
 MiniBosses = {
-	make_miniboss("windows", 200, 350),
+	make_miniboss("windows", 200, 3500),
 	make_miniboss("lisp", 150, 100),
 	make_miniboss("java", 150, 100),
 	make_miniboss("rust", 150, 100),

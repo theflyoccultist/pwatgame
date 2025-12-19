@@ -9,7 +9,7 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update([[maybe_unused]] float dt, [[maybe_unused]] Vector2 playerPos,
+  void update(ShootParams &p, ProjectileManager &projMan,
               float bossCooldown) override {
     stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
   }
