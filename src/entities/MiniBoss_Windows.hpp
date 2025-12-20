@@ -40,7 +40,7 @@ public:
     } else if (bossCooldown <= 8.0f) {
       p.type = ProjectileType::UPDATE;
       p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::UPDATE);
-      shootRadialBurst(projMan, p, 3);
+      shootTowardsPlayer(projMan, p);
     }
   }
 
