@@ -19,19 +19,27 @@ public:
 
     if (bossCooldown <= 2.0f) {
       moveTowardsPlayer(p.dt, p.playerPos);
+      p.type = ProjectileType::UPDATE;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::UPDATE);
+      shootRadialBurst(projMan, p, 3);
+
     } else if (bossCooldown <= 3.0f) {
-      stats.currentHP++;
+      if (stats.currentHP <= stats.totalHP)
+        stats.currentHP++;
+
     } else if (bossCooldown <= 4.0f) {
       p.type = ProjectileType::INTERNET;
       p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::INTERNET);
       shootTowardsPlayer(projMan, p);
+
     } else if (bossCooldown <= 6.0f) {
       p.type = ProjectileType::EXECUTABLE;
       p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::EXECUTABLE);
       shootRadialBurst(projMan, p, 8);
+
     } else if (bossCooldown <= 8.0f) {
-      p.type = ProjectileType::EXECUTABLE;
-      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::EXECUTABLE);
+      p.type = ProjectileType::UPDATE;
+      p.spec = MiniBossDatabase::getWeaponSpec(ProjectileType::UPDATE);
       shootRadialBurst(projMan, p, 3);
     }
   }

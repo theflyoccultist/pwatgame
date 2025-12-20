@@ -99,6 +99,8 @@ inline ProjectileType projTypeFromString(std::string_view s) {
     return ProjectileType::INTERNET;
   if (s == "exe")
     return ProjectileType::EXECUTABLE;
+  if (s == "update")
+    return ProjectileType::UPDATE;
 
   return ProjectileType::ROCKET;
 }

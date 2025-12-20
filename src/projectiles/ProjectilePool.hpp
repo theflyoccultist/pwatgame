@@ -8,6 +8,7 @@
 #include "Proj_Rocket.hpp"
 #include "Proj_SlowCannon.hpp"
 #include "Proj_Straight.hpp"
+#include "Proj_Update.hpp"
 #include "Proj_Uzi.hpp"
 #include "WeaponSpec.hpp"
 #include <array>
@@ -24,6 +25,7 @@ private:
   static inline std::array<Grenade, BULLET_POOL> grenadePool;
   static inline std::array<Executable, BULLET_POOL> exePool;
   static inline std::array<Internet, BULLET_POOL> iePool;
+  static inline std::array<Update, BULLET_POOL> updatePool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -94,4 +96,10 @@ template <>
 inline std::array<Internet, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<Internet>() {
   return iePool;
+}
+
+template <>
+inline std::array<Update, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Update>() {
+  return updatePool;
 }

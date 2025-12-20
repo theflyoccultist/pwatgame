@@ -15,7 +15,7 @@ item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(4, 21, "shinramyun", 20
 item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(4, 40.2, "tomyum", 25))
 item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(18, 100.5, "yopkki", 14))
 item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(25, 121.5, "pho", 20))
-item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(25, 138.4, "buldak", 20))
+item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(25, 145.4, "buldak", 20))
 
 DrinkSpawns = {
 	{ x = 450, y = 550, delay = 0.0, type = "soju", hpBonus = 50 },
@@ -23,6 +23,7 @@ DrinkSpawns = {
 	{ x = 50, y = 750, delay = 10.0, type = "icecoffee", hpBonus = 90 },
 	{ x = 42, y = 669, delay = 31.0, type = "monster", hpBonus = 110 },
 	{ x = 564, y = 119, delay = 47.9, type = "soju", hpBonus = 40 },
+	{ x = 123, y = 456, delay = 141.9, type = "monster", hpBonus = 80 },
 }
 
 item_spawn.append(DrinkSpawns, item_spawn.bulk_drink_spawn(4, 26, "calpis", 20))

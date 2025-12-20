@@ -13,8 +13,9 @@ end
 
 Weapons = {
 	-- Miniboss projectiles
-	make_weapon("exe", 450, 0.5, 40, 3, 7),
-	make_weapon("ie", 700, 0.35, 50, 3, 5),
+	make_weapon("exe", 450, 0.015, 40, 3, 7),
+	make_weapon("ie", 700, 0.25, 50, 3, 5),
+	make_weapon("update", 600, 0.030, 69, 2, 7),
 
 	-- Enemy projectiles
 	make_weapon("longrange", 400, 1.0, 15, 3, 5),

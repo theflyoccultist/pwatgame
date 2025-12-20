@@ -54,6 +54,9 @@ public:
       return ProjectilePool::getFreeProjectile<Internet>(f, startPos, dir,
                                                          spec);
 
+    case ProjectileType::UPDATE:
+      return ProjectilePool::getFreeProjectile<Update>(f, startPos, dir, spec);
+
     default:
       std::cerr << "Unknown projectile type!\n";
       return nullptr;

@@ -36,6 +36,9 @@ public:
 
     projTextures[ProjectileType::INTERNET] =
         &a.loadTexture("../assets/bullets/bullet_ie.png");
+
+    projTextures[ProjectileType::UPDATE] =
+        &a.loadTexture("../assets/bullets/bullet_update.png");
   }
 
   static Texture2D *get(ProjectileType type) { return projTextures[type]; }

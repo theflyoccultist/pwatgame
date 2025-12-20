@@ -64,7 +64,7 @@ public:
     for (int i = 0; i < count; ++i) {
       float angle = (float)i * step;
       Vector2 dir = {cosf(angle), sinf(angle)};
-      pm.spawn(Faction::Enemy, p.type, p.startPos, dir, p.spec);
+      shoot(pm, p, dir);
     }
   }
 
