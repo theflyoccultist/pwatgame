@@ -10,8 +10,9 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
-    timer += delta;
+  void update(ShootParams &p, ProjectileManager &projMan,
+              float actorCooldown) override {
+    timer += p.dt;
 
     stats.pos.x = std::cosf(timer) * stats.speed + 400;
     stats.pos.y = std::sinf(timer) * stats.speed + 400;

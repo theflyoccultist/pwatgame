@@ -10,7 +10,7 @@ public:
   void setTexture() override { textures = sharedTextures; }
 
   void update(ShootParams &p, ProjectileManager &projMan,
-              float bossCooldown) override {
-    stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
+              float actorCooldown) override {
+    stats.pos = {stats.pos.x, stats.pos.y + (sinf(actorCooldown) * .25f)};
   }
 };

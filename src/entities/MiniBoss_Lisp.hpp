@@ -15,10 +15,10 @@ public:
   void setTexture() override { textures = sharedTextures; }
 
   void update(ShootParams &p, ProjectileManager &projMan,
-              float bossCooldown) override {
-    stats.pos = {stats.pos.x, stats.pos.y + (sinf(bossCooldown) * .25f)};
+              float actorCooldown) override {
+    stats.pos = {stats.pos.x, stats.pos.y + (sinf(actorCooldown) * .25f)};
 
-    if (bossCooldown <= 4.0f) {
+    if (actorCooldown <= 4.0f) {
       copyPlayerMovements(p.playerPos);
     } else {
       backToCenter(p.dt);

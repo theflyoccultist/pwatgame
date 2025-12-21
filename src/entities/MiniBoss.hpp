@@ -60,9 +60,6 @@ public:
     return stats.currentHP <= 0;
   }
 
-  virtual void update(ShootParams &p, ProjectileManager &projMan,
-                      float bossCooldown) = 0;
-
   bool isAlive() const { return stats.currentHP > 0; }
   bool isActive() const { return stats.active; }
   void activate() { stats.active = true; }

@@ -19,13 +19,13 @@ Texture2D &AssetSystem::loadTexture(const std::string &path) {
 }
 
 void AssetSystem::drawTexture(const Texture2D *tex, float posX, float posY,
-                              float size, Color tint) {
+                              float size, float rotation, Color tint) {
   if (!tex)
     return;
 
   float scale = size / (float)tex->width;
 
-  DrawTextureEx(*tex, {posX, posY}, 0.0f, scale, tint);
+  DrawTextureEx(*tex, {posX, posY}, rotation, scale, tint);
 }
 
 Texture2D &AssetSystem::loadSprite(const std::string &path) {

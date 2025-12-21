@@ -2,6 +2,7 @@
 
 #include "../utils/Random.hpp"
 #include "Enemy.hpp"
+#include "EnemyDatabase.hpp"
 #include <array>
 #include <raylib.h>
 
@@ -12,20 +13,27 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float delta, [[maybe_unused]] Vector2 playerPos) override {
+  void update(ShootParams &p, ProjectileManager &projMan,
+              float actorCooldown) override {
+    p.type = ProjectileType::SLOWCANNON;
+    p.spec = EnemyDatabase::getWeaponSpec(p.type);
+
     if (isX) {
-      stats.pos.x += stats.speed * delta * dirX;
+      stats.pos.x += stats.speed * p.dt * dirX;
       if (stats.pos.x >= 730.f)
         dirX = -1;
       else if (stats.pos.x <= 0)
         dirX = 1;
     } else {
-      stats.pos.y += stats.speed * delta * dirY;
+      stats.pos.y += stats.speed * p.dt * dirY;
       if (stats.pos.y >= 730.f)
         dirY = -1;
       else if (stats.pos.y <= 0)
         dirY = 1;
     }
+
+    if (actorCooldown >= 2.0f)
+      shootInVoid(projMan, p);
   }
 
 private:

@@ -2,4 +2,5 @@
 
 EnemySpawns = {
 	{ x = 10, y = 30, delay = 0, type = "godsip" },
+	{ x = 500, y = 500, delay = 0, type = "swarmer" },
 }

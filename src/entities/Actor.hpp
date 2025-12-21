@@ -36,6 +36,9 @@ public:
 
   virtual void draw() const = 0;
 
+  virtual void update(ShootParams &p, ProjectileManager &projMan,
+                      float actorCooldown) = 0;
+
   void shootTowardsPlayer(ProjectileManager &pm, const ShootParams &p) {
     Vector2 direction = {p.playerPos.x - p.startPos.x,
                          p.playerPos.y - p.startPos.y};

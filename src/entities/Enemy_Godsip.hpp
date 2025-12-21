@@ -2,6 +2,7 @@
 
 #include "../utils/clampEntities.hpp"
 #include "Enemy.hpp"
+#include "EnemyDatabase.hpp"
 #include <array>
 #include <raylib.h>
 
@@ -12,12 +13,14 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float delta, Vector2 playerPos) override {
-    dashTimer += delta;
+  void update(ShootParams &p, ProjectileManager &projMan,
+              float actorCooldown) override {
+    dashTimer += p.dt;
 
     if (!isDashing) {
-      if (dashTimer >= dashCooldown) {
-        Vector2 rawDir = {playerPos.x - stats.pos.x, playerPos.y - stats.pos.y};
+      if (dashTimer >= actorCooldown) {
+        Vector2 rawDir = {p.playerPos.x - stats.pos.x,
+                          p.playerPos.y - stats.pos.y};
         float length = std::sqrtf(rawDir.x * rawDir.x + rawDir.y * rawDir.y);
 
         if (length > 0.0f) {
@@ -30,12 +33,18 @@ public:
         isDashing = true;
         dashTimer = 0.f;
       }
+
+      if (actorCooldown >= 3.0f) {
+        p.type = ProjectileType::SLOWCANNON;
+        p.spec = EnemyDatabase::getWeaponSpec(p.type);
+        shootTowardsPlayer(projMan, p);
+      }
     }
 
     if (isDashing) {
-      stats.pos.x += dashDir.x * stats.speed * delta * 12;
-      stats.pos.y += dashDir.y * stats.speed * delta * 12;
-      ClampEntities::clamp(stats.pos, 80);
+      stats.pos.x += dashDir.x * stats.speed * p.dt * 12;
+      stats.pos.y += dashDir.y * stats.speed * p.dt * 12;
+      ClampEntities::clamp(stats.pos, (int)stats.size);
 
       if (dashTimer >= dashDuration) {
         isDashing = false;
@@ -46,7 +55,6 @@ public:
 
 private:
   float dashTimer = 0.f;
-  float dashCooldown = 2.f;
   float dashDuration = 1.5f;
   Vector2 dashDir{};
   bool isDashing = false;

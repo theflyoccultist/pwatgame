@@ -38,8 +38,6 @@ public:
 
   virtual void setTexture() = 0;
 
-  virtual void update(float dt, Vector2 playerPos) = 0;
-
   void draw() const override {
     if (!isAlive())
       return;

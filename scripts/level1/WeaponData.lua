@@ -19,10 +19,10 @@ Weapons = {
 
 	-- Enemy projectiles
 	make_weapon("longrange", 400, 1.0, 15, 3, 5),
-	make_weapon("slowcannon", 800, 0.1, 20, 3, 1),
+	make_weapon("slowcannon", 300, 0.1, 20, 3, 1),
 
 	-- Player projectiles
-	make_weapon("straight", 750, 0.3, 20, 1.6, 5),
+	make_weapon("straight", 750, 0.3, 20, 1.6, 10),
 	make_weapon("uzi", 1100, 0.18, 25, 2.1, 8),
 	make_weapon("rocket", 1200, 0.3, 30, 2, 46),
 }

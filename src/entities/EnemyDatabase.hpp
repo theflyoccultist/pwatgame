@@ -14,8 +14,7 @@ public:
   void loadFromLua(const char *filename);
   static const EnemySpec &get(EnemyType e);
 
-  static ProjectileType getWeaponType(EnemyType e);
-  static WeaponSpec getWeaponSpec(EnemyType e);
+  static WeaponSpec getWeaponSpec(ProjectileType pt);
 
 private:
   LuaWrapper &lua;

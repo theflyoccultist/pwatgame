@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../player/Player.hpp"
+#include "../player/PlayerState.hpp"
 #include "Enemy.hpp"
 #include "EnemyFactory.hpp"
 #include <array>
@@ -24,4 +24,6 @@ private:
   EnemyFactory factory;
 
   ProjectileManager &projMan;
+  Actor::ShootParams p;
+  float enemyTimer = 0.0f;
 };

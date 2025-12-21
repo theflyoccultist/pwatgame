@@ -17,13 +17,13 @@ public:
         &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::LONGRANGE] =
-        &a.loadTexture("../assets/bullets/bullet_check.png");
+        &a.loadTexture("../assets/bullets/bullet_longrange.png");
 
     projTextures[ProjectileType::ROCKET] =
         &a.loadTexture("../assets/bullets/bullet_check.png");
 
     projTextures[ProjectileType::SLOWCANNON] =
-        &a.loadTexture("../assets/bullets/bullet_check.png");
+        &a.loadTexture("../assets/bullets/bullet_slowcannon.png");
 
     projTextures[ProjectileType::STRAIGHT] =
         &a.loadTexture("../assets/bullets/bullet_check.png");

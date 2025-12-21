@@ -26,12 +26,29 @@ void EnemyManager::spawnEnemy(const Vector2 &pos, EnemyType type) {
 void EnemyManager::updateAll(float delta, const PlayerState &player,
                              std::span<Projectile *const> bullets) {
   using namespace Collisions;
+  enemyTimer += delta;
+  float enemyCooldown = std::fmodf(enemyTimer, 4.0f);
 
   for (auto *e : enemies) {
     if (!e || !e->isAlive())
       continue;
 
-    e->update(delta, player.position);
+    bool touchPlayer =
+        checkPlayerInteraction(player.position, (float)player.playerSize,
+                               e->stats.pos, (float)e->stats.size);
+
+    Vector2 bulletStartPos = {e->stats.pos.x + (float)e->stats.size / 2,
+                              e->stats.pos.y + (float)e->stats.size / 2};
+
+    if (touchPlayer) {
+      player.applyPlayerDmg(delta, e->stats.contactDmg);
+    }
+
+    p.startPos = bulletStartPos;
+    p.playerPos = player.position;
+    p.dt = delta;
+
+    e->update(p, projMan, enemyCooldown);
 
     for (auto &b : bullets) {
       if (!b || !b->isActive())
@@ -54,33 +71,6 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
         player.applyPlayerDmg(delta, b->stats.damage);
         b->expire();
       }
-    }
-
-    bool touchPlayer =
-        checkPlayerInteraction(player.position, (float)player.playerSize,
-                               e->stats.pos, (float)e->stats.size);
-
-    Vector2 bulletStartPos = {e->stats.pos.x + (float)e->stats.size / 2,
-                              e->stats.pos.y + (float)e->stats.size / 2};
-
-    Actor::ShootParams p;
-    p.startPos = bulletStartPos;
-    p.playerPos = player.position;
-    p.dt = delta;
-
-    p.type = EnemyDatabase::getWeaponType(e->type);
-    p.spec = EnemyDatabase::getWeaponSpec(e->type);
-
-    if (touchPlayer) {
-      player.applyPlayerDmg(delta, e->stats.contactDmg);
-    }
-
-    if (e->type == EnemyType::SNIPER) {
-      e->shootTowardsPlayer(projMan, p);
-    }
-
-    if (e->type == EnemyType::ZOMB) {
-      e->shootInVoid(projMan, p);
     }
   }
 

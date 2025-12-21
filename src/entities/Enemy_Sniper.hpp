@@ -2,6 +2,7 @@
 
 #include "../utils/clampEntities.hpp"
 #include "Enemy.hpp"
+#include "EnemyDatabase.hpp"
 #include <array>
 #include <cmath>
 #include <raylib.h>
@@ -13,12 +14,23 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(float delta, Vector2 playerPos) override {
-    float dist = std::sqrtf(std::powf(playerPos.x - stats.pos.x, 2) +
-                            std::powf(playerPos.y - stats.pos.y, 2));
+  void update(ShootParams &p, ProjectileManager &projMan,
+              float actorCooldown) override {
+    fleeFromPlayer(p);
+
+    p.type = ProjectileType::LONGRANGE;
+    p.spec = EnemyDatabase::getWeaponSpec(p.type);
+    if (actorCooldown <= 3.0f)
+      shootTowardsPlayer(projMan, p);
+  }
+
+private:
+  void fleeFromPlayer(ShootParams &p) {
+    float dist = std::sqrtf(std::powf(p.playerPos.x - stats.pos.x, 2) +
+                            std::powf(p.playerPos.y - stats.pos.y, 2));
 
     if (dist < 300) {
-      Vector2 dir = {stats.pos.x - playerPos.x, stats.pos.y - playerPos.y};
+      Vector2 dir = {stats.pos.x - p.playerPos.x, stats.pos.y - p.playerPos.y};
       float len = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
 
       if (len > 0.0001f) {
@@ -26,9 +38,10 @@ public:
         dir.y /= len;
       }
 
-      stats.pos.x += dir.x * stats.speed * delta;
-      stats.pos.y += dir.y * stats.speed * delta;
+      stats.pos.x += dir.x * stats.speed * p.dt;
+      stats.pos.y += dir.y * stats.speed * p.dt;
     }
-    ClampEntities::clamp(stats.pos, 60);
+
+    ClampEntities::clamp(stats.pos, (int)stats.size);
   }
 };

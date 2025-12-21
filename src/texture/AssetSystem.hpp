@@ -16,7 +16,7 @@ public:
 
   Texture2D &loadTexture(const std::string &path);
   void drawTexture(const Texture2D *tex, float posX, float posY, float size,
-                   Color tint = WHITE);
+                   float rotation = 0.0f, Color tint = WHITE);
 
   Texture2D &loadSprite(const std::string &path);
   void drawSprite(const Texture2D &sprite, Vector2 position, int frames);
