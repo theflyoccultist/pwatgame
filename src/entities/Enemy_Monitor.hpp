@@ -10,14 +10,18 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(ShootParams &p, ProjectileManager &projMan,
+  void update(ShootParams &p, [[maybe_unused]] ProjectileManager &projMan,
               float actorCooldown) override {
-    timer += p.dt;
 
-    stats.pos.x = std::cosf(timer) * stats.speed + 400;
-    stats.pos.y = std::sinf(timer) * stats.speed + 400;
+    if (actorCooldown >= 2.0f) {
+      stats.pos.x -= std::cosf(actorCooldown) * stats.speed * p.dt;
+      stats.pos.y -= std::sinf(actorCooldown) * stats.speed * p.dt;
+    }
+
+    if (stats.pos.x >= 1000.0f || stats.pos.y >= 1000.0f) {
+      resetPosition();
+    }
   }
 
-private:
-  float timer = 0;
+  void resetPosition() { stats.pos = stats.initialPos; }
 };

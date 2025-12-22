@@ -13,6 +13,7 @@ protected:
   struct MiniBossStats {
     bool active = false;
     Vector2 pos{};
+    Vector2 initialPos{};
     float speed = 0.0f;
     int currentHP;
     int totalHP;
@@ -26,9 +27,10 @@ public:
   MiniBossStats stats;
   MiniBossType type;
 
-  void reset(Vector2 pos, const MiniBossSpec &spec) {
+  void reset(const Vector2 &startPos, const MiniBossSpec &spec) {
     stats.active = true;
-    stats.pos = pos;
+    stats.pos = startPos;
+    stats.initialPos = startPos;
     stats.speed = spec.speed;
     stats.totalHP = spec.totalHP;
     stats.currentHP = stats.totalHP;

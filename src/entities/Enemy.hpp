@@ -13,6 +13,7 @@ protected:
   struct EnemyStats {
     bool active = false;
     Vector2 pos{};
+    Vector2 initialPos{};
     float speed = 0.0f;
     float size = 70.0f;
     int currentHP = 0;
@@ -27,9 +28,10 @@ public:
   EnemyStats stats;
   EnemyType type;
 
-  void reset(Vector2 pos, const EnemySpec &spec) {
+  void reset(const Vector2 &startPos, const EnemySpec &spec) {
     stats.active = true;
-    stats.pos = pos;
+    stats.pos = startPos;
+    stats.initialPos = startPos;
     stats.speed = spec.speed;
     stats.totalHP = spec.totalHP;
     stats.currentHP = stats.totalHP;

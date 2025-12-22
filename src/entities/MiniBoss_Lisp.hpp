@@ -16,31 +16,31 @@ public:
 
   void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
-    stats.pos = {stats.pos.x, stats.pos.y + (sinf(actorCooldown) * .25f)};
 
     if (actorCooldown <= 4.0f) {
-      copyPlayerMovements(p.playerPos);
+      copyPlayerMovements(actorCooldown);
     } else {
-      backToCenter(p.dt);
+      resetPosition();
     }
   }
 
 private:
-  void copyPlayerMovements(Vector2 playerPos) {
-    stats.pos = {playerPos.x + 100.0f, playerPos.y + 100.0f};
+  void copyPlayerMovements(float actorCooldown) {
+    if (actorCooldown <= 1.0f)
+      stats.pos = {(float)GetScreenHeight() - stats.size,
+                   (float)GetScreenWidth() - stats.size};
+
+    else if (actorCooldown <= 2.0f)
+      stats.pos = {0, (float)GetScreenWidth() - stats.size};
+
+    else if (actorCooldown <= 3.0f)
+      stats.pos = {(float)GetScreenHeight() - stats.size, 0};
+
+    else if (actorCooldown <= 4.0f)
+      stats.pos = {0, 0};
+
     ClampEntities::clamp(stats.pos, (int)stats.size);
   }
 
-  void backToCenter(float dt) {
-    Vector2 dir = {320.0f - stats.pos.x, 320.0f - stats.pos.y};
-
-    float length = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
-    if (length > 0.0f) {
-      dir.x /= length;
-      dir.y /= length;
-    }
-
-    stats.pos.x += dir.x * stats.speed * dt;
-    stats.pos.y += dir.y * stats.speed * dt;
-  }
+  void resetPosition() { stats.pos = stats.initialPos; }
 };

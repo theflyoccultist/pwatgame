@@ -7,17 +7,14 @@ function M.append(dst, src)
 end
 
 function M.monitor_circle(delay)
-	local t = {}
-	local x, y = 320, 320
-
-	for i = 1, 6 do
-		t[#t + 1] = {
-			x = x,
-			y = y,
-			delay = delay + i,
-			type = "monitor",
-		}
-	end
+	local t = {
+		{ x = -320, y = 320, delay = delay, type = "monitor" },
+		{ x = -250, y = 250, delay = delay + 1, type = "monitor" },
+		{ x = -60, y = 600, delay = delay + 2, type = "monitor" },
+		{ x = -500, y = 500, delay = delay + 3, type = "monitor" },
+		{ x = -100, y = 100, delay = delay + 4, type = "monitor" },
+		{ x = -480, y = 480, delay = delay + 5, type = "monitor" },
+	}
 
 	return t
 end

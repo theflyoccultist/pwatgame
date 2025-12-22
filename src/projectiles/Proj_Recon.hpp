@@ -2,22 +2,25 @@
 
 #include "Projectile.hpp"
 #include <cmath>
+#include <iostream>
 
 class Recon : public Projectile {
 public:
   Recon() : Projectile(Faction::None, ProjectileType::RECON) {}
 
   void update(float dt) override {
-    time += dt;
+    bulletTime += dt;
+    float accel = std::expf(bulletTime * 0.6f);
+    stats.vel.x += stats.vel.x * accel * dt;
+    stats.vel.y += stats.vel.y * accel * dt;
 
-    float cosh = std::powf(std::cosh(time), 2);
-    stats.pos.x += stats.vel.x * dt + cosh;
-    stats.pos.y += stats.vel.y * dt + cosh;
+    stats.pos.x += stats.vel.x * dt;
+    stats.pos.y += stats.vel.y * dt;
 
     stats.lifetime -= dt;
 
-    if (stats.lifetime <= 0.0f)
-      time = 0.0f;
+    if (bulletTime >= 2.0f)
+      bulletTime = 0.0f;
   }
 
   void draw() const override {
@@ -35,5 +38,5 @@ public:
   }
 
 private:
-  float time = 0.0f;
+  float bulletTime = 0.0f;
 };
