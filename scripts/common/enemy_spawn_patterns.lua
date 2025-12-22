@@ -21,10 +21,10 @@ end
 
 function M.godsip_cardinal(delay)
 	local t = {
-		{ x = 0, y = 0, delay = delay, type = "godsip" },
-		{ x = 730, y = 0, delay = delay, type = "godsip" },
-		{ x = 0, y = 730, delay = delay, type = "godsip" },
-		{ x = 730, y = 730, delay = delay, type = "godsip" },
+		{ x = math.random(0, 730), y = math.random(0, 730), delay = delay, type = "godsip" },
+		{ x = math.random(0, 730), y = math.random(0, 730), delay = delay, type = "godsip" },
+		{ x = math.random(0, 730), y = math.random(0, 730), delay = delay, type = "godsip" },
+		{ x = math.random(0, 730), y = math.random(0, 730), delay = delay, type = "godsip" },
 	}
 
 	return t

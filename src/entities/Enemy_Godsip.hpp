@@ -17,6 +17,11 @@ public:
               float actorCooldown) override {
     dashTimer += p.dt;
 
+    if (actorCooldown <= 0.8f) {
+      stats.pos.x += (stats.initialPos.x - stats.pos.x) * 0.25f;
+      stats.pos.y += (stats.initialPos.y - stats.pos.y) * 0.25f;
+    }
+
     if (!isDashing) {
       if (dashTimer >= actorCooldown) {
         Vector2 rawDir = {p.playerPos.x - stats.pos.x,
