@@ -101,6 +101,8 @@ inline ProjectileType projTypeFromString(std::string_view s) {
     return ProjectileType::EXECUTABLE;
   if (s == "update")
     return ProjectileType::UPDATE;
+  if (s == "recon")
+    return ProjectileType::RECON;
 
   return ProjectileType::ROCKET;
 }

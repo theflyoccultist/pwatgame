@@ -35,7 +35,7 @@ public:
       }
 
       if (actorCooldown >= 3.0f) {
-        p.type = ProjectileType::SLOWCANNON;
+        p.type = ProjectileType::RECON;
         p.spec = EnemyDatabase::getWeaponSpec(p.type);
         shootTowardsPlayer(projMan, p);
       }

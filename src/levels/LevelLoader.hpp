@@ -5,6 +5,7 @@
 #include "../projectiles/WeaponDatabase.hpp"
 #include "ItemScheduler.hpp"
 #include "LevelID.hpp"
+#include "ProjectileScheduler.hpp"
 #include "ScheduleManager.hpp"
 #include "SpawnScheduler.hpp"
 #include <iostream>
@@ -12,13 +13,21 @@
 class LevelLoader {
 public:
   LevelLoader(WeaponDataBase &wd, EnemyDatabase &ed, MiniBossDatabase &md,
-              ScheduleManager &sm, SpawnScheduler &ss, ItemScheduler &is)
+              ScheduleManager &sm, SpawnScheduler &ss, ItemScheduler &is,
+              ProjectileScheduler &ps)
       : weaponDatabase(wd), enemyDatabase(ed), minibossDatabase(md),
-        scheduleManager(sm), spawnScheduler(ss), itemScheduler(is) {}
+        scheduleManager(sm), spawnScheduler(ss), itemScheduler(is),
+        projectileScheduler(ps) {}
 
   void initDatabase() {
     weaponDatabase.loadFromLua("../scripts/level1/WeaponData.lua");
     enemyDatabase.loadFromLua("../scripts/level1/EnemyData.lua");
+  }
+
+  void loadEntityTextures() {
+    spawnScheduler.loadEnemyTextures();
+    itemScheduler.loadItemTextures();
+    projectileScheduler.loadProjectileTextures();
   }
 
   void load(LevelID level) {
@@ -75,4 +84,5 @@ private:
   ScheduleManager &scheduleManager;
   SpawnScheduler &spawnScheduler;
   ItemScheduler &itemScheduler;
+  ProjectileScheduler &projectileScheduler;
 };

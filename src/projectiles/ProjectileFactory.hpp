@@ -57,6 +57,9 @@ public:
     case ProjectileType::UPDATE:
       return ProjectilePool::getFreeProjectile<Update>(f, startPos, dir, spec);
 
+    case ProjectileType::RECON:
+      return ProjectilePool::getFreeProjectile<Recon>(f, startPos, dir, spec);
+
     default:
       std::cerr << "Unknown projectile type!\n";
       return nullptr;

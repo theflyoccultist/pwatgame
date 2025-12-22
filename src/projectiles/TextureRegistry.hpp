@@ -20,16 +20,16 @@ public:
         &a.loadTexture("../assets/bullets/bullet_longrange.png");
 
     projTextures[ProjectileType::ROCKET] =
-        &a.loadTexture("../assets/bullets/bullet_check.png");
+        &a.loadTexture("../assets/bullets/bullet_rocket.png");
 
     projTextures[ProjectileType::SLOWCANNON] =
         &a.loadTexture("../assets/bullets/bullet_slowcannon.png");
 
     projTextures[ProjectileType::STRAIGHT] =
-        &a.loadTexture("../assets/bullets/bullet_check.png");
+        &a.loadTexture("../assets/bullets/bullet_straight.png");
 
     projTextures[ProjectileType::UZI] =
-        &a.loadTexture("../assets/bullets/bullet_check.png");
+        &a.loadTexture("../assets/bullets/bullet_uzi.png");
 
     projTextures[ProjectileType::EXECUTABLE] =
         &a.loadTexture("../assets/bullets/bullet_exe.png");
@@ -39,6 +39,9 @@ public:
 
     projTextures[ProjectileType::UPDATE] =
         &a.loadTexture("../assets/bullets/bullet_update.png");
+
+    projTextures[ProjectileType::RECON] =
+        &a.loadTexture("../assets/bullets/bullet_recon.png");
   }
 
   static Texture2D *get(ProjectileType type) { return projTextures[type]; }

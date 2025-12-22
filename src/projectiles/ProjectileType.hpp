@@ -14,6 +14,7 @@ enum class ProjectileType : uint8_t {
   INTERNET,
   EXECUTABLE,
   UPDATE,
+  RECON,
   COUNT
 };
 
@@ -48,6 +49,9 @@ inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
     break;
   case ProjectileType::UPDATE:
     os << "WINDOWS UPDATE";
+    break;
+  case ProjectileType::RECON:
+    os << "RECON";
     break;
   default:
     os << "UNKNOWN_PROJECTILE";

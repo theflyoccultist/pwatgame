@@ -84,6 +84,7 @@ public:
   ItemScheduler(LuaWrapper &lua, World &w, ScheduleManager &sm)
       : lua(lua), world(w), sm(sm) {}
 
+  void loadItemTextures() { world.itemManager.loadItemTextures(); }
   void clearAllItems() { world.itemManager.clearAll(); }
 
   template <typename T>

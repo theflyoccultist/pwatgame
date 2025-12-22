@@ -15,8 +15,5 @@ struct World {
 
   World()
       : enemyManager(projectileManager), pwat(projectileManager),
-        minibossManager(projectileManager) {
-    itemManager.loadItemTextures();
-    projectileManager.loadProjectileTextures();
-  }
+        minibossManager(projectileManager) {}
 };

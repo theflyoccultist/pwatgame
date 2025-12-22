@@ -8,7 +8,7 @@ public:
   SpawnScheduler(LuaWrapper &lua, World &w, ScheduleManager &sm)
       : lua(lua), world(w), sm(sm) {}
 
-  void initEnemies() {
+  void loadEnemyTextures() {
     world.enemyManager.init();
     world.minibossManager.init();
   }

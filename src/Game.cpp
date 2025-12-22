@@ -19,17 +19,17 @@ void Game::run() {
   ScheduleManager sm(world);
   SpawnScheduler ss(lua, world, sm);
   ItemScheduler is(lua, world, sm);
+  ProjectileScheduler ps(world);
 
   lua.initLua();
-  LevelLoader levelLoader(wd, ed, md, sm, ss, is);
+  LevelLoader levelLoader(wd, ed, md, sm, ss, is, ps);
   levelLoader.initDatabase();
+  levelLoader.loadEntityTextures();
 
   PlayerManager playerManager(world);
   PlayerState pwatState = playerManager.init();
 
   MusicScheduler musicScheduler(world, sm);
-
-  ss.initEnemies();
 
   UIManager::loadUI();
 

@@ -29,7 +29,7 @@ void WeaponDataBase::loadFromLua(const char *filename) {
           WeaponSpec spec;
           spec.speed = lua.getInt("speed").value_or(0);
           spec.fireRate = lua.getNumber("fireRate").value_or(1.0f);
-          spec.size = lua.getInt("size").value_or(1);
+          spec.size = lua.getNumber("size").value_or(1.0f);
           spec.lifetime = lua.getNumber("lifetime").value_or(1.0f);
           spec.damage = lua.getInt("damage").value_or(1);
 

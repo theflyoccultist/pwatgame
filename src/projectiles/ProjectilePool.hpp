@@ -5,6 +5,7 @@
 #include "Proj_Hellfire.hpp"
 #include "Proj_Internet.hpp"
 #include "Proj_LongRange.hpp"
+#include "Proj_Recon.hpp"
 #include "Proj_Rocket.hpp"
 #include "Proj_SlowCannon.hpp"
 #include "Proj_Straight.hpp"
@@ -26,6 +27,7 @@ private:
   static inline std::array<Executable, BULLET_POOL> exePool;
   static inline std::array<Internet, BULLET_POOL> iePool;
   static inline std::array<Update, BULLET_POOL> updatePool;
+  static inline std::array<Recon, BULLET_POOL> reconPool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -102,4 +104,10 @@ template <>
 inline std::array<Update, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<Update>() {
   return updatePool;
+}
+
+template <>
+inline std::array<Recon, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Recon>() {
+  return reconPool;
 }
