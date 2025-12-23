@@ -4,19 +4,8 @@
 
 class Grenade : public Projectile {
 public:
-  Grenade() : Projectile(Faction::None, ProjectileType::GRENADE) {}
+  static Texture2D *projTexture;
+  Grenade() : Projectile(Faction::None, ProjectileType::GRENADE, projTexture) {}
 
-  void draw() const override {
-    if (!isActive())
-      return;
-
-    Texture2D *tex = ProjectileTextures::get(ProjectileType::GRENADE);
-    if (!tex) {
-      std::cerr << "Grenade Projectile texture missing\n";
-      return;
-    }
-
-    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
-                                        stats.size);
-  }
+  void setTexture() override { texture = projTexture; }
 };

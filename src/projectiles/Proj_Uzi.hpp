@@ -5,19 +5,8 @@
 
 class Uzi : public Projectile {
 public:
-  Uzi() : Projectile(Faction::None, ProjectileType::UZI) {}
+  static Texture2D *projTexture;
+  Uzi() : Projectile(Faction::None, ProjectileType::UZI, projTexture) {}
 
-  void draw() const override {
-    if (!isActive())
-      return;
-
-    Texture2D *tex = ProjectileTextures::get(ProjectileType::UZI);
-    if (!tex) {
-      std::cerr << "Uzi Projectile texture missing\n";
-      return;
-    }
-
-    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
-                                        stats.size);
-  }
+  void setTexture() override { texture = projTexture; }
 };

@@ -4,19 +4,9 @@
 
 class Executable : public Projectile {
 public:
-  Executable() : Projectile(Faction::None, ProjectileType::EXECUTABLE) {}
+  static Texture2D *projTexture;
+  Executable()
+      : Projectile(Faction::None, ProjectileType::EXECUTABLE, projTexture) {}
 
-  void draw() const override {
-    if (!isActive())
-      return;
-
-    Texture2D *tex = ProjectileTextures::get(ProjectileType::EXECUTABLE);
-    if (!tex) {
-      std::cerr << ".exe Projectile texture missing\n";
-      return;
-    }
-
-    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
-                                        stats.size);
-  }
+  void setTexture() override { texture = projTexture; }
 };

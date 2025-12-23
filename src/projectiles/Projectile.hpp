@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../entities/Faction.hpp"
+#include "../texture/AssetSystem.hpp"
 #include "ProjectileType.hpp"
-#include "TextureRegistry.hpp"
 #include "WeaponSpec.hpp"
 #include <iostream>
 #include <raylib.h>
@@ -45,8 +45,10 @@ public:
   ProjectileStats stats;
   Faction faction;
   ProjectileType type;
+  Texture2D *texture;
 
-  Projectile(Faction f, ProjectileType t) : faction(f), type(t) {}
+  Projectile(Faction f, ProjectileType t, Texture2D *&texture)
+      : faction(f), type(t), texture(texture) {}
 
   virtual ~Projectile() = default;
 
@@ -56,7 +58,20 @@ public:
     stats.lifetime -= dt;
   };
 
-  virtual void draw() const = 0;
+  virtual void draw() const {
+    if (!isActive())
+      return;
+
+    if (!texture) {
+      std::cerr << "Projectile texture missing\n";
+      return;
+    }
+
+    AssetSystem::instance().drawTexture(texture, stats.pos.x, stats.pos.y,
+                                        stats.size);
+  }
+
+  virtual void setTexture() = 0;
 
   void reset(Faction f, Vector2 pos, Vector2 dir, const WeaponSpec &spec) {
     stats.active = true;

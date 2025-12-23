@@ -1,10 +1,7 @@
 #include "ProjectileManager.hpp"
-#include "TextureRegistry.hpp"
 #include "WeaponSpec.hpp"
 
-void ProjectileManager::loadProjectileTextures() {
-  ProjectileTextures::loadTextures();
-}
+void ProjectileManager::loadProjectileTextures() { factory.loadAssets(); }
 
 void ProjectileManager::spawn(Faction f, ProjectileType type,
                               const Vector2 &startPos, const Vector2 &dir,

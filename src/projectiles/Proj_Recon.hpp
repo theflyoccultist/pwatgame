@@ -6,7 +6,8 @@
 
 class Recon : public Projectile {
 public:
-  Recon() : Projectile(Faction::None, ProjectileType::RECON) {}
+  static Texture2D *projTexture;
+  Recon() : Projectile(Faction::None, ProjectileType::RECON, projTexture) {}
 
   void update(float dt, float bulletTime) override {
     float accel = 1.0f * bulletTime;
@@ -20,17 +21,5 @@ public:
     stats.lifetime -= dt;
   }
 
-  void draw() const override {
-    if (!isActive())
-      return;
-
-    Texture2D *tex = ProjectileTextures::get(ProjectileType::RECON);
-    if (!tex) {
-      std::cerr << "Recon Projectile texture missing\n";
-      return;
-    }
-
-    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
-                                        stats.size);
-  }
+  void setTexture() override { texture = projTexture; }
 };

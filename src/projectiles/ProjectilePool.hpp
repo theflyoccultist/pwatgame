@@ -41,6 +41,7 @@ public:
     for (auto &p : pool) {
       if (!p.isActive()) {
         p.reset(f, pos, dir, spec);
+        p.setTexture();
         return &p;
       }
     }

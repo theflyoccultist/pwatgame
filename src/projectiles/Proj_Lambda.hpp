@@ -2,11 +2,11 @@
 
 #include "Projectile.hpp"
 #include <cmath>
-#include <iostream>
 
 class Lambda : public Projectile {
 public:
-  Lambda() : Projectile(Faction::None, ProjectileType::LAMBDA) {}
+  static Texture2D *projTexture;
+  Lambda() : Projectile(Faction::None, ProjectileType::LAMBDA, projTexture) {}
 
   void update(float dt, float bulletTime) override {
     float speed =
@@ -23,17 +23,5 @@ public:
     stats.lifetime -= dt;
   }
 
-  void draw() const override {
-    if (!isActive())
-      return;
-
-    Texture2D *tex = ProjectileTextures::get(ProjectileType::LAMBDA);
-    if (!tex) {
-      std::cerr << "Lambda Projectile texture missing\n";
-      return;
-    }
-
-    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
-                                        stats.size);
-  }
+  void setTexture() override { texture = projTexture; }
 };

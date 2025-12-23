@@ -5,19 +5,9 @@
 
 class Straight : public Projectile {
 public:
-  Straight() : Projectile(Faction::None, ProjectileType::STRAIGHT) {}
+  static Texture2D *projTexture;
+  Straight()
+      : Projectile(Faction::None, ProjectileType::STRAIGHT, projTexture) {}
 
-  void draw() const override {
-    if (!isActive())
-      return;
-
-    Texture2D *tex = ProjectileTextures::get(ProjectileType::STRAIGHT);
-    if (!tex) {
-      std::cerr << "Straight Projectile texture missing\n";
-      return;
-    }
-
-    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
-                                        stats.size);
-  }
+  void setTexture() override { texture = projTexture; }
 };

@@ -2,6 +2,7 @@
 
 #include "../entities/Faction.hpp"
 #include "../sound/AudioSystem.hpp"
+#include "../texture/AssetSystem.hpp"
 #include "Projectile.hpp"
 #include "ProjectilePool.hpp"
 #include "WeaponSpec.hpp"
@@ -11,6 +12,47 @@
 
 class ProjectileFactory {
 public:
+  ProjectileFactory() = default;
+
+  static void loadAssets() {
+    auto &aasset = AssetSystem::instance();
+
+    Grenade::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_check.png");
+
+    Hellfire::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_check.png");
+
+    LongRange::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_longrange.png");
+
+    Rocket::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_rocket.png");
+
+    SlowCannon::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_slowcannon.png");
+
+    Straight::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_straight.png");
+
+    Uzi::projTexture = &aasset.loadTexture("../assets/bullets/bullet_uzi.png");
+
+    Executable::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_exe.png");
+
+    Internet::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_ie.png");
+
+    Update::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_update.png");
+
+    Recon::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_recon.png");
+
+    Lambda::projTexture =
+        &aasset.loadTexture("../assets/bullets/bullet_check.png");
+  }
+
   Projectile *createProjectile(Faction f, ProjectileType type, Vector2 startPos,
                                Vector2 dir, WeaponSpec spec) {
     auto &audio = AudioSystem::instance();
