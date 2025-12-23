@@ -31,7 +31,7 @@ public:
 
     Texture2D *tex = FoodTextures::get(type);
     if (!tex) {
-      std::cerr << "Food Item texture missing\n";
+      std::cerr << "Item_Food::draw() - Food texture missing\n";
       return;
     }
 

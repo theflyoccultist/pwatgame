@@ -22,9 +22,12 @@ void ProjectileManager::spawn(Faction f, ProjectileType type,
 }
 
 void ProjectileManager::update(float dt) {
+  bulletTimer += dt;
+  float bulletCooldown = std::fmodf(bulletTimer, 8.0f);
+
   for (auto *p : projectiles)
     if (p && p->isActive())
-      p->update(dt);
+      p->update(dt, bulletCooldown);
 
   for (auto &p : projectiles) {
     if (p && p->lifetime() <= 0.0f) {

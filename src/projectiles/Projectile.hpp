@@ -50,7 +50,7 @@ public:
 
   virtual ~Projectile() = default;
 
-  virtual void update(float dt) {
+  virtual void update(float dt, [[maybe_unused]] float bulletTime) {
     stats.pos.x += stats.vel.x * dt;
     stats.pos.y += stats.vel.y * dt;
     stats.lifetime -= dt;

@@ -60,8 +60,11 @@ public:
     case ProjectileType::RECON:
       return ProjectilePool::getFreeProjectile<Recon>(f, startPos, dir, spec);
 
+    case ProjectileType::LAMBDA:
+      return ProjectilePool::getFreeProjectile<Lambda>(f, startPos, dir, spec);
+
     default:
-      std::cerr << "Unknown projectile type!\n";
+      std::cerr << "Projectile Factory: Unknown projectile type!\n";
       return nullptr;
     }
   }

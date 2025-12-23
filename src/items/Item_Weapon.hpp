@@ -30,7 +30,8 @@ public:
 
     AudioSystem::instance().sfx->newWeapon();
 
-    std::cout << "Picked projectile type: " << newType << '\n';
+    std::cout << "Item_Weapon::applyToPlayer() - Picked projectile type: "
+              << newType << '\n';
 
     deactivate();
   }
@@ -41,7 +42,7 @@ public:
 
     Texture2D *tex = WeaponTextures::get(weaponType);
     if (!tex) {
-      std::cerr << "Food Item texture missing\n";
+      std::cerr << "Item_Weapon::draw() - Weapon texture missing\n";
       return;
     }
 

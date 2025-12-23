@@ -3,6 +3,7 @@
 
 #include "../utils/clampEntities.hpp"
 #include "MiniBoss.hpp"
+#include "MiniBossDatabase.hpp"
 #include <array>
 #include <cmath>
 #include <raylib.h>
@@ -18,6 +19,9 @@ public:
               float actorCooldown) override {
 
     if (actorCooldown <= 4.0f) {
+      p.type = ProjectileType::LAMBDA;
+      p.spec = MiniBossDatabase::getWeaponSpec(p.type);
+      shootTowardsPlayer(projMan, p);
       copyPlayerMovements(actorCooldown);
     } else {
       resetPosition();
@@ -26,6 +30,7 @@ public:
 
 private:
   void copyPlayerMovements(float actorCooldown) {
+
     if (actorCooldown <= 1.0f)
       stats.pos = {(float)GetScreenHeight() - stats.size,
                    (float)GetScreenWidth() - stats.size};

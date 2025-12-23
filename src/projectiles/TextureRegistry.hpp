@@ -42,6 +42,9 @@ public:
 
     projTextures[ProjectileType::RECON] =
         &a.loadTexture("../assets/bullets/bullet_recon.png");
+
+    projTextures[ProjectileType::LAMBDA] =
+        &a.loadTexture("../assets/bullets/bullet_check.png");
   }
 
   static Texture2D *get(ProjectileType type) { return projTextures[type]; }

@@ -3,6 +3,7 @@
 #include "../sound/AudioSystem.hpp"
 #include "UILib.hpp"
 #include <algorithm>
+#include <iostream>
 #include <raylib.h>
 
 namespace UIManager {
@@ -145,9 +146,12 @@ void updateLostMenu(LevelID &currentLevel, GameModes &gameMode) {
   if (IsKeyPressed(KEY_ENTER)) {
     switch (lossChoice) {
     case UILib::LostMenuOpts::Restart:
-      if (gameMode == GameModes::Dealthless)
+      if (gameMode == GameModes::Dealthless) {
         currentLevel = LevelID::Level1;
+      }
 
+      std::cout << "UIManager - You lost! Gamemode: " << gameMode << "\n"
+                << "Restarting at level: " << currentLevel << "\n";
       Game::currentState = GameState::Restarting;
       break;
 

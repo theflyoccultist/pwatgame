@@ -4,6 +4,7 @@
 #include "Proj_Grenade.hpp"
 #include "Proj_Hellfire.hpp"
 #include "Proj_Internet.hpp"
+#include "Proj_Lambda.hpp"
 #include "Proj_LongRange.hpp"
 #include "Proj_Recon.hpp"
 #include "Proj_Rocket.hpp"
@@ -16,7 +17,7 @@
 
 class ProjectilePool {
 private:
-  static constexpr int BULLET_POOL = 350;
+  static constexpr int BULLET_POOL = 450;
   static inline std::array<Straight, BULLET_POOL> straightPool;
   static inline std::array<LongRange, BULLET_POOL> longRangePool;
   static inline std::array<SlowCannon, BULLET_POOL> slowCannonPool;
@@ -28,6 +29,7 @@ private:
   static inline std::array<Internet, BULLET_POOL> iePool;
   static inline std::array<Update, BULLET_POOL> updatePool;
   static inline std::array<Recon, BULLET_POOL> reconPool;
+  static inline std::array<Lambda, BULLET_POOL> lambdaPool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -110,4 +112,10 @@ template <>
 inline std::array<Recon, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<Recon>() {
   return reconPool;
+}
+
+template <>
+inline std::array<Lambda, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Lambda>() {
+  return lambdaPool;
 }

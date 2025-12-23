@@ -4,15 +4,18 @@
 #include <cmath>
 #include <iostream>
 
-class Recon : public Projectile {
+class Lambda : public Projectile {
 public:
-  Recon() : Projectile(Faction::None, ProjectileType::RECON) {}
+  Lambda() : Projectile(Faction::None, ProjectileType::LAMBDA) {}
 
   void update(float dt, float bulletTime) override {
-    float accel = 1.0f * bulletTime;
+    float speed =
+        std::sqrtf(stats.vel.x * stats.vel.x + stats.vel.y * stats.vel.y);
 
-    stats.vel.x += stats.vel.x * accel * dt;
-    stats.vel.y += stats.vel.y * accel * dt;
+    float growth = 1.0f + bulletTime * bulletTime;
+
+    stats.vel.x = (stats.vel.x / speed) * growth;
+    stats.vel.y = (stats.vel.y / speed) * growth;
 
     stats.pos.x += stats.vel.x * dt;
     stats.pos.y += stats.vel.y * dt;
@@ -24,9 +27,9 @@ public:
     if (!isActive())
       return;
 
-    Texture2D *tex = ProjectileTextures::get(ProjectileType::RECON);
+    Texture2D *tex = ProjectileTextures::get(ProjectileType::LAMBDA);
     if (!tex) {
-      std::cerr << "Recon Projectile texture missing\n";
+      std::cerr << "Lambda Projectile texture missing\n";
       return;
     }
 

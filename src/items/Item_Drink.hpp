@@ -31,7 +31,7 @@ public:
 
     Texture2D *tex = DrinkTextures::get(type);
     if (!tex) {
-      std::cerr << "Drink Item texture missing\n";
+      std::cerr << "Item_Drink::draw() - Drink texture missing\n";
       return;
     }
 

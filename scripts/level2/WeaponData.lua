@@ -13,6 +13,7 @@ end
 
 Weapons = {
 	-- Miniboss projectiles
+	make_weapon("lambda", 700, 0.55, 50, 25, 9),
 
 	-- Enemy projectiles
 	make_weapon("longrange", 400, 2.3, 21, 3, 8),

@@ -28,4 +28,5 @@ private:
   std::array<Projectile *, BULLET_POOL> projectiles{};
   std::array<Projectile *, BULLET_POOL> tempView{};
   ProjectileFactory factory;
+  float bulletTimer = 0.0f;
 };

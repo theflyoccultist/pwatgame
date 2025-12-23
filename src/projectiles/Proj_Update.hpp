@@ -7,7 +7,7 @@ class Update : public Projectile {
 public:
   Update() : Projectile(Faction::None, ProjectileType::UPDATE) {}
 
-  void update(float dt) override {
+  void update(float dt, [[maybe_unused]] float bulletTimer) override {
     time += dt;
 
     stats.pos.x += baseVel.x * dt;

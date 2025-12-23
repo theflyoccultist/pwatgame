@@ -15,6 +15,7 @@ enum class ProjectileType : uint8_t {
   EXECUTABLE,
   UPDATE,
   RECON,
+  LAMBDA,
   COUNT
 };
 
@@ -52,6 +53,9 @@ inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
     break;
   case ProjectileType::RECON:
     os << "RECON";
+    break;
+  case ProjectileType::LAMBDA:
+    os << "LAMBDA";
     break;
   default:
     os << "UNKNOWN_PROJECTILE";
