@@ -20,8 +20,9 @@ public:
         projectileScheduler(ps) {}
 
   void initDatabase() {
-    weaponDatabase.loadFromLua("../scripts/level1/WeaponData.lua");
+    weaponDatabase.loadFromLua("../scripts/common/DefaultWeaponData.lua");
     enemyDatabase.loadFromLua("../scripts/level1/EnemyData.lua");
+    std::cout << "Weapon and Enemy databases initialized with defaults\n";
   }
 
   void loadEntityTextures() {

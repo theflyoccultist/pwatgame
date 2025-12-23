@@ -45,7 +45,6 @@ void LuaWrapper::initLua() {
   lua_setfield(L, -2, "path");
   lua_pop(L, 1);
   std::cout << "Lua Initialized\n";
-  std::cout << path << "\n";
 }
 
 LuaResultT<void> LuaWrapper::runFile(const char *filename) {

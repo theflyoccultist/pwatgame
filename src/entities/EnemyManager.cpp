@@ -41,7 +41,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
                               e->stats.pos.y + (float)e->stats.size / 2};
 
     if (touchPlayer) {
-      player.applyPlayerDmg(delta, e->stats.contactDmg);
+      player.tryApplyPlayerDmg(e->stats.contactDmg);
     }
 
     p.startPos = bulletStartPos;
@@ -68,8 +68,8 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
       if (b->faction == Faction::Enemy &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
                                  player.position, (float)player.playerSize)) {
-        player.applyPlayerDmg(delta, b->stats.damage);
-        b->expire();
+        if (player.tryApplyPlayerDmg(b->stats.damage))
+          b->expire();
       }
     }
   }

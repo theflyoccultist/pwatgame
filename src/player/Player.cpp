@@ -54,7 +54,8 @@ void Player::draw(Vector2 position, int direction) {
                                       position.y, PlayerState::playerSize);
 }
 
-PlayerState Player::playerMovements(PlayerState state, float dt) {
+PlayerState Player::playerMovements(PlayerState &state, float dt) {
+  state.updateDamageCooldown(dt);
   Vector2 moveDir = {0.0f, 0.0f};
 
   bool facingLeft = IsKeyDown(KEY_LEFT);

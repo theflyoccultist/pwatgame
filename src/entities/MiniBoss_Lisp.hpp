@@ -1,7 +1,6 @@
 
 #pragma once
 
-#include "../utils/clampEntities.hpp"
 #include "MiniBoss.hpp"
 #include "MiniBossDatabase.hpp"
 #include <array>
@@ -19,33 +18,44 @@ public:
               float actorCooldown) override {
 
     if (actorCooldown <= 4.0f) {
+      moveAccrossScreen(actorCooldown);
       p.type = ProjectileType::LAMBDA;
       p.spec = MiniBossDatabase::getWeaponSpec(p.type);
       shootTowardsPlayer(projMan, p);
-      copyPlayerMovements(actorCooldown);
     } else {
       resetPosition();
     }
   }
 
 private:
-  void copyPlayerMovements(float actorCooldown) {
+  void moveAccrossScreen(float actorCooldown) {
+    if (actorCooldown <= 1.0f) {
+      stats.pos.x +=
+          ((float)GetScreenHeight() - stats.size - stats.pos.x) * 0.25f;
+      stats.pos.y +=
+          ((float)GetScreenWidth() - stats.size - stats.pos.y) * 0.25f;
+    }
 
-    if (actorCooldown <= 1.0f)
-      stats.pos = {(float)GetScreenHeight() - stats.size,
-                   (float)GetScreenWidth() - stats.size};
+    else if (actorCooldown <= 2.0f) {
+      stats.pos.x += (0 - stats.pos.x) * 0.25f;
+      stats.pos.y +=
+          ((float)GetScreenWidth() - stats.size - stats.pos.y) * 0.25f;
+    }
 
-    else if (actorCooldown <= 2.0f)
-      stats.pos = {0, (float)GetScreenWidth() - stats.size};
+    else if (actorCooldown <= 3.0f) {
+      stats.pos.x +=
+          ((float)GetScreenHeight() - stats.size - stats.pos.x) * 0.25f;
+      stats.pos.y += (0 - stats.pos.y) * 0.25f;
+    }
 
-    else if (actorCooldown <= 3.0f)
-      stats.pos = {(float)GetScreenHeight() - stats.size, 0};
-
-    else if (actorCooldown <= 4.0f)
-      stats.pos = {0, 0};
-
-    ClampEntities::clamp(stats.pos, (int)stats.size);
+    else if (actorCooldown <= 4.0f) {
+      stats.pos.x += (0 - stats.pos.x) * 0.25f;
+      stats.pos.y += (0 - stats.pos.y) * 0.25f;
+    }
   }
 
-  void resetPosition() { stats.pos = stats.initialPos; }
+  void resetPosition() {
+    stats.pos.x += (stats.initialPos.x - stats.pos.x) * 0.25f;
+    stats.pos.y += (stats.initialPos.y - stats.pos.y) * 0.25f;
+  }
 };

@@ -54,8 +54,8 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
       if (b->faction == Faction::Enemy &&
           checkBulletInteraction(b->stats.pos, (float)b->stats.size,
                                  player.position, (float)player.playerSize)) {
-        player.applyPlayerDmg(dt, b->stats.damage);
-        b->expire();
+        if (player.tryApplyPlayerDmg(b->stats.damage))
+          b->expire();
       }
     }
   }

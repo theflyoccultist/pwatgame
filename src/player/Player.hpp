@@ -12,13 +12,13 @@ public:
   void init();
   void draw(Vector2 position, int direction);
 
-  PlayerState playerMovements(PlayerState state, float dt);
+  PlayerState playerMovements(PlayerState &state, float dt);
   void playerFootsteps(float dt);
 
-  static void resetPlayerHealth() { PlayerState::health = 200; }
-  static void resetPlayerScore() { PlayerState::score = 0; }
-  static void resetPlayerAmmo() { PlayerState::playerAmmo = 0; }
-  static void resetDefaultWeapon();
+  void resetPlayerHealth() { PlayerState::health = 200; }
+  void resetPlayerScore() { PlayerState::score = 0; }
+  void resetPlayerAmmo() { PlayerState::playerAmmo = 0; }
+  void resetDefaultWeapon();
 
 private:
   static constexpr std::size_t numPwats = 8;

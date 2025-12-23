@@ -17,21 +17,23 @@ struct PlayerState {
   static inline int score = 0;
   static inline int playerAmmo = 0;
 
-  static void addHealth(int value) { PlayerState::health += value; }
-  static void addAmmo(int ammo) { PlayerState::playerAmmo += ammo; }
-  static void addScore(int score) { PlayerState::score += score; }
+  void addHealth(int value) const { health += value; }
+  void addAmmo(int ammo) const { playerAmmo += ammo; }
+  void addScore(int score) const { score += score; }
 
-  static void upgradeAmmo(ProjectileType newWeapon) {
-    PlayerState::currWeapon = newWeapon;
+  void upgradeAmmo(ProjectileType newWeapon) const { currWeapon = newWeapon; }
+
+  void updateDamageCooldown(float dt) {
+    if (damageCooldown > 0.0f)
+      damageCooldown -= dt;
   }
 
-  void applyPlayerDmg(float delta, int damage) const {
-    if (PlayerState::damageCooldown > 0.0f)
-      PlayerState::damageCooldown -= delta;
+  bool tryApplyPlayerDmg(int damage) const {
+    if (damageCooldown > 0.0f)
+      return false;
 
-    if (PlayerState::damageCooldown <= 0.0f) {
-      PlayerState::health -= damage;
-      PlayerState::damageCooldown = 0.50f;
-    }
+    health -= damage;
+    damageCooldown = 0.30f;
+    return true;
   }
 };
