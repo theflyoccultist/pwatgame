@@ -15,8 +15,8 @@ public:
   PlayerState playerMovements(PlayerState &state, float dt);
   void playerFootsteps(float dt);
 
-  void resetPlayerHealth() { PlayerState::health = 200; }
-  void resetPlayerScore() { PlayerState::score = 0; }
+  void resetPlayerHealth() { PlayerState::playerHealth = 200; }
+  void resetPlayerScore() { PlayerState::playerScore = 0; }
   void resetPlayerAmmo() { PlayerState::playerAmmo = 0; }
   void resetDefaultWeapon();
 

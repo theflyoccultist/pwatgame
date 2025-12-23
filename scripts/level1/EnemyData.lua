@@ -1,4 +1,4 @@
--- enemy characteristics that can be configurable: total HP and speed
+-- enemy characteristics that can be configurable: total HP, speed and contactDmg
 
 local function make_enemy(type, speed, hp, contactDmg)
 	return {

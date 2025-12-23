@@ -21,7 +21,7 @@ public:
 
   void initDatabase() {
     weaponDatabase.loadFromLua("../scripts/common/DefaultWeaponData.lua");
-    enemyDatabase.loadFromLua("../scripts/level1/EnemyData.lua");
+    enemyDatabase.loadFromLua("../scripts/common/DefaultEnemyData.lua");
     std::cout << "Weapon and Enemy databases initialized with defaults\n";
   }
 

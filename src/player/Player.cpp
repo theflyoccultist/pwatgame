@@ -25,9 +25,7 @@ void Player::init() {
 
   shootTimer = 0.0f;
   PlayerState::playerAmmo = 0;
-  PlayerState::currWeapon = ProjectileType::STRAIGHT;
-  PlayerState::currentWeaponSpec =
-      WeaponDataBase::get(ProjectileType::STRAIGHT);
+  resetDefaultWeapon();
 }
 
 void Player::resetDefaultWeapon() {

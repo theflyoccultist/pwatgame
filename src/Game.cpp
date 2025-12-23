@@ -95,7 +95,7 @@ void Game::run() {
       if (IsKeyPressed(KEY_P))
         Game::currentState = GameState::Paused;
 
-      if (pwatState.health <= 0)
+      if (pwatState.playerHealth <= 0)
         Game::currentState = GameState::Lost;
 
       break;

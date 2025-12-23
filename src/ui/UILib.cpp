@@ -120,8 +120,10 @@ void playerHUD(int currentLevel) {
 
   DrawText(TextFormat("Current Level: %d", currentLevel), 20, 20, 20, BLACK);
   DrawText(TextFormat("Ammo: %d", PlayerState::playerAmmo), 20, 50, 20, BLACK);
-  DrawText(TextFormat("Health: %d", PlayerState::health), 20, 80, 20, BLACK);
-  DrawText(TextFormat("Score: %d", PlayerState::score), 20, 110, 20, BLACK);
+  DrawText(TextFormat("Health: %d", PlayerState::playerHealth), 20, 80, 20,
+           BLACK);
+  DrawText(TextFormat("Score: %d", PlayerState::playerScore), 20, 110, 20,
+           BLACK);
 };
 
 void weaponHUD(ProjectileType currentProjectile) {
@@ -227,8 +229,8 @@ LostMenuOpts losingScreen(GameModes &gameMode) {
                                       800);
   static int index = 0;
 
-  DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
-           PURPLE);
+  DrawText(TextFormat("Total Score : %d", PlayerState::playerScore), 150, 300,
+           20, PURPLE);
 
   std::array<std::string, 2> items = {
       "Restart Level",
@@ -248,8 +250,8 @@ WinMenuOpts winningMenu(int currentLevel) {
                                       800);
   static int index = 0;
 
-  DrawText(TextFormat("Total Score : %d", PlayerState::score), 150, 300, 20,
-           PURPLE);
+  DrawText(TextFormat("Total Score : %d", PlayerState::playerScore), 150, 300,
+           20, PURPLE);
 
   std::array<std::string, 3> items = {
       "Next Level",
