@@ -6,7 +6,7 @@
 
 namespace UIManager {
 
-void loadUI();
+void loadUITextures();
 void updateMainMenu(LevelID &currentLevel, GameModes &gameMode);
 void updateLevelSelection(LevelID &currentlevel);
 

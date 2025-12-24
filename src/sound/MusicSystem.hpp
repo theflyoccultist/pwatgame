@@ -7,10 +7,13 @@ public:
   MusicSystem();
   void playTitleTrack();
   void playLevel1Track();
+  void playLevel1BossMusic();
   void playLevel2Track();
+  void playLevel2BossMusic();
   void playLevel3Track();
+  void playLevel3BossMusic();
   void playLevel4Track();
-  void playBossMusic();
+  void playLevel4BossMusic();
 
   void pauseMusic();
   void resumeMusic();
@@ -20,6 +23,6 @@ public:
   void changeMusicVolume(int vol);
 
 private:
-  std::unique_ptr<std::array<GameScore, 6>> gameScores;
+  std::unique_ptr<std::array<GameScore, 9>> gameScores;
   int currentTrack = -1;
 };

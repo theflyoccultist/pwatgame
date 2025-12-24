@@ -27,14 +27,16 @@ void Game::run() {
   levelLoader.loadEntityTextures();
 
   PlayerManager playerManager(world);
-  PlayerState pwatState = playerManager.init();
+  playerManager.loadPlayerTextures();
+  PlayerState pwatState = playerManager.initPlayerState();
 
   MusicScheduler musicScheduler(world, sm);
 
-  UIManager::loadUI();
+  UIManager::loadUITextures();
 
   auto &audio = AudioSystem::instance();
   audio.music->playTitleTrack();
+
   LevelID currentLevel = LevelID::Level1;
   GameModes gameMode = GameModes::Dealthless;
 
@@ -68,6 +70,7 @@ void Game::run() {
 
       levelLoader.load(currentLevel);
       musicScheduler.scheduleMusic(currentLevel);
+      musicScheduler.scheduleBossMusic(currentLevel);
       std::cout << "Game::run() - Current level: " << currentLevel << "\n";
       Game::currentState = GameState::LevelIntro;
       break;
@@ -85,7 +88,7 @@ void Game::run() {
       playerManager.update(pwatState, deltaTime);
 
       sm.updateScheduler(deltaTime);
-      sm.updateProjectiles(deltaTime);
+      ps.updateProjectiles(deltaTime);
       is.updateItems(pwatState);
       ss.updateEnemies(deltaTime, pwatState);
 

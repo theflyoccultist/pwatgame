@@ -10,11 +10,14 @@ struct PlayerState {
   Vector2 direction;
   float playerSpeed;
 
+  static constexpr int playerSize = 70;
+
   static inline ProjectileType currWeapon = ProjectileType::STRAIGHT;
   static inline WeaponSpec currentWeaponSpec{};
 
+  void upgradeAmmo(ProjectileType newWeapon) const { currWeapon = newWeapon; }
+
   static inline float damageCooldown = 0.0f;
-  static constexpr int playerSize = 70;
 
   static inline int playerHealth;
   static inline int playerScore;
@@ -23,8 +26,6 @@ struct PlayerState {
   void addHealth(int health) const { playerHealth += health; }
   void addScore(int score) const { playerScore += score; }
   void addAmmo(int ammo) const { playerAmmo += ammo; }
-
-  void upgradeAmmo(ProjectileType newWeapon) const { currWeapon = newWeapon; }
 
   void updateDamageCooldown(float dt) const {
     if (damageCooldown > 0.0f)

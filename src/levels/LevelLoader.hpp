@@ -34,7 +34,7 @@ public:
 
   void load(LevelID level) {
     scheduleManager.resetScheduler();
-    scheduleManager.clearAllProjectiles();
+    projectileScheduler.clearAllProjectiles();
     itemScheduler.clearAllItems();
     spawnScheduler.clearAllEnemies();
 

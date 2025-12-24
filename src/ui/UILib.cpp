@@ -26,6 +26,7 @@ void loadUIAssets() {
 
   assetBank[AssetType::PwatMenu] = {
       "../assets/ui/pwat_menu.png",
+      "../assets/ui/pwat_levels.png",
       "../assets/ui/pwat_pause.png",
       "../assets/ui/pwat_options.png",
   };
@@ -188,6 +189,8 @@ LevelOpts levelSelection() {
       "Level 1", "Level 2", "Level 3", "Level 4", "Back to Menu",
   };
 
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][1], 225,
+                                      365, 300);
   return runMenuEnum<LevelOpts>("Level Selection", levels, index, 150, 140);
 }
 
@@ -203,7 +206,7 @@ PauseMenuOpts pauseMenu() {
       "Back to Menu",
   };
 
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][1], 225,
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][2], 225,
                                       400, 300);
 
   return runMenuEnum<PauseMenuOpts>("Game Paused", items, index, 150, 140);
@@ -219,7 +222,7 @@ OptionMenuOpts optionsMenu(int musicVol, int sfxVol) {
       std::format("Sound Effects : {}%", sfxVol),
   };
 
-  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][2], 225,
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::PwatMenu][3], 225,
                                       400, 300);
   return runMenuEnum<OptionMenuOpts>("OPTIONS", items, index, 150, 140);
 }

@@ -6,5 +6,5 @@ local function spawn_miniboss(type, delay)
 end
 
 MinibossSpawns = {
-	spawn_miniboss("java", 160.0),
+	spawn_miniboss("java", 169.0),
 }

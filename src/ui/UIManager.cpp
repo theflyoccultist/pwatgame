@@ -8,7 +8,7 @@
 
 namespace UIManager {
 
-void loadUI() { UILib::loadUIAssets(); }
+void loadUITextures() { UILib::loadUIAssets(); }
 
 auto &audio = AudioSystem::instance();
 
