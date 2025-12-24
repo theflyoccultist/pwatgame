@@ -52,6 +52,7 @@ public:
 
     Update::projTexture =
         &asset.loadTexture("../assets/bullets/bullet_update.png");
+
     Uzi::projTexture = &asset.loadTexture("../assets/bullets/bullet_uzi.png");
   }
 

@@ -8,10 +8,12 @@ struct PlayerState {
   int texture;
   Vector2 position;
   Vector2 direction;
+  float playerSpeed;
+
   static inline ProjectileType currWeapon = ProjectileType::STRAIGHT;
   static inline WeaponSpec currentWeaponSpec{};
+
   static inline float damageCooldown = 0.0f;
-  static inline float playerSpeed = 600.0f;
   static constexpr int playerSize = 70;
 
   static inline int playerHealth;

@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <raylib.h>
 
-void Player::init() {
+void Player::loadPlayerTextures() {
   const std::array<std::string, numPwats> pwatPaths = {
       "../assets/player/pwatleft.png",
       "../assets/player/pwatright.png",
@@ -22,10 +22,6 @@ void Player::init() {
   for (size_t i = 0; i < numPwats; ++i) {
     pwatAssets[i] = &AssetSystem::instance().loadTexture(pwatPaths[i]);
   }
-
-  shootTimer = 0.0f;
-  PlayerState::playerAmmo = 0;
-  resetDefaultWeapon();
 }
 
 void Player::resetDefaultWeapon() {

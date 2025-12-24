@@ -9,7 +9,7 @@
 class Player {
 public:
   Player(ProjectileManager &pm) : projMan(pm) {}
-  void init();
+  void loadPlayerTextures();
   void draw(Vector2 position, int direction);
 
   PlayerState playerMovements(PlayerState &state, float dt);

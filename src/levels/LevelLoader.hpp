@@ -27,6 +27,7 @@ public:
 
   void loadEntityTextures() {
     spawnScheduler.loadEnemyTextures();
+    spawnScheduler.loadMiniBossTextures();
     itemScheduler.loadItemTextures();
     projectileScheduler.loadProjectileTextures();
   }
