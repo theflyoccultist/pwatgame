@@ -17,17 +17,20 @@ public:
               float actorCooldown) override {
     stats.pos = {stats.pos.x, stats.pos.y + (sinf(actorCooldown) * .25f)};
 
-    if (actorCooldown <= 2.0f) {
+    if (actorCooldown <= 2.0f ||
+        (actorCooldown >= 8.0f && actorCooldown <= 10.0f)) {
       moveTowardsPlayer(p.dt, p.playerPos);
       p.type = ProjectileType::UPDATE;
       p.spec = MiniBossDatabase::getWeaponSpec(p.type);
       shootTowardsPlayer(projMan, p);
 
-    } else if (actorCooldown <= 3.0f) {
+    } else if (actorCooldown <= 3.0f ||
+               (actorCooldown >= 10.0f && actorCooldown <= 11.0f)) {
       if (stats.currentHP <= stats.totalHP)
         stats.currentHP++;
 
-    } else if (actorCooldown <= 4.0f) {
+    } else if (actorCooldown <= 4.0f ||
+               (actorCooldown >= 11.0f && actorCooldown <= 12.0f)) {
       p.type = ProjectileType::INTERNET;
       p.spec = MiniBossDatabase::getWeaponSpec(p.type);
       shootTowardsPlayer(projMan, p);
@@ -39,6 +42,14 @@ public:
 
     } else if (actorCooldown <= 8.0f) {
       shootRadialBurst(projMan, p, 3);
+
+    } else if (actorCooldown <= 14.0f) {
+      p.type = ProjectileType::EXECUTABLE;
+      p.spec = MiniBossDatabase::getWeaponSpec(p.type);
+      shootRadialBurst(projMan, p, 4);
+
+    } else if (actorCooldown <= 16.0f) {
+      shootRadialBurst(projMan, p, 2);
     }
   }
 

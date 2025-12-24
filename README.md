@@ -23,10 +23,10 @@ You will play as PwatPwat, a cute blob cat plush who needs to claim her throne a
 ## Concepts for levels:
 
 #### Level 1 - Windows stage
-This level is fast paced, chaotic but forgiving, themed around a retro Windows imagery. There is a large number of enemies and projectiles, but the patterns are predictable you are also provided with a lot of health and ammo.
+This level is fast paced, chaotic but forgiving, themed around a retro Windows imagery. There is a large number of enemies and projectiles, but the patterns are predictable you are also provided with a lot of food and drinks.
 
 #### Level 2 - Lisp stage
-This one is themed around math and functional programming. It is slower, requiring more precision from the player. Projectiles and enemies has elegant patterns, which are slightly more unpredictable.
+This one is themed around math and functional programming. It is slower, requiring more precision from the player. Projectiles and enemies has elegant patterns, does a lot of damage, and sometimes requires memorizing patterns. Items are also pretty scarce.
 
 #### Level 3 - Java stage
 This level is office themed. It is also pretty slow, but cluttered and the patterns are awkward on purpose. The player will need to get over the cognitive overhead if they want to pass this level.

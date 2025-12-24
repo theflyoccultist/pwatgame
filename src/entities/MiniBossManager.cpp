@@ -22,7 +22,7 @@ bool MiniBossManager::updateAll(float dt, const PlayerState &player,
                                 std::span<Projectile *const> bullets) {
   using namespace Collisions;
   miniBossTimer += dt;
-  float bossCooldown = std::fmodf(miniBossTimer, 8.0f);
+  float bossCooldown = std::fmodf(miniBossTimer, 16.0f);
 
   for (auto *m : miniBosses) {
     if (!m || !m->isAlive())

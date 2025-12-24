@@ -34,7 +34,7 @@ struct PlayerState {
       return false;
 
     playerHealth -= damage;
-    damageCooldown = 0.30f;
+    damageCooldown = 0.15f;
     return true;
   }
 };

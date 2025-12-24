@@ -4,37 +4,26 @@
 #include <ostream>
 
 enum class ProjectileType : uint8_t {
-  STRAIGHT,
-  LONGRANGE,
-  SLOWCANNON,
-  ROCKET,
-  UZI,
+  EXECUTABLE,
   GRENADE,
   HELLFIRE,
   INTERNET,
-  EXECUTABLE,
-  UPDATE,
-  RECON,
   LAMBDA,
+  LONGRANGE,
+  PAREN,
+  RECON,
+  ROCKET,
+  SLOWCANNON,
+  STRAIGHT,
+  UPDATE,
+  UZI,
   COUNT
 };
 
 inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
   switch (type) {
-  case ProjectileType::STRAIGHT:
-    os << "STRAIGHT";
-    break;
-  case ProjectileType::LONGRANGE:
-    os << "LONGRANGE";
-    break;
-  case ProjectileType::SLOWCANNON:
-    os << "SLOWCANNON";
-    break;
-  case ProjectileType::ROCKET:
-    os << "ROCKET";
-    break;
-  case ProjectileType::UZI:
-    os << "UZI";
+  case ProjectileType::EXECUTABLE:
+    os << "EXE";
     break;
   case ProjectileType::GRENADE:
     os << "GRENADE";
@@ -45,17 +34,32 @@ inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
   case ProjectileType::INTERNET:
     os << "INTERNET EXPLORER";
     break;
-  case ProjectileType::EXECUTABLE:
-    os << "EXE";
+  case ProjectileType::LAMBDA:
+    os << "LAMBDA";
     break;
-  case ProjectileType::UPDATE:
-    os << "WINDOWS UPDATE";
+  case ProjectileType::LONGRANGE:
+    os << "LONGRANGE";
+    break;
+  case ProjectileType::PAREN:
+    os << "LISP PARENTHESIS";
     break;
   case ProjectileType::RECON:
     os << "RECON";
     break;
-  case ProjectileType::LAMBDA:
-    os << "LAMBDA";
+  case ProjectileType::ROCKET:
+    os << "ROCKET";
+    break;
+  case ProjectileType::SLOWCANNON:
+    os << "SLOWCANNON";
+    break;
+  case ProjectileType::STRAIGHT:
+    os << "STRAIGHT";
+    break;
+  case ProjectileType::UPDATE:
+    os << "WINDOWS UPDATE";
+    break;
+  case ProjectileType::UZI:
+    os << "UZI";
     break;
   default:
     os << "UNKNOWN_PROJECTILE";

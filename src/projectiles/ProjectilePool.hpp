@@ -6,6 +6,7 @@
 #include "Proj_Internet.hpp"
 #include "Proj_Lambda.hpp"
 #include "Proj_LongRange.hpp"
+#include "Proj_Paren.hpp"
 #include "Proj_Recon.hpp"
 #include "Proj_Rocket.hpp"
 #include "Proj_SlowCannon.hpp"
@@ -18,18 +19,19 @@
 class ProjectilePool {
 private:
   static constexpr int BULLET_POOL = 450;
-  static inline std::array<Straight, BULLET_POOL> straightPool;
-  static inline std::array<LongRange, BULLET_POOL> longRangePool;
-  static inline std::array<SlowCannon, BULLET_POOL> slowCannonPool;
-  static inline std::array<Rocket, BULLET_POOL> rocketPool;
-  static inline std::array<Uzi, BULLET_POOL> uziPool;
-  static inline std::array<Hellfire, BULLET_POOL> hellfirePool;
-  static inline std::array<Grenade, BULLET_POOL> grenadePool;
   static inline std::array<Executable, BULLET_POOL> exePool;
+  static inline std::array<Grenade, BULLET_POOL> grenadePool;
+  static inline std::array<Hellfire, BULLET_POOL> hellfirePool;
   static inline std::array<Internet, BULLET_POOL> iePool;
-  static inline std::array<Update, BULLET_POOL> updatePool;
-  static inline std::array<Recon, BULLET_POOL> reconPool;
   static inline std::array<Lambda, BULLET_POOL> lambdaPool;
+  static inline std::array<LongRange, BULLET_POOL> longRangePool;
+  static inline std::array<Paren, BULLET_POOL> parenPool;
+  static inline std::array<Recon, BULLET_POOL> reconPool;
+  static inline std::array<Rocket, BULLET_POOL> rocketPool;
+  static inline std::array<SlowCannon, BULLET_POOL> slowCannonPool;
+  static inline std::array<Straight, BULLET_POOL> straightPool;
+  static inline std::array<Update, BULLET_POOL> updatePool;
+  static inline std::array<Uzi, BULLET_POOL> uziPool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -50,15 +52,51 @@ public:
 };
 
 template <>
-inline std::array<Straight, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Straight>() {
-  return straightPool;
+inline std::array<Executable, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Executable>() {
+  return exePool;
+}
+
+template <>
+inline std::array<Grenade, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Grenade>() {
+  return grenadePool;
+}
+
+template <>
+inline std::array<Hellfire, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Hellfire>() {
+  return hellfirePool;
+}
+
+template <>
+inline std::array<Internet, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Internet>() {
+  return iePool;
+}
+
+template <>
+inline std::array<Lambda, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Lambda>() {
+  return lambdaPool;
 }
 
 template <>
 inline std::array<LongRange, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<LongRange>() {
   return longRangePool;
+}
+
+template <>
+inline std::array<Paren, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Paren>() {
+  return parenPool;
+}
+
+template <>
+inline std::array<Recon, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Recon>() {
+  return reconPool;
 }
 
 template <>
@@ -74,33 +112,9 @@ ProjectilePool::poolForType<Rocket>() {
 }
 
 template <>
-inline std::array<Uzi, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Uzi>() {
-  return uziPool;
-}
-
-template <>
-inline std::array<Hellfire, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Hellfire>() {
-  return hellfirePool;
-}
-
-template <>
-inline std::array<Grenade, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Grenade>() {
-  return grenadePool;
-}
-
-template <>
-inline std::array<Executable, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Executable>() {
-  return exePool;
-}
-
-template <>
-inline std::array<Internet, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Internet>() {
-  return iePool;
+inline std::array<Straight, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Straight>() {
+  return straightPool;
 }
 
 template <>
@@ -110,13 +124,7 @@ ProjectilePool::poolForType<Update>() {
 }
 
 template <>
-inline std::array<Recon, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Recon>() {
-  return reconPool;
-}
-
-template <>
-inline std::array<Lambda, ProjectilePool::BULLET_POOL> &
-ProjectilePool::poolForType<Lambda>() {
-  return lambdaPool;
+inline std::array<Uzi, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Uzi>() {
+  return uziPool;
 }

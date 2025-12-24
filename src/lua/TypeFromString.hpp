@@ -81,30 +81,32 @@ inline MiniBossType mbTypeFromString(std::string_view s) {
 }
 
 inline ProjectileType projTypeFromString(std::string_view s) {
+  if (s == "exe")
+    return ProjectileType::EXECUTABLE;
+  if (s == "grenade")
+    return ProjectileType::GRENADE;
+  if (s == "hellfire")
+    return ProjectileType::HELLFIRE;
+  if (s == "ie")
+    return ProjectileType::INTERNET;
+  if (s == "lambda")
+    return ProjectileType::LAMBDA;
   if (s == "longrange")
     return ProjectileType::LONGRANGE;
+  if (s == "paren")
+    return ProjectileType::PAREN;
+  if (s == "recon")
+    return ProjectileType::RECON;
+  if (s == "rocket")
+    return ProjectileType::ROCKET;
   if (s == "slowcannon")
     return ProjectileType::SLOWCANNON;
   if (s == "straight")
     return ProjectileType::STRAIGHT;
-  if (s == "uzi")
-    return ProjectileType::UZI;
-  if (s == "rocket")
-    return ProjectileType::ROCKET;
-  if (s == "hellfire")
-    return ProjectileType::HELLFIRE;
-  if (s == "grenade")
-    return ProjectileType::GRENADE;
-  if (s == "ie")
-    return ProjectileType::INTERNET;
-  if (s == "exe")
-    return ProjectileType::EXECUTABLE;
   if (s == "update")
     return ProjectileType::UPDATE;
-  if (s == "recon")
-    return ProjectileType::RECON;
-  if (s == "lambda")
-    return ProjectileType::LAMBDA;
+  if (s == "uzi")
+    return ProjectileType::UZI;
 
   return ProjectileType::ROCKET;
 }

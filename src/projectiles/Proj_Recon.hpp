@@ -2,7 +2,6 @@
 
 #include "Projectile.hpp"
 #include <cmath>
-#include <iostream>
 
 class Recon : public Projectile {
 public:
