@@ -1,5 +1,6 @@
 #include "ProjectilePool.hpp"
 
+Texture2D *Elixir::projTexture{};
 Texture2D *Executable::projTexture{};
 Texture2D *Grenade::projTexture{};
 Texture2D *Hellfire::projTexture{};

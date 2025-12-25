@@ -81,6 +81,8 @@ inline MiniBossType mbTypeFromString(std::string_view s) {
 }
 
 inline ProjectileType projTypeFromString(std::string_view s) {
+  if (s == "elixir")
+    return ProjectileType::ELIXIR;
   if (s == "exe")
     return ProjectileType::EXECUTABLE;
   if (s == "grenade")

@@ -4,6 +4,7 @@
 #include <ostream>
 
 enum class ProjectileType : uint8_t {
+  ELIXIR,
   EXECUTABLE,
   GRENADE,
   HELLFIRE,
@@ -22,6 +23,9 @@ enum class ProjectileType : uint8_t {
 
 inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
   switch (type) {
+  case ProjectileType::ELIXIR:
+    os << "ELIXIR";
+    break;
   case ProjectileType::EXECUTABLE:
     os << "EXE";
     break;

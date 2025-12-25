@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Proj_Elixir.hpp"
 #include "Proj_Executable.hpp"
 #include "Proj_Grenade.hpp"
 #include "Proj_Hellfire.hpp"
@@ -19,6 +20,7 @@
 class ProjectilePool {
 private:
   static constexpr int BULLET_POOL = 450;
+  static inline std::array<Elixir, BULLET_POOL> elixirPool;
   static inline std::array<Executable, BULLET_POOL> exePool;
   static inline std::array<Grenade, BULLET_POOL> grenadePool;
   static inline std::array<Hellfire, BULLET_POOL> hellfirePool;
@@ -50,6 +52,12 @@ public:
     return nullptr;
   }
 };
+
+template <>
+inline std::array<Elixir, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Elixir>() {
+  return elixirPool;
+}
 
 template <>
 inline std::array<Executable, ProjectilePool::BULLET_POOL> &

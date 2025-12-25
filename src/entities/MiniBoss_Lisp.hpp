@@ -25,7 +25,7 @@ public:
 
     } else if (actorCooldown >= 8.0f && actorCooldown <= 12.0f) {
       moveAccrossScreen(actorCooldown);
-      p.type = ProjectileType::INTERNET;
+      p.type = ProjectileType::ELIXIR;
       p.spec = MiniBossDatabase::getWeaponSpec(p.type);
       shootTowardsPlayer(projMan, p);
 

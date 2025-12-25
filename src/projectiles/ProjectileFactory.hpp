@@ -17,6 +17,9 @@ public:
   static void loadAssets() {
     auto &asset = AssetSystem::instance();
 
+    Elixir::projTexture =
+        &asset.loadTexture("../assets/bullets/bullet_elixir.png");
+
     Executable::projTexture =
         &asset.loadTexture("../assets/bullets/bullet_exe.png");
 
@@ -61,6 +64,9 @@ public:
     auto &audio = AudioSystem::instance();
 
     switch (type) {
+    case ProjectileType::ELIXIR:
+      return ProjectilePool::getFreeProjectile<Elixir>(f, startPos, dir, spec);
+
     case ProjectileType::EXECUTABLE:
       return ProjectilePool::getFreeProjectile<Executable>(f, startPos, dir,
                                                            spec);

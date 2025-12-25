@@ -15,6 +15,7 @@ Weapons = {
 	-- Miniboss projectiles
 	make_weapon("lambda", 700, 0.55, 50, 25, 17),
 	make_weapon("paren", 500, 0.69, 30, 6, 9),
+	make_weapon("elixir", 800, 0.30, 54, 3, 6),
 
 	-- Enemy projectiles
 	make_weapon("longrange", 400, 2.3, 21, 3, 8),
