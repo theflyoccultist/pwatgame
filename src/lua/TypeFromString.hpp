@@ -7,21 +7,6 @@
 #include <string_view>
 
 namespace TypeFromString {
-inline FoodType foodTypeFromString(std::string_view s) {
-  if (s == "buldak")
-    return FoodType::BULDAK;
-  if (s == "pho")
-    return FoodType::PHO;
-  if (s == "shinramyun")
-    return FoodType::SHINRAMYUN;
-  if (s == "tomyum")
-    return FoodType::TOMYUM;
-  if (s == "yopokki")
-    return FoodType::YOPOKKI;
-
-  return FoodType::BULDAK;
-}
-
 inline DrinkType drinkTypeFromString(std::string_view s) {
   if (s == "bobatea")
     return DrinkType::BOBATEA;
@@ -33,8 +18,35 @@ inline DrinkType drinkTypeFromString(std::string_view s) {
     return DrinkType::MONSTER;
   if (s == "soju")
     return DrinkType::SOJU;
+  if (s == "champagne")
+    return DrinkType::CHAMPAGNE;
+  if (s == "gingerale")
+    return DrinkType::GINGERALE;
+  if (s == "wine")
+    return DrinkType::WINE;
 
   return DrinkType::MONSTER;
+}
+
+inline FoodType foodTypeFromString(std::string_view s) {
+  if (s == "buldak")
+    return FoodType::BULDAK;
+  if (s == "pho")
+    return FoodType::PHO;
+  if (s == "shinramyun")
+    return FoodType::SHINRAMYUN;
+  if (s == "tomyum")
+    return FoodType::TOMYUM;
+  if (s == "yopokki")
+    return FoodType::YOPOKKI;
+  if (s == "blueberry")
+    return FoodType::BLUEBERRY;
+  if (s == "cherry")
+    return FoodType::CHERRY;
+  if (s == "strawberry")
+    return FoodType::STRAWBERRY;
+
+  return FoodType::BULDAK;
 }
 
 inline WeaponType weaponTypeFromString(std::string_view s) {

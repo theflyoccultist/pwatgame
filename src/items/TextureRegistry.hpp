@@ -23,6 +23,14 @@ public:
 
     drinkTextures[DrinkType::ICECOFFEE] =
         &a.loadTexture("../assets/items/icecoffee.png");
+
+    drinkTextures[DrinkType::CHAMPAGNE] =
+        &a.loadTexture("../assets/items/champagne.png");
+
+    drinkTextures[DrinkType::GINGERALE] =
+        &a.loadTexture("../assets/items/gingerale.png");
+
+    drinkTextures[DrinkType::WINE] = &a.loadTexture("../assets/items/wine.png");
   }
 
   static Texture2D *get(DrinkType type) { return drinkTextures[type]; }
@@ -49,6 +57,15 @@ public:
 
     foodTextures[FoodType::YOPOKKI] =
         &a.loadTexture("../assets/items/yopokki.png");
+
+    foodTextures[FoodType::BLUEBERRY] =
+        &a.loadTexture("../assets/items/blueberry.png");
+
+    foodTextures[FoodType::CHERRY] =
+        &a.loadTexture("../assets/items/cherry.png");
+
+    foodTextures[FoodType::STRAWBERRY] =
+        &a.loadTexture("../assets/items/strawberry.png");
   }
 
   static Texture2D *get(FoodType type) { return foodTextures[type]; }

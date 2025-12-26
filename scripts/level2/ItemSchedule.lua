@@ -1,10 +1,16 @@
 FoodSpawns = {
 	{ x = 50, y = 150, delay = 0.0, type = "yopokki", ammoBonus = 50 },
+	{ x = 40, y = 610, delay = 0.0, type = "blueberry", ammoBonus = 25 },
+	{ x = 640, y = 610, delay = 0.0, type = "cherry", ammoBonus = 35 },
+	{ x = 380, y = 410, delay = 0.0, type = "strawberry", ammoBonus = 45 },
 	{ x = 220, y = 412, delay = 18.4, type = "buldak", ammoBonus = 90 },
 }
 
 DrinkSpawns = {
 	{ x = 450, y = 550, delay = 0.0, type = "soju", hpBonus = 50 },
+	{ x = 10, y = 120, delay = 0.0, type = "champagne", hpBonus = 200 },
+	{ x = 180, y = 480, delay = 0.0, type = "gingerale", hpBonus = 50 },
+	{ x = 260, y = 397, delay = 0.0, type = "wine", hpBonus = 75 },
 	{ x = 710, y = 190, delay = 10.9, type = "monster", hpBonus = 80 },
 }
 

@@ -1,14 +1,7 @@
 #include "ItemsManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
-#include "TextureRegistry.hpp"
 #include <memory>
 #include <raylib.h>
-
-void ItemManager::loadItemTextures() {
-  DrinkTextures::loadTextures();
-  FoodTextures::loadTextures();
-  WeaponTextures::loadTextures();
-}
 
 void ItemManager::updateAll(const PlayerState &player) {
   for (auto &item : items) {

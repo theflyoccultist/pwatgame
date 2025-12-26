@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Projectile.hpp"
+#include <cmath>
 
 class Elixir : public Projectile {
 public:
@@ -8,7 +9,7 @@ public:
   Elixir() : Projectile(Faction::None, ProjectileType::ELIXIR, projTexture) {}
 
   void update(float dt, float bulletTime) override {
-    float accel = 0.7f * bulletTime;
+    float accel = std::fmodf(bulletTime, 3);
 
     stats.vel.x += stats.vel.x * accel * dt;
     stats.vel.y += stats.vel.y * accel * dt;
