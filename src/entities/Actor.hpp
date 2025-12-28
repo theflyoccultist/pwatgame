@@ -71,6 +71,15 @@ public:
     }
   }
 
+  void shootGarbageBurst(ProjectileManager &pm, const ShootParams &p) {
+    float step = Random::rangeFloat(1.0f, 8.0f) * PI / 3;
+
+    for (int i = 0; i < Random::rangeInt(2, 10); ++i) {
+      Vector2 dir = {cosf((float)i * step), sinf((float)i * step)};
+      shoot(pm, p, dir);
+    }
+  }
+
 protected:
   const Texture2D *
   chooseTexture(float ratio, const std::array<Texture2D *, 3> &textures) const {

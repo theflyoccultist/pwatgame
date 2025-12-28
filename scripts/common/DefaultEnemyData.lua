@@ -4,4 +4,5 @@ Enemies = {
 	{ type = "godsip", speed = 80, hp = 20, contactDmg = 6 },
 	{ type = "zomb", speed = 70, hp = 30, contactDmg = 2 },
 	{ type = "monitor", speed = 300, hp = 10, contactDmg = 3 },
+	{ type = "duo", speed = 0, hp = 100, contactDmg = 4 },
 }

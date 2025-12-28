@@ -9,7 +9,7 @@ class Game {
 public:
   void run();
 
-  static inline float deltaTime = 0.0f;
+  float deltaTime;
 
   static inline GameState currentState = GameState::MainMenu;
 

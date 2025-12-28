@@ -75,6 +75,8 @@ inline EnemyType enemyTypeFromString(std::string_view s) {
     return EnemyType::SWARMER;
   if (s == "zomb")
     return EnemyType::ZOMB;
+  if (s == "duo")
+    return EnemyType::DUO;
 
   return EnemyType::ZOMB;
 }

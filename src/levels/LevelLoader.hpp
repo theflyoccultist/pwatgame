@@ -38,7 +38,7 @@ public:
     itemScheduler.clearAllItems();
     spawnScheduler.clearAllEnemies();
 
-    minibossDatabase.loadFromLua("../scripts/MinibossData.lua");
+    minibossDatabase.loadFromLua("../scripts/common/MinibossData.lua");
 
     switch (level) {
     case LevelID::Level1:

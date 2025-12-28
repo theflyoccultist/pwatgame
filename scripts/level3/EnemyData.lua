@@ -15,4 +15,5 @@ Enemies = {
 	make_enemy("godsip", 19, 70, 20),
 	make_enemy("zomb", 300, 40, 5),
 	make_enemy("monitor", 300, 10, 5),
+	make_enemy("duo", 0, 100, 4),
 }

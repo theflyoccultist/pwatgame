@@ -43,6 +43,12 @@ public:
         &assets.loadTexture("../assets/enemies/zomb_MED.png"),
         &assets.loadTexture("../assets/enemies/zomb_LOW.png"),
     };
+
+    Duo::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/duo_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/duo_MED.png"),
+        &assets.loadTexture("../assets/enemies/duo_LOW.png"),
+    };
   }
 
   Enemy *create(EnemyType type, Vector2 pos, const EnemySpec &spec) {
@@ -61,6 +67,9 @@ public:
 
     case EnemyType::ZOMB:
       return EnemyPool::getFreeEnemy<Zomb>(pos, spec);
+
+    case EnemyType::DUO:
+      return EnemyPool::getFreeEnemy<Duo>(pos, spec);
 
     default:
       std::cerr << "Unknown Enemy type!\n";

@@ -2,4 +2,5 @@
 
 EnemySpawns = {
 	{ x = 10, y = 30, delay = 0, type = "godsip" },
+	{ x = 600, y = 100, delay = 0, type = "duo" },
 }

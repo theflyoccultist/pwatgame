@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EnemySpec.hpp"
+#include "Enemy_Duo.hpp"
 #include "Enemy_Godsip.hpp"
 #include "Enemy_Monitor.hpp"
 #include "Enemy_Sniper.hpp"
@@ -17,6 +18,7 @@ private:
   static inline std::array<Sniper, ENEMY_POOL> sniperPool;
   static inline std::array<Swarmer, ENEMY_POOL> swarmerPool;
   static inline std::array<Zomb, ENEMY_POOL> zombPool;
+  static inline std::array<Duo, ENEMY_POOL> duoPool;
 
 public:
   template <typename T> static std::array<T, ENEMY_POOL> &poolForType();
@@ -62,4 +64,9 @@ EnemyPool::poolForType<Swarmer>() {
 template <>
 inline std::array<Zomb, EnemyPool::ENEMY_POOL> &EnemyPool::poolForType<Zomb>() {
   return zombPool;
+}
+
+template <>
+inline std::array<Duo, EnemyPool::ENEMY_POOL> &EnemyPool::poolForType<Duo>() {
+  return duoPool;
 }
