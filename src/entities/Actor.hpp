@@ -72,7 +72,7 @@ public:
   }
 
   void shootGarbageBurst(ProjectileManager &pm, const ShootParams &p) {
-    float step = Random::rangeFloat(1.0f, 8.0f) * PI / 3;
+    float step = Random::rangeFloat(1.0f, 4.0f) * PI / 3;
 
     for (int i = 0; i < Random::rangeInt(2, 10); ++i) {
       Vector2 dir = {cosf((float)i * step), sinf((float)i * step)};

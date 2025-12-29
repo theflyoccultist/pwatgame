@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EnemySpec.hpp"
+#include "Enemy_Clank.hpp"
 #include "Enemy_Duo.hpp"
 #include "Enemy_Godsip.hpp"
 #include "Enemy_Monitor.hpp"
@@ -13,12 +14,13 @@
 class EnemyPool {
 private:
   static constexpr int ENEMY_POOL = 350;
+  static inline std::array<Clank, ENEMY_POOL> clankPool;
+  static inline std::array<Duo, ENEMY_POOL> duoPool;
   static inline std::array<Godsip, ENEMY_POOL> godsipPool;
   static inline std::array<Monitor, ENEMY_POOL> monitorPool;
   static inline std::array<Sniper, ENEMY_POOL> sniperPool;
   static inline std::array<Swarmer, ENEMY_POOL> swarmerPool;
   static inline std::array<Zomb, ENEMY_POOL> zombPool;
-  static inline std::array<Duo, ENEMY_POOL> duoPool;
 
 public:
   template <typename T> static std::array<T, ENEMY_POOL> &poolForType();
@@ -36,6 +38,17 @@ public:
     return nullptr;
   }
 };
+
+template <>
+inline std::array<Clank, EnemyPool::ENEMY_POOL> &
+EnemyPool::poolForType<Clank>() {
+  return clankPool;
+}
+
+template <>
+inline std::array<Duo, EnemyPool::ENEMY_POOL> &EnemyPool::poolForType<Duo>() {
+  return duoPool;
+}
 
 template <>
 inline std::array<Godsip, EnemyPool::ENEMY_POOL> &
@@ -64,9 +77,4 @@ EnemyPool::poolForType<Swarmer>() {
 template <>
 inline std::array<Zomb, EnemyPool::ENEMY_POOL> &EnemyPool::poolForType<Zomb>() {
   return zombPool;
-}
-
-template <>
-inline std::array<Duo, EnemyPool::ENEMY_POOL> &EnemyPool::poolForType<Duo>() {
-  return duoPool;
 }

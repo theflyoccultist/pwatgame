@@ -65,6 +65,10 @@ inline WeaponType weaponTypeFromString(std::string_view s) {
 }
 
 inline EnemyType enemyTypeFromString(std::string_view s) {
+  if (s == "clank")
+    return EnemyType::CLANK;
+  if (s == "duo")
+    return EnemyType::DUO;
   if (s == "godsip")
     return EnemyType::GODSIP;
   if (s == "monitor")
@@ -75,8 +79,6 @@ inline EnemyType enemyTypeFromString(std::string_view s) {
     return EnemyType::SWARMER;
   if (s == "zomb")
     return EnemyType::ZOMB;
-  if (s == "duo")
-    return EnemyType::DUO;
 
   return EnemyType::ZOMB;
 }

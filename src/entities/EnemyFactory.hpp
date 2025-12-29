@@ -14,6 +14,18 @@ public:
   void loadAssets() {
     auto &assets = AssetSystem::instance();
 
+    Clank::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/clank_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/clank_MED.png"),
+        &assets.loadTexture("../assets/enemies/clank_LOW.png"),
+    };
+
+    Duo::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/duo_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/duo_MED.png"),
+        &assets.loadTexture("../assets/enemies/duo_LOW.png"),
+    };
+
     Godsip::sharedTextures = {
         &assets.loadTexture("../assets/enemies/godsip_HIGH.png"),
         &assets.loadTexture("../assets/enemies/godsip_MED.png"),
@@ -43,16 +55,16 @@ public:
         &assets.loadTexture("../assets/enemies/zomb_MED.png"),
         &assets.loadTexture("../assets/enemies/zomb_LOW.png"),
     };
-
-    Duo::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/duo_HIGH.png"),
-        &assets.loadTexture("../assets/enemies/duo_MED.png"),
-        &assets.loadTexture("../assets/enemies/duo_LOW.png"),
-    };
   }
 
   Enemy *create(EnemyType type, Vector2 pos, const EnemySpec &spec) {
     switch (type) {
+    case EnemyType::CLANK:
+      return EnemyPool::getFreeEnemy<Clank>(pos, spec);
+
+    case EnemyType::DUO:
+      return EnemyPool::getFreeEnemy<Duo>(pos, spec);
+
     case EnemyType::GODSIP:
       return EnemyPool::getFreeEnemy<Godsip>(pos, spec);
 
@@ -67,9 +79,6 @@ public:
 
     case EnemyType::ZOMB:
       return EnemyPool::getFreeEnemy<Zomb>(pos, spec);
-
-    case EnemyType::DUO:
-      return EnemyPool::getFreeEnemy<Duo>(pos, spec);
 
     default:
       std::cerr << "Unknown Enemy type!\n";

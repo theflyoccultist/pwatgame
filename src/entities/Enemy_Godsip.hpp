@@ -15,9 +15,10 @@ public:
 
   void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
+    float godsipCooldown = std::fmodf(actorCooldown, 4.0f);
     dashTimer += p.dt;
 
-    if (actorCooldown <= 0.8f) {
+    if (godsipCooldown <= 0.8f) {
       stats.pos.x += (stats.initialPos.x - stats.pos.x) * 0.25f;
       stats.pos.y += (stats.initialPos.y - stats.pos.y) * 0.25f;
     }
@@ -39,7 +40,7 @@ public:
         dashTimer = 0.f;
       }
 
-      if (actorCooldown >= 3.0f) {
+      if (godsipCooldown >= 3.0f) {
         p.type = ProjectileType::RECON;
         p.spec = EnemyDatabase::getWeaponSpec(p.type);
         shootTowardsPlayer(projMan, p);

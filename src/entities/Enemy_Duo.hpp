@@ -15,13 +15,14 @@ public:
 
   void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
+    float duoCooldown = std::fmodf(actorCooldown, 4.0f);
 
-    if (actorCooldown <= 1.5f) {
+    if (duoCooldown <= 1.5f) {
       p.type = ProjectileType::INTERNET;
       p.spec = EnemyDatabase::getWeaponSpec(p.type);
       shootTowardsPlayer(projMan, p);
 
-    } else if (actorCooldown >= 3.5f) {
+    } else if (duoCooldown >= 3.5f && duoCooldown <= 4.0f) {
       p.type = ProjectileType::EXECUTABLE;
       p.spec = EnemyDatabase::getWeaponSpec(p.type);
       shootGarbageBurst(projMan, p);

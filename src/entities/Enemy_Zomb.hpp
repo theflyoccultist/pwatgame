@@ -32,7 +32,8 @@ public:
         dirY = 1;
     }
 
-    if (actorCooldown >= 2.0f)
+    if ((actorCooldown >= 2.0f && actorCooldown <= 4.0f) ||
+        actorCooldown >= 5.0f)
       shootInVoid(projMan, p);
   }
 

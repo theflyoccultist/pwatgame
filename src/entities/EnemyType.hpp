@@ -9,5 +9,6 @@ enum class EnemyType : uint8_t {
   GODSIP,
   MONITOR,
   DUO,
+  CLANK,
   COUNT
 };

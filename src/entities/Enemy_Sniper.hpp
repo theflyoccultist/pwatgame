@@ -20,7 +20,7 @@ public:
 
     p.type = ProjectileType::LONGRANGE;
     p.spec = EnemyDatabase::getWeaponSpec(p.type);
-    if (actorCooldown <= 3.0f)
+    if (actorCooldown <= 7.0f)
       shootTowardsPlayer(projMan, p);
   }
 
