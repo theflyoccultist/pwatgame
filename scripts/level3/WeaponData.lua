@@ -13,10 +13,12 @@ end
 
 Weapons = {
 	-- Miniboss projectiles
+	make_weapon("exe", 450, 0.008, 40, 3, 7),
+	make_weapon("ie", 700, 0.4, 30, 3, 5),
 
 	-- Enemy projectiles
 	make_weapon("longrange", 400, 1.0, 8, 3, 5),
-	make_weapon("slowcannon", 100, 3.0, 70, 3, 20),
+	make_weapon("slowcannon", 70, 0.6, 10, 15, 1),
 	make_weapon("recon", 300, 0.22, 35, 3, 3),
 
 	-- Player projectiles

@@ -18,7 +18,7 @@ Weapons = {
 	make_weapon("update", 800, 0.10, 69, 5, 7),
 
 	-- Enemy projectiles
-	make_weapon("longrange", 400, 1.0, 15, 3, 5),
+	make_weapon("longrange", 300, 1.0, 15, 3, 5),
 	make_weapon("slowcannon", 300, 0.3, 35, 3, 1),
 	make_weapon("recon", 300, 0.22, 35, 3, 3),
 

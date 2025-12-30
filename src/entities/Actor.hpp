@@ -80,6 +80,17 @@ public:
     }
   }
 
+  void shootFractals(ProjectileManager &pm, const ShootParams &p,
+                     float actorCooldown) {
+    float yMovement = std::sinf(std::cosf(actorCooldown));
+    float xMovement = std::cosf(std::sinf(actorCooldown));
+
+    shoot(pm, p, {xMovement, yMovement});
+    shoot(pm, p, {-xMovement, yMovement});
+    shoot(pm, p, {xMovement, -yMovement});
+    shoot(pm, p, {-xMovement, -yMovement});
+  }
+
 protected:
   const Texture2D *
   chooseTexture(float ratio, const std::array<Texture2D *, 3> &textures) const {

@@ -24,5 +24,6 @@ public:
     }
   }
 
+private:
   void resetPosition() { stats.pos = stats.initialPos; }
 };

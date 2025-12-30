@@ -10,7 +10,7 @@ local function make_enemy(type, speed, hp, contactDmg)
 end
 
 Enemies = {
-	make_enemy("godsip", 150, 70, 20),
+	make_enemy("godsip", 80, 70, 20),
 	make_enemy("duo", 0, 100, 4),
 	make_enemy("clank", 15, 100, 2),
 }

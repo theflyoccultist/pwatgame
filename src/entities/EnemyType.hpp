@@ -3,12 +3,13 @@
 #include <cstdint>
 
 enum class EnemyType : uint8_t {
-  SWARMER,
-  SNIPER,
-  ZOMB,
+  CLANK,
+  DUO,
+  FRACTAL,
   GODSIP,
   MONITOR,
-  DUO,
-  CLANK,
+  SNIPER,
+  SWARMER,
+  ZOMB,
   COUNT
 };

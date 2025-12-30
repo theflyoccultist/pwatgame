@@ -12,16 +12,22 @@ inline DrinkType drinkTypeFromString(std::string_view s) {
     return DrinkType::BOBATEA;
   if (s == "calpis")
     return DrinkType::CALPIS;
+  if (s == "champagne")
+    return DrinkType::CHAMPAGNE;
+  if (s == "coffeemachine")
+    return DrinkType::COFFEEMACHINE;
+  if (s == "coffeemug")
+    return DrinkType::COFFEEMUG;
+  if (s == "coffeepaper")
+    return DrinkType::COFFEEPAPER;
+  if (s == "gingerale")
+    return DrinkType::GINGERALE;
   if (s == "icecoffee")
     return DrinkType::ICECOFFEE;
   if (s == "monster")
     return DrinkType::MONSTER;
   if (s == "soju")
     return DrinkType::SOJU;
-  if (s == "champagne")
-    return DrinkType::CHAMPAGNE;
-  if (s == "gingerale")
-    return DrinkType::GINGERALE;
   if (s == "wine")
     return DrinkType::WINE;
 
@@ -29,22 +35,28 @@ inline DrinkType drinkTypeFromString(std::string_view s) {
 }
 
 inline FoodType foodTypeFromString(std::string_view s) {
+  if (s == "blueberry")
+    return FoodType::BLUEBERRY;
   if (s == "buldak")
     return FoodType::BULDAK;
+  if (s == "cherry")
+    return FoodType::CHERRY;
+  if (s == "pasta")
+    return FoodType::PASTA;
   if (s == "pho")
     return FoodType::PHO;
+  if (s == "pizza")
+    return FoodType::PIZZA;
   if (s == "shinramyun")
     return FoodType::SHINRAMYUN;
+  if (s == "strawberry")
+    return FoodType::STRAWBERRY;
+  if (s == "toast")
+    return FoodType::TOAST;
   if (s == "tomyum")
     return FoodType::TOMYUM;
   if (s == "yopokki")
     return FoodType::YOPOKKI;
-  if (s == "blueberry")
-    return FoodType::BLUEBERRY;
-  if (s == "cherry")
-    return FoodType::CHERRY;
-  if (s == "strawberry")
-    return FoodType::STRAWBERRY;
 
   return FoodType::BULDAK;
 }
@@ -69,6 +81,8 @@ inline EnemyType enemyTypeFromString(std::string_view s) {
     return EnemyType::CLANK;
   if (s == "duo")
     return EnemyType::DUO;
+  if (s == "fractal")
+    return EnemyType::FRACTAL;
   if (s == "godsip")
     return EnemyType::GODSIP;
   if (s == "monitor")

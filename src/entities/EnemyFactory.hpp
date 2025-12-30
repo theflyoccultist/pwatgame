@@ -26,6 +26,12 @@ public:
         &assets.loadTexture("../assets/enemies/duo_LOW.png"),
     };
 
+    Fractal::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/fractal_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/fractal_MED.png"),
+        &assets.loadTexture("../assets/enemies/fractal_LOW.png"),
+    };
+
     Godsip::sharedTextures = {
         &assets.loadTexture("../assets/enemies/godsip_HIGH.png"),
         &assets.loadTexture("../assets/enemies/godsip_MED.png"),
@@ -64,6 +70,9 @@ public:
 
     case EnemyType::DUO:
       return EnemyPool::getFreeEnemy<Duo>(pos, spec);
+
+    case EnemyType::FRACTAL:
+      return EnemyPool::getFreeEnemy<Fractal>(pos, spec);
 
     case EnemyType::GODSIP:
       return EnemyPool::getFreeEnemy<Godsip>(pos, spec);

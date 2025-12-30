@@ -3,7 +3,6 @@
 #include "Enemy.hpp"
 #include "EnemyDatabase.hpp"
 #include <array>
-#include <iostream>
 #include <raylib.h>
 
 class Clank : public Enemy {
@@ -19,7 +18,6 @@ public:
     p.type = ProjectileType::SLOWCANNON;
     p.spec = EnemyDatabase::getWeaponSpec(p.type);
     shootInVoid(projMan, p);
-    std::cout << stats.speed << "\n";
 
     moveInSquare(p, actorCooldown);
   }
