@@ -12,6 +12,7 @@ DrinkSpawns = {
 	{ x = 180, y = 480, delay = 0.0, type = "gingerale", hpBonus = 50 },
 	{ x = 260, y = 397, delay = 0.0, type = "wine", hpBonus = 75 },
 	{ x = 710, y = 190, delay = 10.9, type = "monster", hpBonus = 80 },
+	{ x = 413, y = 487, delay = 30.0, type = "champagne", hpBonus = 200 },
 }
 
 WeaponSpawns = {

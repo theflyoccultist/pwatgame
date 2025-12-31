@@ -12,8 +12,7 @@ end
 Enemies = {
 	make_enemy("fractal", 30, 300, 2),
 	make_enemy("godsip", 40, 80, 10),
-	make_enemy("monitor", 300, 40, 4),
+	make_enemy("monitor", 158, 40, 4),
 	make_enemy("sniper", 180, 40, 0),
-	make_enemy("swarmer", 230, 20, 5),
 	make_enemy("zomb", 34, 40, 3),
 }
