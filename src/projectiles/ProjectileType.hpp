@@ -13,7 +13,6 @@ enum class ProjectileType : uint8_t {
   LONGRANGE,
   PAREN,
   RECON,
-  RECURSIVEERROR,
   ROCKET,
   SLOWCANNON,
   STRAIGHT,
@@ -50,9 +49,6 @@ inline std::ostream &operator<<(std::ostream &os, ProjectileType type) {
     break;
   case ProjectileType::RECON:
     os << "RECON";
-    break;
-  case ProjectileType::RECURSIVEERROR:
-    os << "RECURSIVE ERROR";
     break;
   case ProjectileType::ROCKET:
     os << "ROCKET";

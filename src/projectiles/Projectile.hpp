@@ -6,7 +6,6 @@
 #include "WeaponSpec.hpp"
 #include <iostream>
 #include <raylib.h>
-#include <vector>
 
 inline const char *toString(ProjectileType type) {
   switch (type) {
@@ -93,8 +92,6 @@ public:
     stats.lifetime = spec.lifetime;
     stats.damage = spec.damage;
   }
-
-  virtual void onExpire(std::vector<SpawnRequest> &out) {}
 
   void expire() { stats.lifetime = 0.0f; }
 
