@@ -24,7 +24,7 @@ private:
              const Vector2 &direction) {
     shootTimer -= p.dt;
     if (shootTimer <= 0.0f) {
-      pm.spawn(Faction::Enemy, p.type, p.startPos, direction, p.spec);
+      pm.spawn({Faction::Enemy, p.type, p.startPos, direction, p.spec});
       shootTimer = p.spec.fireRate;
     }
   }

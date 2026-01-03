@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../entities/Faction.hpp"
 #include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
 #include "Projectile.hpp"
@@ -59,63 +58,70 @@ public:
     Uzi::projTexture = &asset.loadTexture("../assets/bullets/bullet_uzi.png");
   }
 
-  Projectile *createProjectile(Faction f, ProjectileType type, Vector2 startPos,
-                               Vector2 dir, WeaponSpec spec) {
+  Projectile *createProjectile(const SpawnRequest &req) {
     auto &audio = AudioSystem::instance();
 
-    switch (type) {
+    switch (req.type) {
     case ProjectileType::ELIXIR:
-      return ProjectilePool::getFreeProjectile<Elixir>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Elixir>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::EXECUTABLE:
-      return ProjectilePool::getFreeProjectile<Executable>(f, startPos, dir,
-                                                           spec);
+      return ProjectilePool::getFreeProjectile<Executable>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::GRENADE:
       audio.sfx->grenade();
-      return ProjectilePool::getFreeProjectile<Grenade>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Grenade>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::HELLFIRE:
       audio.sfx->hellfire();
-      return ProjectilePool::getFreeProjectile<Hellfire>(f, startPos, dir,
-                                                         spec);
+      return ProjectilePool::getFreeProjectile<Hellfire>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::INTERNET:
-      return ProjectilePool::getFreeProjectile<Internet>(f, startPos, dir,
-                                                         spec);
+      return ProjectilePool::getFreeProjectile<Internet>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::LAMBDA:
-      return ProjectilePool::getFreeProjectile<Lambda>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Lambda>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::LONGRANGE:
-      return ProjectilePool::getFreeProjectile<LongRange>(f, startPos, dir,
-                                                          spec);
+      return ProjectilePool::getFreeProjectile<LongRange>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::PAREN:
-      return ProjectilePool::getFreeProjectile<Paren>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Paren>(req.faction, req.startPos,
+                                                      req.direction, req.spec);
 
     case ProjectileType::RECON:
-      return ProjectilePool::getFreeProjectile<Recon>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Recon>(req.faction, req.startPos,
+                                                      req.direction, req.spec);
 
     case ProjectileType::ROCKET:
       audio.sfx->rocketGun();
-      return ProjectilePool::getFreeProjectile<Rocket>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Rocket>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::SLOWCANNON:
-      return ProjectilePool::getFreeProjectile<SlowCannon>(f, startPos, dir,
-                                                           spec);
+      return ProjectilePool::getFreeProjectile<SlowCannon>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::STRAIGHT:
       audio.sfx->defaultGun();
-      return ProjectilePool::getFreeProjectile<Straight>(f, startPos, dir,
-                                                         spec);
+      return ProjectilePool::getFreeProjectile<Straight>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::UPDATE:
-      return ProjectilePool::getFreeProjectile<Update>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Update>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::UZI:
       audio.sfx->uziGun();
-      return ProjectilePool::getFreeProjectile<Uzi>(f, startPos, dir, spec);
+      return ProjectilePool::getFreeProjectile<Uzi>(req.faction, req.startPos,
+                                                    req.direction, req.spec);
 
     default:
       std::cerr << "Projectile Factory: Unknown projectile type!\n";

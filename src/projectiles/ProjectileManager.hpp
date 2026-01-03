@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ProjectileFactory.hpp"
-#include "WeaponSpec.hpp"
 #include <array>
 #include <raylib.h>
 #include <span>
@@ -15,8 +14,7 @@ public:
 
   void loadProjectileTextures();
 
-  void spawn(Faction f, ProjectileType type, const Vector2 &startPos,
-             const Vector2 &dir, const WeaponSpec &spec);
+  void spawn(const SpawnRequest &req);
   void update(float dt);
   void draw();
   void clearAll();

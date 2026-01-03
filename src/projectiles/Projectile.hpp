@@ -6,6 +6,7 @@
 #include "WeaponSpec.hpp"
 #include <iostream>
 #include <raylib.h>
+#include <vector>
 
 inline const char *toString(ProjectileType type) {
   switch (type) {
@@ -28,6 +29,14 @@ inline const char *toString(ProjectileType type) {
   }
 }
 
+struct SpawnRequest {
+  Faction faction;
+  ProjectileType type;
+  Vector2 startPos;
+  Vector2 direction;
+  WeaponSpec spec;
+};
+
 class Projectile {
 protected:
   struct ProjectileStats {
@@ -35,10 +44,10 @@ protected:
     Vector2 pos{};
     Vector2 dir{};
     Vector2 vel{};
-    float cooldown = 0.0f;
-    float size = 0.0f;
-    float lifetime = 0.0f;
-    int damage = 0;
+    float cooldown;
+    float size;
+    float lifetime;
+    int damage;
   };
 
 public:
@@ -85,10 +94,10 @@ public:
     stats.damage = spec.damage;
   }
 
+  virtual void onExpire(std::vector<SpawnRequest> &out) {}
+
   void expire() { stats.lifetime = 0.0f; }
 
   bool isActive() const { return stats.active; }
   void deactivate() { stats.active = false; }
-
-  float lifetime() const { return stats.lifetime; }
 };

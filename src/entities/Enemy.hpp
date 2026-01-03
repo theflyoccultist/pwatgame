@@ -14,11 +14,11 @@ protected:
     bool active = false;
     Vector2 pos{};
     Vector2 initialPos{};
-    float speed = 0.0f;
+    float speed;
     float size = 70.0f;
-    int currentHP = 0;
-    int totalHP = 0;
-    int contactDmg = 0;
+    int currentHP;
+    int totalHP;
+    int contactDmg;
   };
 
 public:

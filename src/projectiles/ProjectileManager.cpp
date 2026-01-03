@@ -1,12 +1,9 @@
 #include "ProjectileManager.hpp"
-#include "WeaponSpec.hpp"
 
 void ProjectileManager::loadProjectileTextures() { factory.loadAssets(); }
 
-void ProjectileManager::spawn(Faction f, ProjectileType type,
-                              const Vector2 &startPos, const Vector2 &dir,
-                              const WeaponSpec &spec) {
-  Projectile *p = factory.createProjectile(f, type, startPos, dir, spec);
+void ProjectileManager::spawn(const SpawnRequest &req) {
+  Projectile *p = factory.createProjectile(req);
   if (!p)
     return;
 
@@ -27,7 +24,7 @@ void ProjectileManager::update(float dt) {
       p->update(dt, bulletCooldown);
 
   for (auto &p : projectiles) {
-    if (p && p->lifetime() <= 0.0f) {
+    if (p && p->stats.lifetime <= 0.0f) {
       p->deactivate();
       p = nullptr;
     }

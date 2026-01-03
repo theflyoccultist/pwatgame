@@ -36,8 +36,8 @@ void Player::shoot(Vector2 startPosition, Vector2 dir) {
 
   const auto &spec = PlayerState::currentWeaponSpec;
 
-  projMan.spawn(Faction::Player, PlayerState::currWeapon, startPosition, dir,
-                spec);
+  projMan.spawn(
+      {Faction::Player, PlayerState::currWeapon, startPosition, dir, spec});
 
   PlayerState::playerAmmo--;
   shootTimer = spec.fireRate;
