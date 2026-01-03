@@ -26,6 +26,8 @@ void updateMainMenu(LevelID &currentLevel, GameModes &gamemode) {
       gamemode = GameModes::LevelSelection;
       Game::currentState = GameState::LevelSelection;
       break;
+    case UILib::MainMenuOpts::Help:
+      Game::currentState = GameState::DisplayHelp;
     default:
       break;
     }
@@ -60,6 +62,12 @@ void updateLevelSelection(LevelID &currentLevel) {
       break;
     }
   }
+}
+
+void updateHelpMenu() {
+  UILib::helpHUD();
+  if (IsKeyPressed(KEY_ENTER))
+    Game::currentState = GameState::MainMenu;
 }
 
 void updateLevelIntro(int currentLevel) {

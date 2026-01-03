@@ -3,6 +3,8 @@
 #include <memory>
 #include <raylib.h>
 
+void ItemManager::init() { items.reserve(ITEM_POOL); }
+
 void ItemManager::updateAll(const PlayerState &player) {
   for (auto &item : items) {
     if (item->isActive() &&

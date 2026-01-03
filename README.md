@@ -1,5 +1,7 @@
 # Pwatgame: A bullet hell game engine in C++ and Raylib
 
+My first attempt at making a game, perhaps the start of a rabbit hole into graphics engine programming, or just yet another systems project.
+
 You will play as PwatPwat, a cute blob cat plush who needs to claim her throne as the cutest one ever! But some jealous enemies are getting on your way. Fight your way throughout different levels, refill your health with drinks, and refill your ammo with food, scattered across the map. Discover different weapons to use and fight different, equally evil mini bosses.
 
 ## Overview:

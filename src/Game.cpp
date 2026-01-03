@@ -56,6 +56,10 @@ void Game::run() {
       UIManager::updateLevelSelection(currentLevel);
       break;
 
+    case GameState::DisplayHelp:
+      UIManager::updateHelpMenu();
+      break;
+
     case GameState::Restarting: {
       if (gameMode == GameModes::LevelSelection) {
         playerManager.resetStatus();

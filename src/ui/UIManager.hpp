@@ -9,6 +9,7 @@ namespace UIManager {
 void loadUITextures();
 void updateMainMenu(LevelID &currentLevel, GameModes &gameMode);
 void updateLevelSelection(LevelID &currentlevel);
+void updateHelpMenu();
 
 void updateLevelIntro(int currentLevel);
 void updatePlayerHUD(int currentLevel);

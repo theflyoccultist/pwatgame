@@ -82,7 +82,9 @@ template <> struct ItemArgsFor<ItemWeapon> {
 class ItemScheduler {
 public:
   ItemScheduler(LuaWrapper &lua, World &w, ScheduleManager &sm)
-      : lua(lua), world(w), sm(sm) {}
+      : lua(lua), world(w), sm(sm) {
+    world.itemManager.init();
+  }
 
   void loadItemTextures() {
     DrinkTextures::loadTextures();

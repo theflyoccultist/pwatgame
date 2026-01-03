@@ -83,33 +83,58 @@ MainMenuOpts mainMenu() {
 
   DrawText("Play Game", 305, 550, 30, BLACK);
   DrawText("Play From Level", 265, 610, 30, BLACK);
+  DrawText("Help", 345, 670, 30, BLACK);
 
   return static_cast<MainMenuOpts>(selectedIndex);
+}
+
+void helpHUD() {
+  AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0,
+                                      800);
+
+  DrawText("HELP", 355, 80, 40, BLACK);
+  DrawText("Press the arrow keys to move across the map!", 115, 180, 20, BLACK);
+  DrawText("Press the space key to shoot projectiles towards enemies!", 115,
+           230, 20, BLACK);
+  DrawText("Pick up food items spread across the map to gain ammo!", 115, 280,
+           20, BLACK);
+  DrawText("Pick up drink items spread across the map to gain health!", 115,
+           330, 20, BLACK);
+  DrawText("Pick up weapon items, and discover new ways", 115, 380, 20, BLACK);
+  DrawText("to defeat your opponents!", 115, 430, 20, BLACK);
+  DrawText("Defeat mini bosses to clear that level!", 115, 480, 20, BLACK);
+
+  DrawText("Press Enter to return to the Main Menu", 155, 680, 25, RED);
 }
 
 void levelIntro(int currentLevel) {
   AssetSystem::instance().drawTexture(
       uiAssets[AssetType::Background][currentLevel], 0, 0, 800);
   const char *levelName = "";
+  Color introColor;
 
   switch (currentLevel) {
   case 1:
     levelName = "The Vile Void";
+    introColor = PINK;
     break;
   case 2:
     levelName = "The Isolated Youth";
+    introColor = LIME;
     break;
   case 3:
     levelName = "Boys in Love";
+    introColor = GOLD;
     break;
   case 4:
     levelName = "Inconsolable Sadness";
+    introColor = SKYBLUE;
     break;
   default:
     break;
   }
 
-  DrawRectangle(50, 250, 600, 300, PINK);
+  DrawRectangle(50, 250, 600, 300, introColor);
   DrawText(TextFormat("Level %d", currentLevel), 100, 300, 40, BLACK);
   DrawText(levelName, 100, 400, 30, BLACK);
   DrawText("Press Enter to continue", 100, 470, 20, BLACK);
@@ -293,6 +318,7 @@ void CreditsMenu() {
   DrawText("Mom", 150, 550, 20, BLACK);
   DrawText("My cute girlfriend", 150, 590, 20, BLACK);
   DrawText("Raysan5, creator of Raylib", 150, 630, 20, BLACK);
+  DrawText("Press Enter to return to the Main Menu", 155, 680, 25, PURPLE);
 }
 
 } // namespace UILib

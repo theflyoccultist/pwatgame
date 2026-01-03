@@ -13,15 +13,15 @@ public:
   ItemManager(const ItemManager &) = delete;
   ItemManager &operator=(const ItemManager &) = delete;
 
-  void loadItemTextures();
-
   template <typename T, typename... Args> T &spawnItem(Args &&...args);
 
+  void init();
   void updateAll(const PlayerState &player);
   void drawAll();
   void clearAll();
 
 private:
+  static constexpr int ITEM_POOL = 150;
   std::vector<std::unique_ptr<Item>> items;
 };
 

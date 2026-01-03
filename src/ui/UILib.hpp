@@ -6,7 +6,7 @@
 
 namespace UILib {
 
-enum class MainMenuOpts : uint8_t { PlayGame, SelectLevel, Count };
+enum class MainMenuOpts : uint8_t { PlayGame, SelectLevel, Help, Count };
 
 enum class LevelOpts : uint8_t {
   Level1,
@@ -35,6 +35,7 @@ void loadUIAssets();
 
 MainMenuOpts mainMenu();
 LevelOpts levelSelection();
+void helpHUD();
 
 void levelIntro(int currentLevel);
 void playerHUD(int currentLevel);
