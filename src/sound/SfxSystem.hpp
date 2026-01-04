@@ -6,11 +6,18 @@
 
 class SfxSystem {
 public:
-  enum class SoundType : uint8_t { pwatSteps, combatSFX, bonusPickup };
+  enum class SoundType : uint8_t {
+    pwatSteps,
+    combatSFX,
+    bonusPickup,
+    menuSounds
+  };
 
   SfxSystem();
 
   void playRandSteps();
+
+  void enemyKilled();
   void defaultGun();
   void rocketGun();
   void uziGun();
@@ -21,7 +28,11 @@ public:
   void healthAdded();
   void newWeapon();
 
-  void enemyKilled();
+  void winBounce();
+  void menuSelect();
+  void menuEnter();
+  void startLevel();
+
   void changeSfxVolume(int vol);
 
 private:

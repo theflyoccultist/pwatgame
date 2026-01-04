@@ -121,7 +121,7 @@ void Game::run() {
       break;
 
     case GameState::Won:
-      UIManager::winningMenu(displayCurrentLevel(currentLevel));
+      UIManager::winningMenu(displayCurrentLevel(currentLevel), deltaTime);
       break;
 
     case GameState::NextLevel:

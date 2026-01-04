@@ -18,15 +18,18 @@ void updateMainMenu(LevelID &currentLevel, GameModes &gamemode) {
   if (IsKeyPressed(KEY_ENTER)) {
     switch (menuChoice) {
     case UILib::MainMenuOpts::PlayGame:
+      audio.sfx->startLevel();
       currentLevel = LevelID::Level1;
       gamemode = GameModes::Dealthless;
       Game::currentState = GameState::Restarting;
       break;
     case UILib::MainMenuOpts::SelectLevel:
+      audio.sfx->menuEnter();
       gamemode = GameModes::LevelSelection;
       Game::currentState = GameState::LevelSelection;
       break;
     case UILib::MainMenuOpts::Help:
+      audio.sfx->menuEnter();
       Game::currentState = GameState::DisplayHelp;
     default:
       break;
@@ -38,6 +41,7 @@ void updateLevelSelection(LevelID &currentLevel) {
   auto levelChoice = UILib::levelSelection();
 
   if (IsKeyPressed(KEY_ENTER)) {
+    audio.sfx->startLevel();
     switch (levelChoice) {
     case UILib::LevelOpts::Level1:
       currentLevel = LevelID::Level1;
@@ -66,14 +70,17 @@ void updateLevelSelection(LevelID &currentLevel) {
 
 void updateHelpMenu() {
   UILib::helpHUD();
-  if (IsKeyPressed(KEY_ENTER))
+  if (IsKeyPressed(KEY_ENTER)) {
+    audio.sfx->menuEnter();
     Game::currentState = GameState::MainMenu;
+  }
 }
 
 void updateLevelIntro(int currentLevel) {
   UILib::levelIntro(currentLevel);
-  if (IsKeyPressed(KEY_ENTER))
+  if (IsKeyPressed(KEY_ENTER)) {
     Game::currentState = GameState::Playing;
+  }
 }
 
 void updatePlayerHUD(int currentLevel) { UILib::playerHUD(currentLevel); }
@@ -87,6 +94,7 @@ void updatePauseMenu() {
   audio.music->pauseMusic();
 
   if (IsKeyPressed(KEY_ENTER)) {
+    audio.sfx->menuEnter();
     switch (pauseChoice) {
     case UILib::PauseMenuOpts::Resume:
       Game::currentState = GameState::Playing;
@@ -114,8 +122,10 @@ void updateOptionsMenu() {
   static int sfxVol = 100;
   auto optionsChoice = UILib::optionsMenu(musicVol, sfxVol);
 
-  if (IsKeyPressed(KEY_ENTER))
+  if (IsKeyPressed(KEY_ENTER)) {
+    audio.sfx->menuEnter();
     Game::currentState = GameState::Paused;
+  }
 
   if (IsKeyPressed(KEY_LEFT)) {
     switch (optionsChoice) {
@@ -152,6 +162,7 @@ void updateLostMenu(LevelID &currentLevel, GameModes &gameMode) {
   audio.music->pauseMusic();
 
   if (IsKeyPressed(KEY_ENTER)) {
+    audio.sfx->menuEnter();
     switch (lossChoice) {
     case UILib::LostMenuOpts::Restart:
       if (gameMode == GameModes::Dealthless) {
@@ -175,9 +186,19 @@ void updateLostMenu(LevelID &currentLevel, GameModes &gameMode) {
   }
 }
 
-void winningMenu(int currentLevel) {
+float bounceTimer = 0.0f;
+const float bounceDelay = 0.695f;
+
+void winningMenu(int currentLevel, float dt) {
+  bounceTimer -= dt;
+  if (bounceTimer <= 0.0f) {
+    audio.sfx->winBounce();
+    bounceTimer = bounceDelay;
+  }
+
   auto winChoice = UILib::winningMenu(currentLevel);
   if (IsKeyPressed(KEY_ENTER)) {
+    audio.sfx->menuEnter();
     switch (winChoice) {
     case UILib::WinMenuOpts::NextLevel:
       if (currentLevel == 4) {
@@ -207,6 +228,7 @@ void updateCredits() {
   UILib::CreditsMenu();
 
   if (IsKeyPressed(KEY_ENTER)) {
+    audio.sfx->menuEnter();
     Game::currentState = GameState::MainMenu;
     audio.music->stopMusic();
     audio.music->playTitleTrack();

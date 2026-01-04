@@ -1,6 +1,8 @@
 #include "UILib.hpp"
 #include "../player/PlayerState.hpp"
+#include "../sound/AudioSystem.hpp"
 #include "../texture/AssetSystem.hpp"
+
 #include <algorithm>
 #include <array>
 #include <cstdint>
@@ -62,6 +64,8 @@ void loadUIAssets() {
   }
 }
 
+auto &audio = AudioSystem::instance();
+
 MainMenuOpts mainMenu() {
   AssetSystem::instance().drawTexture(uiAssets[AssetType::Background][0], 0, 0,
                                       800);
@@ -71,10 +75,15 @@ MainMenuOpts mainMenu() {
 
   static int selectedIndex = 0;
 
-  if (IsKeyPressed(KEY_DOWN))
+  if (IsKeyPressed(KEY_DOWN)) {
+    audio.sfx->menuSelect();
     selectedIndex++;
-  if (IsKeyPressed(KEY_UP))
+  }
+
+  if (IsKeyPressed(KEY_UP)) {
+    audio.sfx->menuSelect();
     selectedIndex--;
+  }
 
   selectedIndex = std::clamp(selectedIndex, 0, (int)MainMenuOpts::Count - 1);
 
@@ -183,10 +192,15 @@ void weaponHUD(ProjectileType currentProjectile) {
 template <typename Enum>
 Enum runMenuEnum(const char *title, std::span<std::string const> items,
                  int &selectedIndex, int x, int y) {
-  if (IsKeyPressed(KEY_DOWN))
+  if (IsKeyPressed(KEY_DOWN)) {
+    audio.sfx->menuSelect();
     selectedIndex++;
-  if (IsKeyPressed(KEY_UP))
+  }
+
+  if (IsKeyPressed(KEY_UP)) {
+    audio.sfx->menuSelect();
     selectedIndex--;
+  }
 
   selectedIndex = std::clamp(selectedIndex, 0, (int)items.size() - 1);
 

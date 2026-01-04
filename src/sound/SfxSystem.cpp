@@ -26,6 +26,14 @@ SfxSystem::SfxSystem() {
           SoundEffect("../assets/sfx/add_health.wav"),
           SoundEffect("../assets/sfx/upgrade_weapon.wav"),
       });
+
+  fxBank[SoundType::menuSounds] = std::make_unique<std::vector<SoundEffect>>(
+      std::initializer_list<SoundEffect>{
+          SoundEffect("../assets/sfx/boing.wav"),
+          SoundEffect("../assets/sfx/menu_selection.wav"),
+          SoundEffect("../assets/sfx/menu_button.wav"),
+          SoundEffect("../assets/sfx/level_start.wav"),
+      });
 }
 
 void SfxSystem::playRandSteps() {
@@ -44,6 +52,11 @@ void SfxSystem::hellfire() { (*fxBank[SoundType::combatSFX])[5].play(); }
 void SfxSystem::ammoAdded() { (*fxBank[SoundType::bonusPickup])[0].play(); }
 void SfxSystem::healthAdded() { (*fxBank[SoundType::bonusPickup])[1].play(); }
 void SfxSystem::newWeapon() { (*fxBank[SoundType::bonusPickup])[2].play(); }
+
+void SfxSystem::winBounce() { (*fxBank[SoundType::menuSounds])[0].play(); }
+void SfxSystem::menuSelect() { (*fxBank[SoundType::menuSounds])[1].play(); }
+void SfxSystem::menuEnter() { (*fxBank[SoundType::menuSounds])[2].play(); }
+void SfxSystem::startLevel() { (*fxBank[SoundType::menuSounds])[3].play(); }
 
 void SfxSystem::changeSfxVolume(int vol) {
   float volume = static_cast<float>(vol) / 100;

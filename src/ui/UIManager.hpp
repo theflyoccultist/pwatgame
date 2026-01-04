@@ -18,6 +18,6 @@ void updateweaponHUD(ProjectileType currentProjectile);
 void updatePauseMenu();
 void updateOptionsMenu();
 void updateLostMenu(LevelID &currentLevel, GameModes &gameMode);
-void winningMenu(int currentLevel);
+void winningMenu(int currentLevel, float dt);
 void updateCredits();
 }; // namespace UIManager
