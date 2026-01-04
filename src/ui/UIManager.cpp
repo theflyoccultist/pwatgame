@@ -41,25 +41,29 @@ void updateLevelSelection(LevelID &currentLevel) {
   auto levelChoice = UILib::levelSelection();
 
   if (IsKeyPressed(KEY_ENTER)) {
-    audio.sfx->startLevel();
     switch (levelChoice) {
     case UILib::LevelOpts::Level1:
+      audio.sfx->startLevel();
       currentLevel = LevelID::Level1;
       Game::currentState = GameState::Restarting;
       break;
     case UILib::LevelOpts::Level2:
       currentLevel = LevelID::Level2;
+      audio.sfx->startLevel();
       Game::currentState = GameState::Restarting;
       break;
     case UILib::LevelOpts::Level3:
       currentLevel = LevelID::Level3;
+      audio.sfx->startLevel();
       Game::currentState = GameState::Restarting;
       break;
     case UILib::LevelOpts::Level4:
       currentLevel = LevelID::Level4;
+      audio.sfx->startLevel();
       Game::currentState = GameState::Restarting;
       break;
     case UILib::LevelOpts::BackToMenu:
+      audio.sfx->menuEnter();
       Game::currentState = GameState::MainMenu;
       break;
     default:
@@ -157,12 +161,21 @@ void updateOptionsMenu() {
   sfxVol = std::clamp(sfxVol, 0, 100);
 }
 
+bool lostTrigger = true;
+
 void updateLostMenu(LevelID &currentLevel, GameModes &gameMode) {
   auto lossChoice = UILib::losingScreen(gameMode);
   audio.music->pauseMusic();
 
+  if (lostTrigger) {
+    audio.sfx->lostBeeps();
+    lostTrigger = false;
+  }
+
   if (IsKeyPressed(KEY_ENTER)) {
     audio.sfx->menuEnter();
+    lostTrigger = true;
+
     switch (lossChoice) {
     case UILib::LostMenuOpts::Restart:
       if (gameMode == GameModes::Dealthless) {

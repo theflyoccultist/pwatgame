@@ -76,6 +76,7 @@ void Game::run() {
       musicScheduler.scheduleMusic(currentLevel);
       musicScheduler.scheduleBossMusic(currentLevel);
       std::cout << "Game::run() - Current level: " << currentLevel << "\n";
+      std::cout << "Game::run() - Chosen Game Mode: " << gameMode << "\n";
       Game::currentState = GameState::LevelIntro;
       break;
     }

@@ -29,6 +29,7 @@ public:
   void newWeapon();
 
   void winBounce();
+  void lostBeeps();
   void menuSelect();
   void menuEnter();
   void startLevel();
