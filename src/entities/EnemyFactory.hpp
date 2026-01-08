@@ -38,6 +38,12 @@ public:
         &assets.loadTexture("../assets/enemies/godsip_LOW.png"),
     };
 
+    Miku::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/miku_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/miku_MED.png"),
+        &assets.loadTexture("../assets/enemies/miku_LOW.png"),
+    };
+
     Monitor::sharedTextures = {
         &assets.loadTexture("../assets/enemies/monitor_HIGH.png"),
         &assets.loadTexture("../assets/enemies/monitor_MED.png"),
@@ -76,6 +82,9 @@ public:
 
     case EnemyType::GODSIP:
       return EnemyPool::getFreeEnemy<Godsip>(pos, spec);
+
+    case EnemyType::MIKU:
+      return EnemyPool::getFreeEnemy<Miku>(pos, spec);
 
     case EnemyType::MONITOR:
       return EnemyPool::getFreeEnemy<Monitor>(pos, spec);

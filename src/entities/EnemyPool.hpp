@@ -5,6 +5,7 @@
 #include "Enemy_Duo.hpp"
 #include "Enemy_Fractal.hpp"
 #include "Enemy_Godsip.hpp"
+#include "Enemy_Miku.hpp"
 #include "Enemy_Monitor.hpp"
 #include "Enemy_Sniper.hpp"
 #include "Enemy_Swarmer.hpp"
@@ -19,6 +20,7 @@ private:
   static inline std::array<Duo, ENEMY_POOL> duoPool;
   static inline std::array<Fractal, ENEMY_POOL> fractalPool;
   static inline std::array<Godsip, ENEMY_POOL> godsipPool;
+  static inline std::array<Miku, ENEMY_POOL> mikuPool;
   static inline std::array<Monitor, ENEMY_POOL> monitorPool;
   static inline std::array<Sniper, ENEMY_POOL> sniperPool;
   static inline std::array<Swarmer, ENEMY_POOL> swarmerPool;
@@ -62,6 +64,11 @@ template <>
 inline std::array<Godsip, EnemyPool::ENEMY_POOL> &
 EnemyPool::poolForType<Godsip>() {
   return godsipPool;
+}
+
+template <>
+inline std::array<Miku, EnemyPool::ENEMY_POOL> &EnemyPool::poolForType<Miku>() {
+  return mikuPool;
 }
 
 template <>

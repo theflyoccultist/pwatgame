@@ -7,6 +7,7 @@ enum class EnemyType : uint8_t {
   DUO,
   FRACTAL,
   GODSIP,
+  MIKU,
   MONITOR,
   SNIPER,
   SWARMER,

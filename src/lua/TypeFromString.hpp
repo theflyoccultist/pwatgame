@@ -85,6 +85,8 @@ inline EnemyType enemyTypeFromString(std::string_view s) {
     return EnemyType::FRACTAL;
   if (s == "godsip")
     return EnemyType::GODSIP;
+  if (s == "miku")
+    return EnemyType::MIKU;
   if (s == "monitor")
     return EnemyType::MONITOR;
   if (s == "sniper")

@@ -23,10 +23,10 @@ public:
         &asset.loadTexture("../assets/bullets/bullet_exe.png");
 
     Grenade::projTexture =
-        &asset.loadTexture("../assets/bullets/bullet_check.png");
+        &asset.loadTexture("../assets/bullets/bullet_grenade.png");
 
     Hellfire::projTexture =
-        &asset.loadTexture("../assets/bullets/bullet_check.png");
+        &asset.loadTexture("../assets/bullets/bullet_hellfire.png");
 
     Internet::projTexture =
         &asset.loadTexture("../assets/bullets/bullet_ie.png");

@@ -2,6 +2,7 @@
 local spawn = require("common.enemy_spawn_patterns")
 
 EnemySpawns = {
+	{ x = 400, y = 100, delay = 0, type = "miku" },
 	{ x = 400, y = 100, delay = 9, type = "fractal" },
 	{ x = 120, y = 50, delay = 15, type = "sniper" },
 	{ x = 207, y = 35, delay = 15, type = "sniper" },
@@ -10,6 +11,7 @@ EnemySpawns = {
 	{ x = 369, y = 143, delay = 15, type = "sniper" },
 	{ x = 409, y = 13, delay = 15, type = "sniper" },
 	{ x = 400, y = 100, delay = 46, type = "fractal" },
+	{ x = 400, y = 100, delay = 59, type = "miku" },
 }
 
 spawn.append(EnemySpawns, spawn.zomb_chaos(10, 0))
@@ -17,4 +19,6 @@ spawn.append(EnemySpawns, spawn.monitor_circle(18))
 spawn.append(EnemySpawns, spawn.zomb_chaos(10, 32))
 spawn.append(EnemySpawns, spawn.monitor_circle(41))
 spawn.append(EnemySpawns, spawn.godsip_cardinal(49))
+spawn.append(EnemySpawns, spawn.swarm("sniper", 8, 690, 595, -50, -53, 59, 2))
+
 -- todo : add new enemy type around 59 seconds
