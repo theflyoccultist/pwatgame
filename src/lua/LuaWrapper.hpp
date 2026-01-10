@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <expected>
-#include <lua5.4/lua.hpp>
+#include <lua.hpp>
 #include <ostream>
 #include <string>
 
