@@ -4,6 +4,7 @@ project(pwatgame)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER_VERSION 12)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include_directories(include)
 
@@ -69,7 +70,10 @@ add_library(lua STATIC
     ${lua_SOURCE_DIR}/lzio.c
 )
 
-target_include_directories(lua PUBLIC ${lua_SOURCE_DIR})
+target_include_directories(lua PUBLIC 
+  ${lua_SOURCE_DIR}
+  ${CMAKE_SOURCE_DIR}/external/lua
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib lua)
 
