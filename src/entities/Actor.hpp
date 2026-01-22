@@ -128,7 +128,7 @@ public:
     }
 
     shootTimer -= p.dt;
-    if ((shootTimer - actorCooldown) <= 0.0f) {
+    if ((shootTimer - actorCooldown) <= 8.0f) {
       pm.spawn({Faction::Enemy, p.type, p.startPos, direction, p.spec});
       shootTimer = p.spec.fireRate;
     }

@@ -26,11 +26,13 @@ public:
     stats.pos.x = os.center.x + std::cosf(os.orbitAngle) * os.orbitRadius;
     stats.pos.y = os.center.y + std::sinf(os.orbitAngle) * os.orbitRadius;
 
-    p.type = ProjectileType::INTERNET;
-    p.spec = EnemyDatabase::getWeaponSpec(p.type);
-    shootThreadJIT(projMan, p, actorCooldown);
-
-    if (actorCooldown >= 7.8f) {
+    if (actorCooldown < 7.8f) {
+      if (inFireWindow(actorCooldown, 0.6f, 0.35f)) {
+        p.type = ProjectileType::INTERNET;
+        p.spec = EnemyDatabase::getWeaponSpec(p.type);
+        shootThreadJIT(projMan, p, actorCooldown);
+      }
+    } else {
       killEntity();
     }
   }
@@ -38,4 +40,9 @@ public:
 private:
   void resetPosition() { stats.pos = stats.initialPos; }
   orbitState os;
+
+  bool inFireWindow(float t, float period, float duty) {
+    float phase = std::fmodf(t, period);
+    return phase < (period * duty);
+  }
 };
