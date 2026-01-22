@@ -32,6 +32,37 @@ EnemySpawns = {
 	{ x = 540, y = 300, delay = 39, type = "duo" },
 	{ x = 397, y = 500, delay = 39, type = "clank" },
 
+	{ x = 10, y = 30, delay = 43, type = "godsip" },
+	{ x = 600, y = 100, delay = 43, type = "duo" },
+	{ x = 397, y = 500, delay = 43, type = "clank" },
+	{ x = 200, y = 400, delay = 43, type = "clank" },
+	{ x = 340, y = 700, delay = 43, type = "clank" },
+	{ x = 600, y = 400, delay = 43, type = "clank" },
+
+	{ x = 10, y = 30, delay = 63, type = "godsip" },
+	{ x = 100, y = 400, delay = 63, type = "duo" },
+	{ x = 397, y = 500, delay = 63, type = "clank" },
+
+	{ x = 10, y = 30, delay = 73, type = "godsip" },
+	{ x = 200, y = 700, delay = 73, type = "duo" },
+	{ x = 397, y = 500, delay = 73, type = "clank" },
+
+	{ x = 10, y = 30, delay = 78, type = "godsip" },
+	{ x = 200, y = 100, delay = 78, type = "duo" },
+	{ x = 397, y = 500, delay = 78, type = "clank" },
+
+	{ x = 710, y = 30, delay = 80, type = "godsip" },
+	{ x = 540, y = 300, delay = 80, type = "duo" },
+	{ x = 397, y = 500, delay = 80, type = "clank" },
+
+	{ x = 710, y = 30, delay = 81, type = "godsip" },
+	{ x = 550, y = 600, delay = 81, type = "duo" },
+	{ x = 397, y = 500, delay = 81, type = "clank" },
+
+	{ x = 710, y = 30, delay = 82, type = "godsip" },
+	{ x = 540, y = 300, delay = 82, type = "duo" },
+	{ x = 397, y = 500, delay = 82, type = "clank" },
+
 	-- mini boss spawn time + 12
 	{ x = 200, y = 400, delay = timings.lvl3minibossDelay + 12.0, type = "threademitter" },
 	{ x = 300, y = 600, delay = timings.lvl3minibossDelay + 12.0, type = "threademitter" },
