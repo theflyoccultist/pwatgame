@@ -11,6 +11,7 @@ enum class EnemyType : uint8_t {
   MONITOR,
   SNIPER,
   SWARMER,
+  THREADEMITTER,
   ZOMB,
   COUNT
 };

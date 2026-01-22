@@ -68,6 +68,7 @@ public:
   }
 
   bool isAlive() const { return stats.currentHP > 0; }
+  void killEntity() { stats.currentHP = 0; }
   bool isActive() { return stats.active; }
   void activate() { stats.active = true; }
   void deactivate() { stats.active = false; }

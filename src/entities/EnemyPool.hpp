@@ -9,6 +9,7 @@
 #include "Enemy_Monitor.hpp"
 #include "Enemy_Sniper.hpp"
 #include "Enemy_Swarmer.hpp"
+#include "Enemy_ThreadEmitter.hpp"
 #include "Enemy_Zomb.hpp"
 #include <array>
 #include <raylib.h>
@@ -24,6 +25,7 @@ private:
   static inline std::array<Monitor, ENEMY_POOL> monitorPool;
   static inline std::array<Sniper, ENEMY_POOL> sniperPool;
   static inline std::array<Swarmer, ENEMY_POOL> swarmerPool;
+  static inline std::array<ThreadEmitter, ENEMY_POOL> tePool;
   static inline std::array<Zomb, ENEMY_POOL> zombPool;
 
 public:
@@ -87,6 +89,12 @@ template <>
 inline std::array<Swarmer, EnemyPool::ENEMY_POOL> &
 EnemyPool::poolForType<Swarmer>() {
   return swarmerPool;
+}
+
+template <>
+inline std::array<ThreadEmitter, EnemyPool::ENEMY_POOL> &
+EnemyPool::poolForType<ThreadEmitter>() {
+  return tePool;
 }
 
 template <>

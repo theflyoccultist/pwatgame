@@ -7,4 +7,6 @@ EnemySpawns = {
 	{ x = 200, y = 400, delay = 0, type = "clank" },
 	{ x = 340, y = 700, delay = 0, type = "clank" },
 	{ x = 600, y = 400, delay = 0, type = "clank" },
+
+	{ x = 200, y = 400, delay = 2.0, type = "threademitter" },
 }

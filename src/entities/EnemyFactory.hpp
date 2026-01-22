@@ -3,6 +3,7 @@
 #include "Enemy.hpp"
 #include "EnemyPool.hpp"
 #include "EnemySpec.hpp"
+#include "EnemyType.hpp"
 #include <array>
 #include <iostream>
 #include <raylib.h>
@@ -62,6 +63,12 @@ public:
         &assets.loadTexture("../assets/enemies/swarmer_LOW.png"),
     };
 
+    ThreadEmitter::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/gost_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/gost_MED.png"),
+        &assets.loadTexture("../assets/enemies/gost_LOW.png"),
+    };
+
     Zomb::sharedTextures = {
         &assets.loadTexture("../assets/enemies/zomb_HIGH.png"),
         &assets.loadTexture("../assets/enemies/zomb_MED.png"),
@@ -95,11 +102,14 @@ public:
     case EnemyType::SWARMER:
       return EnemyPool::getFreeEnemy<Swarmer>(pos, spec);
 
+    case EnemyType::THREADEMITTER:
+      return EnemyPool::getFreeEnemy<ThreadEmitter>(pos, spec);
+
     case EnemyType::ZOMB:
       return EnemyPool::getFreeEnemy<Zomb>(pos, spec);
 
     default:
-      std::cerr << "Unknown Enemy type!\n";
+      std::cerr << "EnemyFactory.hpp: Enemy *create: Unknown Enemy Type!\n";
       return nullptr;
     }
   }
