@@ -96,7 +96,7 @@ public:
     shoot(pm, p, {1, 1});
   }
 
-  void shootJIT(ProjectileManager &pm, ShootParams &p, float &shootAccel) {
+  void shootJavaJIT(ProjectileManager &pm, ShootParams &p, float &shootAccel) {
     Vector2 direction = {p.playerPos.x - p.startPos.x,
                          p.playerPos.y - p.startPos.y};
 
@@ -112,6 +112,25 @@ public:
       pm.spawn({Faction::Enemy, p.type, p.startPos, direction, p.spec});
       shootTimer = p.spec.fireRate;
       shootAccel += 0.025f;
+    }
+  }
+
+  void shootThreadJIT(ProjectileManager &pm, ShootParams &p,
+                      float actorCooldown) {
+    Vector2 direction = {p.playerPos.x - p.startPos.x,
+                         p.playerPos.y - p.startPos.y};
+
+    float len =
+        std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (len != 0) {
+      direction.x /= len;
+      direction.y /= len;
+    }
+
+    shootTimer -= p.dt;
+    if ((shootTimer - actorCooldown) <= 0.0f) {
+      pm.spawn({Faction::Enemy, p.type, p.startPos, direction, p.spec});
+      shootTimer = p.spec.fireRate;
     }
   }
 

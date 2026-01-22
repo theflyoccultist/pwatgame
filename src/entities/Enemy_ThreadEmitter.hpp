@@ -1,7 +1,15 @@
 #include "Enemy.hpp"
+#include "EnemyDatabase.hpp"
 #include <array>
 #include <cmath>
 #include <raylib.h>
+
+struct orbitState {
+  float orbitAngle = Random::rangeFloat(0.0f, 2.0f * PI);
+  float orbitSpeed = Random::rangeFloat(0.5f, 2.0f);
+  float orbitRadius = Random::rangeFloat(80.0f, 160.0f);
+  Vector2 center = {250, 250};
+};
 
 class ThreadEmitter : public Enemy {
 public:
@@ -13,14 +21,14 @@ public:
   void update(ShootParams &p, [[maybe_unused]] ProjectileManager &projMan,
               float actorCooldown) override {
 
-    if (actorCooldown >= 2.0f) {
-      stats.pos.x -= std::cosf(actorCooldown) * stats.speed * p.dt;
-      stats.pos.y -= std::sinf(actorCooldown) * stats.speed * p.dt;
-    }
+    os.orbitAngle += os.orbitSpeed * p.dt;
 
-    if (stats.pos.x >= 1000.0f || stats.pos.y >= 1000.0f) {
-      resetPosition();
-    }
+    stats.pos.x = os.center.x + std::cosf(os.orbitAngle) * os.orbitRadius;
+    stats.pos.y = os.center.y + std::sinf(os.orbitAngle) * os.orbitRadius;
+
+    p.type = ProjectileType::INTERNET;
+    p.spec = EnemyDatabase::getWeaponSpec(p.type);
+    shootThreadJIT(projMan, p, actorCooldown);
 
     if (actorCooldown >= 7.8f) {
       killEntity();
@@ -29,4 +37,5 @@ public:
 
 private:
   void resetPosition() { stats.pos = stats.initialPos; }
+  orbitState os;
 };
