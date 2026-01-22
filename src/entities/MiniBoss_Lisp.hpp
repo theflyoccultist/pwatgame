@@ -4,7 +4,6 @@
 #include "MiniBoss.hpp"
 #include "MiniBossDatabase.hpp"
 #include <array>
-#include <cmath>
 #include <raylib.h>
 
 class Lisp : public MiniBoss {

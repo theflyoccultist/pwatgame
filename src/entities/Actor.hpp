@@ -91,6 +91,30 @@ public:
     shoot(pm, p, {-xMovement, -yMovement});
   }
 
+  void shootDiagonally(ProjectileManager &pm, const ShootParams &p) {
+    shoot(pm, p, {0, 1});
+    shoot(pm, p, {1, 1});
+  }
+
+  void shootJIT(ProjectileManager &pm, ShootParams &p, float &shootAccel) {
+    Vector2 direction = {p.playerPos.x - p.startPos.x,
+                         p.playerPos.y - p.startPos.y};
+
+    float len =
+        std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (len != 0) {
+      direction.x /= len;
+      direction.y /= len;
+    }
+
+    shootTimer -= p.dt;
+    if ((shootTimer - shootAccel) <= 0.0f) {
+      pm.spawn({Faction::Enemy, p.type, p.startPos, direction, p.spec});
+      shootTimer = p.spec.fireRate;
+      shootAccel += 0.025f;
+    }
+  }
+
 protected:
   const Texture2D *
   chooseTexture(float ratio, const std::array<Texture2D *, 3> &textures) const {

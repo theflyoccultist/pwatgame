@@ -71,7 +71,6 @@ public:
           req.faction, req.startPos, req.direction, req.spec);
 
     case ProjectileType::GRENADE:
-      audio.sfx->grenade();
       return ProjectilePool::getFreeProjectile<Grenade>(
           req.faction, req.startPos, req.direction, req.spec);
 
