@@ -1,6 +1,7 @@
 local timings = {}
 
--- timings.lvl3minibossDelay = 169.0
-timings.lvl3minibossDelay = 1.0
+timings.lvl1minibossDelay = 128.0
+timings.lvl2minibossDelay = 196.0
+timings.lvl3minibossDelay = 169.0
 
 return timings

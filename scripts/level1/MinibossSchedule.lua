@@ -2,6 +2,7 @@
 -- It is possible to spawn several minibosses, but
 -- the player defeating one of them will end the level automatically.
 -- it will spawn at the center of the map.
+local timings = require("common.timings")
 
 local function spawn_miniboss(type, delay)
 	return {
@@ -11,5 +12,5 @@ local function spawn_miniboss(type, delay)
 end
 
 MinibossSpawns = {
-	spawn_miniboss("windows", 128.0),
+	spawn_miniboss("windows", timings.lvl1minibossDelay),
 }

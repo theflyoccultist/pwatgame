@@ -20,8 +20,15 @@ public:
     }
 
     if (actorCooldown >= 2.0f) {
-      stats.pos.x -= std::cosf(actorCooldown) * stats.speed * p.dt;
+      stats.pos.x += stats.speed * p.dt * (float)dirX;
+      if (stats.pos.x >= 730.f)
+        dirX = -1;
+      else if (stats.pos.x <= 0)
+        dirX = 1;
       stats.pos.y -= std::sinf(actorCooldown) * stats.speed * p.dt;
     }
   }
+
+private:
+  int dirX = 1;
 };
