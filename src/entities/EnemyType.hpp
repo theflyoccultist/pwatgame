@@ -4,6 +4,7 @@
 
 enum class EnemyType : uint8_t {
   CLANK,
+  CONSTRAINER,
   DUO,
   FRACTAL,
   GODSIP,

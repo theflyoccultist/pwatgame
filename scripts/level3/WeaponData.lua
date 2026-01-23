@@ -26,5 +26,5 @@ Weapons = {
 	make_weapon("straight", 1100, 0.3, 15, 1.6, 14),
 	make_weapon("uzi", 666, 0.13, 25, 2.1, 27),
 	make_weapon("rocket", 400, 0.8, 75, 2, 100),
-	make_weapon("hellfire", 100, 0.1, 60, 2, 100),
+	make_weapon("hellfire", 100, 0.1, 60, 2, 70),
 }

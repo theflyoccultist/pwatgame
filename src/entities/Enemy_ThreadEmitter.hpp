@@ -18,7 +18,7 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update(ShootParams &p, [[maybe_unused]] ProjectileManager &projMan,
+  void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
 
     os.orbitAngle += os.orbitSpeed * p.dt;

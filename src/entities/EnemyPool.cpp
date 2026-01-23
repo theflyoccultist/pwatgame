@@ -1,6 +1,7 @@
 #include "EnemyPool.hpp"
 
 std::array<Texture2D *, 3> Clank::sharedTextures{};
+std::array<Texture2D *, 3> Constrainer::sharedTextures{};
 std::array<Texture2D *, 3> Duo::sharedTextures{};
 std::array<Texture2D *, 3> Fractal::sharedTextures{};
 std::array<Texture2D *, 3> Godsip::sharedTextures{};

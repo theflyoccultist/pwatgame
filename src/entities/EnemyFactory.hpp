@@ -21,6 +21,12 @@ public:
         &assets.loadTexture("../assets/enemies/clank_LOW.png"),
     };
 
+    Constrainer::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/gost_HIGH.png"),
+        &assets.loadTexture("../assets/enemies/gost_MED.png"),
+        &assets.loadTexture("../assets/enemies/gost_LOW.png"),
+    };
+
     Duo::sharedTextures = {
         &assets.loadTexture("../assets/enemies/duo_HIGH.png"),
         &assets.loadTexture("../assets/enemies/duo_MED.png"),
@@ -80,6 +86,9 @@ public:
     switch (type) {
     case EnemyType::CLANK:
       return EnemyPool::getFreeEnemy<Clank>(pos, spec);
+
+    case EnemyType::CONSTRAINER:
+      return EnemyPool::getFreeEnemy<Constrainer>(pos, spec);
 
     case EnemyType::DUO:
       return EnemyPool::getFreeEnemy<Duo>(pos, spec);

@@ -79,6 +79,8 @@ inline WeaponType weaponTypeFromString(std::string_view s) {
 inline EnemyType enemyTypeFromString(std::string_view s) {
   if (s == "clank")
     return EnemyType::CLANK;
+  if (s == "constrainer")
+    return EnemyType::CONSTRAINER;
   if (s == "duo")
     return EnemyType::DUO;
   if (s == "fractal")

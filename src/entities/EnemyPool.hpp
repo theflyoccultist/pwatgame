@@ -2,6 +2,7 @@
 
 #include "EnemySpec.hpp"
 #include "Enemy_Clank.hpp"
+#include "Enemy_Constrainer.hpp"
 #include "Enemy_Duo.hpp"
 #include "Enemy_Fractal.hpp"
 #include "Enemy_Godsip.hpp"
@@ -18,6 +19,7 @@ class EnemyPool {
 private:
   static constexpr int ENEMY_POOL = 350;
   static inline std::array<Clank, ENEMY_POOL> clankPool;
+  static inline std::array<Constrainer, ENEMY_POOL> constrainerPool;
   static inline std::array<Duo, ENEMY_POOL> duoPool;
   static inline std::array<Fractal, ENEMY_POOL> fractalPool;
   static inline std::array<Godsip, ENEMY_POOL> godsipPool;
@@ -49,6 +51,12 @@ template <>
 inline std::array<Clank, EnemyPool::ENEMY_POOL> &
 EnemyPool::poolForType<Clank>() {
   return clankPool;
+}
+
+template <>
+inline std::array<Constrainer, EnemyPool::ENEMY_POOL> &
+EnemyPool::poolForType<Constrainer>() {
+  return constrainerPool;
 }
 
 template <>
