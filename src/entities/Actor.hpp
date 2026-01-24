@@ -135,8 +135,8 @@ public:
   }
 
 protected:
-  const Texture2D *
-  chooseTexture(float ratio, const std::array<Texture2D *, 3> &textures) const {
+  Texture2D *chooseTexture(float ratio,
+                           const std::array<Texture2D *, 3> &textures) const {
     if (textures[0] == nullptr)
       return nullptr;
     if (ratio > 0.66f)
@@ -144,6 +144,19 @@ protected:
     if (ratio > 0.33f)
       return textures[1];
     return textures[2];
+  }
+
+  Texture2D *
+  chooseWallTexture(int choice,
+                    const std::array<Texture2D *, 3> &textures) const {
+    if (textures[0] == nullptr)
+      return nullptr;
+    if (choice == 0)
+      return textures[0];
+    if (choice == 1)
+      return textures[1];
+    else
+      return textures[2];
   }
 
   const Color healthbarColor(float ratio) const {

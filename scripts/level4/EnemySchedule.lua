@@ -9,4 +9,5 @@ EnemySpawns = {
 	{ x = 650, y = 340, delay = 1, type = "constrainer" },
 	{ x = 200, y = 460, delay = 1, type = "constrainer" },
 	{ x = 300, y = 700, delay = 1, type = "constrainer" },
+	{ x = 300, y = 100, delay = 10, type = "wall" },
 }

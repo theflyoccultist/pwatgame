@@ -19,7 +19,7 @@ protected:
     int currentHP;
     int totalHP;
     int contactDmg;
-    // int initialContactDmg;
+    int initialContactDmg;
   };
 
 public:
@@ -37,7 +37,7 @@ public:
     stats.totalHP = spec.totalHP;
     stats.currentHP = stats.totalHP;
     stats.contactDmg = spec.contactDmg;
-    // stats.initialContactDmg = spec.contactDmg;
+    stats.initialContactDmg = spec.contactDmg;
   }
 
   virtual void setTexture() = 0;
@@ -48,15 +48,15 @@ public:
 
     float ratio =
         static_cast<float>(stats.currentHP) / static_cast<float>(stats.totalHP);
-    const Texture2D *tex = chooseTexture(ratio, textures);
+    Texture2D *tex = chooseTexture(ratio, textures);
 
     if (!tex) {
       std::cerr << "Enemy texture missing\n";
       return;
     }
 
-    AssetSystem::instance().drawTexture(const_cast<Texture2D *>(tex),
-                                        stats.pos.x, stats.pos.y, stats.size);
+    AssetSystem::instance().drawTexture(tex, stats.pos.x, stats.pos.y,
+                                        stats.size);
 
     DrawRectangle((int)stats.pos.x + 5, (int)stats.pos.y - 15,
                   (int)((float)stats.size * ratio), 10, healthbarColor(ratio));
@@ -75,8 +75,8 @@ public:
   void activate() { stats.active = true; }
   void deactivate() { stats.active = false; }
 
-  // void deactivateContactDmg() { stats.contactDmg = 0; }
-  // void activateContactDmg() { stats.contactDmg = stats.initialContactDmg; }
+  void deactivateContactDmg() { stats.contactDmg = 0; }
+  void activateContactDmg() { stats.contactDmg = stats.initialContactDmg; }
 
 protected:
   std::array<Texture2D *, 3> textures{};

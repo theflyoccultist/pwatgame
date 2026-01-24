@@ -97,6 +97,8 @@ inline EnemyType enemyTypeFromString(std::string_view s) {
     return EnemyType::SWARMER;
   if (s == "threademitter")
     return EnemyType::THREADEMITTER;
+  if (s == "wall")
+    return EnemyType::WALLED;
   if (s == "zomb")
     return EnemyType::ZOMB;
 
