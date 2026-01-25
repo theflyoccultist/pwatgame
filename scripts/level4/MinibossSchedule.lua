@@ -1,3 +1,5 @@
+local timings = require("common.timings")
+
 local function spawn_miniboss(type, delay)
 	return {
 		type = type,
@@ -6,5 +8,5 @@ local function spawn_miniboss(type, delay)
 end
 
 MinibossSpawns = {
-	spawn_miniboss("rust", 139.0),
+	spawn_miniboss("rust", timings.lvl4minibossDelay),
 }

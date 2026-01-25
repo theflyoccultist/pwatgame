@@ -30,17 +30,17 @@ public:
                                         stats.size);
   }
 
-  void update([[maybe_unused]] ShootParams &p,
-              [[maybe_unused]] ProjectileManager &projMan,
-              float actorCooldown) override {
+  void update(ShootParams &p, [[maybe_unused]] ProjectileManager &projMan,
+              [[maybe_unused]] float actorCooldown) override {
+    wallTimer += p.dt;
     stats.size = 150.0f;
 
-    if (actorCooldown < cs.warningTime) {
+    if (wallTimer < cs.warningTime) {
       textureChoice = 0;
       deactivateContactDmg();
     }
 
-    else if (actorCooldown < cs.warningTime + cs.activeTime) {
+    else if (wallTimer < cs.warningTime + cs.activeTime) {
       textureChoice = 1;
       activateContactDmg();
     } else {
@@ -51,5 +51,6 @@ public:
 private:
   WallState cs = {3.6f, 2.5f};
   int textureChoice;
+  float wallTimer = 0.0f;
   void resetPosition() { stats.pos = stats.initialPos; }
 };

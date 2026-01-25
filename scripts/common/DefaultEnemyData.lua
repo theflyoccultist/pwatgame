@@ -8,4 +8,6 @@ Enemies = {
 	{ type = "swarmer", speed = 70, hp = 40, contactDmg = 4 },
 	{ type = "sniper", speed = 150, hp = 30, contactDmg = 0 },
 	{ type = "zomb", speed = 70, hp = 30, contactDmg = 2 },
+	{ type = "constrainer", speed = 420, hp = 10, contactDmg = 80 },
+	{ type = "wall", speed = 0, hp = 100000, contactDmg = 20 },
 }

@@ -9,5 +9,5 @@ end
 
 MinibossSpawns = {
 	spawn_miniboss("java", timings.lvl3minibossDelay),
-	-- spawn_miniboss("java", 169.0),
+	-- spawn_miniboss("java", 86.0),
 }
