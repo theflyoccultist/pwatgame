@@ -17,6 +17,7 @@ public:
 
   void drawAll();
   void clearAll();
+  void resetTimer() { enemyTimer = 0.0f; }
 
 private:
   static constexpr int ENEMY_POOL = 350;

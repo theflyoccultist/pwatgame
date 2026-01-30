@@ -14,7 +14,9 @@ public:
 
   void clearAllEnemies() {
     world.enemyManager.clearAll();
+    world.enemyManager.resetTimer();
     world.minibossManager.clearAll();
+    world.minibossManager.resetTimer();
   }
 
   void scheduleEnemies(const char *filename);

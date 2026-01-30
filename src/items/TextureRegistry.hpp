@@ -40,6 +40,15 @@ public:
     drinkTextures[DrinkType::SOJU] = &a.loadTexture("../assets/items/soju.png");
 
     drinkTextures[DrinkType::WINE] = &a.loadTexture("../assets/items/wine.png");
+
+    drinkTextures[DrinkType::ESTROGEN] =
+        &a.loadTexture("../assets/items/estrogen.png");
+
+    drinkTextures[DrinkType::SKIRT] =
+        &a.loadTexture("../assets/items/skirt.png");
+
+    drinkTextures[DrinkType::THIGHHIGH] =
+        &a.loadTexture("../assets/items/thighhigh.png");
   }
 
   static Texture2D *get(DrinkType type) { return drinkTextures[type]; }

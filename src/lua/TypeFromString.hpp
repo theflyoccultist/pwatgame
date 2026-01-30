@@ -30,6 +30,12 @@ inline DrinkType drinkTypeFromString(std::string_view s) {
     return DrinkType::SOJU;
   if (s == "wine")
     return DrinkType::WINE;
+  if (s == "estrogen")
+    return DrinkType::ESTROGEN;
+  if (s == "skirt")
+    return DrinkType::SKIRT;
+  if (s == "thighhigh")
+    return DrinkType::THIGHHIGH;
 
   return DrinkType::MONSTER;
 }

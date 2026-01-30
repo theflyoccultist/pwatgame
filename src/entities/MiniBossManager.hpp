@@ -34,6 +34,8 @@ public:
     }
   }
 
+  void resetTimer() { miniBossTimer = 0.0f; }
+
 private:
   float miniBossTimer = 0.0f;
   static constexpr int MINIBOSS_POOL = 10;

@@ -82,5 +82,7 @@ void MusicSystem::stopMusic() {
 
 void MusicSystem::changeMusicVolume(int vol) {
   float volume = static_cast<float>(vol) / 100;
-  (*gameScores)[currentTrack].changeScoreVolume(volume);
+
+  for (auto &score : *gameScores)
+    score.changeScoreVolume(volume);
 }

@@ -61,6 +61,7 @@ void Game::run() {
       break;
 
     case GameState::Restarting: {
+
       if (gameMode == GameModes::LevelSelection) {
         playerManager.resetStatus();
       }

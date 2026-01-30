@@ -15,6 +15,6 @@ Enemies = {
 	make_enemy("godsip", 300, 70, 2),
 	make_enemy("zomb", 70, 40, 7),
 	make_enemy("monitor", 300, 10, 10),
-	make_enemy("constrainer", 420, 10, 80),
-	make_enemy("wall", 0, 100000, 20),
+	make_enemy("constrainer", 420, 10, 20),
+	make_enemy("wall", 0, 100000, 50),
 }

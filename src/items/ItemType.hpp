@@ -16,6 +16,11 @@ enum class DrinkType : uint8_t {
   MONSTER,
   SOJU,
   WINE,
+  // weird to put those in drinks, but just like drinks they give the player
+  // extra HP
+  ESTROGEN,
+  SKIRT,
+  THIGHHIGH,
 };
 
 enum class FoodType : uint8_t {
