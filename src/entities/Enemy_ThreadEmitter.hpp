@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Enemy.hpp"
 #include "EnemyDatabase.hpp"
 #include <array>

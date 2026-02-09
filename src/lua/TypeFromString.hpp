@@ -105,6 +105,8 @@ inline EnemyType enemyTypeFromString(std::string_view s) {
     return EnemyType::THREADEMITTER;
   if (s == "wall")
     return EnemyType::WALLED;
+  if (s == "wallmove")
+    return EnemyType::WALLEDMOVE;
   if (s == "zomb")
     return EnemyType::ZOMB;
 

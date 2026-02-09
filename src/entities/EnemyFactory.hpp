@@ -81,6 +81,12 @@ public:
         &assets.loadTexture("../assets/enemies/wall_appear.png"),
     };
 
+    WalledMove::sharedTextures = {
+        &assets.loadTexture("../assets/enemies/wall_warning.png"),
+        &assets.loadTexture("../assets/enemies/wall_moving.png"),
+        &assets.loadTexture("../assets/enemies/wall_moving.png"),
+    };
+
     Zomb::sharedTextures = {
         &assets.loadTexture("../assets/enemies/zomb_HIGH.png"),
         &assets.loadTexture("../assets/enemies/zomb_MED.png"),
@@ -122,6 +128,9 @@ public:
 
     case EnemyType::WALLED:
       return EnemyPool::getFreeEnemy<Walled>(pos, spec);
+
+    case EnemyType::WALLEDMOVE:
+      return EnemyPool::getFreeEnemy<WalledMove>(pos, spec);
 
     case EnemyType::ZOMB:
       return EnemyPool::getFreeEnemy<Zomb>(pos, spec);

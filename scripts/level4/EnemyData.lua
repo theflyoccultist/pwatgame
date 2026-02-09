@@ -12,9 +12,10 @@ end
 Enemies = {
 	make_enemy("swarmer", 120, 60, 8),
 	make_enemy("sniper", 150, 30, 0),
-	make_enemy("godsip", 300, 70, 2),
+	make_enemy("godsip", 100, 70, 4),
 	make_enemy("zomb", 70, 40, 7),
 	make_enemy("monitor", 300, 10, 10),
 	make_enemy("constrainer", 420, 10, 20),
 	make_enemy("wall", 0, 100000, 50),
+	make_enemy("wallmove", 100, 100000, 50),
 }

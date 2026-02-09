@@ -12,6 +12,7 @@
 #include "Enemy_Swarmer.hpp"
 #include "Enemy_ThreadEmitter.hpp"
 #include "Enemy_Walled.hpp"
+#include "Enemy_WalledMove.hpp"
 #include "Enemy_Zomb.hpp"
 #include <array>
 #include <raylib.h>
@@ -30,6 +31,7 @@ private:
   static inline std::array<Swarmer, ENEMY_POOL> swarmerPool;
   static inline std::array<ThreadEmitter, ENEMY_POOL> tePool;
   static inline std::array<Walled, ENEMY_POOL> wallPool;
+  static inline std::array<WalledMove, ENEMY_POOL> wallmovePool;
   static inline std::array<Zomb, ENEMY_POOL> zombPool;
 
 public:
@@ -111,6 +113,12 @@ template <>
 inline std::array<Walled, EnemyPool::ENEMY_POOL> &
 EnemyPool::poolForType<Walled>() {
   return wallPool;
+}
+
+template <>
+inline std::array<WalledMove, EnemyPool::ENEMY_POOL> &
+EnemyPool::poolForType<WalledMove>() {
+  return wallmovePool;
 }
 
 template <>

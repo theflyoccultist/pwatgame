@@ -20,13 +20,13 @@ public:
 
     if (isX) {
       stats.pos.x += stats.speed * p.dt * dirX;
-      if (stats.pos.x >= 730.f)
+      if (stats.pos.x >= ((float)GetScreenWidth() - stats.size))
         dirX = -1;
       else if (stats.pos.x <= 0)
         dirX = 1;
     } else {
       stats.pos.y += stats.speed * p.dt * dirY;
-      if (stats.pos.y >= 730.f)
+      if (stats.pos.y >= ((float)GetScreenHeight() - stats.size))
         dirY = -1;
       else if (stats.pos.y <= 0)
         dirY = 1;
