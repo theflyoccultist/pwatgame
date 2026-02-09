@@ -35,7 +35,7 @@ public:
   void update([[maybe_unused]] ShootParams &p,
               [[maybe_unused]] ProjectileManager &projMan,
               float actorCooldown) override {
-    stats.size = 150.0f;
+    stats.size = 100.0f;
 
     if (actorCooldown < cs.warningTime) {
       textureChoice = 0;

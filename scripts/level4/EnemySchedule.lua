@@ -1,3 +1,5 @@
+local spawn = require("common.enemy_spawn_patterns")
+
 -- enemy x and y position, type, and delay before spawning can be scripted.
 
 EnemySpawns = {
@@ -32,11 +34,11 @@ EnemySpawns = {
 
 	{ x = 691, y = 712, delay = 21, type = "godsip" },
 	{ x = 188, y = 712, delay = 21, type = "godsip" },
-
-	{ x = 109, y = 452, delay = 24, type = "wall" },
-	{ x = 180, y = 450, delay = 24, type = "wall" },
-	{ x = 310, y = 455, delay = 24, type = "wall" },
-	{ x = 522, y = 449, delay = 24, type = "wall" },
-
-	{ x = 10, y = 10, delay = 26, type = "wallmove" },
+	--	{ x = 10, y = 10, delay = 26, type = "wallmove" },
 }
+
+spawn.append(EnemySpawns, spawn.horizontal_walls(-100, 300, 26, 0.1))
+spawn.append(EnemySpawns, spawn.vertical_walls(400, -100, 26.8, 0.2))
+spawn.append(EnemySpawns, spawn.vertical_walls(200, 300, 27.4, 0.4))
+spawn.append(EnemySpawns, spawn.horizontal_walls(-100, 100, 29.6, 0.2))
+spawn.append(EnemySpawns, spawn.vertical_walls(500, -100, 31.4, 0.2))
