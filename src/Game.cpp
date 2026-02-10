@@ -23,6 +23,7 @@ void Game::run() {
 
   lua.initLua();
   LevelLoader levelLoader(wd, ed, md, sm, ss, is, ps);
+  levelLoader.initDatabase();
   levelLoader.loadEntityTextures();
 
   PlayerManager playerManager(world);

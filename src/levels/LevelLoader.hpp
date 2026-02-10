@@ -19,6 +19,10 @@ public:
         scheduleManager(sm), spawnScheduler(ss), itemScheduler(is),
         projectileScheduler(ps) {}
 
+  void initDatabase() {
+    weaponDatabase.loadFromLua("../scripts/common/DefaultWeaponData.lua");
+  }
+
   void loadEntityTextures() {
     spawnScheduler.loadEnemyTextures();
     spawnScheduler.loadMiniBossTextures();
