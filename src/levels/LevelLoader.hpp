@@ -19,11 +19,6 @@ public:
         scheduleManager(sm), spawnScheduler(ss), itemScheduler(is),
         projectileScheduler(ps) {}
 
-  void initDatabase() {
-    weaponDatabase.loadFromLua("../scripts/common/DefaultWeaponData.lua");
-    std::cout << "Weapon database initialized with defaults\n";
-  }
-
   void loadEntityTextures() {
     spawnScheduler.loadEnemyTextures();
     spawnScheduler.loadMiniBossTextures();
