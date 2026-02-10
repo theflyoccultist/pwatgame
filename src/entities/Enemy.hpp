@@ -15,7 +15,7 @@ protected:
     Vector2 pos{};
     Vector2 initialPos{};
     float speed;
-    float size = 70.0f;
+    float size;
     int currentHP;
     int totalHP;
     int contactDmg;
@@ -34,6 +34,7 @@ public:
     stats.pos = startPos;
     stats.initialPos = startPos;
     stats.speed = spec.speed;
+    stats.size = spec.size;
     stats.totalHP = spec.totalHP;
     stats.currentHP = stats.totalHP;
     stats.contactDmg = spec.contactDmg;
