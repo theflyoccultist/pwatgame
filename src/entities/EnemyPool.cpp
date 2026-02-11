@@ -10,6 +10,4 @@ std::array<Texture2D *, 3> Monitor::sharedTextures{};
 std::array<Texture2D *, 3> Sniper::sharedTextures{};
 std::array<Texture2D *, 3> Swarmer::sharedTextures{};
 std::array<Texture2D *, 3> ThreadEmitter::sharedTextures{};
-std::array<Texture2D *, 3> Walled::sharedTextures{};
-std::array<Texture2D *, 3> WalledMove::sharedTextures{};
 std::array<Texture2D *, 3> Zomb::sharedTextures{};

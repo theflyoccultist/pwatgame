@@ -97,6 +97,7 @@ void Game::run() {
       ps.updateProjectiles(deltaTime);
       is.updateItems(pwatState);
       ss.updateEnemies(deltaTime, pwatState);
+      ss.updateWalls(deltaTime, pwatState);
 
       if (ss.updateMiniBoss(deltaTime, pwatState))
         Game::currentState = GameState::Won;

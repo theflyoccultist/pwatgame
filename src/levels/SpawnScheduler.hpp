@@ -9,8 +9,8 @@ public:
       : lua(lua), world(w), sm(sm) {}
 
   void loadEnemyTextures() { world.enemyManager.init(); }
-
   void loadMiniBossTextures() { world.minibossManager.init(); }
+  void loadWallTextures() { world.wallManager.init(); }
 
   void clearAllEnemies() {
     world.enemyManager.clearAll();
@@ -19,7 +19,13 @@ public:
     world.minibossManager.resetTimer();
   }
 
+  void clearAllWalls() {
+    world.wallManager.clearAll();
+    world.wallManager.resetTimer();
+  }
+
   void scheduleEnemies(const char *filename);
+  void scheduleWalls(const char *filename);
   void scheduleMiniBoss(const char *filename);
 
   void updateEnemies(float deltaTime, const PlayerState &pwatState) {
@@ -35,6 +41,11 @@ public:
 
     world.minibossManager.drawAll();
     return false;
+  }
+
+  void updateWalls(float deltaTime, const PlayerState &pwatState) {
+    world.wallManager.updateAll(deltaTime, pwatState);
+    world.wallManager.drawAll();
   }
 
 private:

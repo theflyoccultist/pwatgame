@@ -19,7 +19,6 @@ protected:
     int currentHP;
     int totalHP;
     int contactDmg;
-    int initialContactDmg;
   };
 
 public:
@@ -38,7 +37,6 @@ public:
     stats.totalHP = spec.totalHP;
     stats.currentHP = stats.totalHP;
     stats.contactDmg = spec.contactDmg;
-    stats.initialContactDmg = spec.contactDmg;
   }
 
   virtual void setTexture() = 0;
@@ -75,9 +73,6 @@ public:
   bool isActive() { return stats.active; }
   void activate() { stats.active = true; }
   void deactivate() { stats.active = false; }
-
-  void deactivateContactDmg() { stats.contactDmg = 0; }
-  void activateContactDmg() { stats.contactDmg = stats.initialContactDmg; }
 
 protected:
   std::array<Texture2D *, 3> textures{};

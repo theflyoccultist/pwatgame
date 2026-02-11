@@ -25,6 +25,7 @@ public:
 
   void loadEntityTextures() {
     spawnScheduler.loadEnemyTextures();
+    spawnScheduler.loadWallTextures();
     spawnScheduler.loadMiniBossTextures();
     itemScheduler.loadItemTextures();
     projectileScheduler.loadProjectileTextures();
@@ -35,6 +36,7 @@ public:
     projectileScheduler.clearAllProjectiles();
     itemScheduler.clearAllItems();
     spawnScheduler.clearAllEnemies();
+    spawnScheduler.clearAllWalls();
 
     minibossDatabase.loadFromLua("../scripts/common/MinibossData.lua");
 
@@ -69,6 +71,7 @@ public:
       spawnScheduler.scheduleEnemies("../scripts/level4/EnemySchedule.lua");
       itemScheduler.scheduleItems("../scripts/level4/ItemSchedule.lua");
       spawnScheduler.scheduleMiniBoss("../scripts/level4/MinibossSchedule.lua");
+      spawnScheduler.scheduleWalls("../scripts/level4/WallSchedule.lua");
       break;
 
     default:

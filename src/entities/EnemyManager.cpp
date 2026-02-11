@@ -36,13 +36,12 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     bool touchPlayer =
         checkPlayerInteraction(player.position, (float)player.playerSize,
                                e->stats.pos, (float)e->stats.size);
-
-    Vector2 bulletStartPos = {e->stats.pos.x + (float)e->stats.size / 2,
-                              e->stats.pos.y + (float)e->stats.size / 2};
-
     if (touchPlayer) {
       player.tryApplyPlayerDmg(e->stats.contactDmg);
     }
+
+    Vector2 bulletStartPos = {e->stats.pos.x + (float)e->stats.size / 2,
+                              e->stats.pos.y + (float)e->stats.size / 2};
 
     p.startPos = bulletStartPos;
     p.playerPos = player.position;

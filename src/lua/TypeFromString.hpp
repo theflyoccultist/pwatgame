@@ -2,6 +2,8 @@
 
 #include "../entities/EnemyType.hpp"
 #include "../entities/MiniBossType.hpp"
+#include "../entities/WallAxis.hpp"
+#include "../entities/WallType.hpp"
 #include "../items/ItemType.hpp"
 #include "../projectiles/ProjectileType.hpp"
 #include <string_view>
@@ -103,10 +105,6 @@ inline EnemyType enemyTypeFromString(std::string_view s) {
     return EnemyType::SWARMER;
   if (s == "threademitter")
     return EnemyType::THREADEMITTER;
-  if (s == "wall")
-    return EnemyType::WALLED;
-  if (s == "wallmove")
-    return EnemyType::WALLEDMOVE;
   if (s == "zomb")
     return EnemyType::ZOMB;
 
@@ -124,6 +122,24 @@ inline MiniBossType mbTypeFromString(std::string_view s) {
     return MiniBossType::RUST;
 
   return MiniBossType::WINDOWS;
+}
+
+inline WallType wallTypeFromString(std::string_view s) {
+  if (s == "immobile")
+    return WallType::IMMOBILE;
+  if (s == "moving")
+    return WallType::MOVING;
+
+  return WallType::IMMOBILE;
+}
+
+inline MoveAxis wallAxisFromString(std::string_view s) {
+  if (s == "horizontal")
+    return MoveAxis::Horizontal;
+  if (s == "vertical")
+    return MoveAxis::Vertical;
+
+  return MoveAxis::Vertical;
 }
 
 inline ProjectileType projTypeFromString(std::string_view s) {
