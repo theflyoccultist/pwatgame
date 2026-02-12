@@ -44,7 +44,8 @@ public:
   }
 
   void updateWalls(float deltaTime, const PlayerState &pwatState) {
-    world.wallManager.updateAll(deltaTime, pwatState);
+    auto bullets = world.projectileManager.view();
+    world.wallManager.updateAll(deltaTime, pwatState, bullets);
     world.wallManager.drawAll();
   }
 

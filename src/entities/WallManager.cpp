@@ -1,6 +1,7 @@
 #include "WallManager.hpp"
 #include "../collisions/CollisionDetection.hpp"
 #include <cmath>
+#include <span>
 
 void WallManager::init() { factory.loadAssets(); }
 
@@ -18,7 +19,8 @@ void WallManager::spawnWall(WallType type, const Vector2 &pos,
   }
 }
 
-void WallManager::updateAll(float delta, const PlayerState &player) {
+void WallManager::updateAll(float delta, const PlayerState &player,
+                            std::span<Projectile *const> bullets) {
   using namespace Collisions;
   wallTimer += delta;
   float wallCooldown = std::fmodf(wallTimer, 8.0f);
@@ -34,6 +36,15 @@ void WallManager::updateAll(float delta, const PlayerState &player) {
     }
 
     w->update({delta, wallCooldown});
+
+    for (auto &b : bullets) {
+      if (!b || !b->isActive())
+        continue;
+
+      if (checkBulletInteraction(b->stats.pos, b->stats.size, w->stats.pos,
+                                 w->stats.size))
+        b->expire();
+    }
   }
 
   for (auto &w : walls) {

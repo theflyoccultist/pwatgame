@@ -20,9 +20,9 @@ Weapons = {
 	make_weapon("recon", 300, 0.22, 35, 3, 3),
 
 	-- Player projectiles
-	make_weapon("straight", 1600, 0.3, 10, 1.6, 100),
+	make_weapon("straight", 1600, 0.3, 15, 1.6, 100),
 	make_weapon("uzi", 1100, 0.18, 6, 2.1, 80),
-	make_weapon("rocket", 1200, 0.3, 25, 2, 400),
+	make_weapon("rocket", 1200, 0.3, 55, 2, 400),
 	make_weapon("hellfire", 100, 0.1, 60, 2, 100),
 	make_weapon("grenade", 900, 2.0, 150, 3, 300),
 }

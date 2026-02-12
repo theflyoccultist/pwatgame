@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../player/PlayerState.hpp"
+#include "../projectiles/Projectile.hpp"
 #include "WallFactory.hpp"
 #include "WallSpec.hpp"
 #include "WallType.hpp"
@@ -16,7 +17,8 @@ public:
   void init();
   void spawnWall(WallType type, const Vector2 &pos, const WallSpec &spec);
 
-  void updateAll(float delta, const PlayerState &player);
+  void updateAll(float delta, const PlayerState &player,
+                 std::span<Projectile *const> bullets);
   void drawAll();
   void clearAll();
 

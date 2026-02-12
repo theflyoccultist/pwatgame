@@ -33,10 +33,12 @@ public:
     else if (p.wallCooldown < stats.warningTime + stats.activeTime) {
       textureChoice = 1;
       activateContactDmg();
+    } else {
+      deactivateContactDmg();
+      deactivateWall();
     }
   }
 
 private:
-  void resetPosition() { stats.pos = stats.initialPos; }
   int dir = 1;
 };
