@@ -49,7 +49,7 @@ public:
       });
       break;
     case LevelID::Level4:
-      sm.scheduler.schedule(139.0f, [&] {
+      sm.scheduler.schedule(116.0f, [&] {
         audio.music->stopMusic();
         audio.music->playLevel4BossMusic();
       });

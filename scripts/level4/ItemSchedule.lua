@@ -10,6 +10,10 @@ DrinkSpawns = {
 	{ x = 150, y = 700, delay = 24.0, type = "estrogen", hpBonus = 50 },
 	{ x = 650, y = 650, delay = 24.0, type = "skirt", hpBonus = 20 },
 	{ x = 260, y = 680, delay = 24.0, type = "thighhigh", hpBonus = 20 },
+	{ x = 660, y = 664, delay = 48.3, type = "monster", hpBonus = 150 },
+	{ x = 694, y = 666, delay = 48.3, type = "estrogen", hpBonus = 70 },
+	{ x = 555, y = 459, delay = 48.4, type = "estrogen", hpBonus = 56 },
+	{ x = 701, y = 699, delay = 48.6, type = "thighhigh", hpBonus = 88 },
 }
 
 WeaponSpawns = {

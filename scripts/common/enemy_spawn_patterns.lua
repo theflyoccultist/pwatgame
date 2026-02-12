@@ -51,7 +51,7 @@ function M.swarm(type, count, start_x, start_y, dx, dy, delay, delay_step)
 	return t
 end
 
-function M.zomb_chaos(count, delay, delay_step)
+function M.zomb_chaos(type, count, delay, delay_step)
 	local t = {}
 	delay_step = delay_step or 0
 
@@ -64,7 +64,7 @@ function M.zomb_chaos(count, delay, delay_step)
 			x = x,
 			y = y,
 			delay = delay,
-			type = "zomb",
+			type = type,
 		}
 	end
 

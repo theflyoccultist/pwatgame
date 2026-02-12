@@ -24,14 +24,32 @@ EnemySpawns = {
 
 	{ x = 691, y = 712, delay = 21, type = "godsip" },
 	{ x = 188, y = 712, delay = 21, type = "godsip" },
-	--	{ x = 10, y = 10, delay = 26, type = "wallmove" },
 
 	{ x = 300, y = 300, delay = 35, type = "constrainer" },
 	{ x = 320, y = 480, delay = 35, type = "constrainer" },
 	{ x = 10, y = 510, delay = 35, type = "constrainer" },
 	{ x = 120, y = 190, delay = 35, type = "constrainer" },
+
+	{ x = 300, y = 300, delay = 56, type = "constrainer" },
+	{ x = 320, y = 480, delay = 56, type = "constrainer" },
+	{ x = 10, y = 510, delay = 56, type = "constrainer" },
+	{ x = 120, y = 190, delay = 56, type = "constrainer" },
+	{ x = 650, y = 340, delay = 56, type = "constrainer" },
+	{ x = 200, y = 460, delay = 56, type = "constrainer" },
+	{ x = 300, y = 700, delay = 56, type = "constrainer" },
+
+	{ x = 300, y = 300, delay = 64, type = "constrainer" },
+	{ x = 320, y = 480, delay = 64, type = "constrainer" },
+	{ x = 10, y = 510, delay = 64, type = "constrainer" },
+	{ x = 120, y = 190, delay = 64, type = "constrainer" },
+	{ x = 650, y = 340, delay = 64, type = "constrainer" },
+	{ x = 200, y = 460, delay = 64, type = "constrainer" },
+	{ x = 300, y = 700, delay = 64, type = "constrainer" },
 }
 
 -- function M.swarm(type, count, start_x, start_y, dx, dy, delay, delay_step)
 spawn.append(EnemySpawns, spawn.swarm("sniper", 5, 512, 24, 60, 60, 17, 0))
 spawn.append(EnemySpawns, spawn.swarm("sniper", 5, 69, 600, 39, 39, 31, 0))
+spawn.append(EnemySpawns, spawn.swarm("swarmer", 69, 10, 10, 10, 7, 54, 0.03))
+spawn.append(EnemySpawns, spawn.swarm("sniper", 69, 710, 0, -4, 7, 64, 0.03))
+spawn.append(EnemySpawns, spawn.zomb_chaos("godsip", 56, 74, 0.03))
