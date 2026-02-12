@@ -45,6 +45,11 @@ EnemySpawns = {
 	{ x = 650, y = 340, delay = 64, type = "constrainer" },
 	{ x = 200, y = 460, delay = 64, type = "constrainer" },
 	{ x = 300, y = 700, delay = 64, type = "constrainer" },
+
+	{ x = 210, y = 100, delay = 93, type = "duo" },
+	{ x = 640, y = 150, delay = 93, type = "duo" },
+	{ x = 180, y = 640, delay = 93, type = "duo" },
+	{ x = 400, y = 100, delay = 99, type = "fractal" },
 }
 
 -- function M.swarm(type, count, start_x, start_y, dx, dy, delay, delay_step)

@@ -170,6 +170,46 @@ WallSpawns = {
 		contactDmg = 20,
 		delay = 40,
 	},
+	{
+		x = 512,
+		y = 212,
+		type = "immobile",
+		size = 81,
+		warningTime = 3.6,
+		activeTime = 3.6,
+		contactDmg = 30,
+		delay = 88,
+	},
+	{
+		x = 600,
+		y = 616,
+		type = "immobile",
+		size = 88,
+		warningTime = 3.6,
+		activeTime = 3.6,
+		contactDmg = 30,
+		delay = 88,
+	},
+	{
+		x = 128,
+		y = 600,
+		type = "immobile",
+		size = 99,
+		warningTime = 3.6,
+		activeTime = 3.6,
+		contactDmg = 30,
+		delay = 88,
+	},
+	{
+		x = 499,
+		y = 350,
+		type = "immobile",
+		size = 177,
+		warningTime = 3.6,
+		activeTime = 3.6,
+		contactDmg = 30,
+		delay = 88,
+	},
 }
 
 wall.append(WallSpawns, wall.horizontal_walls(-100, 300, 26, 0.1))
@@ -180,5 +220,15 @@ wall.append(WallSpawns, wall.horizontal_walls(-100, 100, 27.4, 0.2))
 wall.append(WallSpawns, wall.vertical_walls(500, -100, 32, 0))
 wall.append(WallSpawns, wall.horizontal_walls(-100, 300, 32.5, 0.2))
 wall.append(WallSpawns, wall.vertical_walls(300, -100, 32, 0.3))
+
 wall.append(WallSpawns, wall.moving_horizontal_walls(0, 0, 40))
 wall.append(WallSpawns, wall.moving_vertical_walls(0, 0, 48))
+wall.append(WallSpawns, wall.moving_horizontal_walls(120, 100, 48))
+
+wall.append(WallSpawns, wall.horizontal_walls(100, 350, 80, 0.5))
+wall.append(WallSpawns, wall.vertical_walls(400, -100, 80, 0.2))
+wall.append(WallSpawns, wall.horizontal_walls(300, 600, 80.5, 0.35))
+
+wall.append(WallSpawns, wall.moving_horizontal_walls(134, 300, 90))
+wall.append(WallSpawns, wall.moving_vertical_walls(180, 20, 90))
+wall.append(WallSpawns, wall.moving_horizontal_walls(120, 100, 90))

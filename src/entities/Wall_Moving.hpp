@@ -26,13 +26,13 @@ public:
       dir = 1;
 
     if (p.wallCooldown < stats.warningTime) {
-      textureChoice = 0;
       deactivateContactDmg();
+      textureChoice = 0;
     }
 
     else if (p.wallCooldown < stats.warningTime + stats.activeTime) {
-      textureChoice = 1;
       activateContactDmg();
+      textureChoice = 1;
     } else {
       deactivateContactDmg();
       deactivateWall();
