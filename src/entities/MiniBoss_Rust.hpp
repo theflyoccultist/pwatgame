@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MiniBoss.hpp"
+#include "MiniBossDatabase.hpp"
 
 class Rust : public MiniBoss {
 public:
@@ -9,9 +10,12 @@ public:
 
   void setTexture() override { textures = sharedTextures; }
 
-  void update([[maybe_unused]] ShootParams &p,
-              [[maybe_unused]] ProjectileManager &projMan,
+  void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
-    stats.pos = {stats.pos.x, stats.pos.y + (sinf(actorCooldown) * .25f)};
+    if (actorCooldown <= 4.0f) {
+      p.type = ProjectileType::LONGRANGE;
+      p.spec = MiniBossDatabase::getWeaponSpec(p.type);
+      shootTowardsPlayer(projMan, p);
+    }
   }
 };

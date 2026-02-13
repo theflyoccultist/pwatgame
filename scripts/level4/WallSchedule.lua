@@ -235,3 +235,32 @@ wall.append(WallSpawns, wall.moving_horizontal_walls(120, 100, 90))
 
 wall.append(WallSpawns, wall.moving_horizontal_walls(-100, -100, 105))
 wall.append(WallSpawns, wall.moving_horizontal_walls(400, -100, 105))
+
+-- During miniboss
+wall.append(WallSpawns, wall.horizontal_walls(0, 0, 114, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 700, 114, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(0, -100, 114, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(700, -100, 114, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 100, 114, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 600, 114, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(100, -100, 114, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(600, -100, 114, 0.1))
+
+wall.append(WallSpawns, wall.horizontal_walls(0, 0, 130, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 700, 130, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(0, -100, 130, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(700, -100, 130, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 100, 130, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 600, 130, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(100, -100, 130, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(600, -100, 130, 0.1))
+
+wall.append(WallSpawns, wall.vertical_walls(0, -100, 146, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(700, -100, 146, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(100, -100, 146, 0.1))
+wall.append(WallSpawns, wall.vertical_walls(600, -100, 146, 0.1))
+
+wall.append(WallSpawns, wall.horizontal_walls(0, 0, 162, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 700, 162, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 100, 162, 0.1))
+wall.append(WallSpawns, wall.horizontal_walls(0, 600, 162, 0.1))

@@ -12,10 +12,10 @@ FoodSpawns = {
 }
 
 DrinkSpawns = {
-	-- for cheating and testing
+	-- uncomment for cheating and testing
 	{ x = 450, y = 550, delay = 0.0, type = "soju", hpBonus = 20000 },
-	-- the honest version
-	-- { x = 450, y = 550, delay = 0.0, type = "soju", hpBonus = 50 },
+
+	{ x = 250, y = 650, delay = 0.0, type = "soju", hpBonus = 50 },
 	{ x = 150, y = 700, delay = 24.0, type = "estrogen", hpBonus = 50 },
 	{ x = 650, y = 650, delay = 24.0, type = "skirt", hpBonus = 20 },
 	{ x = 260, y = 680, delay = 24.0, type = "thighhigh", hpBonus = 20 },
@@ -35,6 +35,13 @@ DrinkSpawns = {
 	{ x = 348, y = 619, delay = 104.6, type = "monster", hpBonus = 80 },
 	{ x = 199, y = 309, delay = 104.6, type = "monster", hpBonus = 80 },
 	{ x = 701, y = 399, delay = 104.6, type = "monster", hpBonus = 80 },
+
+	{ x = 410, y = 289, delay = 111, type = "thighhigh", hpBonus = 70 },
+	{ x = 10, y = 489, delay = 111, type = "thighhigh", hpBonus = 70 },
+	{ x = 127, y = 701, delay = 111, type = "thighhigh", hpBonus = 70 },
+	{ x = 348, y = 619, delay = 111, type = "thighhigh", hpBonus = 70 },
+	{ x = 199, y = 309, delay = 111, type = "thighhigh", hpBonus = 70 },
+	{ x = 701, y = 399, delay = 111, type = "thighhigh", hpBonus = 70 },
 }
 
 WeaponSpawns = {
