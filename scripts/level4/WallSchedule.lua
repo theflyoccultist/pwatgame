@@ -232,3 +232,6 @@ wall.append(WallSpawns, wall.horizontal_walls(300, 600, 80.5, 0.35))
 wall.append(WallSpawns, wall.moving_horizontal_walls(134, 300, 90))
 wall.append(WallSpawns, wall.moving_vertical_walls(180, 20, 90))
 wall.append(WallSpawns, wall.moving_horizontal_walls(120, 100, 90))
+
+wall.append(WallSpawns, wall.moving_horizontal_walls(-100, -100, 105))
+wall.append(WallSpawns, wall.moving_horizontal_walls(400, -100, 105))

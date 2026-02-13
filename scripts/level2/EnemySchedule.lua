@@ -14,11 +14,9 @@ EnemySpawns = {
 	{ x = 400, y = 100, delay = 59, type = "miku" },
 }
 
-spawn.append(EnemySpawns, spawn.zomb_chaos(10, 0))
+spawn.append(EnemySpawns, spawn.zomb_chaos("zomb", 10, 0))
 spawn.append(EnemySpawns, spawn.monitor_circle(18))
-spawn.append(EnemySpawns, spawn.zomb_chaos(10, 32))
+spawn.append(EnemySpawns, spawn.zomb_chaos("zomb", 10, 32))
 spawn.append(EnemySpawns, spawn.monitor_circle(41))
 spawn.append(EnemySpawns, spawn.godsip_cardinal(49))
 spawn.append(EnemySpawns, spawn.swarm("sniper", 8, 690, 595, -50, -53, 59, 2))
-
--- todo : add new enemy type around 59 seconds
