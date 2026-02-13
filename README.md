@@ -4,6 +4,8 @@ My first attempt at making a game, perhaps the start of a rabbit hole into graph
 
 You will play as PwatPwat, a cute blob cat plush who needs to claim her throne as the cutest one ever! But some jealous enemies are getting on your way. Fight your way throughout different levels, refill your health with drinks, and refill your ammo with food, scattered across the map. Discover different weapons to use and fight different, equally evil mini bosses.
 
+![Preview](./assets/game.png)
+
 ## Overview:
 
 - **Game Modes**: 
@@ -20,7 +22,7 @@ You will play as PwatPwat, a cute blob cat plush who needs to claim her throne a
 
 - **Terminal logging for debugging during development**: along with the default Raylib logging, I have also added my own logging to be able to quickly troubleshoot any issues.
 
-- **Usage of CMake as a build tool**: for better multi platform compatibility and reliable compilation.
+- **Usage of CMake as a build tool**: for better multi platform compatibility and reliable compilation. Raylib and lua dependencies are also handled by CMake.
 
 ## Concepts for levels:
 
