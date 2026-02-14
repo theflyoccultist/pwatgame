@@ -13,6 +13,7 @@ end
 
 Weapons = {
 	-- Miniboss projectiles
+	make_weapon("executable", 450, 1.8, 40, 2, 10),
 
 	-- Enemy projectiles
 	make_weapon("longrange", 400, 3.0, 25, 3, 5),
@@ -21,8 +22,7 @@ Weapons = {
 
 	-- Player projectiles
 	make_weapon("straight", 1600, 0.3, 15, 1.6, 100),
-	make_weapon("uzi", 1100, 0.18, 10, 2.1, 80),
+	make_weapon("uzi", 1100, 0.18, 18, 2.1, 80),
 	make_weapon("rocket", 1200, 0.3, 55, 2, 400),
-	make_weapon("hellfire", 100, 0.1, 60, 2, 100),
-	make_weapon("grenade", 700, 0.4, 180, 4, 1000),
+	make_weapon("grenade", 700, 0.4, 110, 4, 1000),
 }

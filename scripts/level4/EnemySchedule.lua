@@ -60,7 +60,7 @@ spawn.append(EnemySpawns, spawn.swarm("sniper", 69, 710, 0, -4, 7, 64, 0.03))
 spawn.append(EnemySpawns, spawn.zomb_chaos("godsip", 56, 74, 0.03))
 
 -- During miniboss
-spawn.append(EnemySpawns, spawn.swarm("swarmer", 69, 10, 10, 10, 0, 119, 0.03))
-spawn.append(EnemySpawns, spawn.swarm("swarmer", 69, 750, 750, -10, 0, 119, 0.03))
-spawn.append(EnemySpawns, spawn.swarm("godsip", 69, 10, 10, 10, 0, 127, 0.03))
-spawn.append(EnemySpawns, spawn.swarm("godsip", 69, 750, 750, -10, 0, 127, 0.03))
+-- spawn.append(EnemySpawns, spawn.swarm("swarmer", 69, 10, 10, 10, 0, 119, 0.03))
+-- spawn.append(EnemySpawns, spawn.swarm("swarmer", 69, 750, 750, -10, 0, 119, 0.03))
+-- spawn.append(EnemySpawns, spawn.swarm("godsip", 69, 10, 10, 10, 0, 127, 0.03))
+-- spawn.append(EnemySpawns, spawn.swarm("godsip", 69, 750, 750, -10, 0, 127, 0.03))

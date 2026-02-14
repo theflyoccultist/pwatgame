@@ -12,5 +12,5 @@ MiniBosses = {
 	make_miniboss("windows", 200, 3500),
 	make_miniboss("lisp", 80, 1300),
 	make_miniboss("java", 150, 4850),
-	make_miniboss("rust", 150, 4000),
+	make_miniboss("rust", 150, 8000),
 }

@@ -31,6 +31,14 @@ private:
 
   const bool isX = Random::chance(.5f);
 
+  // locking pattern
+  Vector2 storedDir;
+  bool hasLock = false;
+
+  // spiral pattern
+  float spiralAngle = 0.0f;
+  int angularSpeed = 90;
+
 public:
   virtual ~Actor() = default;
 
@@ -76,6 +84,19 @@ public:
 
     for (int i = 0; i < Random::rangeInt(2, 10); ++i) {
       Vector2 dir = {cosf((float)i * step), sinf((float)i * step)};
+      shoot(pm, p, dir);
+    }
+  }
+
+  void shootSpiral(ProjectileManager &pm, const ShootParams &p) {
+    spiralAngle += (float)angularSpeed * p.dt;
+
+    float step = 2 * PI / 4;
+
+    for (int i = 0; i < 4; i++) {
+      float angle = spiralAngle + (float)i * step;
+
+      Vector2 dir = {cosf(angle), sinf(angle)};
       shoot(pm, p, dir);
     }
   }
@@ -132,6 +153,26 @@ public:
       pm.spawn({Faction::Enemy, p.type, p.startPos, direction, p.spec});
       shootTimer = p.spec.fireRate;
     }
+  }
+
+  void lockOn(const ShootParams &p) {
+    Vector2 direction = {p.playerPos.x - p.startPos.x,
+                         p.playerPos.y - p.startPos.y};
+
+    float len =
+        std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (len != 0) {
+      direction.x /= len;
+      direction.y /= len;
+    }
+
+    storedDir = direction;
+    hasLock = true;
+  }
+
+  void lockedTarget(ProjectileManager &pm, const ShootParams &p) {
+    if (hasLock)
+      shoot(pm, p, storedDir);
   }
 
 protected:
