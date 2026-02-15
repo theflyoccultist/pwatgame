@@ -171,6 +171,8 @@ inline ProjectileType projTypeFromString(std::string_view s) {
     return ProjectileType::UPDATE;
   if (s == "uzi")
     return ProjectileType::UZI;
+  if (s == "warning")
+    return ProjectileType::WARNING;
 
   return ProjectileType::ROCKET;
 }

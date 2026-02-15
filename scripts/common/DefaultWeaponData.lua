@@ -9,6 +9,7 @@ Weapons = {
 	{ type = "lambda", speed = 700, fireRate = 0.55, size = 50, lifetime = 20, damage = 9 },
 	{ type = "paren", speed = 700, fireRate = 0.55, size = 50, lifetime = 20, damage = 9 },
 	{ type = "elixir", speed = 1000, fireRate = 0.30, size = 54, lifetime = 3, damage = 6 },
+	{ type = "warning", speed = 450, fireRate = 0.5, size = 40, lifetime = 2, damage = 0 },
 
 	-- Enemy projectiles
 	{ type = "longrange", speed = 400, firetate = 2.3, size = 21, lifetime = 3, damage = 8 },

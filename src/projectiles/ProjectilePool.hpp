@@ -14,6 +14,7 @@
 #include "Proj_Straight.hpp"
 #include "Proj_Update.hpp"
 #include "Proj_Uzi.hpp"
+#include "Proj_Warning.hpp"
 #include "WeaponSpec.hpp"
 #include <array>
 
@@ -34,6 +35,7 @@ private:
   static inline std::array<Straight, BULLET_POOL> straightPool;
   static inline std::array<Update, BULLET_POOL> updatePool;
   static inline std::array<Uzi, BULLET_POOL> uziPool;
+  static inline std::array<Warning, BULLET_POOL> warningPool;
 
 public:
   template <typename T> static std::array<T, BULLET_POOL> &poolForType();
@@ -135,4 +137,10 @@ template <>
 inline std::array<Uzi, ProjectilePool::BULLET_POOL> &
 ProjectilePool::poolForType<Uzi>() {
   return uziPool;
+}
+
+template <>
+inline std::array<Warning, ProjectilePool::BULLET_POOL> &
+ProjectilePool::poolForType<Warning>() {
+  return warningPool;
 }

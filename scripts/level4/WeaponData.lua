@@ -14,6 +14,7 @@ end
 Weapons = {
 	-- Miniboss projectiles
 	make_weapon("executable", 450, 1.8, 40, 2, 10),
+	make_weapon("warning", 450, 0.3, 40, 2, 0),
 
 	-- Enemy projectiles
 	make_weapon("longrange", 400, 3.0, 25, 3, 5),

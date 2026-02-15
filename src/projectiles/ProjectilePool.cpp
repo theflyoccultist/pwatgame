@@ -14,3 +14,4 @@ Texture2D *SlowCannon::projTexture{};
 Texture2D *Straight::projTexture{};
 Texture2D *Update::projTexture{};
 Texture2D *Uzi::projTexture{};
+Texture2D *Warning::projTexture{};

@@ -56,6 +56,9 @@ public:
         &asset.loadTexture("../assets/bullets/bullet_update.png");
 
     Uzi::projTexture = &asset.loadTexture("../assets/bullets/bullet_uzi.png");
+
+    Warning::projTexture =
+        &asset.loadTexture("../assets/bullets/bullet_warning.png");
   }
 
   Projectile *createProjectile(const SpawnRequest &req) {
@@ -122,6 +125,10 @@ public:
       audio.sfx->uziGun();
       return ProjectilePool::getFreeProjectile<Uzi>(req.faction, req.startPos,
                                                     req.direction, req.spec);
+
+    case ProjectileType::WARNING:
+      return ProjectilePool::getFreeProjectile<Warning>(
+          req.faction, req.startPos, req.direction, req.spec);
 
     default:
       std::cerr << "Projectile Factory: Unknown projectile type!\n";

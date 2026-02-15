@@ -18,6 +18,7 @@ enum class ProjectileType : uint8_t {
   STRAIGHT,
   UPDATE,
   UZI,
+  WARNING,
   COUNT
 };
 
