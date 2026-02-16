@@ -42,7 +42,8 @@ void WallManager::updateAll(float delta, const PlayerState &player,
         continue;
 
       if (checkBulletInteraction(b->stats.pos, b->stats.size, w->stats.pos,
-                                 w->stats.size))
+                                 w->stats.size) &&
+          w->stats.collision)
         b->expire();
     }
   }

@@ -27,14 +27,17 @@ public:
 
     if (p.wallCooldown < stats.warningTime) {
       deactivateContactDmg();
+      deactivateCollision();
       textureChoice = 0;
     }
 
     else if (p.wallCooldown < stats.warningTime + stats.activeTime) {
       activateContactDmg();
+      activateCollision();
       textureChoice = 1;
     } else {
       deactivateContactDmg();
+      deactivateCollision();
       deactivateWall();
     }
   }

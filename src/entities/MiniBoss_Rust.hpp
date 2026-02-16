@@ -44,6 +44,8 @@ public:
 
     if (actorCooldown > 5.5f && actorCooldown <= 6.5f) {
       resetPosition();
+      p.type = ProjectileType::INTERNET;
+      p.spec = MiniBossDatabase::getWeaponSpec(p.type);
       shootTowardsPlayer(projMan, p);
     }
 
@@ -56,14 +58,17 @@ public:
           ((float)GetScreenHeight() - stats.size - stats.pos.x) * 0.25f;
     }
 
-    if (actorCooldown > 7.5f && actorCooldown < 8.0f) {
+    if (actorCooldown > 7.5f && actorCooldown < 8.5f) {
       resetPosition();
+      p.type = ProjectileType::INTERNET;
+      p.spec = MiniBossDatabase::getWeaponSpec(p.type);
+      shootTowardsPlayer(projMan, p);
     }
 
-    if (actorCooldown >= 8.0f && actorCooldown <= 8.5f)
+    if (actorCooldown >= 8.5f && actorCooldown <= 9.0f)
       lockOn(p);
 
-    if (actorCooldown > 8.5f && actorCooldown < 9.5f) {
+    if (actorCooldown > 9.0f && actorCooldown < 9.5f) {
       p.type = ProjectileType::WARNING;
       p.spec = MiniBossDatabase::getWeaponSpec(p.type);
       lockedTarget(projMan, p);
@@ -75,13 +80,43 @@ public:
       lockedTarget(projMan, p);
     }
 
-    if (actorCooldown >= 11.5f && actorCooldown <= 13.0f) {
+    if (actorCooldown >= 11.5f && actorCooldown <= 12.5f) {
       p.type = ProjectileType::EXECUTABLE;
       p.spec = MiniBossDatabase::getWeaponSpec(p.type);
       shootSpiral(projMan, p);
     }
 
-    // TODO: add some movement patterns.
+    if (actorCooldown > 12.5f && actorCooldown <= 13.0f) {
+      stats.pos.y += (0 - stats.pos.y) * 0.25f;
+    }
+
+    if (actorCooldown > 13.0f && actorCooldown <= 13.5f) {
+      stats.pos.y +=
+          ((float)GetScreenWidth() - stats.size - stats.pos.y) * 0.25f;
+    }
+
+    if (actorCooldown > 13.5f && actorCooldown <= 14.5f) {
+      resetPosition();
+      p.type = ProjectileType::INTERNET;
+      p.spec = MiniBossDatabase::getWeaponSpec(p.type);
+      shootTowardsPlayer(projMan, p);
+    }
+
+    if (actorCooldown > 14.5f && actorCooldown <= 15.0f) {
+      stats.pos.y +=
+          ((float)GetScreenWidth() - stats.size - stats.pos.y) * 0.25f;
+    }
+
+    if (actorCooldown > 15.0f && actorCooldown <= 15.5f) {
+      stats.pos.y += (0 - stats.pos.y) * 0.25f;
+    }
+
+    if (actorCooldown > 15.5f && actorCooldown < 16.5f) {
+      resetPosition();
+      p.type = ProjectileType::INTERNET;
+      p.spec = MiniBossDatabase::getWeaponSpec(p.type);
+      shootTowardsPlayer(projMan, p);
+    }
   }
 
 private:

@@ -1,3 +1,5 @@
+local item_spawn = require("common.item_spawn_patterns")
+
 FoodSpawns = {
 	{ x = 50, y = 150, delay = 0.0, type = "yopokki", ammoBonus = 50 },
 	{ x = 50, y = 150, delay = 24.2, type = "buldak", ammoBonus = 50 },
@@ -10,6 +12,8 @@ FoodSpawns = {
 	{ x = 349, y = 691, delay = 107.2, type = "pasta", ammoBonus = 50 },
 	{ x = 18, y = 555, delay = 107.2, type = "toast", ammoBonus = 50 },
 }
+
+item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(5, 138, "yopokki", 50))
 
 DrinkSpawns = {
 	-- uncomment for cheating and testing
@@ -28,21 +32,11 @@ DrinkSpawns = {
 	{ x = 711, y = 549, delay = 78.3, type = "skirt", hpBonus = 80 },
 	{ x = 16, y = 589, delay = 99.5, type = "estrogen", hpBonus = 50 },
 	{ x = 199, y = 694, delay = 103.7, type = "skirt", hpBonus = 60 },
-
-	{ x = 410, y = 289, delay = 104.6, type = "monster", hpBonus = 80 },
-	{ x = 10, y = 489, delay = 104.6, type = "monster", hpBonus = 80 },
-	{ x = 127, y = 701, delay = 104.6, type = "monster", hpBonus = 80 },
-	{ x = 348, y = 619, delay = 104.6, type = "monster", hpBonus = 80 },
-	{ x = 199, y = 309, delay = 104.6, type = "monster", hpBonus = 80 },
-	{ x = 701, y = 399, delay = 104.6, type = "monster", hpBonus = 80 },
-
-	{ x = 410, y = 289, delay = 111, type = "thighhigh", hpBonus = 70 },
-	{ x = 10, y = 489, delay = 111, type = "thighhigh", hpBonus = 70 },
-	{ x = 127, y = 701, delay = 111, type = "thighhigh", hpBonus = 70 },
-	{ x = 348, y = 619, delay = 111, type = "thighhigh", hpBonus = 70 },
-	{ x = 199, y = 309, delay = 111, type = "thighhigh", hpBonus = 70 },
-	{ x = 701, y = 399, delay = 111, type = "thighhigh", hpBonus = 70 },
 }
+
+item_spawn.append(DrinkSpawns, item_spawn.bulk_drink_spawn(5, 104.6, "monster", 80))
+item_spawn.append(DrinkSpawns, item_spawn.bulk_drink_spawn(5, 111, "thighhigh", 70))
+item_spawn.append(DrinkSpawns, item_spawn.bulk_drink_spawn(5, 143, "estrogen", 50))
 
 WeaponSpawns = {
 	{ x = 400, y = 400, delay = 0.0, type = "straight", ammoBonus = 0 },

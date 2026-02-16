@@ -10,6 +10,7 @@
 
 struct WallConfig {
   bool active = false;
+  bool collision = false;
   MoveAxis axis;
   Vector2 pos;
   Vector2 initialPos;
@@ -36,6 +37,7 @@ public:
 
   void reset(const Vector2 &startPos, const WallSpec &spec) {
     stats.active = true;
+    stats.collision = false;
     stats.axis = spec.axis;
     stats.pos = startPos;
     stats.initialPos = startPos;
@@ -69,6 +71,8 @@ public:
   bool isActive() { return stats.active; }
   void deactivateContactDmg() { stats.contactDmg = 0; }
   void activateContactDmg() { stats.contactDmg = stats.initialContactDmg; }
+  void deactivateCollision() { stats.collision = false; }
+  void activateCollision() { stats.collision = true; }
   void deactivateWall() { stats.active = false; }
 
 protected:
