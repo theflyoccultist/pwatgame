@@ -12,17 +12,15 @@ file(GLOB_RECURSE SOURCES src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 #raylib
-find_package(raylib REQUIRED)
-if (NOT raylib_FOUND)
-  include(FetchContent)
-  FetchContent_Declare(
-    raylib
-    GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG 5e6cdf3
-    GIT_SHALLOW 1
-  )
-  FetchContent_MakeAvailable(raylib)
-endif()
+include(FetchContent)
+
+FetchContent_Declare(
+  raylib
+  GIT_REPOSITORY https://github.com/raysan5/raylib.git
+  GIT_TAG 97023de
+  GIT_SHALLOW 1
+)
+FetchContent_MakeAvailable(raylib)
 
 #lua
 include(FetchContent)
