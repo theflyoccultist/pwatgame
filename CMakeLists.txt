@@ -76,7 +76,7 @@ target_include_directories(lua PUBLIC
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib lua)
 
 # Normal
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wpedantic)
 
 # For leaks and segfaults
 # target_compile_options(pwatgame PRIVATE -fsanitize=address -fno-omit-frame-pointer -g)
