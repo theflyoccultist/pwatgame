@@ -6,6 +6,12 @@ You will play as PwatPwat, a cute blob cat plush who needs to claim her throne a
 
 ![Preview](./assets/game.png)
 
+## Controls:
+
+- Press the arrow keys to move across the map!
+- Press the space key to shoot projectiles towards enemies!
+- A mini boss will appear at the end of each level, each with a different attack pattern. Make sure to defeat them!
+
 ## Overview:
 
 - **Game Modes**: 
@@ -38,9 +44,20 @@ This level is office themed. It is also pretty slow, but cluttered and the patte
 #### Level 4 - Rust stage
 This final level requires precision again but is also fast paced, and needs the player to have a short reaction window. Projectiles from both the player and enemies deals a lot of damage, making it pretty unforgiving.
 
+## Download:
+- I am figuring that out right now. I will make the game playable on several platforms.
+
 ## Building:
 
-- Make sure to have a C++23 compatible compiler. This project was built using GCC 14.2 across my Trixie Debian and Arch Linux computers.
-- Make sure to have the Lua and Raylib C libraries installed on your machine.
+- Make sure to have a C++23 compatible compiler, and to have a fairly recent version of CMAKE as well. This project was built using GCC 14.2 across my Trixie Debian and Arch Linux computers.
+- If you decide to run the CMAKE script, it will download the Raylib and Lua C libraries if they are missing from your machine.
 
-Use the Linux_build.sh script to compile on Linux. This shell script will automatically create a new `build/` folder and generate a `pwatgame` binary that is compatible with Unix systems.
+Use the Linux_build.sh script to compile on Linux. This shell script will automatically use CMAKE and create a new `build/` folder and generate a `pwatgame` binary that is compatible with Unix systems.
+
+## Credits
+
+- Game Engine, Music, Scripting, Direction, UI, Marketing : Rin
+- **Special thanks to:**
+  - Mom,
+  - My cute girlfriend,
+  - Raysan5, creator of Raylib.
