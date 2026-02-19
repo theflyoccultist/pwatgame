@@ -16,7 +16,7 @@ public:
 
   void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
-    stats.pos = {stats.pos.x, stats.pos.y + (sinf(actorCooldown) * .25f)};
+    stats.pos = {stats.pos.x, stats.pos.y + (std::sin(actorCooldown) * .25f)};
 
     if (actorCooldown <= 2.0f ||
         (actorCooldown >= 8.0f && actorCooldown <= 10.0f)) {

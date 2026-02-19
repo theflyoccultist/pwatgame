@@ -17,7 +17,7 @@ void ProjectileManager::spawn(const SpawnRequest &req) {
 
 void ProjectileManager::update(float dt) {
   bulletTimer += dt;
-  float bulletCooldown = std::fmodf(bulletTimer, 4.0f);
+  float bulletCooldown = std::fmod(bulletTimer, 4.0f);
 
   for (auto *p : projectiles)
     if (p && p->isActive())

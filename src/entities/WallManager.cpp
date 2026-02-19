@@ -24,7 +24,7 @@ void WallManager::updateAll(float delta, const PlayerState &player,
                             std::span<Projectile *const> bullets) {
   using namespace Collisions;
   wallTimer += delta;
-  float wallCooldown = std::fmodf(wallTimer, 8.0f);
+  float wallCooldown = std::fmod(wallTimer, 8.0f);
 
   for (auto *w : walls) {
     if (!w || !w->isActive())

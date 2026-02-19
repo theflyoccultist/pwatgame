@@ -23,7 +23,7 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
                              std::span<Projectile *const> bullets) {
   using namespace Collisions;
   enemyTimer += delta;
-  float enemyCooldown = std::fmodf(enemyTimer, 8.0f);
+  float enemyCooldown = std::fmod(enemyTimer, 8.0f);
 
   for (auto *e : enemies) {
     if (!e || !e->isAlive())
