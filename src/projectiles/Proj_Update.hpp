@@ -11,7 +11,7 @@ public:
   void update(float dt, float bulletTimer) override {
     stats.pos.x += baseVel.x * dt;
     stats.pos.y +=
-        baseVel.y * dt + std::sinf(bulletTimer * frequency) * amplitude * dt;
+        baseVel.y * dt + std::sin(bulletTimer * frequency) * amplitude * dt;
 
     stats.lifetime -= dt;
   }

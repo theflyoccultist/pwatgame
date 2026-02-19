@@ -11,11 +11,11 @@ public:
 
   void update(ShootParams &p, [[maybe_unused]] ProjectileManager &projMan,
               float actorCooldown) override {
-    float monitorCooldown = std::fmodf(actorCooldown, 4.0f);
+    float monitorCooldown = std::fmod(actorCooldown, 4.0f);
 
     if (monitorCooldown >= 2.0f) {
-      stats.pos.x -= std::cosf(monitorCooldown) * stats.speed * p.dt;
-      stats.pos.y -= std::sinf(monitorCooldown) * stats.speed * p.dt;
+      stats.pos.x -= std::cos(monitorCooldown) * stats.speed * p.dt;
+      stats.pos.y -= std::sin(monitorCooldown) * stats.speed * p.dt;
     }
 
     if (stats.pos.x >= 1000.0f || stats.pos.y >= 1000.0f) {

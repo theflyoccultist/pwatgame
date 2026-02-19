@@ -13,7 +13,7 @@ public:
   void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
     Vector2 dir = {p.playerPos.x - stats.pos.x, p.playerPos.y - stats.pos.y};
-    float length = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
+    float length = std::sqrt(dir.x * dir.x + dir.y * dir.y);
 
     if (actorCooldown <= 2.0f ||
         (actorCooldown >= 4.0f && actorCooldown <= 6.0f))

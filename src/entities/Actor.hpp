@@ -73,7 +73,7 @@ public:
 
     for (int i = 0; i < count; ++i) {
       float angle = (float)i * step;
-      Vector2 dir = {cosf(angle), sinf(angle)};
+      Vector2 dir = {std::cos(angle), std::sin(angle)};
       shoot(pm, p, dir);
     }
   }
@@ -82,7 +82,7 @@ public:
     float step = Random::rangeFloat(1.0f, 4.0f) * PI / 3;
 
     for (int i = 0; i < Random::rangeInt(2, 10); ++i) {
-      Vector2 dir = {cosf((float)i * step), sinf((float)i * step)};
+      Vector2 dir = {std::cos((float)i * step), std::sin((float)i * step)};
       shoot(pm, p, dir);
     }
   }
@@ -95,15 +95,15 @@ public:
     for (int i = 0; i < 4; i++) {
       float angle = spiralAngle + (float)i * step;
 
-      Vector2 dir = {cosf(angle), sinf(angle)};
+      Vector2 dir = {std::cos(angle), std::sin(angle)};
       shoot(pm, p, dir);
     }
   }
 
   void shootFractals(ProjectileManager &pm, const ShootParams &p,
                      float actorCooldown) {
-    float yMovement = std::sinf(std::cosf(actorCooldown));
-    float xMovement = std::cosf(std::sinf(actorCooldown));
+    float yMovement = std::sin(std::cos(actorCooldown));
+    float xMovement = std::cos(std::sin(actorCooldown));
 
     shoot(pm, p, {xMovement, yMovement});
     shoot(pm, p, {-xMovement, yMovement});

@@ -22,8 +22,8 @@ public:
 
     os.orbitAngle += os.orbitSpeed * p.dt;
 
-    stats.pos.x = os.center.x + std::cosf(os.orbitAngle) * os.orbitRadius;
-    stats.pos.y = os.center.y + std::sinf(os.orbitAngle) * os.orbitRadius;
+    stats.pos.x = os.center.x + std::cos(os.orbitAngle) * os.orbitRadius;
+    stats.pos.y = os.center.y + std::sin(os.orbitAngle) * os.orbitRadius;
 
     if (actorCooldown < 7.8f) {
       if (inFireWindow(actorCooldown, 0.6f, 0.35f)) {
@@ -41,7 +41,7 @@ private:
   orbitState os;
 
   bool inFireWindow(float t, float period, float duty) {
-    float phase = std::fmodf(t, period);
+    float phase = std::fmod(t, period);
     return phase < (period * duty);
   }
 };

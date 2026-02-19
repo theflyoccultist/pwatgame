@@ -58,7 +58,7 @@ private:
   void moveTowardsPlayer(float dt, Vector2 playerPos) {
     Vector2 dir = {playerPos.x - stats.pos.x, playerPos.y - stats.pos.y};
 
-    float length = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
+    float length = std::sqrt(dir.x * dir.x + dir.y * dir.y);
     if (length > 0.0f) {
       dir.x /= length;
       dir.y /= length;

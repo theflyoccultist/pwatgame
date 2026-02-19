@@ -10,7 +10,7 @@ public:
 
   void update(float dt, float bulletTime) override {
     float speed =
-        std::sqrtf(stats.vel.x * stats.vel.x + stats.vel.y * stats.vel.y);
+        std::sqrt(stats.vel.x * stats.vel.x + stats.vel.y * stats.vel.y);
 
     float growth = 1.0f + bulletTime * bulletTime;
 

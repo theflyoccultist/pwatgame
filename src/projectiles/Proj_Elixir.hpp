@@ -9,7 +9,7 @@ public:
   Elixir() : Projectile(Faction::None, ProjectileType::ELIXIR, projTexture) {}
 
   void update(float dt, float bulletTime) override {
-    float accel = std::fmodf(bulletTime, 3);
+    float accel = (float)std::fmod(bulletTime, 3);
 
     stats.vel.x += stats.vel.x * accel * dt;
     stats.vel.y += stats.vel.y * accel * dt;

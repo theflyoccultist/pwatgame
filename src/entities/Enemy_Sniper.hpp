@@ -23,8 +23,8 @@ public:
 
 private:
   void fleeFromPlayer(ShootParams &p) {
-    float dist = std::sqrtf(std::powf(p.playerPos.x - stats.pos.x, 2) +
-                            std::powf(p.playerPos.y - stats.pos.y, 2));
+    float dist = (float)std::sqrt(std::pow(p.playerPos.x - stats.pos.x, 2) +
+                                  std::pow(p.playerPos.y - stats.pos.y, 2));
 
     if (dist < 300) {
       Vector2 dir = {stats.pos.x - p.playerPos.x, stats.pos.y - p.playerPos.y};

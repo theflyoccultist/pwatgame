@@ -13,7 +13,7 @@ public:
 
   void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
-    float godsipCooldown = std::fmodf(actorCooldown, 4.0f);
+    float godsipCooldown = std::fmod(actorCooldown, 4.0f);
     dashTimer += p.dt;
 
     if (godsipCooldown <= 0.8f) {
@@ -25,7 +25,7 @@ public:
       if (dashTimer >= actorCooldown) {
         Vector2 rawDir = {p.playerPos.x - stats.pos.x,
                           p.playerPos.y - stats.pos.y};
-        float length = std::sqrtf(rawDir.x * rawDir.x + rawDir.y * rawDir.y);
+        float length = std::sqrt(rawDir.x * rawDir.x + rawDir.y * rawDir.y);
 
         if (length > 0.0f) {
           dashDir.x = rawDir.x / length;

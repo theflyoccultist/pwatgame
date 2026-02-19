@@ -24,7 +24,7 @@ public:
         dirX = -1;
       else if (stats.pos.x <= 0)
         dirX = 1;
-      stats.pos.y -= std::sinf(actorCooldown) * stats.speed * p.dt;
+      stats.pos.y -= std::sin(actorCooldown) * stats.speed * p.dt;
     }
   }
 

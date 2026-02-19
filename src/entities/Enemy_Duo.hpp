@@ -12,7 +12,7 @@ public:
 
   void update(ShootParams &p, ProjectileManager &projMan,
               float actorCooldown) override {
-    float duoCooldown = std::fmodf(actorCooldown, 4.0f);
+    float duoCooldown = std::fmod(actorCooldown, 4.0f);
 
     if (duoCooldown <= 1.5f) {
       p.type = ProjectileType::INTERNET;
