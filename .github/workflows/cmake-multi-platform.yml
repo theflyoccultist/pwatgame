@@ -4,9 +4,17 @@ name: CMake on multiple platforms
 
 on:
   push:
-    branches: [ "main" ]
+    branches: 
+      - "main"
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - "main"
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
 
 jobs:
   build:
@@ -56,14 +64,9 @@ jobs:
       
     - name: Install Linux dependencies
       if: runner.os == 'Linux'
-      run: |
+      run: |                
         sudo apt-get update -y
-        sudo apt-get upgrade -y
-        sudo apt Install -y \
-        libxcursor-dev \
-        libxrandr-dev \
-        libxinerama-dev \
-        libxi-dev \
+        sudo apt-get install -y --no-install-recommends libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev gettext
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
