@@ -10,7 +10,7 @@
 
 class ItemDrink : public Item {
 public:
-  explicit ItemDrink(DrinkType t) : Item(ItemType::Drink), type(t) {}
+  explicit ItemDrink(DrinkType d_type) : Item(ItemType::Drink), type(d_type) {}
 
   void reset(Vector2 pos, const DrinkSpec &spec) {
     stats.active = true;

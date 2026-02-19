@@ -32,6 +32,7 @@ void WallManager::updateAll(float delta, const PlayerState &player,
 
     bool touchPlayer = checkPlayerInteraction(
         player.position, (float)player.playerSize, w->stats.pos, w->stats.size);
+
     if (touchPlayer) {
       player.tryApplyPlayerDmg(w->stats.contactDmg);
     }

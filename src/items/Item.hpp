@@ -14,9 +14,9 @@ protected:
   };
 
 public:
-  Item(ItemType type) : type(type) {}
+  Item(ItemType type) : i_type(type) {}
 
-  ItemType type;
+  ItemType i_type;
   ItemStats stats;
 
   virtual ~Item() = default;

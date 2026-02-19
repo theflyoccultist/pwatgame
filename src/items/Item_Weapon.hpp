@@ -11,8 +11,8 @@
 
 class ItemWeapon : public Item {
 public:
-  explicit ItemWeapon(WeaponType weapon)
-      : Item(ItemType::Weapon), weaponType(weapon) {}
+  explicit ItemWeapon(WeaponType w_type)
+      : Item(ItemType::Weapon), weaponType(w_type) {}
 
   void reset(Vector2 pos, const WeaponItemSpec &spec) {
     stats.active = true;
@@ -54,8 +54,8 @@ private:
   WeaponType weaponType;
   int ammoBonus = 0;
 
-  ProjectileType weaponToProjectile(WeaponType type) {
-    switch (type) {
+  ProjectileType weaponToProjectile(WeaponType weapon) {
+    switch (weapon) {
     case WeaponType::ROCKET:
       return ProjectileType::ROCKET;
     case WeaponType::GRENADE:
@@ -68,7 +68,7 @@ private:
       return ProjectileType::STRAIGHT;
 
     default:
-      throw std::runtime_error("Invalid weaponType");
+      throw std::runtime_error("Invalid weapon");
     }
   }
 };

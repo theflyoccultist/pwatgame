@@ -120,7 +120,7 @@ void levelIntro(int currentLevel) {
   AssetSystem::instance().drawTexture(
       uiAssets[AssetType::Background][currentLevel], 0, 0, 800);
   const char *levelName = "";
-  Color introColor;
+  Color introColor = PINK;
 
   switch (currentLevel) {
   case 1:

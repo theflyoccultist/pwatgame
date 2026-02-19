@@ -7,6 +7,7 @@
 #include <projectiles/Projectile.hpp>
 
 #include <raylib.h>
+#include <span>
 
 class WallManager {
 public:

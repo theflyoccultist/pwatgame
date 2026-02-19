@@ -10,7 +10,7 @@
 
 class ItemFood : public Item {
 public:
-  explicit ItemFood(FoodType t) : Item(ItemType::Food), type(t) {}
+  explicit ItemFood(FoodType f_type) : Item(ItemType::Food), type(f_type) {}
 
   void reset(Vector2 pos, const FoodSpec &spec) {
     stats.active = true;
