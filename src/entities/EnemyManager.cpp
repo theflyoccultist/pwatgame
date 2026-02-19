@@ -39,11 +39,11 @@ void EnemyManager::updateAll(float delta, const PlayerState &player,
     Vector2 bulletStartPos = {e->stats.pos.x + (float)e->stats.size / 2,
                               e->stats.pos.y + (float)e->stats.size / 2};
 
-    p.startPos = bulletStartPos;
-    p.playerPos = player.position;
-    p.dt = delta;
+    shootParams.startPos = bulletStartPos;
+    shootParams.playerPos = player.position;
+    shootParams.dt = delta;
 
-    e->update(p, projMan, enemyCooldown);
+    e->update(shootParams, projMan, enemyCooldown);
 
     for (auto &b : bullets) {
       if (!b || !b->isActive())

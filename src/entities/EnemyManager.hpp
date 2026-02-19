@@ -24,6 +24,6 @@ private:
   EnemyFactory factory;
 
   ProjectileManager &projMan;
-  Actor::ShootParams p;
+  Actor::ShootParams shootParams;
   float enemyTimer = 0.0f;
 };
