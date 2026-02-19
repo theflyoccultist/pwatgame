@@ -28,7 +28,7 @@ private:
 
     if (dist < 300) {
       Vector2 dir = {stats.pos.x - p.playerPos.x, stats.pos.y - p.playerPos.y};
-      float len = std::sqrtf(dir.x * dir.x + dir.y * dir.y);
+      float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
 
       if (len > 0.0001f) {
         dir.x /= len;

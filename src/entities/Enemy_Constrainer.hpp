@@ -40,7 +40,7 @@ private:
   int dirY = 1;
 
   bool inFireWindow(float t, float period, float duty) {
-    float phase = std::fmodf(t, period);
+    float phase = std::fmod(t, period);
     return phase < (period * duty);
   }
 };
