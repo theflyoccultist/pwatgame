@@ -1,15 +1,15 @@
-#include "Game.hpp"
-#include "GameModes.hpp"
-#include "GameState.hpp"
-#include "levels/LevelID.hpp"
-#include "levels/LevelLoader.hpp"
-#include "levels/MusicScheduler.hpp"
-#include "levels/displayLevel.hpp"
-#include "player/PlayerManager.hpp"
-#include "sound/AudioSystem.hpp"
-#include "ui/UIManager.hpp"
+#include <Game.hpp>
+#include <GameModes.hpp>
+#include <GameState.hpp>
 #include <iostream>
+#include <levels/LevelID.hpp>
+#include <levels/LevelLoader.hpp>
+#include <levels/MusicScheduler.hpp>
+#include <levels/displayLevel.hpp>
+#include <player/PlayerManager.hpp>
 #include <raylib.h>
+#include <sound/AudioSystem.hpp>
+#include <ui/UIManager.hpp>
 
 void Game::run() {
   WeaponDataBase wd(lua);

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../texture/AssetSystem.hpp"
-#include "ItemType.hpp"
+#include <items/ItemType.hpp>
 #include <raylib.h>
+#include <texture/AssetSystem.hpp>
 #include <unordered_map>
 
 class DrinkTextures {

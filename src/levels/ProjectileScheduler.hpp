@@ -1,10 +1,13 @@
 #pragma once
 
-#include "../World.hpp"
+#include <World.hpp>
 
 class ProjectileScheduler {
 public:
   ProjectileScheduler(World &w) : world(w) {}
+
+  ProjectileScheduler &operator=(const ProjectileScheduler &) = delete;
+  ProjectileScheduler &operator=(const ProjectileScheduler &&) = delete;
 
   void loadProjectileTextures() {
     world.projectileManager.loadProjectileTextures();

@@ -1,10 +1,15 @@
-#include "GameScore.hpp"
+#include <sound/GameScore.hpp>
+
 #include <array>
 #include <memory>
 
 class MusicSystem {
 public:
   MusicSystem();
+
+  MusicSystem(const MusicSystem &) = delete;
+  MusicSystem &operator=(const MusicSystem &) = delete;
+
   void playTitleTrack();
   void playLevel1Track();
   void playLevel1BossMusic();

@@ -1,5 +1,5 @@
-#include "ItemsManager.hpp"
-#include "../collisions/CollisionDetection.hpp"
+#include <collisions/CollisionDetection.hpp>
+#include <items/ItemsManager.hpp>
 #include <memory>
 #include <raylib.h>
 

@@ -1,4 +1,4 @@
-#include "MusicSystem.hpp"
+#include <sound/MusicSystem.hpp>
 
 MusicSystem::MusicSystem() {
   gameScores =

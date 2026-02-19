@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WallAxis.hpp"
+#include <entities/WallAxis.hpp>
 
 struct WallSpec {
   MoveAxis axis = MoveAxis::Horizontal;

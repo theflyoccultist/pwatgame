@@ -1,11 +1,8 @@
 #pragma once
 
-#include "../projectiles/ProjectileManager.hpp"
-#include "../utils/Random.hpp"
-#include "Faction.hpp"
-#include <array>
-#include <cmath>
-#include <raylib.h>
+#include <entities/Faction.hpp>
+#include <projectiles/ProjectileManager.hpp>
+#include <utils/Random.hpp>
 
 class Actor {
 public:
@@ -18,6 +15,8 @@ public:
     ProjectileType type;
     WeaponSpec spec;
   };
+
+  Actor &operator=(const Actor &) = delete;
 
 private:
   void shoot(ProjectileManager &pm, const ShootParams &p,

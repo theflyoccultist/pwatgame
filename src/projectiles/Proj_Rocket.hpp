@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Projectile.hpp"
+#include <projectiles/Projectile.hpp>
 #include <raylib.h>
 
 class Rocket : public Projectile {

@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Wall.hpp"
-#include "WallPool.hpp"
-#include "WallSpec.hpp"
-#include "WallType.hpp"
+#include <entities/Wall.hpp>
+#include <entities/WallPool.hpp>
+#include <entities/WallSpec.hpp>
+#include <entities/WallType.hpp>
+
 #include <iostream>
 #include <raylib.h>
 

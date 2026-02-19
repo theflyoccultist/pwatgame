@@ -1,5 +1,4 @@
-#include "CollisionDetection.hpp"
-#include <raylib.h>
+#include <collisions/CollisionDetection.hpp>
 
 namespace Collisions {
 bool checkPickup(const Vector2 &playerPos, float playerSize,

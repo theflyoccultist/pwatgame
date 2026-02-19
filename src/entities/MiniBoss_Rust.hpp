@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MiniBoss.hpp"
-#include "MiniBossDatabase.hpp"
+#include <entities/MiniBoss.hpp>
+#include <entities/MiniBossDatabase.hpp>
 
 class Rust : public MiniBoss {
 public:

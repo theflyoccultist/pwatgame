@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Proj_Elixir.hpp"
-#include "Proj_Executable.hpp"
-#include "Proj_Grenade.hpp"
-#include "Proj_Hellfire.hpp"
-#include "Proj_Internet.hpp"
-#include "Proj_Lambda.hpp"
-#include "Proj_LongRange.hpp"
-#include "Proj_Paren.hpp"
-#include "Proj_Recon.hpp"
-#include "Proj_Rocket.hpp"
-#include "Proj_SlowCannon.hpp"
-#include "Proj_Straight.hpp"
-#include "Proj_Update.hpp"
-#include "Proj_Uzi.hpp"
-#include "Proj_Warning.hpp"
-#include "WeaponSpec.hpp"
+#include <projectiles/Proj_Elixir.hpp>
+#include <projectiles/Proj_Executable.hpp>
+#include <projectiles/Proj_Grenade.hpp>
+#include <projectiles/Proj_Hellfire.hpp>
+#include <projectiles/Proj_Internet.hpp>
+#include <projectiles/Proj_Lambda.hpp>
+#include <projectiles/Proj_LongRange.hpp>
+#include <projectiles/Proj_Paren.hpp>
+#include <projectiles/Proj_Recon.hpp>
+#include <projectiles/Proj_Rocket.hpp>
+#include <projectiles/Proj_SlowCannon.hpp>
+#include <projectiles/Proj_Straight.hpp>
+#include <projectiles/Proj_Update.hpp>
+#include <projectiles/Proj_Uzi.hpp>
+#include <projectiles/Proj_Warning.hpp>
+
 #include <array>
 
 class ProjectilePool {

@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../player/PlayerState.hpp"
-#include "../projectiles/ProjectileManager.hpp"
-#include "MiniBoss.hpp"
-#include "MiniBossFactory.hpp"
+#include <entities/MiniBoss.hpp>
+#include <entities/MiniBossFactory.hpp>
+#include <player/PlayerState.hpp>
+#include <projectiles/ProjectileManager.hpp>
+
 #include <array>
 #include <raylib.h>
 #include <span>
@@ -11,6 +12,9 @@
 class MiniBossManager {
 public:
   MiniBossManager(ProjectileManager &pm) : projMan(pm) {}
+
+  MiniBossManager &operator=(const MiniBossManager &) = delete;
+  MiniBossManager &operator=(const MiniBossManager &&) = delete;
 
   void init() { factory.loadAssets(); };
 

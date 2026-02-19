@@ -1,6 +1,7 @@
 #pragma once
 
-#include "ProjectileFactory.hpp"
+#include <projectiles/ProjectileFactory.hpp>
+
 #include <array>
 #include <raylib.h>
 #include <span>

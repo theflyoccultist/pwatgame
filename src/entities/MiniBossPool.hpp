@@ -1,10 +1,11 @@
 #pragma once
 
-#include "MiniBossSpec.hpp"
-#include "MiniBoss_Java.hpp"
-#include "MiniBoss_Lisp.hpp"
-#include "MiniBoss_Rust.hpp"
-#include "MiniBoss_Windows.hpp"
+#include <entities/MiniBossSpec.hpp>
+#include <entities/MiniBoss_Java.hpp>
+#include <entities/MiniBoss_Lisp.hpp>
+#include <entities/MiniBoss_Rust.hpp>
+#include <entities/MiniBoss_Windows.hpp>
+
 #include <array>
 #include <raylib.h>
 

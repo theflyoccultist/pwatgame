@@ -1,6 +1,6 @@
-#include "MiniBossManager.hpp"
-#include "../collisions/CollisionDetection.hpp"
-#include "Actor.hpp"
+#include <collisions/CollisionDetection.hpp>
+#include <entities/Actor.hpp>
+#include <entities/MiniBossManager.hpp>
 
 void MiniBossManager::spawnMiniBoss(MiniBossType type) {
   for (auto *&slot : miniBosses) {

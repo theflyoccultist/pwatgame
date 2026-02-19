@@ -1,7 +1,8 @@
 #pragma once
-#include "MusicSystem.hpp"
-#include "SfxSystem.hpp"
+
 #include <memory>
+#include <sound/MusicSystem.hpp>
+#include <sound/SfxSystem.hpp>
 
 class AudioSystem {
 public:

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../player/PlayerState.hpp"
-#include "ItemType.hpp"
+#include <items/ItemType.hpp>
+#include <player/PlayerState.hpp>
+
 #include <raylib.h>
 
 class Item {

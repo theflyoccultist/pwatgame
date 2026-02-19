@@ -1,8 +1,7 @@
-#include "EnemyDatabase.hpp"
-#include "../lua/TypeFromString.hpp"
-#include "../projectiles/WeaponDatabase.hpp"
-#include "EnemySpec.hpp"
-#include "EnemyType.hpp"
+#include <entities/EnemyDatabase.hpp>
+#include <lua/TypeFromString.hpp>
+#include <projectiles/WeaponDatabase.hpp>
+
 #include <expected>
 #include <iostream>
 #include <string_view>

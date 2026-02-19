@@ -1,5 +1,6 @@
-#include "ItemScheduler.hpp"
-#include "../items/ItemsManager.hpp"
+#include <items/ItemsManager.hpp>
+#include <levels/ItemScheduler.hpp>
+
 #include <algorithm>
 #include <expected>
 #include <iostream>

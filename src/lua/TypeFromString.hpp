@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../entities/EnemyType.hpp"
-#include "../entities/MiniBossType.hpp"
-#include "../entities/WallAxis.hpp"
-#include "../entities/WallType.hpp"
-#include "../items/ItemType.hpp"
-#include "../projectiles/ProjectileType.hpp"
+#include <entities/EnemyType.hpp>
+#include <entities/MiniBossType.hpp>
+#include <entities/WallAxis.hpp>
+#include <entities/WallType.hpp>
+#include <items/ItemType.hpp>
+#include <projectiles/ProjectileType.hpp>
+
 #include <string_view>
 
 namespace TypeFromString {

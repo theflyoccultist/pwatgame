@@ -14,5 +14,4 @@ enum class EnemyType : uint8_t {
   SWARMER,
   THREADEMITTER,
   ZOMB,
-  COUNT
 };

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "entities/EnemyManager.hpp"
-#include "entities/MiniBossManager.hpp"
-#include "entities/WallManager.hpp"
-#include "items/ItemsManager.hpp"
-#include "player/Player.hpp"
-#include "projectiles/ProjectileManager.hpp"
+#include <entities/EnemyManager.hpp>
+#include <entities/MiniBossManager.hpp>
+#include <entities/WallManager.hpp>
+#include <items/ItemsManager.hpp>
+#include <player/Player.hpp>
+#include <projectiles/ProjectileManager.hpp>
 
 struct World {
   ProjectileManager projectileManager;
@@ -18,4 +18,8 @@ struct World {
   World()
       : enemyManager(projectileManager), pwat(projectileManager),
         minibossManager(projectileManager) {}
+
+  World(const World &) = delete;
+  World &operator=(const World &) = delete;
+  World &operator=(const World &&) = delete;
 };

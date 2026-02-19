@@ -6,10 +6,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER_VERSION 12)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include_directories(include)
-
 file(GLOB_RECURSE SOURCES src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+  ${CMAKE_SOURCE_DIR}/src
+)
 
 #raylib
 include(FetchContent)
@@ -76,7 +78,11 @@ target_include_directories(lua PUBLIC
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib lua)
 
 # Normal
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
+if (MSVC)
+  target_compile_options(${PROJECT_NAME} PRIVATE /W4)
+else()
+  target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
+endif()
 
 # For leaks and segfaults
 # target_compile_options(pwatgame PRIVATE -fsanitize=address -fno-omit-frame-pointer -g)

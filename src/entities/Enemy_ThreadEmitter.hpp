@@ -1,10 +1,7 @@
 #pragma once
 
-#include "Enemy.hpp"
-#include "EnemyDatabase.hpp"
-#include <array>
-#include <cmath>
-#include <raylib.h>
+#include <entities/Enemy.hpp>
+#include <entities/EnemyDatabase.hpp>
 
 struct orbitState {
   float orbitAngle = Random::rangeFloat(0.0f, 2.0f * PI);

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../GameModes.hpp"
-#include "../levels/LevelID.hpp"
-#include "../projectiles/ProjectileType.hpp"
+#include <GameModes.hpp>
+#include <levels/LevelID.hpp>
+#include <projectiles/ProjectileType.hpp>
 
 namespace UIManager {
 

@@ -1,11 +1,14 @@
 #pragma once
 
-#include "../World.hpp"
-#include "../levels/Scheduler.hpp"
+#include <World.hpp>
+#include <levels/Scheduler.hpp>
 
 class ScheduleManager {
 public:
   ScheduleManager(World &w) : world(w) {}
+
+  ScheduleManager &operator=(const ScheduleManager &) = delete;
+  ScheduleManager &operator=(const ScheduleManager &&) = delete;
 
   void resetScheduler() { scheduler.init(); }
 

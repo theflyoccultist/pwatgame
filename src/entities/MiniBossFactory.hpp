@@ -1,10 +1,8 @@
 #pragma once
 
-#include "MiniBoss.hpp"
-#include "MiniBossPool.hpp"
-#include "MiniBossSpec.hpp"
-#include "MiniBossType.hpp"
-#include <array>
+#include <entities/MiniBoss.hpp>
+#include <entities/MiniBossPool.hpp>
+
 #include <iostream>
 #include <raylib.h>
 #include <string>

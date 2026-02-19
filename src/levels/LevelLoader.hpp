@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../entities/EnemyDatabase.hpp"
-#include "../entities/MiniBossDatabase.hpp"
-#include "../projectiles/WeaponDatabase.hpp"
-#include "ItemScheduler.hpp"
-#include "LevelID.hpp"
-#include "ProjectileScheduler.hpp"
-#include "ScheduleManager.hpp"
-#include "SpawnScheduler.hpp"
+#include <entities/EnemyDatabase.hpp>
+#include <entities/MiniBossDatabase.hpp>
+#include <levels/ItemScheduler.hpp>
+#include <levels/LevelID.hpp>
+#include <levels/ProjectileScheduler.hpp>
+#include <levels/SpawnScheduler.hpp>
+#include <projectiles/WeaponDatabase.hpp>
+
 #include <iostream>
 
 class LevelLoader {
@@ -18,6 +18,9 @@ public:
       : weaponDatabase(wd), enemyDatabase(ed), minibossDatabase(md),
         scheduleManager(sm), spawnScheduler(ss), itemScheduler(is),
         projectileScheduler(ps) {}
+
+  LevelLoader &operator=(const LevelLoader &) = delete;
+  LevelLoader &operator=(const LevelLoader &&) = delete;
 
   void initDatabase() {
     weaponDatabase.loadFromLua("../scripts/common/DefaultWeaponData.lua");

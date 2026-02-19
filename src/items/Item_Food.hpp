@@ -1,10 +1,11 @@
 #pragma once
 
-#include "../sound/AudioSystem.hpp"
-#include "../texture/AssetSystem.hpp"
-#include "Item.hpp"
-#include "ItemSpec.hpp"
-#include "TextureRegistry.hpp"
+#include <items/Item.hpp>
+#include <items/ItemSpec.hpp>
+#include <items/TextureRegistry.hpp>
+#include <sound/AudioSystem.hpp>
+#include <texture/AssetSystem.hpp>
+
 #include <iostream>
 
 class ItemFood : public Item {

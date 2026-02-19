@@ -17,7 +17,7 @@ item_spawn.append(FoodSpawns, item_spawn.bulk_food_spawn(5, 138, "yopokki", 50))
 
 DrinkSpawns = {
 	-- uncomment for cheating and testing
-	{ x = 450, y = 550, delay = 0.0, type = "soju", hpBonus = 20000 },
+	--	{ x = 450, y = 550, delay = 0.0, type = "soju", hpBonus = 20000 },
 
 	{ x = 250, y = 650, delay = 0.0, type = "soju", hpBonus = 50 },
 	{ x = 150, y = 700, delay = 24.0, type = "estrogen", hpBonus = 50 },

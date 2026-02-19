@@ -1,8 +1,7 @@
-#include "MiniBossDatabase.hpp"
-#include "../lua/TypeFromString.hpp"
-#include "../projectiles/WeaponDatabase.hpp"
-#include "MiniBossSpec.hpp"
-#include "MiniBossType.hpp"
+#include <entities/MiniBossDatabase.hpp>
+#include <lua/TypeFromString.hpp>
+#include <projectiles/WeaponDatabase.hpp>
+
 #include <expected>
 #include <iostream>
 #include <string_view>

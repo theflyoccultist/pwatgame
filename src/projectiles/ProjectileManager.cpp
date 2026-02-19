@@ -1,4 +1,4 @@
-#include "ProjectileManager.hpp"
+#include <projectiles/ProjectileManager.hpp>
 
 void ProjectileManager::loadProjectileTextures() { factory.loadAssets(); }
 

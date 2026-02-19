@@ -1,10 +1,11 @@
-#include "UIManager.hpp"
-#include "../Game.hpp"
-#include "../sound/AudioSystem.hpp"
-#include "UILib.hpp"
+#include <Game.hpp>
 #include <algorithm>
 #include <iostream>
 #include <raylib.h>
+
+#include <sound/AudioSystem.hpp>
+#include <ui/UILib.hpp>
+#include <ui/UIManager.hpp>
 
 namespace UIManager {
 

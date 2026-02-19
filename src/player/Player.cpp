@@ -1,9 +1,9 @@
-#include "Player.hpp"
-#include "../entities/Faction.hpp"
-#include "../projectiles/WeaponDatabase.hpp"
-#include "../sound/AudioSystem.hpp"
-#include "../texture/AssetSystem.hpp"
-#include "../utils/clampEntities.hpp"
+#include <entities/Faction.hpp>
+#include <player/Player.hpp>
+#include <projectiles/WeaponDatabase.hpp>
+#include <sound/AudioSystem.hpp>
+#include <texture/AssetSystem.hpp>
+#include <utils/clampEntities.hpp>
 
 #include <algorithm>
 #include <raylib.h>

@@ -1,10 +1,11 @@
 #pragma once
 
-#include "MiniBoss.hpp"
-#include "MiniBossDatabase.hpp"
 #include <array>
 #include <cmath>
 #include <raylib.h>
+
+#include <entities/MiniBoss.hpp>
+#include <entities/MiniBossDatabase.hpp>
 
 class Windows : public MiniBoss {
 public:

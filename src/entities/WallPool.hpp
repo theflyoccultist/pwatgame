@@ -1,5 +1,5 @@
-#include "Wall_Immobile.hpp"
-#include "Wall_Moving.hpp"
+#include <entities/Wall_Immobile.hpp>
+#include <entities/Wall_Moving.hpp>
 #include <raylib.h>
 
 class WallPool {

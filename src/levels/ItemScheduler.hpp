@@ -1,12 +1,13 @@
 #pragma once
 
-#include "../World.hpp"
-#include "../items/Item_Drink.hpp"
-#include "../items/Item_Food.hpp"
-#include "../items/Item_Weapon.hpp"
-#include "../levels/ScheduleManager.hpp"
-#include "../lua/LuaWrapper.hpp"
-#include "../lua/TypeFromString.hpp"
+#include <World.hpp>
+#include <items/Item_Drink.hpp>
+#include <items/Item_Food.hpp>
+#include <items/Item_Weapon.hpp>
+#include <levels/ScheduleManager.hpp>
+#include <lua/LuaWrapper.hpp>
+#include <lua/TypeFromString.hpp>
+
 #include <concepts>
 #include <raylib.h>
 
@@ -85,6 +86,9 @@ public:
       : lua(lua), world(w), sm(sm) {
     world.itemManager.init();
   }
+
+  ItemScheduler &operator=(const ItemScheduler &) = delete;
+  ItemScheduler &operator=(const ItemScheduler &&) = delete;
 
   void loadItemTextures() {
     DrinkTextures::loadTextures();

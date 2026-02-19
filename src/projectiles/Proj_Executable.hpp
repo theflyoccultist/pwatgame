@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Projectile.hpp"
+#include <projectiles/Projectile.hpp>
 
 class Executable : public Projectile {
 public:

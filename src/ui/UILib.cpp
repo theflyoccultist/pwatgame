@@ -1,7 +1,7 @@
-#include "UILib.hpp"
-#include "../player/PlayerState.hpp"
-#include "../sound/AudioSystem.hpp"
-#include "../texture/AssetSystem.hpp"
+#include <player/PlayerState.hpp>
+#include <sound/AudioSystem.hpp>
+#include <texture/AssetSystem.hpp>
+#include <ui/UILib.hpp>
 
 #include <algorithm>
 #include <array>

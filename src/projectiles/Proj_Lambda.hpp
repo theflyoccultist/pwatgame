@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Projectile.hpp"
 #include <cmath>
+#include <projectiles/Projectile.hpp>
 
 class Lambda : public Projectile {
 public:

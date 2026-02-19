@@ -1,10 +1,11 @@
 #pragma once
 
-#include "../player/PlayerState.hpp"
-#include "../projectiles/Projectile.hpp"
-#include "WallFactory.hpp"
-#include "WallSpec.hpp"
-#include "WallType.hpp"
+#include <entities/WallFactory.hpp>
+#include <entities/WallSpec.hpp>
+#include <entities/WallType.hpp>
+#include <player/PlayerState.hpp>
+#include <projectiles/Projectile.hpp>
+
 #include <raylib.h>
 
 class WallManager {

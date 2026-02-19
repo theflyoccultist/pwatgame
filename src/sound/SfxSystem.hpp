@@ -1,8 +1,9 @@
-#include "SoundEffect.hpp"
 #include <cstdint>
 #include <memory>
 #include <unordered_map>
 #include <vector>
+
+#include <sound/SoundEffect.hpp>
 
 class SfxSystem {
 public:

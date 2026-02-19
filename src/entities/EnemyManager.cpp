@@ -1,10 +1,6 @@
-#include "EnemyManager.hpp"
-#include "../collisions/CollisionDetection.hpp"
-#include "../sound/AudioSystem.hpp"
-#include "Actor.hpp"
-#include "Enemy.hpp"
-#include "EnemyDatabase.hpp"
-#include <raylib.h>
+#include <collisions/CollisionDetection.hpp>
+#include <entities/EnemyManager.hpp>
+#include <sound/AudioSystem.hpp>
 
 void EnemyManager::init() { factory.loadAssets(); }
 

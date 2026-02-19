@@ -1,12 +1,9 @@
 #pragma once
 
-#include "../texture/AssetSystem.hpp"
-#include "Actor.hpp"
-#include "MiniBossSpec.hpp"
-#include "MiniBossType.hpp"
-#include <array>
-#include <iostream>
-#include <raylib.h>
+#include <entities/Actor.hpp>
+#include <entities/MiniBossSpec.hpp>
+#include <entities/MiniBossType.hpp>
+#include <texture/AssetSystem.hpp>
 
 class MiniBoss : public Actor {
 protected:
@@ -23,6 +20,9 @@ protected:
 public:
   MiniBoss(MiniBossType t, const std::array<Texture2D *, 3> &textures)
       : type(t), textures(textures) {}
+
+  MiniBoss &operator=(const MiniBoss &) = delete;
+  MiniBoss &operator=(const MiniBoss &&) = delete;
 
   MiniBossStats stats;
   MiniBossType type;

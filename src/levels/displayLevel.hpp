@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LevelID.hpp"
+#include <levels/LevelID.hpp>
 
 int displayCurrentLevel(LevelID level) {
   switch (level) {

@@ -1,13 +1,12 @@
 #pragma once
 
-#include "../sound/AudioSystem.hpp"
-#include "../texture/AssetSystem.hpp"
-#include "Projectile.hpp"
-#include "ProjectilePool.hpp"
-#include "WeaponSpec.hpp"
+#include <projectiles/Projectile.hpp>
+#include <projectiles/ProjectilePool.hpp>
+#include <sound/AudioSystem.hpp>
+#include <texture/AssetSystem.hpp>
+
 #include <iostream>
 #include <memory>
-#include <raylib.h>
 
 class ProjectileFactory {
 public:

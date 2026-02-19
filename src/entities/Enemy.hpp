@@ -1,12 +1,9 @@
 #pragma once
 
-#include "../texture/AssetSystem.hpp"
-#include "Actor.hpp"
-#include "EnemySpec.hpp"
-#include "EnemyType.hpp"
-#include <array>
-#include <iostream>
-#include <raylib.h>
+#include <entities/Actor.hpp>
+#include <entities/EnemySpec.hpp>
+#include <entities/EnemyType.hpp>
+#include <texture/AssetSystem.hpp>
 
 class Enemy : public Actor {
 protected:
@@ -24,6 +21,9 @@ protected:
 public:
   Enemy(EnemyType t, const std::array<Texture2D *, 3> &textures)
       : type(t), textures(textures) {}
+
+  Enemy &operator=(const Enemy &) = delete;
+  Enemy &operator=(const Enemy &&) = delete;
 
   EnemyStats stats;
   EnemyType type;

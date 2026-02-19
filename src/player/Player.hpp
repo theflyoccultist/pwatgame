@@ -9,6 +9,10 @@
 class Player {
 public:
   Player(ProjectileManager &pm) : projMan(pm) {}
+
+  Player &operator=(const Player &) = delete;
+  Player &operator=(const Player &&) = delete;
+
   void loadPlayerTextures();
   void draw(Vector2 position, int direction);
 

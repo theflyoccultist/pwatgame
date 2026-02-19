@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Projectile.hpp"
+#include <projectiles/Projectile.hpp>
 
 class Internet : public Projectile {
 public:

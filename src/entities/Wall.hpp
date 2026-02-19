@@ -30,7 +30,9 @@ struct WallParams {
 class Wall {
 public:
   Wall(WallType t, const std::array<Texture2D *, 2> &textures)
-      : type(t), textures(textures) {}
+      : type(t), wallTextures(textures) {}
+
+  virtual ~Wall() = 0;
 
   WallConfig stats;
   WallType type;
@@ -55,7 +57,7 @@ public:
     if (!isActive())
       return;
 
-    Texture2D *tex = chooseWallTexture(textureChoice, textures);
+    Texture2D *tex = chooseWallTexture(textureChoice, wallTextures);
 
     if (!tex) {
       std::cerr << "Wall textures are missing\n";
@@ -76,7 +78,7 @@ public:
   void deactivateWall() { stats.active = false; }
 
 protected:
-  std::array<Texture2D *, 2> textures{};
+  std::array<Texture2D *, 2> wallTextures{};
   int textureChoice;
 
   Texture2D *

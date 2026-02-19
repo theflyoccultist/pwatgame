@@ -1,5 +1,6 @@
-#include "WallManager.hpp"
-#include "../collisions/CollisionDetection.hpp"
+#include <collisions/CollisionDetection.hpp>
+#include <entities/WallManager.hpp>
+
 #include <cmath>
 #include <span>
 

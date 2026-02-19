@@ -1,6 +1,7 @@
-#include "SpawnScheduler.hpp"
-#include "../entities/WallSpec.hpp"
-#include "../lua/TypeFromString.hpp"
+#include <entities/WallSpec.hpp>
+#include <levels/SpawnScheduler.hpp>
+#include <lua/TypeFromString.hpp>
+
 #include <expected>
 #include <iostream>
 #include <raylib.h>

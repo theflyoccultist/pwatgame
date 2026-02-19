@@ -8,6 +8,9 @@ class PlayerManager {
 public:
   PlayerManager(World &w) : world(w) {}
 
+  PlayerManager &operator=(const PlayerManager &) = delete;
+  PlayerManager &operator=(const PlayerManager &&) = delete;
+
   void loadPlayerTextures() { world.pwat.loadPlayerTextures(); }
 
   PlayerState initPlayerState() {

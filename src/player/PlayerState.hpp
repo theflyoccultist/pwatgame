@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../projectiles/ProjectileType.hpp"
-#include "../projectiles/WeaponSpec.hpp"
+#include <projectiles/ProjectileType.hpp>
+#include <projectiles/WeaponSpec.hpp>
 #include <raylib.h>
 
 struct PlayerState {

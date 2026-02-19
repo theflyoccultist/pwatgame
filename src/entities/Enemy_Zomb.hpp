@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../utils/Random.hpp"
-#include "Enemy.hpp"
-#include "EnemyDatabase.hpp"
-#include <array>
+#include <entities/Enemy.hpp>
+#include <entities/EnemyDatabase.hpp>
+
 #include <raylib.h>
 
 class Zomb : public Enemy {

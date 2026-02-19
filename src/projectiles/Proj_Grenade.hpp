@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Projectile.hpp"
+#include <projectiles/Projectile.hpp>
 
 class Grenade : public Projectile {
 public:

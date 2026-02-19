@@ -1,10 +1,9 @@
 #pragma once
 
-#include "../player/PlayerState.hpp"
-#include "Enemy.hpp"
-#include "EnemyFactory.hpp"
-#include <array>
-#include <raylib.h>
+#include <entities/Enemy.hpp>
+#include <entities/EnemyFactory.hpp>
+#include <player/PlayerState.hpp>
+
 #include <span>
 
 class EnemyManager {

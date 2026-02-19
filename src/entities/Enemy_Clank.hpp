@@ -1,9 +1,7 @@
 #pragma once
 
-#include "Enemy.hpp"
-#include "EnemyDatabase.hpp"
-#include <array>
-#include <raylib.h>
+#include <entities/Enemy.hpp>
+#include <entities/EnemyDatabase.hpp>
 
 class Clank : public Enemy {
 public:

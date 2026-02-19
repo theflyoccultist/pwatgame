@@ -1,28 +1,45 @@
 #pragma once
 
-#include "../entities/Faction.hpp"
-#include "../texture/AssetSystem.hpp"
-#include "ProjectileType.hpp"
-#include "WeaponSpec.hpp"
+#include <entities/Faction.hpp>
+#include <projectiles/ProjectileType.hpp>
+#include <projectiles/WeaponSpec.hpp>
+#include <texture/AssetSystem.hpp>
+
 #include <iostream>
 #include <raylib.h>
 
 inline const char *toString(ProjectileType type) {
   switch (type) {
-  case ProjectileType::STRAIGHT:
-    return "STRAIGHT";
-  case ProjectileType::LONGRANGE:
-    return "LONGRANGE";
-  case ProjectileType::SLOWCANNON:
-    return "SLOWCANNON";
-  case ProjectileType::ROCKET:
-    return "ROCKET";
-  case ProjectileType::UZI:
-    return "UZI";
+  case ProjectileType::ELIXIR:
+    return "ELIXIR";
+  case ProjectileType::EXECUTABLE:
+    return "EXECUTABLE";
   case ProjectileType::GRENADE:
     return "GRENADE";
   case ProjectileType::HELLFIRE:
     return "HELLFIRE";
+  case ProjectileType::INTERNET:
+    return "Internet";
+  case ProjectileType::LAMBDA:
+    return "LAMBDA";
+  case ProjectileType::LONGRANGE:
+    return "LONGRANGE";
+  case ProjectileType::PAREN:
+    return "PAREN";
+  case ProjectileType::RECON:
+    return "RECON";
+  case ProjectileType::ROCKET:
+    return "ROCKET";
+  case ProjectileType::STRAIGHT:
+    return "STRAIGHT";
+  case ProjectileType::SLOWCANNON:
+    return "SLOWCANNON";
+  case ProjectileType::UPDATE:
+    return "UPDATE";
+  case ProjectileType::UZI:
+    return "UZI";
+  case ProjectileType::WARNING:
+    return "WARNING";
   default:
     return "UNKNOWN_PROJECTILE";
   }

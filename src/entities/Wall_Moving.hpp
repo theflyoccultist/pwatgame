@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Wall.hpp"
+#include <entities/Wall.hpp>
+
 #include <array>
 #include <raylib.h>
 
@@ -9,7 +10,7 @@ public:
   static std::array<Texture2D *, 2> sharedTextures;
   MovingWall() : Wall(WallType::MOVING, sharedTextures) {}
 
-  void setTexture() override { textures = sharedTextures; }
+  void setTexture() override { wallTextures = sharedTextures; }
 
   void update(const WallParams &p) override {
     float &pos =

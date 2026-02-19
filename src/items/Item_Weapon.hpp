@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../projectiles/WeaponDatabase.hpp"
-#include "../sound/AudioSystem.hpp"
-#include "../texture/AssetSystem.hpp"
-#include "Item.hpp"
-#include "ItemSpec.hpp"
-#include "TextureRegistry.hpp"
+#include <items/Item.hpp>
+#include <items/ItemSpec.hpp>
+#include <items/TextureRegistry.hpp>
+#include <projectiles/WeaponDatabase.hpp>
+#include <sound/AudioSystem.hpp>
+#include <texture/AssetSystem.hpp>
+
 #include <iostream>
-#include <stdexcept>
 
 class ItemWeapon : public Item {
 public:

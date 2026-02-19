@@ -1,12 +1,6 @@
 #pragma once
 
-#include "Enemy.hpp"
-#include "EnemyPool.hpp"
-#include "EnemySpec.hpp"
-#include "EnemyType.hpp"
-#include <array>
-#include <iostream>
-#include <raylib.h>
+#include <entities/EnemyPool.hpp>
 
 class EnemyFactory {
 public:

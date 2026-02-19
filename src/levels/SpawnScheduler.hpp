@@ -1,12 +1,16 @@
-#include "../World.hpp"
-#include "../levels/ScheduleManager.hpp"
-#include "../lua/LuaWrapper.hpp"
+#include <World.hpp>
+#include <levels/ScheduleManager.hpp>
+#include <lua/LuaWrapper.hpp>
+
 #include <raylib.h>
 
 class SpawnScheduler {
 public:
   SpawnScheduler(LuaWrapper &lua, World &w, ScheduleManager &sm)
       : lua(lua), world(w), sm(sm) {}
+
+  SpawnScheduler &operator=(const SpawnScheduler &) = delete;
+  SpawnScheduler &operator=(const SpawnScheduler &&) = delete;
 
   void loadEnemyTextures() { world.enemyManager.init(); }
   void loadMiniBossTextures() { world.minibossManager.init(); }

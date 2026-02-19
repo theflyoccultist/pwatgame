@@ -1,12 +1,15 @@
 #pragma once
 
-#include "../World.hpp"
-#include "../levels/ScheduleManager.hpp"
-#include "LevelID.hpp"
+#include <World.hpp>
+#include <levels/LevelID.hpp>
+#include <levels/ScheduleManager.hpp>
 
 class MusicScheduler {
 public:
   MusicScheduler(World &w, ScheduleManager &sm) : world(w), sm(sm) {}
+
+  MusicScheduler &operator=(const MusicScheduler &) = delete;
+  MusicScheduler &operator=(const MusicScheduler &&) = delete;
 
   void scheduleMusic(LevelID level) {
     auto &audio = AudioSystem::instance();

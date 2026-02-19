@@ -1,4 +1,4 @@
-#include "ProjectilePool.hpp"
+#include <projectiles/ProjectilePool.hpp>
 
 Texture2D *Elixir::projTexture{};
 Texture2D *Executable::projTexture{};

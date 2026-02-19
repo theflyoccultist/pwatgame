@@ -1,4 +1,4 @@
-#include "SfxSystem.hpp"
+#include <sound/SfxSystem.hpp>
 
 SfxSystem::SfxSystem() {
   fxBank[SoundType::pwatSteps] = std::make_unique<std::vector<SoundEffect>>(

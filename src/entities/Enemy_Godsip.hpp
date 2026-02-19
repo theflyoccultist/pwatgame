@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../utils/clampEntities.hpp"
-#include "Enemy.hpp"
-#include "EnemyDatabase.hpp"
-#include <array>
-#include <raylib.h>
+#include <entities/Enemy.hpp>
+#include <entities/EnemyDatabase.hpp>
+#include <utils/clampEntities.hpp>
 
 class Godsip : public Enemy {
 public:

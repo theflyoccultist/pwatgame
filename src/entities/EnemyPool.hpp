@@ -1,19 +1,17 @@
 #pragma once
 
-#include "EnemySpec.hpp"
-#include "Enemy_Clank.hpp"
-#include "Enemy_Constrainer.hpp"
-#include "Enemy_Duo.hpp"
-#include "Enemy_Fractal.hpp"
-#include "Enemy_Godsip.hpp"
-#include "Enemy_Miku.hpp"
-#include "Enemy_Monitor.hpp"
-#include "Enemy_Sniper.hpp"
-#include "Enemy_Swarmer.hpp"
-#include "Enemy_ThreadEmitter.hpp"
-#include "Enemy_Zomb.hpp"
-#include <array>
-#include <raylib.h>
+#include <entities/EnemySpec.hpp>
+#include <entities/Enemy_Clank.hpp>
+#include <entities/Enemy_Constrainer.hpp>
+#include <entities/Enemy_Duo.hpp>
+#include <entities/Enemy_Fractal.hpp>
+#include <entities/Enemy_Godsip.hpp>
+#include <entities/Enemy_Miku.hpp>
+#include <entities/Enemy_Monitor.hpp>
+#include <entities/Enemy_Sniper.hpp>
+#include <entities/Enemy_Swarmer.hpp>
+#include <entities/Enemy_ThreadEmitter.hpp>
+#include <entities/Enemy_Zomb.hpp>
 
 class EnemyPool {
 private:

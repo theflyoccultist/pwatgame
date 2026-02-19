@@ -1,15 +1,19 @@
 #pragma once
 
-#include "../lua/LuaWrapper.hpp"
-#include "../projectiles/ProjectileType.hpp"
-#include "../projectiles/WeaponSpec.hpp"
-#include "MiniBossSpec.hpp"
-#include "MiniBossType.hpp"
+#include <entities/MiniBossSpec.hpp>
+#include <entities/MiniBossType.hpp>
+#include <lua/LuaWrapper.hpp>
+#include <projectiles/ProjectileType.hpp>
+#include <projectiles/WeaponSpec.hpp>
+
 #include <unordered_map>
 
 class MiniBossDatabase {
 public:
   MiniBossDatabase(LuaWrapper &lua) : lua(lua) {}
+
+  MiniBossDatabase &operator=(const MiniBossDatabase &) = delete;
+  MiniBossDatabase &operator=(const MiniBossDatabase &&) = delete;
 
   void loadFromLua(const char *filename);
   static const MiniBossSpec &get(MiniBossType t);

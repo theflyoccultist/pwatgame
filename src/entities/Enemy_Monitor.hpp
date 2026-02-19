@@ -1,9 +1,6 @@
 #pragma once
 
-#include "Enemy.hpp"
-#include <array>
-#include <cmath>
-#include <raylib.h>
+#include <entities/Enemy.hpp>
 
 class Monitor : public Enemy {
 public:

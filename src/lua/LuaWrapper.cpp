@@ -1,7 +1,8 @@
-#include "LuaWrapper.hpp"
 #include <expected>
 #include <iostream>
 #include <string>
+
+#include <lua/LuaWrapper.hpp>
 
 std::ostream &operator<<(std::ostream &os, const LuaError &err) {
   switch (err) {

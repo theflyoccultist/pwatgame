@@ -1,9 +1,8 @@
-#include "WeaponDatabase.hpp"
-#include "../lua/TypeFromString.hpp"
-#include "ProjectileType.hpp"
-#include "WeaponSpec.hpp"
 #include <expected>
 #include <iostream>
+
+#include <lua/TypeFromString.hpp>
+#include <projectiles/WeaponDatabase.hpp>
 #include <string_view>
 
 void WeaponDataBase::loadFromLua(const char *filename) {
