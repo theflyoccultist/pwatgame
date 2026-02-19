@@ -20,7 +20,6 @@ FetchContent_Declare(
   raylib
   GIT_REPOSITORY https://github.com/raysan5/raylib.git
   GIT_TAG 97023de
-  GIT_SHALLOW 1
 )
 FetchContent_MakeAvailable(raylib)
 
@@ -31,7 +30,6 @@ FetchContent_Declare(
   lua
   GIT_REPOSITORY https://github.com/lua/lua.git
   GIT_TAG v5.4.6
-  GIT_SHALLOW 1
 )
 FetchContent_MakeAvailable(lua)
 
