@@ -85,3 +85,11 @@ endif()
 # For leaks and segfaults
 # target_compile_options(pwatgame PRIVATE -fsanitize=address -fno-omit-frame-pointer -g)
 # target_link_options(pwatgame PRIVATE -fsanitize=address)
+
+install(TARGETS ${PROJECT_NAME}
+        RUNTIME DESTINATION .
+        LIBRARY DESTINATION .
+        ARCHIVE DESTINATION .)
+
+install(DIRECTORY assets DESTINATION .)
+install(DIRECTORY scripts DESTINATION .)
