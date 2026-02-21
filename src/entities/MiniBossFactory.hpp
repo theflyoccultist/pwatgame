@@ -1,41 +1,43 @@
 #pragma once
 
+#include <Paths/Paths.hpp>
 #include <entities/MiniBoss.hpp>
 #include <entities/MiniBossPool.hpp>
 
 #include <iostream>
 #include <raylib.h>
-#include <string>
 
 class MiniBossFactory {
+
 public:
   MiniBossFactory() = default;
 
   void loadAssets() {
     auto &assets = AssetSystem::instance();
+    const fs::path assetsPath = Paths::getAssetsPath();
 
     Windows::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/win_HIGH.png"),
-        &assets.loadTexture("../assets/bosses/win_MED.png"),
-        &assets.loadTexture("../assets/bosses/win_LOW.png"),
+        &assets.loadTexture(assetsPath / "bosses/win_HIGH.png"),
+        &assets.loadTexture(assetsPath / "bosses/win_MED.png"),
+        &assets.loadTexture(assetsPath / "bosses/win_LOW.png"),
     };
 
     Lisp::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/lisp_HIGH.png"),
-        &assets.loadTexture("../assets/bosses/lisp_MED.png"),
-        &assets.loadTexture("../assets/bosses/lisp_LOW.png"),
+        &assets.loadTexture(assetsPath / "bosses/lisp_HIGH.png"),
+        &assets.loadTexture(assetsPath / "bosses/lisp_MED.png"),
+        &assets.loadTexture(assetsPath / "bosses/lisp_LOW.png"),
     };
 
     Java::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/java_HIGH.png"),
-        &assets.loadTexture("../assets/bosses/java_MED.png"),
-        &assets.loadTexture("../assets/bosses/java_LOW.png"),
+        &assets.loadTexture(assetsPath / "bosses/java_HIGH.png"),
+        &assets.loadTexture(assetsPath / "bosses/java_MED.png"),
+        &assets.loadTexture(assetsPath / "bosses/java_LOW.png"),
     };
 
     Rust::sharedTextures = {
-        &assets.loadTexture("../assets/bosses/rust_HIGH.png"),
-        &assets.loadTexture("../assets/bosses/rust_MED.png"),
-        &assets.loadTexture("../assets/bosses/rust_LOW.png"),
+        &assets.loadTexture(assetsPath / "bosses/rust_HIGH.png"),
+        &assets.loadTexture(assetsPath / "bosses/rust_MED.png"),
+        &assets.loadTexture(assetsPath / "bosses/rust_LOW.png"),
     };
   }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Paths/Paths.hpp>
 #include <items/ItemType.hpp>
 #include <raylib.h>
 #include <texture/AssetSystem.hpp>
@@ -7,48 +8,53 @@
 
 class DrinkTextures {
 public:
-  static void loadTextures() {
+  DrinkTextures() = default;
+
+  void loadTextures() {
     auto &a = AssetSystem::instance();
+    const fs::path assetsPath = Paths::getAssetsPath();
 
     drinkTextures[DrinkType::BOBATEA] =
-        &a.loadTexture("../assets/items/bobatea.png");
+        &a.loadTexture(assetsPath / "items/bobatea.png");
 
     drinkTextures[DrinkType::CALPIS] =
-        &a.loadTexture("../assets/items/calpis.png");
+        &a.loadTexture(assetsPath / "items/calpis.png");
 
     drinkTextures[DrinkType::CHAMPAGNE] =
-        &a.loadTexture("../assets/items/champagne.png");
+        &a.loadTexture(assetsPath / "items/champagne.png");
 
     drinkTextures[DrinkType::COFFEEMACHINE] =
-        &a.loadTexture("../assets/items/coffeemachine.png");
+        &a.loadTexture(assetsPath / "items/coffeemachine.png");
 
     drinkTextures[DrinkType::COFFEEMUG] =
-        &a.loadTexture("../assets/items/coffeemug.png");
+        &a.loadTexture(assetsPath / "items/coffeemug.png");
 
     drinkTextures[DrinkType::COFFEEPAPER] =
-        &a.loadTexture("../assets/items/coffeepaper.png");
+        &a.loadTexture(assetsPath / "items/coffeepaper.png");
 
     drinkTextures[DrinkType::GINGERALE] =
-        &a.loadTexture("../assets/items/gingerale.png");
+        &a.loadTexture(assetsPath / "items/gingerale.png");
 
     drinkTextures[DrinkType::ICECOFFEE] =
-        &a.loadTexture("../assets/items/icecoffee.png");
+        &a.loadTexture(assetsPath / "items/icecoffee.png");
 
     drinkTextures[DrinkType::MONSTER] =
-        &a.loadTexture("../assets/items/monster.png");
+        &a.loadTexture(assetsPath / "items/monster.png");
 
-    drinkTextures[DrinkType::SOJU] = &a.loadTexture("../assets/items/soju.png");
+    drinkTextures[DrinkType::SOJU] =
+        &a.loadTexture(assetsPath / "items/soju.png");
 
-    drinkTextures[DrinkType::WINE] = &a.loadTexture("../assets/items/wine.png");
+    drinkTextures[DrinkType::WINE] =
+        &a.loadTexture(assetsPath / "items/wine.png");
 
     drinkTextures[DrinkType::ESTROGEN] =
-        &a.loadTexture("../assets/items/estrogen.png");
+        &a.loadTexture(assetsPath / "items/estrogen.png");
 
     drinkTextures[DrinkType::SKIRT] =
-        &a.loadTexture("../assets/items/skirt.png");
+        &a.loadTexture(assetsPath / "items/skirt.png");
 
     drinkTextures[DrinkType::THIGHHIGH] =
-        &a.loadTexture("../assets/items/thighhigh.png");
+        &a.loadTexture(assetsPath / "items/thighhigh.png");
   }
 
   static Texture2D *get(DrinkType type) { return drinkTextures[type]; }
@@ -59,37 +65,43 @@ private:
 
 class FoodTextures {
 public:
-  static void loadTextures() {
+  FoodTextures() = default;
+
+  void loadTextures() {
     auto &a = AssetSystem::instance();
+    const fs::path assetsPath = Paths::getAssetsPath();
 
     foodTextures[FoodType::BLUEBERRY] =
-        &a.loadTexture("../assets/items/blueberry.png");
+        &a.loadTexture(assetsPath / "items/blueberry.png");
 
     foodTextures[FoodType::BULDAK] =
-        &a.loadTexture("../assets/items/buldak.png");
+        &a.loadTexture(assetsPath / "items/buldak.png");
 
     foodTextures[FoodType::CHERRY] =
-        &a.loadTexture("../assets/items/cherry.png");
+        &a.loadTexture(assetsPath / "items/cherry.png");
 
-    foodTextures[FoodType::PASTA] = &a.loadTexture("../assets/items/pasta.png");
+    foodTextures[FoodType::PASTA] =
+        &a.loadTexture(assetsPath / "items/pasta.png");
 
-    foodTextures[FoodType::PHO] = &a.loadTexture("../assets/items/pho.png");
+    foodTextures[FoodType::PHO] = &a.loadTexture(assetsPath / "items/pho.png");
 
-    foodTextures[FoodType::PIZZA] = &a.loadTexture("../assets/items/pizza.png");
+    foodTextures[FoodType::PIZZA] =
+        &a.loadTexture(assetsPath / "items/pizza.png");
 
     foodTextures[FoodType::SHINRAMYUN] =
-        &a.loadTexture("../assets/items/shinramyun.png");
+        &a.loadTexture(assetsPath / "items/shinramyun.png");
 
     foodTextures[FoodType::STRAWBERRY] =
-        &a.loadTexture("../assets/items/strawberry.png");
+        &a.loadTexture(assetsPath / "items/strawberry.png");
 
-    foodTextures[FoodType::TOAST] = &a.loadTexture("../assets/items/toast.png");
+    foodTextures[FoodType::TOAST] =
+        &a.loadTexture(assetsPath / "items/toast.png");
 
     foodTextures[FoodType::TOMYUM] =
-        &a.loadTexture("../assets/items/tomyum.png");
+        &a.loadTexture(assetsPath / "items/tomyum.png");
 
     foodTextures[FoodType::YOPOKKI] =
-        &a.loadTexture("../assets/items/yopokki.png");
+        &a.loadTexture(assetsPath / "items/yopokki.png");
   }
 
   static Texture2D *get(FoodType type) { return foodTextures[type]; }
@@ -99,23 +111,28 @@ private:
 };
 
 class WeaponTextures {
+
 public:
-  static void loadTextures() {
+  WeaponTextures() = default;
+
+  void loadTextures() {
     auto &a = AssetSystem::instance();
+    const fs::path assetsPath = Paths::getAssetsPath();
 
     weaponTextures[WeaponType::ROCKET] =
-        &a.loadTexture("../assets/items/rocket.png");
+        &a.loadTexture(assetsPath / "items/rocket.png");
 
     weaponTextures[WeaponType::GRENADE] =
-        &a.loadTexture("../assets/items/grenade.png");
+        &a.loadTexture(assetsPath / "items/grenade.png");
 
     weaponTextures[WeaponType::HELLFIRE] =
-        &a.loadTexture("../assets/items/hellfire.png");
+        &a.loadTexture(assetsPath / "items/hellfire.png");
 
-    weaponTextures[WeaponType::UZI] = &a.loadTexture("../assets/items/uzi.png");
+    weaponTextures[WeaponType::UZI] =
+        &a.loadTexture(assetsPath / "items/uzi.png");
 
     weaponTextures[WeaponType::STRAIGHT] =
-        &a.loadTexture("../assets/items/straight.png");
+        &a.loadTexture(assetsPath / "items/straight.png");
   }
 
   static Texture2D *get(WeaponType type) { return weaponTextures[type]; }

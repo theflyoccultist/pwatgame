@@ -1,3 +1,4 @@
+#include <Paths/Paths.hpp>
 #include <player/PlayerState.hpp>
 #include <sound/AudioSystem.hpp>
 #include <texture/AssetSystem.hpp>
@@ -21,28 +22,34 @@ std::unordered_map<AssetType, std::vector<std::string>> assetBank;
 std::unordered_map<AssetType, std::vector<Texture2D *>> uiAssets;
 
 void loadUIAssets() {
+  const fs::path assetsPath = Paths::getAssetsPath();
+
   assetBank[AssetType::Background] = {
-      "../assets/ui/bkg1.png", "../assets/ui/bkg2.png", "../assets/ui/bkg3.png",
-      "../assets/ui/bkg4.png", "../assets/ui/bkg5.png",
+      assetsPath / "ui/bkg1.png", assetsPath / "ui/bkg2.png",
+      assetsPath / "ui/bkg3.png", assetsPath / "ui/bkg4.png",
+      assetsPath / "ui/bkg5.png",
   };
 
   assetBank[AssetType::PwatMenu] = {
-      "../assets/ui/pwat_menu.png",
-      "../assets/ui/pwat_levels.png",
-      "../assets/ui/pwat_pause.png",
-      "../assets/ui/pwat_options.png",
+      assetsPath / "ui/pwat_menu.png",
+      assetsPath / "ui/pwat_levels.png",
+      assetsPath / "ui/pwat_pause.png",
+      assetsPath / "ui/pwat_options.png",
   };
 
   assetBank[AssetType::WeaponUI] = {
-      "../assets/ui/weapon_grenade.png", "../assets/ui/weapon_hellfire.png",
-      "../assets/ui/weapon_rocket.png",  "../assets/ui/weapon_straight.png",
-      "../assets/ui/weapon_uzi.png",     "../assets/ui/weapon_noweapon.png",
+      assetsPath / "ui/weapon_grenade.png",
+      assetsPath / "ui/weapon_hellfire.png",
+      assetsPath / "ui/weapon_rocket.png",
+      assetsPath / "ui/weapon_straight.png",
+      assetsPath / "ui/weapon_uzi.png",
+      assetsPath / "ui/weapon_noweapon.png",
 
   };
 
   assetBank[AssetType::PwatSprite] = {
-      "../assets/ui/pwat_lost.png",
-      "../assets/ui/pwat_win.png",
+      assetsPath / "ui/pwat_lost.png",
+      assetsPath / "ui/pwat_win.png",
   };
 
   auto &asset = AssetSystem::instance();

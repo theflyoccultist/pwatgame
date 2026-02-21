@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Paths/Paths.hpp>
 #include <entities/EnemyDatabase.hpp>
 #include <entities/MiniBossDatabase.hpp>
 #include <levels/ItemScheduler.hpp>
@@ -11,6 +12,9 @@
 #include <iostream>
 
 class LevelLoader {
+private:
+  const fs::path scriptsPath = Paths::getScriptsPath();
+
 public:
   LevelLoader(WeaponDataBase &wd, EnemyDatabase &ed, MiniBossDatabase &md,
               ScheduleManager &sm, SpawnScheduler &ss, ItemScheduler &is,
@@ -23,7 +27,8 @@ public:
   LevelLoader &operator=(const LevelLoader &&) = delete;
 
   void initDatabase() {
-    weaponDatabase.loadFromLua("../scripts/common/DefaultWeaponData.lua");
+    weaponDatabase.loadFromLua(
+        (scriptsPath / "common/DefaultWeaponData.lua").c_str());
   }
 
   void loadEntityTextures() {
@@ -41,40 +46,58 @@ public:
     spawnScheduler.clearAllEnemies();
     spawnScheduler.clearAllWalls();
 
-    minibossDatabase.loadFromLua("../scripts/common/MinibossData.lua");
+    minibossDatabase.loadFromLua(
+        (scriptsPath / "common/MinibossData.lua").c_str());
 
     switch (level) {
     case LevelID::Level1:
-      weaponDatabase.loadFromLua("../scripts/level1/WeaponData.lua");
-      enemyDatabase.loadFromLua("../scripts/level1/EnemyData.lua");
-      spawnScheduler.scheduleEnemies("../scripts/level1/EnemySchedule.lua");
-      itemScheduler.scheduleItems("../scripts/level1/ItemSchedule.lua");
-      spawnScheduler.scheduleMiniBoss("../scripts/level1/MinibossSchedule.lua");
+      weaponDatabase.loadFromLua(
+          (scriptsPath / "level1/WeaponData.lua").c_str());
+      enemyDatabase.loadFromLua((scriptsPath / "level1/EnemyData.lua").c_str());
+      spawnScheduler.scheduleEnemies(
+          (scriptsPath / "level1/EnemySchedule.lua").c_str());
+      itemScheduler.scheduleItems(
+          (scriptsPath / "level1/ItemSchedule.lua").c_str());
+      spawnScheduler.scheduleMiniBoss(
+          (scriptsPath / "level1/MinibossSchedule.lua").c_str());
       break;
 
     case LevelID::Level2:
-      weaponDatabase.loadFromLua("../scripts/level2/WeaponData.lua");
-      enemyDatabase.loadFromLua("../scripts/level2/EnemyData.lua");
-      spawnScheduler.scheduleEnemies("../scripts/level2/EnemySchedule.lua");
-      itemScheduler.scheduleItems("../scripts/level2/ItemSchedule.lua");
-      spawnScheduler.scheduleMiniBoss("../scripts/level2/MinibossSchedule.lua");
+      weaponDatabase.loadFromLua(
+          (scriptsPath / "level2/WeaponData.lua").c_str());
+      enemyDatabase.loadFromLua((scriptsPath / "level2/EnemyData.lua").c_str());
+      spawnScheduler.scheduleEnemies(
+          (scriptsPath / "level2/EnemySchedule.lua").c_str());
+      itemScheduler.scheduleItems(
+          (scriptsPath / "level2/ItemSchedule.lua").c_str());
+      spawnScheduler.scheduleMiniBoss(
+          (scriptsPath / "level2/MinibossSchedule.lua").c_str());
       break;
 
     case LevelID::Level3:
-      weaponDatabase.loadFromLua("../scripts/level3/WeaponData.lua");
-      enemyDatabase.loadFromLua("../scripts/level3/EnemyData.lua");
-      spawnScheduler.scheduleEnemies("../scripts/level3/EnemySchedule.lua");
-      itemScheduler.scheduleItems("../scripts/level3/ItemSchedule.lua");
-      spawnScheduler.scheduleMiniBoss("../scripts/level3/MinibossSchedule.lua");
+      weaponDatabase.loadFromLua(
+          (scriptsPath / "level3/WeaponData.lua").c_str());
+      enemyDatabase.loadFromLua((scriptsPath / "level3/EnemyData.lua").c_str());
+      spawnScheduler.scheduleEnemies(
+          (scriptsPath / "level3/EnemySchedule.lua").c_str());
+      itemScheduler.scheduleItems(
+          (scriptsPath / "level3/ItemSchedule.lua").c_str());
+      spawnScheduler.scheduleMiniBoss(
+          (scriptsPath / "level3/MinibossSchedule.lua").c_str());
       break;
 
     case LevelID::Level4:
-      weaponDatabase.loadFromLua("../scripts/level4/WeaponData.lua");
-      enemyDatabase.loadFromLua("../scripts/level4/EnemyData.lua");
-      spawnScheduler.scheduleEnemies("../scripts/level4/EnemySchedule.lua");
-      itemScheduler.scheduleItems("../scripts/level4/ItemSchedule.lua");
-      spawnScheduler.scheduleMiniBoss("../scripts/level4/MinibossSchedule.lua");
-      spawnScheduler.scheduleWalls("../scripts/level4/WallSchedule.lua");
+      weaponDatabase.loadFromLua(
+          (scriptsPath / "level4/WeaponData.lua").c_str());
+      enemyDatabase.loadFromLua((scriptsPath / "level4/EnemyData.lua").c_str());
+      spawnScheduler.scheduleEnemies(
+          (scriptsPath / "level4/EnemySchedule.lua").c_str());
+      itemScheduler.scheduleItems(
+          (scriptsPath / "level4/ItemSchedule.lua").c_str());
+      spawnScheduler.scheduleMiniBoss(
+          (scriptsPath / "level4/MinibossSchedule.lua").c_str());
+      spawnScheduler.scheduleWalls(
+          (scriptsPath / "level4/WallSchedule.lua").c_str());
       break;
 
     default:

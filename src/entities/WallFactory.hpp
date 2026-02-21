@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Paths/Paths.hpp>
 #include <entities/Wall.hpp>
 #include <entities/WallPool.hpp>
 #include <entities/WallSpec.hpp>
@@ -14,15 +15,16 @@ public:
 
   void loadAssets() {
     auto &assets = AssetSystem::instance();
+    const fs::path assetsPath = Paths::getAssetsPath();
 
     ImmobileWall::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/wall_warning.png"),
-        &assets.loadTexture("../assets/enemies/wall_appear.png"),
+        &assets.loadTexture(assetsPath / "enemies/wall_warning.png"),
+        &assets.loadTexture(assetsPath / "enemies/wall_appear.png"),
     };
 
     MovingWall::sharedTextures = {
-        &assets.loadTexture("../assets/enemies/wall_warning.png"),
-        &assets.loadTexture("../assets/enemies/wall_moving.png"),
+        &assets.loadTexture(assetsPath / "enemies/wall_warning.png"),
+        &assets.loadTexture(assetsPath / "enemies/wall_moving.png"),
     };
   }
 

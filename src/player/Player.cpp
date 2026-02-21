@@ -1,3 +1,4 @@
+#include <Paths/Paths.hpp>
 #include <entities/Faction.hpp>
 #include <player/Player.hpp>
 #include <projectiles/WeaponDatabase.hpp>
@@ -9,15 +10,17 @@
 #include <raylib.h>
 
 void Player::loadPlayerTextures() {
+  const fs::path assetsPath = Paths::getAssetsPath();
+
   const std::array<std::string, numPwats> pwatPaths = {
-      "../assets/player/pwatleft.png",
-      "../assets/player/pwatright.png",
-      "../assets/player/pwatup.png",
-      "../assets/player/pwatdown.png",
-      "../assets/player/pwatleft_up.png",
-      "../assets/player/pwatleft_down.png",
-      "../assets/player/pwatright_up.png",
-      "../assets/player/pwatright_down.png"};
+      assetsPath / "player/pwatleft.png",
+      assetsPath / "player/pwatright.png",
+      assetsPath / "player/pwatup.png",
+      assetsPath / "player/pwatdown.png",
+      assetsPath / "player/pwatleft_up.png",
+      assetsPath / "player/pwatleft_down.png",
+      assetsPath / "player/pwatright_up.png",
+      assetsPath / "player/pwatright_down.png"};
 
   for (size_t i = 0; i < numPwats; ++i) {
     pwatAssets[i] = &AssetSystem::instance().loadTexture(pwatPaths[i]);

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "items/TextureRegistry.hpp"
 #include <World.hpp>
 #include <items/Item_Drink.hpp>
 #include <items/Item_Food.hpp>
@@ -91,9 +92,9 @@ public:
   ItemScheduler &operator=(const ItemScheduler &&) = delete;
 
   void loadItemTextures() {
-    DrinkTextures::loadTextures();
-    FoodTextures::loadTextures();
-    WeaponTextures::loadTextures();
+    dt.loadTextures();
+    ft.loadTextures();
+    wt.loadTextures();
   }
 
   void clearAllItems() { world.itemManager.clearAll(); }
@@ -112,4 +113,8 @@ private:
   LuaWrapper &lua;
   World &world;
   ScheduleManager &sm;
+
+  DrinkTextures dt;
+  FoodTextures ft;
+  WeaponTextures wt;
 };
