@@ -18,13 +18,13 @@ public:
     const fs::path assetsPath = Paths::getAssetsPath();
 
     ImmobileWall::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/wall_warning.png"),
-        &assets.loadTexture(assetsPath / "enemies/wall_appear.png"),
+        &assets.loadTexture((assetsPath / "enemies/wall_warning.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/wall_appear.png").string()),
     };
 
     MovingWall::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/wall_warning.png"),
-        &assets.loadTexture(assetsPath / "enemies/wall_moving.png"),
+        &assets.loadTexture((assetsPath / "enemies/wall_warning.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/wall_moving.png").string()),
     };
   }
 

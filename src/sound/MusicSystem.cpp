@@ -1,17 +1,20 @@
+#include <Paths/Paths.hpp>
 #include <sound/MusicSystem.hpp>
 
 MusicSystem::MusicSystem() {
+  const fs::path assetsPath = Paths::getAssetsPath();
+
   gameScores =
       std::make_unique<std::array<GameScore, 9>>(std::array<GameScore, 9>{
-          GameScore("../assets/music/right_to_rave.ogg"),
-          GameScore("../assets/music/pseudogender.ogg"),
-          GameScore("../assets/music/hasuta.ogg"),
-          GameScore("../assets/music/wickedness.ogg"),
-          GameScore("../assets/music/england.ogg"),
-          GameScore("../assets/music/misery.ogg"),
-          GameScore("../assets/music/boys_in_luv.ogg"),
-          GameScore("../assets/music/thoughts.ogg"),
-          GameScore("../assets/music/battle.ogg"),
+          GameScore((assetsPath / "music/right_to_rave.ogg").string()),
+          GameScore((assetsPath / "music/pseudogender.ogg").string()),
+          GameScore((assetsPath / "music/hasuta.ogg").string()),
+          GameScore((assetsPath / "music/wickedness.ogg").string()),
+          GameScore((assetsPath / "music/england.ogg").string()),
+          GameScore((assetsPath / "music/misery.ogg").string()),
+          GameScore((assetsPath / "music/boys_in_luv.ogg").string()),
+          GameScore((assetsPath / "music/thoughts.ogg").string()),
+          GameScore((assetsPath / "music/battle.ogg").string()),
       });
 }
 

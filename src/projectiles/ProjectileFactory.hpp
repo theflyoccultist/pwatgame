@@ -18,49 +18,49 @@ public:
     auto &asset = AssetSystem::instance();
 
     Elixir::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_elixir.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_elixir.png").string());
 
     Executable::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_exe.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_exe.png").string());
 
-    Grenade::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_grenade.png");
+    Grenade::projTexture = &asset.loadTexture(
+        (assetsPath / "bullets/bullet_grenade.png").string());
 
-    Hellfire::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_hellfire.png");
+    Hellfire::projTexture = &asset.loadTexture(
+        (assetsPath / "bullets/bullet_hellfire.png").string());
 
     Internet::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_ie.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_ie.png").string());
 
     Lambda::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_lambda.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_lambda.png").string());
 
-    LongRange::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_longrange.png");
+    LongRange::projTexture = &asset.loadTexture(
+        (assetsPath / "bullets/bullet_longrange.png").string());
 
     Paren::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_paren.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_paren.png").string());
 
     Recon::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_recon.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_recon.png").string());
 
     Rocket::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_rocket.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_rocket.png").string());
 
-    SlowCannon::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_slowcannon.png");
+    SlowCannon::projTexture = &asset.loadTexture(
+        (assetsPath / "bullets/bullet_slowcannon.png").string());
 
-    Straight::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_straight.png");
+    Straight::projTexture = &asset.loadTexture(
+        (assetsPath / "bullets/bullet_straight.png").string());
 
     Update::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_update.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_update.png").string());
 
     Uzi::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_uzi.png");
+        &asset.loadTexture((assetsPath / "bullets/bullet_uzi.png").string());
 
-    Warning::projTexture =
-        &asset.loadTexture(assetsPath / "bullets/bullet_warning.png");
+    Warning::projTexture = &asset.loadTexture(
+        (assetsPath / "bullets/bullet_warning.png").string());
   }
 
   Projectile *createProjectile(const SpawnRequest &req) {

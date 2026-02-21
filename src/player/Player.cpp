@@ -13,14 +13,15 @@ void Player::loadPlayerTextures() {
   const fs::path assetsPath = Paths::getAssetsPath();
 
   const std::array<std::string, numPwats> pwatPaths = {
-      assetsPath / "player/pwatleft.png",
-      assetsPath / "player/pwatright.png",
-      assetsPath / "player/pwatup.png",
-      assetsPath / "player/pwatdown.png",
-      assetsPath / "player/pwatleft_up.png",
-      assetsPath / "player/pwatleft_down.png",
-      assetsPath / "player/pwatright_up.png",
-      assetsPath / "player/pwatright_down.png"};
+      (assetsPath / "player/pwatleft.png").string(),
+      (assetsPath / "player/pwatright.png").string(),
+      (assetsPath / "player/pwatup.png").string(),
+      (assetsPath / "player/pwatdown.png").string(),
+      (assetsPath / "player/pwatleft_up.png").string(),
+      (assetsPath / "player/pwatleft_down.png").string(),
+      (assetsPath / "player/pwatright_up.png").string(),
+      (assetsPath / "player/pwatright_down.png").string(),
+  };
 
   for (size_t i = 0; i < numPwats; ++i) {
     pwatAssets[i] = &AssetSystem::instance().loadTexture(pwatPaths[i]);

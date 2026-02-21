@@ -1,39 +1,42 @@
+#include <Paths/Paths.hpp>
 #include <sound/SfxSystem.hpp>
 
 SfxSystem::SfxSystem() {
+  const fs::path assetsPath = Paths::getAssetsPath();
+
   fxBank[SoundType::pwatSteps] = std::make_unique<std::vector<SoundEffect>>(
       std::initializer_list<SoundEffect>{
-          SoundEffect("../assets/sfx/pwatwalk1.wav"),
-          SoundEffect("../assets/sfx/pwatwalk2.wav"),
-          SoundEffect("../assets/sfx/pwatwalk3.wav"),
-          SoundEffect("../assets/sfx/pwatwalk4.wav"),
-          SoundEffect("../assets/sfx/pwatwalk5.wav"),
+          SoundEffect((assetsPath / "sfx/pwatwalk1.wav").string()),
+          SoundEffect((assetsPath / "sfx/pwatwalk2.wav").string()),
+          SoundEffect((assetsPath / "sfx/pwatwalk3.wav").string()),
+          SoundEffect((assetsPath / "sfx/pwatwalk4.wav").string()),
+          SoundEffect((assetsPath / "sfx/pwatwalk5.wav").string()),
       });
 
   fxBank[SoundType::combatSFX] = std::make_unique<std::vector<SoundEffect>>(
       std::initializer_list<SoundEffect>{
-          SoundEffect("../assets/sfx/8bit_explosion.wav"),
-          SoundEffect("../assets/sfx/8bit_shoot.wav"),
-          SoundEffect("../assets/sfx/8bit_rocket.wav"),
-          SoundEffect("../assets/sfx/8bit_uzi.wav"),
-          SoundEffect("../assets/sfx/8bit_grenade.wav"),
-          SoundEffect("../assets/sfx/8bit_hellfire.wav"),
+          SoundEffect((assetsPath / "sfx/8bit_explosion.wav").string()),
+          SoundEffect((assetsPath / "sfx/8bit_shoot.wav").string()),
+          SoundEffect((assetsPath / "sfx/8bit_rocket.wav").string()),
+          SoundEffect((assetsPath / "sfx/8bit_uzi.wav").string()),
+          SoundEffect((assetsPath / "sfx/8bit_grenade.wav").string()),
+          SoundEffect((assetsPath / "sfx/8bit_hellfire.wav").string()),
       });
 
   fxBank[SoundType::bonusPickup] = std::make_unique<std::vector<SoundEffect>>(
       std::initializer_list<SoundEffect>{
-          SoundEffect("../assets/sfx/add_ammo.wav"),
-          SoundEffect("../assets/sfx/add_health.wav"),
-          SoundEffect("../assets/sfx/upgrade_weapon.wav"),
+          SoundEffect((assetsPath / "sfx/add_ammo.wav").string()),
+          SoundEffect((assetsPath / "sfx/add_health.wav").string()),
+          SoundEffect((assetsPath / "sfx/upgrade_weapon.wav").string()),
       });
 
   fxBank[SoundType::menuSounds] = std::make_unique<std::vector<SoundEffect>>(
       std::initializer_list<SoundEffect>{
-          SoundEffect("../assets/sfx/boing.wav"),
-          SoundEffect("../assets/sfx/game_over.wav"),
-          SoundEffect("../assets/sfx/menu_selection.wav"),
-          SoundEffect("../assets/sfx/menu_button.wav"),
-          SoundEffect("../assets/sfx/level_start.wav"),
+          SoundEffect((assetsPath / "sfx/boing.wav").string()),
+          SoundEffect((assetsPath / "sfx/game_over.wav").string()),
+          SoundEffect((assetsPath / "sfx/menu_selection.wav").string()),
+          SoundEffect((assetsPath / "sfx/menu_button.wav").string()),
+          SoundEffect((assetsPath / "sfx/level_start.wav").string()),
       });
 }
 

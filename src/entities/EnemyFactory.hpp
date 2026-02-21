@@ -12,69 +12,69 @@ public:
     const fs::path assetsPath = Paths::getAssetsPath();
 
     Clank::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/clank_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/clank_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/clank_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/clank_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/clank_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/clank_LOW.png").string()),
     };
 
     Constrainer::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/gost_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/gost_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/gost_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/gost_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/gost_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/gost_LOW.png").string()),
     };
 
     Duo::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/duo_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/duo_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/duo_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/duo_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/duo_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/duo_LOW.png").string()),
     };
 
     Fractal::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/fractal_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/fractal_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/fractal_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/fractal_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/fractal_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/fractal_LOW.png").string()),
     };
 
     Godsip::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/godsip_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/godsip_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/godsip_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/godsip_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/godsip_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/godsip_LOW.png").string()),
     };
 
     Miku::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/miku_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/miku_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/miku_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/miku_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/miku_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/miku_LOW.png").string()),
     };
 
     Monitor::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/monitor_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/monitor_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/monitor_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/monitor_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/monitor_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/monitor_LOW.png").string()),
     };
 
     Sniper::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/sniper_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/sniper_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/sniper_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/sniper_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/sniper_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/sniper_LOW.png").string()),
     };
 
     Swarmer::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/swarmer_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/swarmer_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/swarmer_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/swarmer_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/swarmer_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/swarmer_LOW.png").string()),
     };
 
     ThreadEmitter::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/gost_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/gost_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/gost_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/gost_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/gost_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/gost_LOW.png").string()),
     };
 
     Zomb::sharedTextures = {
-        &assets.loadTexture(assetsPath / "enemies/zomb_HIGH.png"),
-        &assets.loadTexture(assetsPath / "enemies/zomb_MED.png"),
-        &assets.loadTexture(assetsPath / "enemies/zomb_LOW.png"),
+        &assets.loadTexture((assetsPath / "enemies/zomb_HIGH.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/zomb_MED.png").string()),
+        &assets.loadTexture((assetsPath / "enemies/zomb_LOW.png").string()),
     };
   }
 
