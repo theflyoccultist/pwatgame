@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+#include <Paths/Paths.hpp>
 #include <lua/LuaWrapper.hpp>
 
 std::ostream &operator<<(std::ostream &os, const LuaError &err) {
@@ -35,11 +36,14 @@ std::ostream &operator<<(std::ostream &os, const LuaError &err) {
 };
 
 void LuaWrapper::initLua() {
+  const fs::path scriptsPath = Paths::getScriptsPath();
+
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "path");
 
   std::string path = lua_tostring(L, -1);
-  path = "../scripts/?.lua;../scripts/?/init.lua;" + path;
+  path = (scriptsPath / "?.lua;").string() +
+         (scriptsPath / "?/init.lua;").string() + path;
 
   lua_pop(L, 1);
   lua_pushstring(L, path.c_str());
