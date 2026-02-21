@@ -5,10 +5,10 @@
 #include <raylib.h>
 
 struct PlayerState {
-  int texture;
   Vector2 position;
   Vector2 direction;
   float playerSpeed;
+  int texture;
 
   static constexpr int playerSize = 70;
 

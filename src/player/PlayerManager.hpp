@@ -14,13 +14,13 @@ public:
   void loadPlayerTextures() { world.pwat.loadPlayerTextures(); }
 
   PlayerState initPlayerState() {
-    int pwatTexture = 0;
     Vector2 pwatPosition = {static_cast<float>(screenWidth / 2.0),
                             static_cast<float>(screenHeight / 2.0)};
     Vector2 pwatDirection = {-1, 0};
     float pwatSpeed = 600.0f;
+    int pwatTexture = 0;
 
-    return {pwatTexture, pwatPosition, pwatDirection, pwatSpeed};
+    return {pwatPosition, pwatDirection, pwatSpeed, pwatTexture};
   }
 
   void resetStatus() {

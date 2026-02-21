@@ -9,11 +9,11 @@ public:
   float shootTimer = 0.0f;
 
   struct ShootParams {
+    WeaponSpec spec;
     Vector2 startPos;
     Vector2 playerPos;
     float dt;
     ProjectileType type;
-    WeaponSpec spec;
   };
 
   Actor &operator=(const Actor &) = delete;
@@ -28,11 +28,11 @@ private:
     }
   }
 
-  const bool isX = Random::chance(.5f);
-
   // locking pattern
   Vector2 storedDir;
   bool hasLock = false;
+
+  const bool isX = Random::chance(.5f);
 
   // spiral pattern
   float spiralAngle = 0.0f;
