@@ -12,6 +12,11 @@ You will play as PwatPwat, a cute blob cat plush who needs to claim her throne a
 - Press the space key to shoot projectiles towards enemies!
 - A mini boss will appear at the end of each level, each with a different attack pattern. Make sure to defeat them!
 
+## Download:
+- The game is available on both Linux and Windows. Follow this link to download the game for your preferred platform:
+
+[Download Pwatgame](https://github.com/theflyoccultist/pwatgame/releases/tag/v1.0.1)
+
 ## Overview:
 
 - **Game Modes**: 
@@ -44,8 +49,6 @@ This level is office themed. It is also pretty slow, but cluttered and the patte
 #### Level 4 - Rust stage
 This final level requires precision again but is also fast paced, and needs the player to have a short reaction window. Projectiles from both the player and enemies deals a lot of damage, making it pretty unforgiving.
 
-## Download:
-- I am figuring that out right now. I will make the game playable on several platforms.
 
 ## Building:
 
