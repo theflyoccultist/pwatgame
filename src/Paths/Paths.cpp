@@ -1,8 +1,17 @@
 #include <Paths/Paths.hpp>
 #include <string>
 
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#include <windows.h>
+#else
+#include <linux/limits.h>
+#include <unistd.h>
+#endif
+
 fs::path Paths::getExecutablePath() {
-#if defined(_WIN32)
+#ifdef _WIN32
   char buffer[MAX_PATH];
   GetModuleFileNameA(NULL, buffer, MAX_PATH);
   return fs::path(buffer);

@@ -25,31 +25,33 @@ void loadUIAssets() {
   const fs::path assetsPath = Paths::getAssetsPath();
 
   assetBank[AssetType::Background] = {
-      assetsPath / "ui/bkg1.png", assetsPath / "ui/bkg2.png",
-      assetsPath / "ui/bkg3.png", assetsPath / "ui/bkg4.png",
-      assetsPath / "ui/bkg5.png",
+      (assetsPath / "ui/bkg1.png").string(),
+      (assetsPath / "ui/bkg2.png").string(),
+      (assetsPath / "ui/bkg3.png").string(),
+      (assetsPath / "ui/bkg4.png").string(),
+      (assetsPath / "ui/bkg5.png").string(),
   };
 
   assetBank[AssetType::PwatMenu] = {
-      assetsPath / "ui/pwat_menu.png",
-      assetsPath / "ui/pwat_levels.png",
-      assetsPath / "ui/pwat_pause.png",
-      assetsPath / "ui/pwat_options.png",
+      (assetsPath / "ui/pwat_menu.png").string(),
+      (assetsPath / "ui/pwat_levels.png").string(),
+      (assetsPath / "ui/pwat_pause.png").string(),
+      (assetsPath / "ui/pwat_options.png").string(),
   };
 
   assetBank[AssetType::WeaponUI] = {
-      assetsPath / "ui/weapon_grenade.png",
-      assetsPath / "ui/weapon_hellfire.png",
-      assetsPath / "ui/weapon_rocket.png",
-      assetsPath / "ui/weapon_straight.png",
-      assetsPath / "ui/weapon_uzi.png",
-      assetsPath / "ui/weapon_noweapon.png",
+      (assetsPath / "ui/weapon_grenade.png").string(),
+      (assetsPath / "ui/weapon_hellfire.png").string(),
+      (assetsPath / "ui/weapon_rocket.png").string(),
+      (assetsPath / "ui/weapon_straight.png").string(),
+      (assetsPath / "ui/weapon_uzi.png").string(),
+      (assetsPath / "ui/weapon_noweapon.png").string(),
 
   };
 
   assetBank[AssetType::PwatSprite] = {
-      assetsPath / "ui/pwat_lost.png",
-      assetsPath / "ui/pwat_win.png",
+      (assetsPath / "ui/pwat_lost.png").string(),
+      (assetsPath / "ui/pwat_win.png").string(),
   };
 
   auto &asset = AssetSystem::instance();
